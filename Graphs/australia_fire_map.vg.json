@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australian Bushfire Hotspots (Sep 2019 – Mar 2020)",
+    "subtitle": "NASA FIRMS MODIS Satellite Fire Detection Data",
+    "fontSize": 20,
+    "subtitleFontSize": 13,
+    "subtitleColor": "#888",
+    "anchor": "start",
+    "offset": 15
+  },
+  "width": 700,
+  "height": 580,
+  "background": "#0a0f1a",
+  "config": {
+    "view": {"stroke": null},
+    "title": {"color": "#e0e6f0"},
+    "legend": {
+      "titleColor": "#c0c8d8",
+      "labelColor": "#a0a8b8",
+      "titleFontSize": 12,
+      "labelFontSize": 11
+    }
+  },
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 700
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "../Australia map/SA3_2021_AUST_GDA2020.json",
+        "format": {"type": "topojson", "feature": "SA3_2021_AUST_GDA2020"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#151d2e",
+        "stroke": "#2a3550",
+        "strokeWidth": 0.4
+      },
+      "encoding": {
+        "tooltip": [
+          {"field": "properties.SA3_NAME21", "type": "nominal", "title": "SA3 Region"},
+          {"field": "properties.STE_NAME21", "type": "nominal", "title": "State"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "../Datasets/Datasetnew/fire_archive_M6_sampled.csv"
+      },
+      "transform": [
+        {
+          "filter": "datum.latitude >= -45 && datum.latitude <= -10 && datum.longitude >= 110 && datum.longitude <= 155"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.6
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {
+          "field": "frp",
+          "type": "quantitative",
+          "title": "Fire Radiative Power (MW)",
+          "scale": {"domain": [0, 200], "range": [4, 120]},
+          "legend": {"orient": "bottom-left"}
+        },
+        "color": {
+          "field": "brightness",
+          "type": "quantitative",
+          "title": "Brightness Temp (K)",
+          "scale": {
+            "scheme": "inferno",
+            "domain": [300, 500]
+          },
+          "legend": {"orient": "bottom-left", "direction": "horizontal", "gradientLength": 180}
+        },
+        "tooltip": [
+          {"field": "latitude", "type": "quantitative", "title": "Latitude", "format": ".3f"},
+          {"field": "longitude", "type": "quantitative", "title": "Longitude", "format": ".3f"},
+          {"field": "brightness", "type": "quantitative", "title": "Brightness (K)"},
+          {"field": "frp", "type": "quantitative", "title": "Fire Radiative Power (MW)"},
+          {"field": "acq_date", "type": "nominal", "title": "Date"},
+          {"field": "confidence", "type": "quantitative", "title": "Confidence (%)"},
+          {"field": "satellite", "type": "nominal", "title": "Satellite"}
+        ]
+      }
+    }
+  ]
+}

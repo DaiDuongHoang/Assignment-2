@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Australian Bushfire Data Visualisation</title>
+    <meta
+      name="description"
+      content="Interactive data visualisation of Australian bushfire hotspots detected by NASA FIRMS satellites during the 2019-2020 fire season"
+    />
+    <meta name="author" content="Dai Duong Hoang" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vega & Vega-Lite -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.25.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.16.3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.24.0"></script>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+
+  <body>
+    <!-- ===== Header ===== -->
+    <header class="page-header">
+      <h1>🔥 Australian Bushfire Hotspots</h1>
+      <p class="subtitle">
+        NASA FIRMS MODIS Satellite Data &bull;
+        <span>2019 – 2020 Fire Season</span>
+      </p>
+    </header>
+
+    <!-- ===== Dashboard ===== -->
+    <main class="dashboard">
+      <!-- Stat cards -->
+      <section class="stats-row" id="stats-row">
+        <div class="stat-card">
+          <div class="stat-value" id="stat-total">—</div>
+          <div class="stat-label">Fire Detections</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-peak-brightness">—</div>
+          <div class="stat-label">Peak Brightness (K)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-avg-frp">—</div>
+          <div class="stat-label">Avg Fire Power (MW)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-satellites">—</div>
+          <div class="stat-label">Satellites Used</div>
+        </div>
+      </section>
+
+      <!-- Map Visualisation -->
+      <section class="vis-card" id="map-section">
+        <h2><span class="icon">🗺️</span> Fire Hotspot Map — SA3 Regions</h2>
+        <p class="vis-description">
+          Interactive map showing fire hotspot locations overlaid on Australian
+          SA3 statistical areas. Colour encodes brightness temperature; size
+          encodes fire radiative power. Hover for details.
+        </p>
+        <div class="vis-container" id="vis-map">
+          <div class="loading">
+            <div class="spinner"></div>
+            Loading map data…
+          </div>
+        </div>
+        <div class="data-source">
+          📡 Source: NASA FIRMS MODIS Collection 6 &bull; ABS SA3 2021
+        </div>
+      </section>
+
+      <!-- Two-column charts -->
+      <section class="vis-grid">
+        <!-- Brightness histogram -->
+        <div class="vis-card" id="hist-section">
+          <h2><span class="icon">📊</span> Brightness Distribution</h2>
+          <p class="vis-description">
+            Histogram of fire brightness temperature readings across all
+            detected hotspots.
+          </p>
+          <div class="vis-container" id="vis-histogram">
+            <div class="loading">
+              <div class="spinner"></div>
+              Loading…
+            </div>
+          </div>
+        </div>
+
+        <!-- Monthly trend -->
+        <div class="vis-card" id="trend-section">
+          <h2><span class="icon">📈</span> Monthly Fire Detections</h2>
+          <p class="vis-description">
+            Number of fire hotspot detections per month during the 2019–2020
+            fire season.
+          </p>
+          <div class="vis-container" id="vis-trend">
+            <div class="loading">
+              <div class="spinner"></div>
+              Loading…
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ===== Footer ===== -->
+    <footer class="page-footer">
+      <p>
+        FIT 2179 Assignment 2 &bull; Dai Duong Hoang &bull; Data sourced from
+        <a
+          href="https://firms.modaps.eosdis.nasa.gov/"
+          target="_blank"
+          rel="noopener"
+          >NASA FIRMS</a
+        >
+        and
+        <a href="https://www.abs.gov.au/" target="_blank" rel="noopener"
+          >Australian Bureau of Statistics</a
+        >
+      </p>
+    </footer>
+
+    <!-- ===== Vega-Lite Specs & Embedding ===== -->
+    <script>
+      // ---------- common embed options ----------
+      const embedOpts = {
+        mode: "vega-lite",
+        actions: false,
+        renderer: "canvas",
+      };
+
+      // ---------- 1. Map ----------
+      const mapSpec = "../Graphs/australia_fire_map.vg.json";
+
+      vegaEmbed("#vis-map", mapSpec, embedOpts)
+        .then(function (res) {
+          // compute summary stats from the embedded data
+          const view = res.view;
+          // data source name in Vega is derived from url
+          setTimeout(() => computeStats(), 500);
+        })
+        .catch(function (err) {
+          document.getElementById("vis-map").innerHTML =
+            '<p style="color:#ff6b60">Error loading map: ' + err + "</p>";
+          console.error(err);
+        });
+
+      // ---------- 2. Brightness Histogram ----------
+      const histSpec = {
+        $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+        width: "container",
+        height: 280,
+        background: "#0f1525",
+        data: { url: "../Datasets/Datasetnew/fire_archive_M6_sampled.csv" },
+        transform: [
+          { filter: "datum.latitude >= -45 && datum.latitude <= -10" },
+          { filter: "datum.longitude >= 110 && datum.longitude <= 155" },
+        ],
+        mark: {
+          type: "bar",
+          color: { gradient: "linear", stops: [{ offset: 0, color: "#ff6b35" }, { offset: 1, color: "#ffb347" }] },
+          cornerRadiusTopLeft: 3,
+          cornerRadiusTopRight: 3,
+        },
+        encoding: {
+          x: {
+            bin: { maxbins: 40 },
+            field: "brightness",
+            type: "quantitative",
+            title: "Brightness Temperature (K)",
+            axis: { labelColor: "#a0a8b8", titleColor: "#c0c8d8", gridColor: "#1e2a42" },
+          },
+          y: {
+            aggregate: "count",
+            title: "Count",
+            axis: { labelColor: "#a0a8b8", titleColor: "#c0c8d8", gridColor: "#1e2a42" },
+          },
+          tooltip: [
+            { bin: { maxbins: 40 }, field: "brightness", title: "Brightness (K)" },
+            { aggregate: "count", title: "Count" },
+          ],
+        },
+        config: {
+          view: { stroke: null },
+          axis: { domainColor: "#2a3550" },
+        },
+      };
+
+      vegaEmbed("#vis-histogram", histSpec, embedOpts).catch(console.warn);
+
+      // ---------- 3. Monthly Trend ----------
+      const trendSpec = {
+        $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+        width: "container",
+        height: 280,
+        background: "#0f1525",
+        data: { url: "../Datasets/Datasetnew/fire_archive_M6_sampled.csv" },
+        transform: [
+          { filter: "datum.latitude >= -45 && datum.latitude <= -10" },
+          { filter: "datum.longitude >= 110 && datum.longitude <= 155" },
+        ],
+        mark: {
+          type: "area",
+          line: { color: "#ff6b35", strokeWidth: 2.5 },
+          color: {
+            x1: 1,
+            y1: 1,
+            x2: 1,
+            y2: 0,
+            gradient: "linear",
+            stops: [
+              { offset: 0, color: "rgba(255,107,53,0)" },
+              { offset: 1, color: "rgba(255,107,53,0.35)" },
+            ],
+          },
+          interpolate: "monotone",
+        },
+        encoding: {
+          x: {
+            field: "acq_date",
+            timeUnit: "yearmonth",
+            type: "temporal",
+            title: "Month",
+            axis: { labelColor: "#a0a8b8", titleColor: "#c0c8d8", gridColor: "#1e2a42", format: "%b %Y" },
+          },
+          y: {
+            aggregate: "count",
+            title: "Detections",
+            axis: { labelColor: "#a0a8b8", titleColor: "#c0c8d8", gridColor: "#1e2a42" },
+          },
+          tooltip: [
+            { field: "acq_date", timeUnit: "yearmonth", title: "Month", format: "%b %Y" },
+            { aggregate: "count", title: "Detections" },
+          ],
+        },
+        config: {
+          view: { stroke: null },
+          axis: { domainColor: "#2a3550" },
+        },
+      };
+
+      vegaEmbed("#vis-trend", trendSpec, embedOpts).catch(console.warn);
+
+      // ---------- Summary Stats ----------
+      function computeStats() {
+        // Fetch CSV and compute stats directly
+        fetch("../Datasets/Datasetnew/fire_archive_M6_sampled.csv")
+          .then((r) => r.text())
+          .then((text) => {
+            const lines = text.trim().split("\n");
+            const headers = lines[0].split(",");
+            const bIdx = headers.indexOf("brightness");
+            const frpIdx = headers.indexOf("frp");
+            const satIdx = headers.indexOf("satellite");
+            const latIdx = headers.indexOf("latitude");
+            const lonIdx = headers.indexOf("longitude");
+
+            let count = 0;
+            let maxBrightness = 0;
+            let totalFrp = 0;
+            const sats = new Set();
+
+            for (let i = 1; i < lines.length; i++) {
+              const cols = lines[i].split(",");
+              const lat = parseFloat(cols[latIdx]);
+              const lon = parseFloat(cols[lonIdx]);
+              if (lat < -45 || lat > -10 || lon < 110 || lon > 155) continue;
+
+              count++;
+              const b = parseFloat(cols[bIdx]);
+              const f = parseFloat(cols[frpIdx]);
+              if (b > maxBrightness) maxBrightness = b;
+              totalFrp += f;
+              sats.add(cols[satIdx]);
+            }
+
+            document.getElementById("stat-total").textContent =
+              count.toLocaleString();
+            document.getElementById("stat-peak-brightness").textContent =
+              maxBrightness.toFixed(1);
+            document.getElementById("stat-avg-frp").textContent = (
+              totalFrp / count
+            ).toFixed(1);
+            document.getElementById("stat-satellites").textContent = sats.size;
+
+            // animate stat cards in
+            document
+              .querySelectorAll(".stat-card")
+              .forEach((el, i) => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(12px)";
+                setTimeout(() => {
+                  el.style.transition = "all 0.5s ease";
+                  el.style.opacity = "1";
+                  el.style.transform = "translateY(0)";
+                }, i * 100);
+              });
+          });
+      }
+    </script>
+  </body>
+</html>
