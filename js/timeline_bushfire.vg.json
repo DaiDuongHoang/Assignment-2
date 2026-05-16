@@ -41,5 +41,9 @@
       {"field": "acq_date", "timeUnit": "yearmonthdate", "title": "Date", "format": "%d %b %Y"},
       {"aggregate": "count", "title": "Detections"}
     ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
   }
 }

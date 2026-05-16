@@ -1,61 +1,237 @@
-/* ===== Base ===== */
+/* ===== Base & Typography ===== */
 * {
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    background-color: #f5f5f5;
-    color: #333;
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-
-/* ===== Page Container ===== */
-.page-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 25px 30px;
-    background-color: #ffffff;
-    box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    background: #eef1f3;
+    background-image: linear-gradient(180deg, rgba(183, 28, 28, 0.08), rgba(244, 246, 248, 0) 360px),
+                      radial-gradient(circle at 10% 20%, rgba(245, 124, 0, 0.08), transparent 30%),
+                      radial-gradient(circle at 90% 80%, rgba(47, 47, 47, 0.06), transparent 28%);
+    color: #262626;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
     min-height: 100vh;
 }
 
-/* ===== Header ===== */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', 'Inter', sans-serif;
+}
+
+/* ===== App Layout ===== */
+.page-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 24px 18px 56px;
+}
+
+/* ===== Hero Header ===== */
 .header-section {
-    text-align: center;
-    padding: 25px 0 20px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee;
+    min-height: 500px;
+    display: flex;
+    align-items: flex-end;
+    padding: 44px;
+    margin: 0 15px 24px;
+    border-radius: 22px;
+    background: linear-gradient(90deg, rgba(24, 24, 24, 0.86), rgba(24, 24, 24, 0.36)),
+                url("../Images/Bushfire.jpg") center / cover no-repeat;
+    color: white;
+    box-shadow: 0 20px 55px rgba(70, 38, 24, 0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+.header-section::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(0,0,0,0.2));
+    pointer-events: none;
+}
+
+.header-content {
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.eyebrow {
+    margin: 0 0 10px;
+    color: #ffd7a3;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
 
 .header-section h1 {
-    margin: 0 0 6px;
-    color: #c62828;
-    font-size: 2.2em;
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    line-height: 0.95;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-shadow: 0 4px 18px rgba(0,0,0,0.28);
 }
 
 .header-section p {
     margin: 0;
-    color: #666;
-    font-size: 1.05em;
+    font-size: 1.05rem;
     font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 660px;
 }
 
-/* ===== Visualization Containers ===== */
+/* ===== Visualization Cards ===== */
 .viz-container {
-    padding: 18px 20px;
-    margin: 10px;
-    background-color: #fafafa;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    overflow: visible;
-    transition: box-shadow 0.2s ease;
+    padding: 22px;
+    margin: 14px 15px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(210, 215, 220, 0.9);
+    border-radius: 14px;
+    box-shadow: 0 14px 35px rgba(31, 38, 46, 0.07);
 }
 
-.viz-container:hover {
-    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+.row-aligned {
+    display: flex;
+    align-items: stretch;
+}
+
+.story-container {
+    padding: 22px;
+    margin: 14px 0 14px 15px;
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid rgba(210, 215, 220, 0.9);
+    border-right: 0;
+    border-radius: 14px 0 0 14px;
+    box-shadow: 0 14px 35px rgba(31, 38, 46, 0.07);
+    height: calc(100% - 28px);
+    display: flex;
+    flex-direction: column;
+}
+
+.story-container h2 {
+    font-family: 'Outfit', sans-serif;
+    margin: 0 0 16px;
+    color: #232323;
+    font-size: 1.6rem;
+    line-height: 1.2;
+}
+
+.story-text {
+    margin: 0 0 16px;
+    color: #4a4a4a;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.map-container {
+    margin-left: 0;
+    border-left: 0;
+    border-radius: 0 14px 14px 0;
+    height: calc(100% - 28px);
+    display: flex;
+    align-items: center;
+}
+
+.vertical-legend {
+    margin-top: auto;
+}
+
+.combined-legend {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+    width: 100%;
+    flex: 0 0 auto;
+    padding: 14px 16px;
+    border: 1px solid #d8dde2;
+    border-radius: 10px;
+    background: #fffaf4;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.65);
+}
+
+.legend-block {
+    min-width: 0;
+}
+
+.legend-title {
+    display: block;
+    margin-bottom: 8px;
+    color: #3b322b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.legend-gradient {
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ffffb2, #fd8d3c, #bd0026);
+    border: 1px solid rgba(99, 47, 23, 0.18);
+}
+
+.legend-scale {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    color: #6b625b;
+    font-size: 0.72rem;
+    line-height: 1;
+}
+
+.power-legend {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(34px, 1fr));
+    column-gap: 8px;
+    align-items: end;
+    width: 100%;
+    padding: 2px 2px 0;
+}
+
+.power-step {
+    min-width: 0;
+    display: grid;
+    grid-template-rows: 22px auto;
+    justify-items: center;
+    align-items: end;
+}
+
+.fire-dot {
+    display: block;
+    border-radius: 50%;
+    background: #f16913;
+    border: 1px solid #9f2d15;
+    box-shadow: 0 1px 2px rgba(159, 45, 21, 0.2);
+}
+
+.fire-dot.small {
+    width: 6px;
+    height: 6px;
+}
+
+.fire-dot.medium {
+    width: 10px;
+    height: 10px;
+}
+
+.fire-dot.large {
+    width: 16px;
+    height: 16px;
+}
+
+.fire-dot.xlarge {
+    width: 20px;
+    height: 20px;
+}
+
+.power-label {
+    margin-top: 5px;
+    color: #6b625b;
+    font-size: 0.72rem;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
 }
 
 /* ===== Responsive Vega Charts ===== */
@@ -64,40 +240,75 @@ body {
 #vis-bar,
 #vis-timeline {
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    overflow: hidden;
 }
 
-/* Force Vega Embed to render in column instead of row when it has bindings */
+/* Make vega embeds fully responsive */
 .vega-embed {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+    width: 100% !important;
 }
 
-/* Make the Vega Slider (Binding) Look Nicer */
-.vega-bindings {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+.vega-embed canvas, .vega-embed svg {
+    max-width: 100%;
+    height: auto !important;
 }
 
-.vega-bindings label {
-    font-weight: 600;
-    color: #444;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Hide default Vega Actions (the three dots) if we want a cleaner look, though we disabled them in JS */
+.vega-actions {
+    display: none !important;
 }
 
-.vega-bindings input[type="range"] {
-    cursor: pointer;
-    width: 200px;
-}
-
-/* ===== Pure.css grid gutter fix ===== */
+/* ===== Grid Adjustments ===== */
 .pure-g > [class*="pure-u"] {
-    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
+}
+
+@media (max-width: 860px) {
+    .header-section {
+        min-height: 280px;
+        padding: 30px 24px;
+    }
+
+    .chart-topline {
+        flex-direction: column;
+    }
+
+    .combined-legend {
+        width: 100%;
+        grid-template-columns: 1fr;
+    }
+
+    .story-container,
+    .map-container {
+        margin-left: 15px;
+        margin-right: 15px;
+        border: 1px solid rgba(210, 215, 220, 0.9);
+        border-radius: 14px;
+    }
+}
+
+@media (max-width: 560px) {
+    .page-container {
+        padding: 14px 10px 36px;
+    }
+
+    .header-section,
+    .viz-container,
+    .story-container,
+    .map-container {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .header-section {
+        min-height: 245px;
+        padding: 26px 20px;
+        border-radius: 16px;
+    }
+
+    .combined-legend {
+        grid-template-columns: 1fr;
+    }
 }

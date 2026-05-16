@@ -1,19 +1,11 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "title": {
-    "text": "Australian Bushfire Hotspots (January 2020)",
-    "subtitle": "NASA FIRMS MODIS Satellite Fire Detections — brightness encoded by colour",
-    "fontSize": 16,
-    "subtitleFontSize": 12,
-    "subtitleColor": "#777",
-    "anchor": "middle"
-  },
   "width": "container",
-  "height": 520,
+  "height": 480,
   "projection": {
     "type": "mercator",
-    "center": [134, -28],
-    "scale": 700
+    "center": [134, -28.5],
+    "scale": 680
   },
   "layer": [
     {
@@ -48,12 +40,7 @@
           "type": "quantitative",
           "title": "Fire Radiative Power (MW)",
           "scale": {"domain": [0, 500], "range": [1, 30]},
-          "legend": {
-            "orient": "bottom-right",
-            "titleFontSize": 10,
-            "labelFontSize": 9,
-            "symbolOpacity": 1
-          }
+          "legend": null
         },
         "color": {
           "field": "brightness",
@@ -63,15 +50,7 @@
             "scheme": "yelloworangered",
             "domain": [300, 500]
           },
-          "legend": {
-            "orient": "bottom-right",
-            "direction": "horizontal",
-            "gradientLength": 160,
-            "titleFontSize": 10,
-            "labelFontSize": 9,
-            "offset": 5,
-            "gradientOpacity": 1
-          }
+          "legend": null
         },
         "tooltip": [
           {"field": "latitude", "type": "quantitative", "title": "Latitude", "format": ".3f"},
@@ -115,7 +94,8 @@
             "fontSize": 10,
             "fontWeight": 700,
             "dy": -10,
-            "dx": 8,
+            "dx": 13,
+            "xOffset": 2,
             "align": "right",
             "fill": "#2f2f2f",
             "opacity": 0.85
@@ -127,11 +107,113 @@
           }
         }
       ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "area": "Black Summer",
+            "lon": 141, "lat": -40,
+            "lon2": 149, "lat2": -36.5
+          },
+          {
+            "area": "Wheatbelt",
+            "lon": 124.0, "lat": -36,
+            "lon2": 123, "lat2": -33.0
+          },
+          {
+            "area": "Top End west",
+            "lon": 149, "lat": -15,
+            "lon2": 144, "lat2": -20.0
+          },
+          {
+            "area": "Top End centre",
+            "lon": 149, "lat": -15,
+            "lon2": 143.5, "lat2": -14.5
+          },
+          {
+            "area": "Top End east",
+            "lon": 149, "lat": -15,
+            "lon2": 145, "lat2": -18
+          }
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "rule",
+            "color": "#b71c1c",
+            "strokeWidth": 1.8,
+            "opacity": 0.85
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "longitude2": {"field": "lon2", "type": "quantitative"},
+            "latitude2": {"field": "lat2", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {
+            "type": "point",
+            "shape": "circle",
+            "size": 15,
+            "fill": "#ffffff",
+            "stroke": "#b71c1c",
+            "strokeWidth": 1.5,
+            "opacity": 0.70
+          },
+          "encoding": {
+            "longitude": {"field": "lon2", "type": "quantitative"},
+            "latitude": {"field": "lat2", "type": "quantitative"}
+          }
+        }
+      ]
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "text": "Intense Black Summer Fires (2019-20)", 
+            "lon": 141.2, "lat": -40
+          },
+          {
+            "text": "Wheatbelt Fires (WA)", 
+            "lon": 130.0, "lat": -36.5
+          },
+          {
+            "text": "Seasonal Savanna Burns (NT)", 
+            "lon": 164.0, "lat": -15
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -6,
+        "fontWeight": "bold",
+        "color": "#b71c1c",
+        "fontSize": 12
+      },
+      "encoding": {
+        "longitude": {"field": "lon", "type": "quantitative"},
+        "latitude": {"field": "lat", "type": "quantitative"},
+        "text": {"field": "text"}
+      }
     }
   ],
   "config": {
     "view": {"stroke": null},
-    "background": "white"
+    "background": "transparent",
+    "legend": {
+      "orient": "top-right",
+      "fillColor": "#ffffff",
+      "strokeColor": "#cccccc",
+      "padding": 12,
+      "cornerRadius": 5,
+      "offset": 10
+    }
   }
   
 }

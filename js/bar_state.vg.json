@@ -65,5 +65,9 @@
       {"aggregate": "mean", "field": "brightness", "type": "quantitative", "title": "Avg Brightness (K)", "format": ".1f"},
       {"aggregate": "count", "title": "Fire Detections"}
     ]
+  },
+  "config": {
+    "background": "transparent",
+    "view": {"stroke": "transparent"}
   }
 }
