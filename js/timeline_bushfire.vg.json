@@ -1,0 +1,45 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 250,
+  "title": {
+    "text": "Timeline of Fire Occurrences",
+    "fontSize": 14
+  },
+  "data": {
+    "url": "data/Fire.csv"
+  },
+  "transform": [
+    {"filter": "datum.latitude >= -45 && datum.latitude <= -10 && datum.longitude >= 110 && datum.longitude <= 155"}
+  ],
+  "mark": {
+    "type": "area",
+    "line": {"color": "#d32f2f", "strokeWidth": 2},
+    "color": {
+      "x1": 1, "y1": 1, "x2": 1, "y2": 0,
+      "gradient": "linear",
+      "stops": [
+        {"offset": 0, "color": "rgba(211,47,47,0.05)"},
+        {"offset": 1, "color": "rgba(211,47,47,0.4)"}
+      ]
+    },
+    "interpolate": "monotone"
+  },
+  "encoding": {
+    "x": {
+      "field": "acq_date",
+      "timeUnit": "yearmonthdate",
+      "type": "temporal",
+      "title": "Date",
+      "axis": {"format": "%d %b", "labelAngle": -30}
+    },
+    "y": {
+      "aggregate": "count",
+      "title": "Number of Fire Detections"
+    },
+    "tooltip": [
+      {"field": "acq_date", "timeUnit": "yearmonthdate", "title": "Date", "format": "%d %b %Y"},
+      {"aggregate": "count", "title": "Detections"}
+    ]
+  }
+}

@@ -1,0 +1,103 @@
+/* ===== Base ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: #f5f5f5;
+    color: #333;
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ===== Page Container ===== */
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 25px 30px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(0,0,0,0.08);
+    min-height: 100vh;
+}
+
+/* ===== Header ===== */
+.header-section {
+    text-align: center;
+    padding: 25px 0 20px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.header-section h1 {
+    margin: 0 0 6px;
+    color: #c62828;
+    font-size: 2.2em;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+.header-section p {
+    margin: 0;
+    color: #666;
+    font-size: 1.05em;
+    font-weight: 400;
+}
+
+/* ===== Visualization Containers ===== */
+.viz-container {
+    padding: 18px 20px;
+    margin: 10px;
+    background-color: #fafafa;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: visible;
+    transition: box-shadow 0.2s ease;
+}
+
+.viz-container:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* ===== Responsive Vega Charts ===== */
+#vis-fire-hotspots,
+#vis-map,
+#vis-bar,
+#vis-timeline {
+    width: 100%;
+}
+
+/* Force Vega Embed to render in column instead of row when it has bindings */
+.vega-embed {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Make the Vega Slider (Binding) Look Nicer */
+.vega-bindings {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.vega-bindings label {
+    font-weight: 600;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vega-bindings input[type="range"] {
+    cursor: pointer;
+    width: 200px;
+}
+
+/* ===== Pure.css grid gutter fix ===== */
+.pure-g > [class*="pure-u"] {
+    font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

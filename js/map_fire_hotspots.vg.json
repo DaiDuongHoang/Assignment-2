@@ -1,0 +1,137 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": {
+    "text": "Australian Bushfire Hotspots (January 2020)",
+    "subtitle": "NASA FIRMS MODIS Satellite Fire Detections — brightness encoded by colour",
+    "fontSize": 16,
+    "subtitleFontSize": 12,
+    "subtitleColor": "#777",
+    "anchor": "middle"
+  },
+  "width": "container",
+  "height": 520,
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28],
+    "scale": 700
+  },
+  "layer": [
+    {
+      "data": {
+        "url": "data/Map base.json",
+        "format": {"type": "topojson", "feature": "SA3_2021_AUST_GDA2020"}
+      },
+      "mark": {
+        "type": "geoshape",
+        "fill": "#dce0e5",
+        "stroke": "#7a7a7a",
+        "strokeWidth": 0.4,
+        "strokeOpacity": 0.6
+      }
+    },
+    {
+      "data": {
+        "url": "data/Fire.csv"
+      },
+      "mark": {
+        "type": "circle",
+        "opacity": 0.4,
+        "stroke": "white",
+        "strokeWidth": 0.1,
+        "strokeOpacity": 0.6
+      },
+      "encoding": {
+        "longitude": {"field": "longitude", "type": "quantitative"},
+        "latitude": {"field": "latitude", "type": "quantitative"},
+        "size": {
+          "field": "frp",
+          "type": "quantitative",
+          "title": "Fire Radiative Power (MW)",
+          "scale": {"domain": [0, 500], "range": [1, 30]},
+          "legend": {
+            "orient": "bottom-right",
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "symbolOpacity": 1
+          }
+        },
+        "color": {
+          "field": "brightness",
+          "type": "quantitative",
+          "title": "Brightness Temperature (K)",
+          "scale": {
+            "scheme": "yelloworangered",
+            "domain": [300, 500]
+          },
+          "legend": {
+            "orient": "bottom-right",
+            "direction": "horizontal",
+            "gradientLength": 160,
+            "titleFontSize": 10,
+            "labelFontSize": 9,
+            "offset": 5,
+            "gradientOpacity": 1
+          }
+        },
+        "tooltip": [
+          {"field": "latitude", "type": "quantitative", "title": "Latitude", "format": ".3f"},
+          {"field": "longitude", "type": "quantitative", "title": "Longitude", "format": ".3f"},
+          {"field": "brightness", "type": "quantitative", "title": "Brightness (K)"},
+          {"field": "frp", "type": "quantitative", "title": "Fire Power (MW)"},
+          {"field": "acq_date", "type": "nominal", "title": "Date"},
+          {"field": "confidence", "type": "quantitative", "title": "Confidence (%)"},
+          {"field": "satellite", "type": "nominal", "title": "Satellite"},
+          {"field": "daynight", "type": "nominal", "title": "Day/Night"}
+        ]
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {"city": "Sydney", "lat": -33.8688, "lon": 151.2093},
+          {"city": "Melbourne", "lat": -37.8136, "lon": 144.9631},
+          {"city": "Brisbane", "lat": -27.4705, "lon": 153.0260},
+          {"city": "Perth", "lat": -31.9505, "lon": 115.8605}
+        ]
+      },
+      "layer": [
+        {
+          "mark": {
+            "type": "point",
+            "shape": "diamond",
+            "size": 50,
+            "fill": "#1a1a1a",
+            "stroke": "#ffffff",
+            "strokeWidth": 1.2
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"}
+          }
+        },
+        {
+          "mark": {
+            "type": "text",
+            "fontSize": 10,
+            "fontWeight": 700,
+            "dy": -10,
+            "dx": 8,
+            "align": "right",
+            "fill": "#2f2f2f",
+            "opacity": 0.85
+          },
+          "encoding": {
+            "longitude": {"field": "lon", "type": "quantitative"},
+            "latitude": {"field": "lat", "type": "quantitative"},
+            "text": {"field": "city", "type": "nominal"}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {"stroke": null},
+    "background": "white"
+  }
+  
+}

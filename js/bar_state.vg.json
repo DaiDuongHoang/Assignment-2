@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 380,
+  "title": {
+    "text": "Average Fire Intensity by State",
+    "fontSize": 14,
+    "subtitleFontSize": 10
+  },
+  "data": {
+    "url": "data/Fire.csv"
+  },
+  "transform": [
+    {"filter": "datum.latitude >= -45 && datum.latitude <= -10 && datum.longitude >= 110 && datum.longitude <= 155"},
+    {
+      "lookup": "latitude",
+      "from": {
+        "data": {
+          "url": "data/Map base.json",
+          "format": {"type": "topojson", "feature": "SA3_2021_AUST_GDA2020"}
+        },
+        "key": "properties.STE_NAME21",
+        "fields": ["properties.STE_NAME21"]
+      }
+    },
+    {
+      "calculate": "datum.latitude < -38 ? 'Victoria / Tasmania' : datum.latitude < -33 ? (datum.longitude < 141 ? 'South Australia' : 'New South Wales / ACT') : datum.latitude < -26 ? (datum.longitude < 141 ? 'South Australia' : 'New South Wales / ACT') : datum.latitude < -20 ? 'Queensland' : datum.longitude < 129 ? 'Northern Territory' : 'Queensland'",
+      "as": "Approx State"
+    },
+    {
+      "calculate": "datum.longitude < 129 ? (datum.latitude < -26 ? 'Western Australia' : 'Northern Territory') : datum.longitude < 141 ? (datum.latitude < -26 ? 'South Australia' : datum.latitude < -20 ? 'South Australia' : 'Northern Territory') : (datum.latitude < -38 ? 'Victoria / Tasmania' : datum.latitude < -29 ? 'New South Wales / ACT' : 'Queensland')",
+      "as": "State"
+    }
+  ],
+  "mark": {
+    "type": "bar",
+    "cornerRadiusTopLeft": 4,
+    "cornerRadiusTopRight": 4
+  },
+  "encoding": {
+    "y": {
+      "field": "State",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {"labelFontSize": 11}
+    },
+    "x": {
+      "aggregate": "mean",
+      "field": "frp",
+      "type": "quantitative",
+      "title": "Avg Fire Radiative Power (MW)"
+    },
+    "color": {
+      "aggregate": "mean",
+      "field": "brightness",
+      "type": "quantitative",
+      "title": "Avg Brightness (K)",
+      "scale": {"scheme": "yelloworangered"},
+      "legend": null
+    },
+    "tooltip": [
+      {"field": "State", "type": "nominal"},
+      {"aggregate": "mean", "field": "frp", "type": "quantitative", "title": "Avg FRP (MW)", "format": ".1f"},
+      {"aggregate": "mean", "field": "brightness", "type": "quantitative", "title": "Avg Brightness (K)", "format": ".1f"},
+      {"aggregate": "count", "title": "Fire Detections"}
+    ]
+  }
+}
