@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Hero Header ===== */
 .header-section {
-    min-height: 500px;
+    min-height: 300px;
     display: flex;
     align-items: flex-end;
     padding: 44px;
