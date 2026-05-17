@@ -3,6 +3,7 @@ const fireHotspotsSpec = "js/map_fire_hotspots.vg.json";
 const mapSpec = "js/map_bushfire.vg.json";
 const barSpec = "js/bar_state.vg.json";
 const timelineSpec = "js/timeline_bushfire.vg.json";
+const streamgraphSpec = "js/streamgraph.vg.json";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed('#vis-fire-hotspots', fireHotspotsSpec, { "actions": false }).then(function(result) {
@@ -14,12 +15,17 @@ vegaEmbed('#vis-map', mapSpec, { "actions": false }).then(function(result) {
     console.log("Fire history map loaded successfully");
 }).catch(console.error);
 
-// Embed the bar visualization (Row 3 left)
+// Embed the streamgraph (Row 3)
+vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).then(function(result) {
+    console.log("Streamgraph loaded successfully");
+}).catch(console.error);
+
+// Embed the bar visualization (Row 4 left)
 vegaEmbed('#vis-bar', barSpec, { "actions": false }).then(function(result) {
     console.log("Bar chart loaded successfully");
 }).catch(console.error);
 
-// Embed the timeline visualization (Row 3 right)
+// Embed the timeline visualization (Row 4 right)
 vegaEmbed('#vis-timeline', timelineSpec, { "actions": false }).then(function(result) {
     console.log("Timeline loaded successfully");
 }).catch(console.error);
