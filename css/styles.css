@@ -259,6 +259,7 @@ h1, h2, h3, h4, h5, h6 {
     margin: 8px 0 0;
     color: #4d5a60;
     font-size: 0.82rem;
+    font-style: italic;
     line-height: 1.45;
 }
 

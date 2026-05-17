@@ -6,114 +6,300 @@
     "url": "data/australian_annual_bushfire_area_(19902020).csv",
     "format": {"type": "csv"}
   },
-  "params": [
+  "layer": [
     {
-      "name": "highlight",
-      "select": {
-        "type": "point",
-        "fields": ["Fire Type"],
-        "on": "pointerover"
-      }
-    }
-  ],
-  "transform": [
-    {
-      "fold": [
-        "Tropical_savanna_woodlands",
-        "Arid_semi_arid_rangelands",
-        "Temperate_forest_wildfires",
-        "Temperate_forest_hazard_reduction"
+      "params": [
+        {
+          "name": "legendFilter",
+          "select": {
+            "type": "point",
+            "fields": ["Fire Type"]
+          },
+          "bind": "legend"
+        }
       ],
-      "as": ["Category", "Area"]
+      "transform": [
+        {
+          "fold": [
+            "Tropical_savanna_woodlands",
+            "Arid_semi_arid_rangelands",
+            "Temperate_forest_wildfires",
+            "Temperate_forest_hazard_reduction"
+          ],
+          "as": ["Category", "Area"]
+        },
+        {"calculate": "toNumber(datum.Area)", "as": "Area"},
+        {"calculate": "toNumber(datum.Year)", "as": "Year"},
+        {
+          "calculate": "datum.Category === 'Tropical_savanna_woodlands' ? 'Tropical Savanna Woodlands' : datum.Category === 'Arid_semi_arid_rangelands' ? 'Arid & Semi-Arid Rangelands' : datum.Category === 'Temperate_forest_wildfires' ? 'Temperate Forest Wildfires' : 'Hazard Reduction Burns'",
+          "as": "Fire Type"
+        },
+        {
+          "calculate": "datum.Category === 'Temperate_forest_hazard_reduction' ? 1 : datum.Category === 'Temperate_forest_wildfires' ? 2 : datum.Category === 'Arid_semi_arid_rangelands' ? 3 : 4",
+          "as": "stackOrder"
+        }
+      ],
+      "mark": {
+        "type": "area",
+        "interpolate": "monotone",
+        "line": {
+          "color": "white",
+          "strokeWidth": 0.8
+        },
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "quantitative",
+          "scale": {"zero": false, "nice": false},
+          "axis": {
+            "title": null,
+            "format": "d",
+            "grid": false,
+            "tickCount": 8,
+            "labelFont": "Inter",
+            "labelFontSize": 11,
+            "labelColor": "#555",
+            "domainColor": "#bbb"
+          }
+        },
+        "y": {
+          "field": "Area",
+          "type": "quantitative",
+          "stack": "center",
+          "axis": null
+        },
+        "color": {
+          "field": "Fire Type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Tropical Savanna Woodlands",
+              "Arid & Semi-Arid Rangelands",
+              "Temperate Forest Wildfires",
+              "Hazard Reduction Burns"
+            ],
+            "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
+          },
+          "legend": {
+            "title": "Vegetation Type",
+            "orient": "top",
+            "direction": "horizontal",
+            "columns": 2,
+            "labelFont": "Inter",
+            "labelFontSize": 12.5,
+            "labelColor": "#444",
+            "labelLimit": 0,
+            "titleFont": "Outfit",
+            "titleFontSize": 13,
+            "titleColor": "#333",
+            "symbolType": "circle",
+            "symbolSize": 160,
+            "symbolStrokeWidth": 0,
+            "padding": 12,
+            "offset": 10
+          }
+        },
+        "order": {
+          "field": "stackOrder",
+          "type": "quantitative"
+        },
+        "opacity": {
+          "condition": {"param": "legendFilter", "value": 0.92},
+          "value": 0.18
+        },
+        "tooltip": [
+          {"field": "Year", "type": "quantitative", "title": "Year", "format": "d"},
+          {"field": "Fire Type", "type": "nominal", "title": "Vegetation Type"},
+          {"field": "Area", "type": "quantitative", "title": "Area (M ha)", "format": ".0f"}
+        ]
+      }
     },
-    {"calculate": "toNumber(datum.Area)", "as": "Area"},
-    {"calculate": "toNumber(datum.Year)", "as": "Year"},
-    {"calculate": "toNumber(datum.Total_fire_area)", "as": "TotalArea"},
     {
-      "calculate": "datum.Category === 'Tropical_savanna_woodlands' ? 'Tropical Savanna Woodlands' : datum.Category === 'Arid_semi_arid_rangelands' ? 'Arid & Semi-Arid Rangelands' : datum.Category === 'Temperate_forest_wildfires' ? 'Temperate Forest Wildfires' : 'Hazard Reduction Burns'",
-      "as": "Fire Type"
+      "data": {"values": [{"Year": 2015}]},
+      "mark": {
+        "type": "rule",
+        "strokeDash": [6, 4],
+        "strokeWidth": 1.5,
+        "opacity": 0.4
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative"},
+        "color": {"value": "#000000"}
+      }
     },
     {
-      "calculate": "datum.Category === 'Tropical_savanna_woodlands' ? 1 : datum.Category === 'Arid_semi_arid_rangelands' ? 2 : datum.Category === 'Temperate_forest_wildfires' ? 3 : 4",
-      "as": "stackOrder"
+      "data": {"values": [{"Year": 2019}]},
+      "mark": {
+        "type": "rule",
+        "strokeDash": [6, 4],
+        "strokeWidth": 1.5,
+        "opacity": 0.4
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative"},
+        "color": {"value": "#000000"}
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Year": 2017.5,
+            "StartY": 13.5,
+            "EndY": 7.5,
+            "Fire Type": "Tropical Savanna Woodlands"
+          },
+          {
+            "Year": 2018.2,
+            "StartY": -6,
+            "EndY": -12,
+            "Fire Type": "Arid & Semi-Arid Rangelands"
+          },
+          {
+            "Year": 2018.9,
+            "StartY": -18.5,
+            "EndY": -24,
+            "Fire Type": "Temperate Forest Wildfires"
+          },
+          {
+            "Year": 2019.6,
+            "StartY": -22.5,
+            "EndY": -29,
+            "Fire Type": "Hazard Reduction Burns"
+          }
+        ]
+      },
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 1.8,
+        "opacity": 0.95
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative"},
+        "y": {
+          "field": "StartY",
+          "type": "quantitative",
+          "axis": null
+        },
+        "y2": {"field": "EndY"},
+        "color": {
+          "field": "Fire Type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Tropical Savanna Woodlands",
+              "Arid & Semi-Arid Rangelands",
+              "Temperate Forest Wildfires",
+              "Hazard Reduction Burns"
+            ],
+            "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "Year": 2017.5,
+            "LabelY": 7.5,
+            "label": "Tropical Savanna",
+            "Fire Type": "Tropical Savanna Woodlands"
+          },
+          {
+            "Year": 2018.2,
+            "LabelY": -12,
+            "label": "Rangelands",
+            "Fire Type": "Arid & Semi-Arid Rangelands"
+          },
+          {
+            "Year": 2018.9,
+            "LabelY": -24,
+            "label": "Wildfires",
+            "Fire Type": "Temperate Forest Wildfires"
+          },
+          {
+            "Year": 2019.6,
+            "LabelY": -29,
+            "label": "Hazard burns",
+            "Fire Type": "Hazard Reduction Burns"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 11,
+        "fontWeight": 700,
+        "align": "center",
+        "baseline": "top",
+        "dy": 6
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative"},
+        "y": {
+          "field": "LabelY",
+          "type": "quantitative",
+          "axis": null
+        },
+        "text": {"field": "label"},
+        "color": {
+          "field": "Fire Type",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Tropical Savanna Woodlands",
+              "Arid & Semi-Arid Rangelands",
+              "Temperate Forest Wildfires",
+              "Hazard Reduction Burns"
+            ],
+            "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
+          },
+          "legend": null
+        }
+      }
+    },
+    {
+      "data": {"values": [{"Year": 2015, "label": "Peak: 60M ha"}]},
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 11.5,
+        "fontWeight": 700,
+        "align": "center",
+        "baseline": "bottom",
+        "dy": 80,
+        "color": "#ffffff"
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative"},
+        "y": {"value": 18},
+        "text": {"field": "label"}
+      }
+    },
+    {
+      "data": {"values": [{"Year": 2019, "label": "Black Summer"}]},
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 11.5,
+        "fontWeight": 700,
+        "align": "center",
+        "baseline": "bottom",
+        "dy": 80,
+        "dx": -5,
+        "color": "#ffffff"
+      },
+      "encoding": {
+        "x": {"field": "Year", "type": "quantitative"},
+        "y": {"value": 18},
+        "text": {"field": "label"}
+      }
     }
   ],
-  "mark": {
-    "type": "area",
-    "interpolate": "monotone",
-    "line": {
-      "color": "white",
-      "strokeWidth": 0.8
-    },
-    "cursor": "pointer"
-  },
-  "encoding": {
-    "x": {
-      "field": "Year",
-      "type": "quantitative",
-      "scale": {"zero": false, "nice": false},
-      "axis": {
-        "title": null,
-        "format": "d",
-        "grid": false,
-        "tickCount": 8,
-        "labelFont": "Inter",
-        "labelFontSize": 11,
-        "labelColor": "#555",
-        "domainColor": "#bbb"
-      }
-    },
-    "y": {
-      "field": "Area",
-      "type": "quantitative",
-      "stack": "center",
-      "axis": null
-    },
-    "color": {
-      "field": "Fire Type",
-      "type": "nominal",
-      "scale": {
-        "domain": [
-          "Tropical Savanna Woodlands",
-          "Arid & Semi-Arid Rangelands",
-          "Temperate Forest Wildfires",
-          "Hazard Reduction Burns"
-        ],
-        "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
-      },
-      "legend": {
-        "title": "Vegetation Type",
-        "orient": "bottom",
-        "direction": "horizontal",
-        "columns": 2,
-        "labelFont": "Inter",
-        "labelFontSize": 11,
-        "labelColor": "#444",
-        "titleFont": "Outfit",
-        "titleFontSize": 12,
-        "titleColor": "#333",
-        "symbolType": "circle",
-        "symbolSize": 100,
-        "symbolStrokeWidth": 0,
-        "padding": 10,
-        "offset": 8
-      }
-    },
-    "order": {
-      "field": "stackOrder",
-      "type": "quantitative"
-    },
-    "opacity": {
-      "condition": {"param": "highlight", "value": 0.95},
-      "value": 0.72
-    },
-    "tooltip": [
-      {"field": "Year", "type": "quantitative", "title": "Year", "format": "d"},
-      {"field": "Fire Type", "type": "nominal", "title": "Vegetation Type"},
-      {"field": "Area", "type": "quantitative", "title": "Area (M ha)", "format": ".0f"},
-      {"field": "TotalArea", "type": "quantitative", "title": "Total Area (M ha)", "format": ".0f"}
-    ]
-  },
   "config": {
     "view": {"stroke": null},
     "background": "transparent",
