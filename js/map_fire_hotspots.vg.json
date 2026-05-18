@@ -4,14 +4,20 @@
   "height": 480,
   "projection": {
     "type": "mercator",
-    "center": [134, -28.5],
+    "center": [
+      134,
+      -28.5
+    ],
     "scale": 680
   },
   "layer": [
     {
       "data": {
         "url": "data/Map base.json",
-        "format": {"type": "topojson", "feature": "SA3_2021_AUST_GDA2020"}
+        "format": {
+          "type": "topojson",
+          "feature": "SA3_2021_AUST_GDA2020"
+        }
       },
       "mark": {
         "type": "geoshape",
@@ -33,13 +39,28 @@
         "strokeOpacity": 0.6
       },
       "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
+        "longitude": {
+          "field": "longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "latitude",
+          "type": "quantitative"
+        },
         "size": {
           "field": "frp",
           "type": "quantitative",
           "title": "Fire Radiative Power (MW)",
-          "scale": {"domain": [0, 500], "range": [1, 30]},
+          "scale": {
+            "domain": [
+              0,
+              500
+            ],
+            "range": [
+              1,
+              30
+            ]
+          },
           "legend": null
         },
         "color": {
@@ -48,29 +69,82 @@
           "title": "Brightness Temperature (K)",
           "scale": {
             "scheme": "yelloworangered",
-            "domain": [300, 500]
+            "domain": [
+              300,
+              500
+            ]
           },
           "legend": null
         },
         "tooltip": [
-          {"field": "latitude", "type": "quantitative", "title": "Latitude", "format": ".3f"},
-          {"field": "longitude", "type": "quantitative", "title": "Longitude", "format": ".3f"},
-          {"field": "brightness", "type": "quantitative", "title": "Brightness (K)"},
-          {"field": "frp", "type": "quantitative", "title": "Fire Power (MW)"},
-          {"field": "acq_date", "type": "nominal", "title": "Date"},
-          {"field": "confidence", "type": "quantitative", "title": "Confidence (%)"},
-          {"field": "satellite", "type": "nominal", "title": "Satellite"},
-          {"field": "daynight", "type": "nominal", "title": "Day/Night"}
+          {
+            "field": "latitude",
+            "type": "quantitative",
+            "title": "Latitude",
+            "format": ".3f"
+          },
+          {
+            "field": "longitude",
+            "type": "quantitative",
+            "title": "Longitude",
+            "format": ".3f"
+          },
+          {
+            "field": "brightness",
+            "type": "quantitative",
+            "title": "Brightness (K)"
+          },
+          {
+            "field": "frp",
+            "type": "quantitative",
+            "title": "Fire Power (MW)"
+          },
+          {
+            "field": "acq_date",
+            "type": "nominal",
+            "title": "Date"
+          },
+          {
+            "field": "confidence",
+            "type": "quantitative",
+            "title": "Confidence (%)"
+          },
+          {
+            "field": "satellite",
+            "type": "nominal",
+            "title": "Satellite"
+          },
+          {
+            "field": "daynight",
+            "type": "nominal",
+            "title": "Day/Night"
+          }
         ]
       }
     },
     {
       "data": {
         "values": [
-          {"city": "Sydney", "lat": -33.8688, "lon": 151.2093},
-          {"city": "Melbourne", "lat": -37.8136, "lon": 144.9631},
-          {"city": "Brisbane", "lat": -27.4705, "lon": 153.0260},
-          {"city": "Perth", "lat": -31.9505, "lon": 115.8605}
+          {
+            "city": "Sydney",
+            "lat": -33.8688,
+            "lon": 151.2093
+          },
+          {
+            "city": "Melbourne",
+            "lat": -37.8136,
+            "lon": 144.9631
+          },
+          {
+            "city": "Brisbane",
+            "lat": -27.4705,
+            "lon": 153.0260
+          },
+          {
+            "city": "Perth",
+            "lat": -31.9505,
+            "lon": 115.8605
+          }
         ]
       },
       "layer": [
@@ -81,11 +155,17 @@
             "size": 50,
             "fill": "#1a1a1a",
             "stroke": "#ffffff",
-            "strokeWidth": 1.0 
+            "strokeWidth": 1.0
           },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"}
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            }
           }
         },
         {
@@ -101,9 +181,18 @@
             "opacity": 0.85
           },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "text": {"field": "city", "type": "nominal"}
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "text": {
+              "field": "city",
+              "type": "nominal"
+            }
           }
         }
       ]
@@ -113,28 +202,38 @@
         "values": [
           {
             "area": "Black Summer",
-            "lon": 141, "lat": -40,
-            "lon2": 149, "lat2": -36.5
+            "lon": 141,
+            "lat": -40,
+            "lon2": 149,
+            "lat2": -36.5
           },
           {
             "area": "Wheatbelt",
-            "lon": 124.0, "lat": -36,
-            "lon2": 123, "lat2": -33.0
+            "lon": 124.0,
+            "lat": -36,
+            "lon2": 123,
+            "lat2": -33.0
           },
           {
             "area": "Top End west",
-            "lon": 149, "lat": -15,
-            "lon2": 144, "lat2": -20.0
+            "lon": 149,
+            "lat": -15,
+            "lon2": 144,
+            "lat2": -20.0
           },
           {
             "area": "Top End centre",
-            "lon": 149, "lat": -15,
-            "lon2": 143.5, "lat2": -14.5
+            "lon": 149,
+            "lat": -15,
+            "lon2": 143.5,
+            "lat2": -14.5
           },
           {
             "area": "Top End east",
-            "lon": 149, "lat": -15,
-            "lon2": 145, "lat2": -18
+            "lon": 149,
+            "lat": -15,
+            "lon2": 145,
+            "lat2": -18
           }
         ]
       },
@@ -147,10 +246,22 @@
             "opacity": 0.85
           },
           "encoding": {
-            "longitude": {"field": "lon", "type": "quantitative"},
-            "latitude": {"field": "lat", "type": "quantitative"},
-            "longitude2": {"field": "lon2", "type": "quantitative"},
-            "latitude2": {"field": "lat2", "type": "quantitative"}
+            "longitude": {
+              "field": "lon",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat",
+              "type": "quantitative"
+            },
+            "longitude2": {
+              "field": "lon2",
+              "type": "quantitative"
+            },
+            "latitude2": {
+              "field": "lat2",
+              "type": "quantitative"
+            }
           }
         },
         {
@@ -164,8 +275,14 @@
             "opacity": 0.70
           },
           "encoding": {
-            "longitude": {"field": "lon2", "type": "quantitative"},
-            "latitude": {"field": "lat2", "type": "quantitative"}
+            "longitude": {
+              "field": "lon2",
+              "type": "quantitative"
+            },
+            "latitude": {
+              "field": "lat2",
+              "type": "quantitative"
+            }
           }
         }
       ]
@@ -174,16 +291,19 @@
       "data": {
         "values": [
           {
-            "text": "Intense Black Summer Fires (2019-20)", 
-            "lon": 141.2, "lat": -40
+            "text": "Intense Black Summer Fires (2019-20)",
+            "lon": 141.2,
+            "lat": -40
           },
           {
-            "text": "Wheatbelt Fires (WA)", 
-            "lon": 130.0, "lat": -36.5
+            "text": "Wheatbelt Fires (WA)",
+            "lon": 130.0,
+            "lat": -36.5
           },
           {
-            "text": "Seasonal Savanna Burns (NT)", 
-            "lon": 164.0, "lat": -15
+            "text": "Seasonal Savanna Burns (NT)",
+            "lon": 164.0,
+            "lat": -15
           }
         ]
       },
@@ -197,14 +317,24 @@
         "fontSize": 12
       },
       "encoding": {
-        "longitude": {"field": "lon", "type": "quantitative"},
-        "latitude": {"field": "lat", "type": "quantitative"},
-        "text": {"field": "text"}
+        "longitude": {
+          "field": "lon",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "lat",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "text"
+        }
       }
     }
   ],
   "config": {
-    "view": {"stroke": null},
+    "view": {
+      "stroke": null
+    },
     "background": "transparent",
     "legend": {
       "orient": "top-right",
@@ -215,5 +345,4 @@
       "offset": 10
     }
   }
-  
 }
