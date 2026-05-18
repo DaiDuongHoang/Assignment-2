@@ -271,7 +271,7 @@
         "fontWeight": 700,
         "align": "center",
         "baseline": "bottom",
-        "dy": 80,
+        "dy": 120,
         "color": "#ffffff"
       },
       "encoding": {
@@ -289,7 +289,7 @@
         "fontWeight": 700,
         "align": "center",
         "baseline": "bottom",
-        "dy": 80,
+        "dy": 120,
         "dx": -5,
         "color": "#ffffff"
       },
