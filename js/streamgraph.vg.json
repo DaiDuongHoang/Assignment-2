@@ -91,24 +91,7 @@
             ],
             "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
           },
-          "legend": {
-            "title": "Vegetation Type",
-            "orient": "top",
-            "direction": "horizontal",
-            "columns": 2,
-            "labelFont": "Inter",
-            "labelFontSize": 12.5,
-            "labelColor": "#444",
-            "labelLimit": 0,
-            "titleFont": "Outfit",
-            "titleFontSize": 13,
-            "titleColor": "#333",
-            "symbolType": "circle",
-            "symbolSize": 160,
-            "symbolStrokeWidth": 0,
-            "padding": 12,
-            "offset": 10
-          }
+          "legend": null
         },
         "order": {
           "field": "stackOrder",
@@ -255,7 +238,7 @@
           "mark": {
             "type": "text",
             "font": "Inter",
-            "fontSize": 11,
+            "fontSize": 13.5,
             "fontWeight": 700,
             "align": "center",
             "baseline": "top",
@@ -276,7 +259,7 @@
                   "Temperate Forest Wildfires",
                   "Hazard Reduction Burns"
                 ],
-                "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
+                "range": ["#388e3c", "#4e342e", "#c62828", "#ff8f00"]
               },
               "legend": null
             },
@@ -304,15 +287,16 @@
       ]
     },
     {
-      "data": {"values": [{"Year": 2015, "label": "Peak: 60M ha"}]},
+      "data": {"values": [{"Year": 2015, "label": "2015 total: 60M ha"}]},
       "mark": {
         "type": "text",
         "font": "Inter",
-        "fontSize": 11.5,
+        "fontSize": 13.5,
         "fontWeight": 700,
-        "align": "center",
+        "align": "right",
         "baseline": "bottom",
         "dy": 140,
+        "dx": -10,
         "color": "#ffffff"
       },
       "encoding": {
@@ -326,12 +310,12 @@
       "mark": {
         "type": "text",
         "font": "Inter",
-        "fontSize": 11.5,
+        "fontSize": 13.5,
         "fontWeight": 700,
-        "align": "center",
+        "align": "right",
         "baseline": "bottom",
         "dy": 140,
-        "dx": -5,
+        "dx": -10,
         "color": "#ffffff"
       },
       "encoding": {
