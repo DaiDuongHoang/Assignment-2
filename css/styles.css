@@ -263,6 +263,58 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.45;
 }
 
+.streamgraph-insight {
+    display: grid;
+    grid-template-columns: 5px minmax(0, 1fr);
+    gap: 14px;
+    width: 100%;
+    margin: 16px 0 0;
+    padding: 14px 16px;
+    border: 1px solid #d8dde2;
+    border-radius: 10px;
+    background: #fbfcfd;
+}
+
+.insight-marker {
+    width: 5px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, #388e3c, #8d6e63 48%, #c62828 72%, #ff8f00);
+}
+
+.streamgraph-insight h3 {
+    margin: 0 0 4px;
+    color: #232323;
+    font-size: 1rem;
+    line-height: 1.25;
+}
+
+.streamgraph-insight p {
+    margin: 0;
+    color: #424b50;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.streamgraph-insight .veg-savanna {
+    color: #388e3c;
+    font-weight: 700;
+}
+
+.streamgraph-insight .veg-rangelands {
+    color: #8d6e63;
+    font-weight: 700;
+}
+
+.streamgraph-insight .veg-wildfires {
+    color: #c62828;
+    font-weight: 700;
+}
+
+.streamgraph-insight .veg-hazard {
+    color: #ff8f00;
+    font-weight: 700;
+}
+
 /* ===== Responsive Vega Charts ===== */
 #vis-fire-hotspots,
 #vis-map,
