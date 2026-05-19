@@ -49,6 +49,42 @@
         </div>
       </div>
 
+      <!-- Overview -->
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <section class="overview-section" aria-labelledby="overview-title">
+            <div class="overview-kicker">Overview</div>
+            <h2 id="overview-title">
+              Australia has always lived with fire, but not like this.
+            </h2>
+            <div class="overview-content">
+              <p class="overview-lead">
+                Over the past three decades, the scale and intensity of
+                bushfires have grown dramatically, culminating in the
+                catastrophic Black Summer of 2019-2020.
+              </p>
+              <p>
+                This visualisation explores Australia's bushfire crisis through
+                multiple lenses: satellite-detected hotspots from January 2020,
+                thirty years of burning trends across the continent's major
+                landscapes, and the wider consequences for wildlife, air
+                quality, and communities.
+              </p>
+              <p>
+                The data tells a story not just of one terrible summer, but of a
+                long-term crisis that is still unfolding.
+              </p>
+            </div>
+            <div class="overview-lenses" aria-label="Dashboard focus areas">
+              <span>Hotspots</span>
+              <span>Long-term trends</span>
+              <span>Vegetation types</span>
+              <span>Impacts</span>
+            </div>
+          </section>
+        </div>
+      </div>
+
       <!-- Row 1: Fire Hotspot Map & Story -->
       <div class="pure-g row-aligned">
         <!-- Left Column: Story & Legend -->
@@ -140,12 +176,15 @@
           <div class="viz-container">
             <div class="chart-header">
               <h2>Bushfire Area by Vegetation Type</h2>
-              <p class="chart-subtitle">Annual burned area (million hectares) across four major Australian land types, 1990–2020</p>
+              <p class="chart-subtitle">
+                Annual burned area (million hectares) across four major
+                Australian land types, 1990–2020
+              </p>
               <p class="chart-note">
-                Read the <b>thickness</b> of each stream as burned area. <b>Vertical
-                position</b> is centred for comparison, so exact yearly values are
-                best checked with the tooltip. The largest total in this dataset
-                occurs in 2015, at 60 million hectares.
+                Read the <b>thickness</b> of each stream as burned area.
+                <b>Vertical position</b> is centred for comparison, so exact
+                yearly values are best checked with the tooltip. The largest
+                total in this dataset occurs in 2015, at 60 million hectares.
               </p>
             </div>
             <div id="vis-horizon"></div>
@@ -155,17 +194,19 @@
                 <h3>What stands out?</h3>
                 <p>
                   <span class="veg-savanna">Tropical savanna woodlands</span>
-                  and <span class="veg-rangelands">arid or semi-arid rangelands</span>
+                  and
+                  <span class="veg-rangelands"
+                    >arid or semi-arid rangelands</span
+                  >
                   form the widest streams, showing that most burned area occurs
                   across northern and inland vegetation systems.
                   <span class="veg-wildfires">Temperate forest wildfires</span>
                   and <span class="veg-hazard">hazard reduction burns</span>
-                  are smaller by comparison,
-                  but they remain important because they are closely tied to
-                  populated forest regions and fire management activity. The
-                  dataset reaches its largest total in 2015, while the 2019
-                  marker provides context for the beginning of the Black Summer
-                  period.
+                  are smaller by comparison, but they remain important because
+                  they are closely tied to populated forest regions and fire
+                  management activity. The dataset reaches its largest total in
+                  2015, while the 2019 marker provides context for the beginning
+                  of the Black Summer period.
                 </p>
               </div>
             </div>

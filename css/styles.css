@@ -82,6 +82,79 @@ h1, h2, h3, h4, h5, h6 {
     max-width: 660px;
 }
 
+/* ===== Overview ===== */
+.overview-section {
+    margin: 0 15px 24px;
+    padding: 28px 32px;
+    border: 1px solid rgba(210, 215, 220, 0.95);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.98);
+    box-shadow: 0 14px 35px rgba(31, 38, 46, 0.07);
+}
+
+.overview-kicker {
+    margin-bottom: 8px;
+    color: #b71c1c;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.overview-section h2 {
+    max-width: 920px;
+    margin: 0 0 14px;
+    color: #202020;
+    font-size: clamp(1.9rem, 3vw, 3rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: 0;
+}
+
+.overview-content {
+    max-width: 980px;
+}
+
+.overview-content p {
+    margin: 0 0 12px;
+    color: #3f464a;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.overview-content p:last-child {
+    margin-bottom: 0;
+}
+
+.overview-lead {
+    color: #2f3437 !important;
+    font-size: 1.12rem !important;
+    font-weight: 600;
+    line-height: 1.55 !important;
+}
+
+.overview-lenses {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 18px;
+}
+
+.overview-lenses span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 5px 10px;
+    border: 1px solid #ead8c8;
+    border-radius: 999px;
+    background: #fff8f2;
+    color: #5f3a28;
+    font-size: 0.78rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
 /* ===== Visualization Cards ===== */
 .viz-container {
     padding: 22px;
@@ -377,6 +450,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header-section,
+    .overview-section,
     .viz-container,
     .story-container,
     .map-container {
