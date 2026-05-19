@@ -4,17 +4,55 @@
   "height": 480,
   "projection": {
     "type": "mercator",
-    "center": {"expr": "zoom_center"},
-    "scale": {"expr": "zoom_scale"}
+    "center": {"expr": "center_to"},
+    "scale": {"expr": "zoom_level"}
   },
   "params": [
     {
-      "name": "zoom_scale",
-      "value": 680
+      "name": "Day_selection",
+      "value": 1,
+      "bind": {
+        "input": "range",
+        "min": 1,
+        "max": 31,
+        "step": 1,
+        "name": "Day (Jan 2020): "
+      }
     },
     {
-      "name": "zoom_center",
-      "value": [134, -28.5]
+      "name": "zoom_level",
+      "value": 680,
+      "bind": {
+        "input": "range",
+        "min": 600,
+        "max": 5000,
+        "step": 50,
+        "name": "Map Zoom: "
+      }
+    },
+    {
+      "name": "center_to",
+      "value": [134, -28.5],
+      "bind": {
+        "input": "select",
+        "options": [
+          [134, -28.5],
+          [147, -37],
+          [120, -32],
+          [134, -17]
+        ],
+        "labels": [
+          "Whole Australia",
+          "Southeast Region (Black Summer)",
+          "Southwest Region (Wheatbelt)",
+          "Northern Region (Savanna Burns)"
+        ],
+        "name": "Map Centre: "
+      }
+    },
+    {
+      "name": "zoom_region_region",
+      "value": null
     }
   ],
   "layer": [
@@ -38,6 +76,11 @@
       "data": {
         "url": "data/Fire.csv"
       },
+      "transform": [
+        {
+          "filter": "parseInt(slice(datum.acq_date, 8, 10)) === Day_selection"
+        }
+      ],
       "mark": {
         "type": "circle",
         "opacity": 0.4,
@@ -258,17 +301,6 @@
                 "type": "point",
                 "fields": ["region"],
                 "on": "click"
-              },
-              "bind": {
-                "input": "select",
-                "options": [null, "Southeast", "Southwest", "North"],
-                "labels": [
-                  "Show All Australia",
-                  "Southeast (Black Summer)",
-                  "Southwest (Wheatbelt)",
-                  "North (Savanna Burns)"
-                ],
-                "name": "Zoom to Region: "
               }
             }
           ],
