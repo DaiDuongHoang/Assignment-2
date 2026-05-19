@@ -24,7 +24,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260519" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260520_v6" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -53,33 +53,53 @@
       <div class="pure-g">
         <div class="pure-u-1">
           <section class="overview-section" aria-labelledby="overview-title">
-            <div class="overview-kicker">Overview</div>
-            <h2 id="overview-title">
-              Australia has always lived with fire, but not like this.
-            </h2>
-            <div class="overview-content">
-              <p class="overview-lead">
-                Over the past three decades, the scale and intensity of
-                bushfires have grown dramatically, culminating in the
-                catastrophic Black Summer of 2019-2020.
-              </p>
-              <p>
-                This visualisation explores Australia's bushfire crisis through
-                multiple lenses: satellite-detected hotspots from January 2020,
-                thirty years of burning trends across the continent's major
-                landscapes, and the wider consequences for wildlife, air
-                quality, and communities.
-              </p>
-              <p>
-                The data tells a story not just of one terrible summer, but of a
-                long-term crisis that is still unfolding.
-              </p>
-            </div>
-            <div class="overview-lenses" aria-label="Dashboard focus areas">
-              <span>Hotspots</span>
-              <span>Long-term trends</span>
-              <span>Vegetation types</span>
-              <span>Impacts</span>
+            <div class="overview-grid">
+              <div class="overview-text-column">
+                <div class="overview-kicker">Overview</div>
+                <h2 id="overview-title">
+                  Australia has always lived with fire, but not like this.
+                </h2>
+                <div class="overview-content">
+                  <p class="overview-lead">
+                    Over the past three decades, the scale and intensity of
+                    bushfires have grown dramatically, culminating in the
+                    catastrophic Black Summer of 2019-2020.
+                  </p>
+                  <p>
+                    This visualisation explores Australia's bushfire crisis through
+                    multiple lenses: satellite-detected hotspots from January 2020,
+                    thirty years of burning trends across the continent's major
+                    landscapes, and the wider consequences for wildlife, air
+                    quality, and communities.
+                  </p>
+                  <p>
+                    The data tells a story not just of one terrible summer, but of a
+                    long-term crisis that is still unfolding.
+                  </p>
+                </div>
+                <div class="overview-lenses" aria-label="Dashboard focus areas">
+                  <span>Hotspots</span>
+                  <span>Long-term trends</span>
+                  <span>Vegetation types</span>
+                  <span>Impacts</span>
+                </div>
+              </div>
+
+              <!-- Metric Boxes -->
+              <div class="overview-metrics">
+                <div class="metric-box">
+                  <span class="metric-value">60M+</span>
+                  <span class="metric-label">Hectares burned during 2015 peaks</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-value highlight">3B+</span>
+                  <span class="metric-label">Animals impacted in 2019-2020</span>
+                </div>
+                <div class="metric-box">
+                  <span class="metric-value">30 Years</span>
+                  <span class="metric-label">Of escalating fire trends mapped</span>
+                </div>
+              </div>
             </div>
           </section>
         </div>
@@ -161,7 +181,7 @@
         </div>
       </div>
 
-      <!-- Row 2: Fire History Map (full width) -->
+      <!-- Row 2: Fire History Map (full width) (Commented out because spec is deleted)
       <div class="pure-g">
         <div class="pure-u-1">
           <div class="viz-container">
@@ -169,6 +189,7 @@
           </div>
         </div>
       </div>
+      -->
 
       <!-- Row 3: Streamgraph (full width) -->
       <div class="pure-g">
@@ -214,7 +235,7 @@
         </div>
       </div>
 
-      <!-- Row 4: Secondary Charts (side by side) -->
+      <!-- Row 4: Secondary Charts (side by side) (Commented out because specs are deleted)
       <div class="pure-g">
         <div class="pure-u-1 pure-u-md-1-2">
           <div class="viz-container">
@@ -227,9 +248,10 @@
           </div>
         </div>
       </div>
+      -->
     </div>
 
     <!-- Main JS for Vega-embed -->
-    <script src="js/main.js"></script>
+    <script src="js/main.js?v=20260520_v6"></script>
   </body>
 </html>

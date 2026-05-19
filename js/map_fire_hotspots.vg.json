@@ -4,12 +4,19 @@
   "height": 480,
   "projection": {
     "type": "mercator",
-    "center": [
-      134,
-      -28.5
-    ],
-    "scale": 680
+    "center": {"expr": "zoom_center"},
+    "scale": {"expr": "zoom_scale"}
   },
+  "params": [
+    {
+      "name": "zoom_scale",
+      "value": 680
+    },
+    {
+      "name": "zoom_center",
+      "value": [134, -28.5]
+    }
+  ],
   "layer": [
     {
       "data": {
@@ -205,45 +212,70 @@
             "lon": 141,
             "lat": -40,
             "lon2": 149,
-            "lat2": -36.5
+            "lat2": -36.5,
+            "region": "Southeast"
           },
           {
             "area": "Wheatbelt",
             "lon": 124.0,
             "lat": -36,
             "lon2": 123,
-            "lat2": -33.0
+            "lat2": -33.0,
+            "region": "Southwest"
           },
           {
             "area": "Top End west",
             "lon": 149,
             "lat": -15,
             "lon2": 144,
-            "lat2": -20.0
+            "lat2": -20.0,
+            "region": "North"
           },
           {
             "area": "Top End centre",
             "lon": 149,
             "lat": -15,
             "lon2": 143.5,
-            "lat2": -14.5
+            "lat2": -14.5,
+            "region": "North"
           },
           {
             "area": "Top End east",
             "lon": 149,
             "lat": -15,
             "lon2": 145,
-            "lat2": -18
+            "lat2": -18,
+            "region": "North"
           }
         ]
       },
       "layer": [
         {
+          "params": [
+            {
+              "name": "zoom_region",
+              "select": {
+                "type": "point",
+                "fields": ["region"],
+                "on": "click"
+              },
+              "bind": {
+                "input": "select",
+                "options": [null, "Southeast", "Southwest", "North"],
+                "labels": [
+                  "Show All Australia",
+                  "Southeast (Black Summer)",
+                  "Southwest (Wheatbelt)",
+                  "North (Savanna Burns)"
+                ],
+                "name": "Zoom to Region: "
+              }
+            }
+          ],
           "mark": {
             "type": "rule",
-            "color": "#b71c1c",
-            "strokeWidth": 1.8,
-            "opacity": 0.85
+            "opacity": 0.85,
+            "cursor": "pointer"
           },
           "encoding": {
             "longitude": {
@@ -261,6 +293,20 @@
             "latitude2": {
               "field": "lat2",
               "type": "quantitative"
+            },
+            "color": {
+              "condition": {
+                "test": "zoom_region_region === datum.region",
+                "value": "#d32f2f"
+              },
+              "value": "#b71c1c"
+            },
+            "size": {
+              "condition": {
+                "test": "zoom_region_region === datum.region",
+                "value": 2.5
+              },
+              "value": 1.8
             }
           }
         },
@@ -268,11 +314,10 @@
           "mark": {
             "type": "point",
             "shape": "circle",
-            "size": 15,
             "fill": "#ffffff",
-            "stroke": "#b71c1c",
             "strokeWidth": 1.5,
-            "opacity": 0.70
+            "opacity": 0.70,
+            "cursor": "pointer"
           },
           "encoding": {
             "longitude": {
@@ -282,6 +327,20 @@
             "latitude": {
               "field": "lat2",
               "type": "quantitative"
+            },
+            "size": {
+              "condition": {
+                "test": "zoom_region_region === datum.region",
+                "value": 30
+              },
+              "value": 15
+            },
+            "color": {
+              "condition": {
+                "test": "zoom_region_region === datum.region",
+                "value": "#d32f2f"
+              },
+              "value": "#b71c1c"
             }
           }
         }
@@ -293,17 +352,20 @@
           {
             "text": "Intense Black Summer Fires (2019-20)",
             "lon": 141.2,
-            "lat": -40
+            "lat": -40,
+            "region": "Southeast"
           },
           {
             "text": "Wheatbelt Fires (WA)",
             "lon": 130.0,
-            "lat": -36.5
+            "lat": -36.5,
+            "region": "Southwest"
           },
           {
             "text": "Seasonal Savanna Burns (NT)",
             "lon": 164.0,
-            "lat": -15
+            "lat": -15,
+            "region": "North"
           }
         ]
       },
@@ -313,8 +375,7 @@
         "baseline": "middle",
         "dx": -6,
         "fontWeight": "bold",
-        "color": "#b71c1c",
-        "fontSize": 12
+        "cursor": "pointer"
       },
       "encoding": {
         "longitude": {
@@ -327,6 +388,20 @@
         },
         "text": {
           "field": "text"
+        },
+        "color": {
+          "condition": {
+            "test": "zoom_region_region === datum.region",
+            "value": "#d32f2f"
+          },
+          "value": "#b71c1c"
+        },
+        "size": {
+          "condition": {
+            "test": "zoom_region_region === datum.region",
+            "value": 13
+          },
+          "value": 11
         }
       }
     }
