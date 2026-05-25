@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": "container",
-  "height": 480,
+  "height": 415,
   "projection": {
     "type": "mercator",
     "center": {"expr": "center_to"},
@@ -21,7 +21,7 @@
     },
     {
       "name": "zoom_level",
-      "value": 680,
+      "value": 600,
       "bind": {
         "input": "range",
         "min": 600,
@@ -221,7 +221,7 @@
         {
           "mark": {
             "type": "text",
-            "fontSize": 10,
+            "fontSize": 11,
             "fontWeight": 700,
             "dy": -10,
             "dx": 13,
@@ -268,7 +268,7 @@
           },
           {
             "area": "Top End west",
-            "lon": 149,
+            "lon": 139,
             "lat": -15,
             "lon2": 144,
             "lat2": -20.0,
@@ -276,7 +276,7 @@
           },
           {
             "area": "Top End centre",
-            "lon": 149,
+            "lon": 139,
             "lat": -15,
             "lon2": 143.5,
             "lat2": -14.5,
@@ -284,7 +284,7 @@
           },
           {
             "area": "Top End east",
-            "lon": 149,
+            "lon": 139,
             "lat": -15,
             "lon2": 145,
             "lat2": -18,
@@ -395,7 +395,7 @@
           },
           {
             "text": "Seasonal Savanna Burns (NT)",
-            "lon": 164.0,
+            "lon": 151.0,
             "lat": -15,
             "region": "North"
           }
@@ -431,9 +431,9 @@
         "size": {
           "condition": {
             "test": "zoom_region_region === datum.region",
-            "value": 13
+            "value": 16.5
           },
-          "value": 11
+          "value": 13.5
         }
       }
     }
