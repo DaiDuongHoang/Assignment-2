@@ -293,7 +293,6 @@
         "fontWeight": "bold",
         "fill": "#2B2621",
         "tooltip": false,
-        "interactive": true,
         "cursor": "pointer",
         "dx": {
           "expr": "datum.year === 2019 ? 14 : datum.label_dx"
@@ -415,7 +414,6 @@
         "align": {
           "expr": "datum.year === 1967 ? 'left' : 'left'"
         },
-        "interactive": true,
         "tooltip": false,
         "cursor": "pointer",
         "stroke": "#ffffff",
@@ -430,14 +428,6 @@
             "value": "#bd0026"
           },
           "value": "#8f241c"
-        },
-        "fontWeight": {
-          "condition": {
-            "param": "hover_note",
-            "empty": false,
-            "value": 800
-          },
-          "value": 500
         },
         "opacity": {
           "condition": [
