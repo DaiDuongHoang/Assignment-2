@@ -524,8 +524,8 @@ h1, h2, h3, h4, h5, h6 {
 
 #vis-economic-shock {
     position: relative;
-    padding-top: 42px;
-    margin-top: 2px;
+    padding-top: 8px;
+    margin-top: 0;
 }
 
 #vis-economic-shock .vega-bindings {
@@ -785,21 +785,17 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.2s ease;
 }
 
-.swatch-icon.severity-low {
-    background-color: #ffffb2;
-    border: 1px solid #e2d975;
-}
-
 .swatch-icon.severity-medium {
-    background-color: #fecc5c;
+    background-color: #ffeda0;
+    border: 1px solid #dcdca0; /* soft outline for yellow-gold contrast */
 }
 
 .swatch-icon.severity-high {
-    background-color: #fd8d3c;
+    background-color: #feb24c;
 }
 
 .swatch-icon.severity-catastrophic {
-    background-color: #bd0026;
+    background-color: #f03b20;
 }
 
 /* Hover effects for custom legends to make it dynamic */
@@ -823,7 +819,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Responsive adjustments for the custom legend */
 @media (max-width: 880px) {
     #vis-economic-shock {
-        padding-top: 58px;
+        padding-top: 12px;
     }
 
     #vis-economic-shock .vega-bindings {
@@ -1023,6 +1019,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .chart-card-body {
     padding: 20px 28px 24px;
+}
+
+.premium-section.sec3 .chart-card-header {
+    padding-bottom: 12px;
+}
+
+.premium-section.sec3 .chart-card-body {
+    padding-top: 10px;
 }
 
 .chart-card-footer {

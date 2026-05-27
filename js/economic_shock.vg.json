@@ -16,6 +16,12 @@
   "data": {
     "url": "data/ica_bushfire_cleaned.json"
   },
+  "transform": [
+    {
+      "calculate": "datum.severity_category === 'Low' || datum.severity_category === 'Medium' ? 'Medium' : datum.severity_category",
+      "as": "severity_category"
+    }
+  ],
   "params": [
     {
       "name": "select_severity",
@@ -107,8 +113,8 @@
           "field": "severity_category",
           "type": "nominal",
           "scale": {
-            "domain": ["Low", "Medium", "High", "Catastrophic"],
-            "range": ["#fed976", "#fecc5c", "#fd8d3c", "#bd0026"]
+            "domain": ["Medium", "High", "Catastrophic"],
+            "range": ["#ffeda0", "#feb24c", "#f03b20"]
           },
           "legend": null
         },
@@ -163,7 +169,7 @@
             },
             {
               "test": "length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0",
-              "value": 0.82
+              "value": 1.0
             }
           ],
           "value": 0.15
@@ -217,7 +223,7 @@
         "shape": "circle",
         "stroke": "#1F1F1F",
         "strokeWidth": 2,
-        "fill": "#bd0026"
+        "fill": "#f03b20"
       },
       "encoding": {
         "x": {
@@ -292,7 +298,6 @@
         "fontSize": 10.5,
         "fontWeight": "bold",
         "fill": "#2B2621",
-        "tooltip": false,
         "cursor": "pointer",
         "dx": {
           "expr": "datum.year === 2019 ? 14 : datum.label_dx"
@@ -366,7 +371,35 @@
             "type": "nominal"
           },
           "value": ""
-        }
+        },
+        "tooltip": [
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Catastrophe Event"
+          },
+          { "field": "year", "type": "quantitative", "title": "Year" },
+          {
+            "field": "loss_billion_label",
+            "type": "nominal",
+            "title": "Normalised Insured Loss"
+          },
+          {
+            "field": "original_loss_label",
+            "type": "nominal",
+            "title": "Original Insured Loss"
+          },
+          {
+            "field": "claims_label",
+            "type": "nominal",
+            "title": "Total Claims Received"
+          },
+          {
+            "field": "severity_category",
+            "type": "nominal",
+            "title": "Severity Category"
+          }
+        ]
       }
     },
     {
@@ -374,14 +407,22 @@
         "values": [
           {
             "year": 1967,
+            "event_name": "Bushfire",
             "loss_billion": 4.1036,
+            "loss_billion_label": "$4.10B",
+            "original_loss_label": "$40,000,000",
+            "claims_label": "No claims data",
             "severity_category": "Catastrophic",
             "y": 4.1,
             "text": "Largest normalised insured loss in the dataset"
           },
           {
             "year": 2019,
+            "event_name": "2019/20 Bushfires (NSW,QLD,SA,VIC)",
             "loss_billion": 2.4054,
+            "loss_billion_label": "$2.41B",
+            "original_loss_label": "$2,319,164,486",
+            "claims_label": "38,936",
             "severity_category": "Catastrophic",
             "y": 2.41,
             "text": "Major recent insured-loss shock"
@@ -414,7 +455,6 @@
         "align": {
           "expr": "datum.year === 1967 ? 'left' : 'left'"
         },
-        "tooltip": false,
         "cursor": "pointer",
         "stroke": "#ffffff",
         "strokeOpacity": 0,
@@ -466,7 +506,35 @@
         "text": {
           "field": "text",
           "type": "nominal"
-        }
+        },
+        "tooltip": [
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Catastrophe Event"
+          },
+          { "field": "year", "type": "quantitative", "title": "Year" },
+          {
+            "field": "loss_billion_label",
+            "type": "nominal",
+            "title": "Normalised Insured Loss"
+          },
+          {
+            "field": "original_loss_label",
+            "type": "nominal",
+            "title": "Original Insured Loss"
+          },
+          {
+            "field": "claims_label",
+            "type": "nominal",
+            "title": "Total Claims Received"
+          },
+          {
+            "field": "severity_category",
+            "type": "nominal",
+            "title": "Severity Category"
+          }
+        ]
       }
     }
   ]
