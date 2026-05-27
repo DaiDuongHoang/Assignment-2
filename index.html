@@ -24,7 +24,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260527_economic_gap" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260527_timeline_v2" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
     <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
@@ -266,9 +266,24 @@
           </div>
         </div>
 
+        <div class="chart-card timeline-chart-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-red">Fig. 3a · Event Timeline</div>
+            <div class="chart-card-title font-display">Major Australian Bushfire Events</div>
+            <div class="chart-card-caption serif-note">Key historical events and their normalised insured losses in 2022 Australian Dollars. Hover each card or point for more detail.</div>
+          </div>
+          <div class="chart-card-body">
+            <div id="vis-bushfire-timeline"></div>
+          </div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>Insurance Council of Australia Historical Catastrophe Data 2024</span>
+          </div>
+        </div>
+
         <div class="chart-card">
           <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-red">Fig. 3 · Economic Shock Timeline</div>
+            <div class="chart-card-tag label-tag accent-red">Fig. 3b · Economic Shock Bubble Chart</div>
             <div class="chart-card-title font-display">Economic Shockwaves from Australian Bushfires</div>
             <div class="chart-card-caption serif-note">Insured losses normalised to 2022 Australian Dollars. Hover bubbles to view details. Click Severity below to filter.</div>
           </div>
@@ -411,6 +426,6 @@
     </div>
 
     <!-- Main JS for Vega-embed -->
-    <script src="js/main.js?v=20260527_label_tooltips"></script>
+    <script src="js/main.js?v=20260527_timeline_v2"></script>
   </body>
 </html>

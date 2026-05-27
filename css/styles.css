@@ -516,6 +516,7 @@ h1, h2, h3, h4, h5, h6 {
 #vis-bar,
 #vis-timeline,
 #vis-horizon,
+#vis-bushfire-timeline,
 #vis-economic-shock {
     width: 100%;
     display: block;
@@ -1027,6 +1028,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .premium-section.sec3 .chart-card-body {
     padding-top: 10px;
+}
+
+.timeline-chart-card {
+    margin-bottom: 24px;
+}
+
+.timeline-chart-card .chart-card-body {
+    padding-top: 14px;
+    overflow-x: auto;
+}
+
+#vis-bushfire-timeline {
+    min-width: 1040px;
+    min-height: 420px;
 }
 
 .chart-card-footer {

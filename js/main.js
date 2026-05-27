@@ -1,5 +1,6 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
+const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260527_v2";
 const economicShockSpec = "js/economic_shock.vg.json?v=20260527_label_tooltips";
 
 // Embed the Fire.csv hotspot map (Row 1)
@@ -107,7 +108,12 @@ vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).then(function(r
     console.log("Streamgraph loaded successfully");
 }).catch(console.error);
 
-// Embed the Economic Shock Timeline (Row 4)
+// Embed the major bushfire events timeline (Section 3)
+vegaEmbed('#vis-bushfire-timeline', bushfireTimelineSpec, { "actions": false }).then(function(result) {
+    console.log("Bushfire event timeline loaded successfully");
+}).catch(console.error);
+
+// Embed the Economic Shock Bubble Chart (Section 3)
 vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(function(result) {
     console.log("Economic Shock Timeline loaded successfully");
     const view = result.view;
