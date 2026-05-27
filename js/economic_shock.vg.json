@@ -181,8 +181,7 @@
         "shape": "circle",
         "stroke": "#1F1F1F",
         "strokeWidth": 2,
-        "fill": "#bd0026",
-        "opacity": 1
+        "fill": "#bd0026"
       },
       "encoding": {
         "x": {
@@ -208,6 +207,19 @@
             "domain": [1000, 60000],
             "range": [80, 850]
           }
+        },
+        "opacity": {
+          "condition": [
+            {
+              "test": "select_severity !== 'All' && select_severity !== 'Catastrophic'",
+              "value": 0.05
+            },
+            {
+              "test": "isDefined(hover_bubble) && isDefined(hover_bubble.year) && hover_bubble.year !== 2019",
+              "value": 0.15
+            }
+          ],
+          "value": 1.0
         }
       }
     },
