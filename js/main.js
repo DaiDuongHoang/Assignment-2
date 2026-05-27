@@ -1,6 +1,6 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
-const economicShockSpec = "js/economic_shock.vg.json?v=20260527_economic_no_year";
+const economicShockSpec = "js/economic_shock.vg.json?v=20260527_note_text_highlight";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })

@@ -51,6 +51,7 @@
             "type": "point",
             "on": "mouseover",
             "clear": "mouseout",
+            "nearest": false,
             "fields": ["year", "loss_billion", "severity_category"]
           }
         }
@@ -146,30 +147,65 @@
               "value": 0.05
             },
             {
-              "test": "!hover_bubble || !isDefined(hover_bubble.year)",
-              "value": 0.82
+              "param": "hover_bubble",
+              "empty": false,
+              "value": 1.0
             },
             {
-              "param": "hover_bubble",
+              "param": "hover_label",
+              "empty": false,
               "value": 1.0
+            },
+            {
+              "param": "hover_note",
+              "empty": false,
+              "value": 1.0
+            },
+            {
+              "test": "length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0",
+              "value": 0.82
             }
           ],
           "value": 0.15
         },
         "stroke": {
-          "condition": {
-            "param": "hover_bubble",
-            "empty": false,
-            "value": "#1F1F1F"
-          },
+          "condition": [
+            {
+              "param": "hover_bubble",
+              "empty": false,
+              "value": "#1F1F1F"
+            },
+            {
+              "param": "hover_label",
+              "empty": false,
+              "value": "#1F1F1F"
+            },
+            {
+              "param": "hover_note",
+              "empty": false,
+              "value": "#1F1F1F"
+            }
+          ],
           "value": "transparent"
         },
         "strokeWidth": {
-          "condition": {
-            "param": "hover_bubble",
-            "empty": false,
-            "value": 1.5
-          },
+          "condition": [
+            {
+              "param": "hover_bubble",
+              "empty": false,
+              "value": 1.5
+            },
+            {
+              "param": "hover_label",
+              "empty": false,
+              "value": 1.5
+            },
+            {
+              "param": "hover_note",
+              "empty": false,
+              "value": 1.5
+            }
+          ],
           "value": 0.5
         }
       }
@@ -215,7 +251,22 @@
               "value": 0.05
             },
             {
-              "test": "isDefined(hover_bubble) && isDefined(hover_bubble.year) && hover_bubble.year !== 2019",
+              "param": "hover_bubble",
+              "empty": false,
+              "value": 1.0
+            },
+            {
+              "param": "hover_label",
+              "empty": false,
+              "value": 1.0
+            },
+            {
+              "param": "hover_note",
+              "empty": false,
+              "value": 1.0
+            },
+            {
+              "test": "length(data('hover_bubble_store')) > 0 || length(data('hover_label_store')) > 0 || length(data('hover_note_store')) > 0",
               "value": 0.15
             }
           ],
@@ -224,13 +275,26 @@
       }
     },
     {
+      "params": [
+        {
+          "name": "hover_label",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "clear": "mouseout",
+            "fields": ["year", "loss_billion", "severity_category"]
+          }
+        }
+      ],
       "mark": {
         "type": "text",
         "font": "Inter",
         "fontSize": 10.5,
         "fontWeight": "bold",
-        "fill": "#2f3438",
+        "fill": "#2B2621",
         "tooltip": false,
+        "interactive": true,
+        "cursor": "pointer",
         "dx": {
           "expr": "datum.year === 2019 ? 14 : datum.label_dx"
         },
@@ -255,20 +319,27 @@
               "value": 0.0
             },
             {
-              "test": "datum.is_top_event === true && (!hover_bubble || !isDefined(hover_bubble.year))",
+              "test": "datum.is_top_event === true && length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0",
               "value": 1.0
             },
             {
-              "test": "datum.is_top_event === true && isDefined(hover_bubble.year) && hover_bubble.year === datum.year",
+              "param": "hover_bubble",
+              "empty": false,
               "value": 1.0
             },
             {
-              "test": "datum.is_top_event === true && isDefined(hover_bubble.year) && hover_bubble.year !== datum.year",
+              "param": "hover_label",
+              "empty": false,
+              "value": 1.0
+            },
+            {
+              "param": "hover_note",
+              "empty": false,
+              "value": 1.0
+            },
+            {
+              "test": "datum.is_top_event === true && (length(data('hover_bubble_store')) > 0 || length(data('hover_label_store')) > 0 || length(data('hover_note_store')) > 0)",
               "value": 0.15
-            },
-            {
-              "test": "isDefined(hover_bubble.year) && hover_bubble.year === datum.year",
-              "value": 1.0
             }
           ],
           "value": 0.0
@@ -304,23 +375,37 @@
         "values": [
           {
             "year": 1967,
+            "loss_billion": 4.1036,
+            "severity_category": "Catastrophic",
             "y": 4.1,
             "text": "Largest normalised insured loss in the dataset"
           },
           {
             "year": 2019,
+            "loss_billion": 2.4054,
+            "severity_category": "Catastrophic",
             "y": 2.41,
             "text": "Major recent insured-loss shock"
           }
         ]
       },
+      "params": [
+        {
+          "name": "hover_note",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "clear": "mouseout",
+            "fields": ["year", "loss_billion", "severity_category"]
+          }
+        }
+      ],
       "mark": {
         "type": "text",
         "font": "Inter",
         "fontSize": 9,
         "fontStyle": "italic",
         "fontWeight": 500,
-        "fill": "#8f241c",
         "dx": {
           "expr": "datum.year === 1967 ? 12 : (datum.year === 2019 ? 16 : 12)"
         },
@@ -330,9 +415,30 @@
         "align": {
           "expr": "datum.year === 1967 ? 'left' : 'left'"
         },
-        "tooltip": false
+        "interactive": true,
+        "tooltip": false,
+        "cursor": "pointer",
+        "stroke": "#ffffff",
+        "strokeOpacity": 0,
+        "strokeWidth": 8
       },
       "encoding": {
+        "fill": {
+          "condition": {
+            "param": "hover_note",
+            "empty": false,
+            "value": "#bd0026"
+          },
+          "value": "#8f241c"
+        },
+        "fontWeight": {
+          "condition": {
+            "param": "hover_note",
+            "empty": false,
+            "value": 800
+          },
+          "value": 500
+        },
         "opacity": {
           "condition": [
             {
@@ -340,7 +446,12 @@
               "value": 0.0
             },
             {
-              "test": "hover_bubble && isDefined(hover_bubble.severity_category) && hover_bubble.severity_category !== 'Catastrophic'",
+              "param": "hover_note",
+              "empty": false,
+              "value": 1
+            },
+            {
+              "test": "(hover_bubble && isDefined(hover_bubble.severity_category) && hover_bubble.severity_category !== 'Catastrophic') || (hover_label && isDefined(hover_label.severity_category) && hover_label.severity_category !== 'Catastrophic') || (hover_note && isDefined(hover_note.severity_category) && hover_note.severity_category !== 'Catastrophic')",
               "value": 0.1
             }
           ],
