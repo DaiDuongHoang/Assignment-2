@@ -101,7 +101,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Low", "Medium", "High", "Catastrophic"],
-            "range": ["#ffffb2", "#fecc5c", "#fd8d3c", "#bd0026"]
+            "range": ["#fed976", "#fecc5c", "#fd8d3c", "#bd0026"]
           },
           "legend": null
         },
