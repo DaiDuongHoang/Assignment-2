@@ -1,0 +1,342 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": "container",
+  "height": 460,
+  "padding": {
+    "left": 8,
+    "right": 18,
+    "top": 6,
+    "bottom": 8
+  },
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
+  "data": {
+    "url": "data/ica_bushfire_cleaned.json"
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    },
+    "background": "#ffffff",
+    "axis": {
+      "labelFont": "Inter",
+      "titleFont": "Outfit",
+      "labelColor": "#667078",
+      "titleColor": "#33383d",
+      "domainColor": "#cfd6dc",
+      "tickColor": "#cfd6dc",
+      "gridColor": "#e7ecef",
+      "gridOpacity": 0.8,
+      "labelFontSize": 13,
+      "titleFontSize": 13,
+      "titleFontWeight": 700
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "hover_bubble",
+          "select": {
+            "type": "point",
+            "on": "mouseover",
+            "clear": "mouseout",
+            "fields": ["year", "loss_billion", "severity_category"]
+          }
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "opacity": 0.85,
+        "stroke": "transparent",
+        "strokeWidth": 0.5,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "title": "Year of Disaster",
+          "scale": {
+            "zero": false,
+            "domain": [1965, 2028]
+          },
+          "axis": {
+            "format": "d",
+            "grid": true,
+            "titlePadding": 10,
+            "tickCount": 10
+          }
+        },
+        "y": {
+          "field": "loss_billion",
+          "type": "quantitative",
+          "title": "Normalised insured loss, 2022 $B",
+          "scale": {
+            "domain": [-0.125, 4.5],
+            "nice": false
+          },
+          "axis": {
+            "labelExpr": "'$' + datum.value + 'B'",
+            "values": [0, 1, 2, 3, 4],
+            "grid": true,
+            "titlePadding": 10
+          }
+        },
+        "size": {
+          "field": "bubble_size_metric",
+          "type": "quantitative",
+          "scale": {
+            "domain": [1000, 60000],
+            "range": [80, 850]
+          },
+          "legend": null
+        },
+        "color": {
+          "field": "severity_category",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Low", "Medium", "High", "Catastrophic"],
+            "range": ["#ffffb2", "#fecc5c", "#fd8d3c", "#bd0026"]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Catastrophe Event"
+          },
+          { "field": "year", "type": "quantitative", "title": "Year" },
+          {
+            "field": "loss_billion_label",
+            "type": "nominal",
+            "title": "Normalised Insured Loss"
+          },
+          {
+            "field": "original_loss_label",
+            "type": "nominal",
+            "title": "Original Insured Loss"
+          },
+          {
+            "field": "claims_label",
+            "type": "nominal",
+            "title": "Total Claims Received"
+          },
+          {
+            "field": "severity_category",
+            "type": "nominal",
+            "title": "Severity Category"
+          }
+        ],
+        "opacity": {
+          "condition": [
+            {
+              "test": "!hover_bubble || !isDefined(hover_bubble.year)",
+              "value": 0.82
+            },
+            {
+              "param": "hover_bubble",
+              "value": 1.0
+            }
+          ],
+          "value": 0.15
+        },
+        "stroke": {
+          "condition": {
+            "param": "hover_bubble",
+            "empty": false,
+            "value": "#1F1F1F"
+          },
+          "value": "transparent"
+        },
+        "strokeWidth": {
+          "condition": {
+            "param": "hover_bubble",
+            "empty": false,
+            "value": 1.5
+          },
+          "value": 0.5
+        }
+      }
+    },
+    {
+      "transform": [{ "filter": "datum.is_black_summer === true" }],
+      "mark": {
+        "type": "point",
+        "shape": "circle",
+        "stroke": "#1F1F1F",
+        "strokeWidth": 2,
+        "fill": "#bd0026",
+        "opacity": 1
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "zero": false,
+            "domain": [1965, 2028]
+          }
+        },
+        "y": {
+          "field": "loss_billion",
+          "type": "quantitative",
+          "scale": {
+            "domain": [-0.125, 4.5],
+            "nice": false
+          }
+        },
+        "size": {
+          "field": "bubble_size_metric",
+          "type": "quantitative",
+          "scale": {
+            "domain": [1000, 60000],
+            "range": [80, 850]
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 10.5,
+        "fontWeight": "bold",
+        "fill": "#2f3438",
+        "tooltip": false,
+        "dx": {
+          "expr": "datum.year === 2019 ? 14 : datum.label_dx"
+        },
+        "dy": {
+          "expr": "datum.year === 2019 ? -16 : datum.label_dy"
+        },
+        "align": {
+          "expr": "datum.year === 2019 ? 'left' : datum.label_align"
+        }
+      },
+      "transform": [
+        {
+          "calculate": "datum.year === 1967 ? '1967 Bushfire' : datum.event_name === 'Ash Wednesday Bushfire (VIC)' ? 'Ash Wednesday' : datum.event_name === 'Black Saturday Bushfire' ? 'Black Saturday' : datum.event_name === '2019/20 Bushfires (NSW,QLD,SA,VIC)' ? 'Black Summer' : datum.event_name === 'Canberra Bushfire' ? 'Canberra' : datum.event_name",
+          "as": "short_label"
+        }
+      ],
+      "encoding": {
+        "opacity": {
+          "condition": [
+            {
+              "test": "datum.is_top_event === true && (!hover_bubble || !isDefined(hover_bubble.year))",
+              "value": 1.0
+            },
+            {
+              "test": "datum.is_top_event === true && isDefined(hover_bubble.year) && hover_bubble.year === datum.year",
+              "value": 1.0
+            },
+            {
+              "test": "datum.is_top_event === true && isDefined(hover_bubble.year) && hover_bubble.year !== datum.year",
+              "value": 0.15
+            },
+            {
+              "test": "isDefined(hover_bubble.year) && hover_bubble.year === datum.year",
+              "value": 1.0
+            }
+          ],
+          "value": 0.0
+        },
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "zero": false,
+            "domain": [1965, 2028]
+          }
+        },
+        "y": {
+          "field": "loss_billion",
+          "type": "quantitative",
+          "scale": {
+            "domain": [-0.125, 4.5],
+            "nice": false
+          }
+        },
+        "text": {
+          "condition": {
+            "test": "datum.is_top_event === true",
+            "field": "short_label",
+            "type": "nominal"
+          },
+          "value": ""
+        }
+      }
+    },
+    {
+      "data": {
+        "values": [
+          {
+            "year": 1967,
+            "y": 4.1,
+            "text": "Largest normalised insured loss in the dataset"
+          },
+          {
+            "year": 2019,
+            "y": 2.41,
+            "text": "Major recent insured-loss shock"
+          }
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontSize": 9,
+        "fontStyle": "italic",
+        "fontWeight": 500,
+        "fill": "#8f241c",
+        "dx": {
+          "expr": "datum.year === 1967 ? 12 : (datum.year === 2019 ? 16 : 12)"
+        },
+        "dy": {
+          "expr": "datum.year === 1967 ? 12 : (datum.year === 2019 ? 16 : 6)"
+        },
+        "align": {
+          "expr": "datum.year === 1967 ? 'left' : 'left'"
+        },
+        "tooltip": false
+      },
+      "encoding": {
+        "opacity": {
+          "condition": [
+            {
+              "test": "hover_bubble && isDefined(hover_bubble.severity_category) && hover_bubble.severity_category !== 'Catastrophic'",
+              "value": 0.1
+            }
+          ],
+          "value": 1
+        },
+        "x": {
+          "field": "year",
+          "type": "quantitative",
+          "scale": {
+            "zero": false,
+            "domain": [1965, 2028]
+          }
+        },
+        "y": {
+          "field": "y",
+          "type": "quantitative",
+          "scale": {
+            "domain": [-0.125, 4.5],
+            "nice": false
+          }
+        },
+        "text": {
+          "field": "text",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}
