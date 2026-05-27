@@ -16,6 +16,12 @@
   "data": {
     "url": "data/ica_bushfire_cleaned.json"
   },
+  "params": [
+    {
+      "name": "select_severity",
+      "value": "All"
+    }
+  ],
 
   "config": {
     "view": {
@@ -136,6 +142,10 @@
         "opacity": {
           "condition": [
             {
+              "test": "select_severity !== 'All' && datum.severity_category !== select_severity",
+              "value": 0.05
+            },
+            {
               "test": "!hover_bubble || !isDefined(hover_bubble.year)",
               "value": 0.82
             },
@@ -229,6 +239,10 @@
         "opacity": {
           "condition": [
             {
+              "test": "select_severity !== 'All' && datum.severity_category !== select_severity",
+              "value": 0.0
+            },
+            {
               "test": "datum.is_top_event === true && (!hover_bubble || !isDefined(hover_bubble.year))",
               "value": 1.0
             },
@@ -309,6 +323,10 @@
       "encoding": {
         "opacity": {
           "condition": [
+            {
+              "test": "select_severity !== 'All' && select_severity !== 'Catastrophic'",
+              "value": 0.0
+            },
             {
               "test": "hover_bubble && isDefined(hover_bubble.severity_category) && hover_bubble.severity_category !== 'Catastrophic'",
               "value": 0.1

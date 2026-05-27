@@ -714,6 +714,28 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.legend-item[data-severity] {
+    cursor: pointer;
+}
+
+.legend-item[data-severity]:hover {
+    background-color: rgba(43, 38, 33, 0.05);
+}
+
+.legend-item.active-legend-filter {
+    background-color: rgba(43, 38, 33, 0.08) !important;
+    border-color: rgba(43, 38, 33, 0.15) !important;
+    font-weight: 700;
+}
+
+.legend-item.active-legend-filter .legend-label {
+    color: #2B2621 !important;
 }
 
 .legend-label {
@@ -846,11 +868,11 @@ h1, h2, h3, h4, h5, h6 {
     display: block;
     width: calc(100% - 30px);
     border: none;
-    border-top: 3px dotted #cbd5e1;
+    border-top: 2px solid #2B2621; /* solid, bold, dark contrast horizontal line */
     position: absolute;
     top: 0;
     left: 15px;
-    opacity: 0.75;
+    opacity: 0.3; /* contrastive espresso shade blending with layout */
 }
 
 .section-header {
@@ -884,6 +906,19 @@ h1, h2, h3, h4, h5, h6 {
     border-left-color: var(--color-sec4);
 }
 
+.premium-section.sec1 .section-heading {
+    color: var(--color-sec1); /* green title for Section 1 */
+}
+.premium-section.sec2 .section-heading {
+    color: var(--color-sec2); /* orange title for Section 2 */
+}
+.premium-section.sec3 .section-heading {
+    color: var(--color-sec3); /* red title for Section 3 */
+}
+.premium-section.sec4 .section-heading {
+    color: var(--color-sec4); /* blue title for Section 4 */
+}
+
 .section-name {
     font-family: 'Outfit', sans-serif;
     font-size: 0.85rem;
@@ -909,7 +944,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: clamp(2rem, 3.5vw, 2.5rem);
     font-weight: 800;
     line-height: 1.1;
-    color: #2B2621;
     margin: 4px 0 0;
     letter-spacing: -0.025em;
 }

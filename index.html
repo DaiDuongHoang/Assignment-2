@@ -40,10 +40,7 @@
             <div class="header-content">
               <p class="eyebrow">FIT2179 Data Visualisation</p>
               <h1>Australian Bushfires</h1>
-              <p>
-                An interactive dashboard exploring the impact and spread of
-                bushfires across Australia.
-              </p>
+              <p>When Australia burns, the damage spreads far beyond the flames.</p>
             </div>
           </div>
         </div>
@@ -273,7 +270,7 @@
           <div class="chart-card-header">
             <div class="chart-card-tag label-tag accent-red">Fig. 3 · Economic Shock Timeline</div>
             <div class="chart-card-title font-display">Economic Shockwaves from Australian Bushfires</div>
-            <div class="chart-card-caption serif-note">Insured losses normalised to 2022 Australian Dollars. Hover bubbles to view specific catastrophe details and severity ratings.</div>
+            <div class="chart-card-caption serif-note">Insured losses normalised to 2022 Australian Dollars. Hover bubbles to view details. Click Severity below to filter.</div>
           </div>
           <div class="chart-card-body">
             <div id="vis-economic-shock"></div>
@@ -304,19 +301,19 @@
               <div class="legend-group">
                 <span class="legend-group-title">Severity</span>
                 <div class="legend-items">
-                  <div class="legend-item">
+                  <div class="legend-item" data-severity="Low">
                     <span class="swatch-icon severity-low"></span>
                     <span class="legend-label">Low &lt; $0.25B</span>
                   </div>
-                  <div class="legend-item">
+                  <div class="legend-item" data-severity="Medium">
                     <span class="swatch-icon severity-medium"></span>
                     <span class="legend-label">Medium $0.25B - $1B</span>
                   </div>
-                  <div class="legend-item">
+                  <div class="legend-item" data-severity="High">
                     <span class="swatch-icon severity-high"></span>
                     <span class="legend-label">High $1B - $2B</span>
                   </div>
-                  <div class="legend-item">
+                  <div class="legend-item" data-severity="Catastrophic">
                     <span class="swatch-icon severity-catastrophic"></span>
                     <span class="legend-label">Catastrophic &gt; $2B</span>
                   </div>

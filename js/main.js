@@ -110,4 +110,28 @@ vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).then(function(r
 // Embed the Economic Shock Timeline (Row 4)
 vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(function(result) {
     console.log("Economic Shock Timeline loaded successfully");
+    const view = result.view;
+    
+    // Custom HTML Legend interactive filter
+    const legendItems = document.querySelectorAll('.custom-chart-legend .legend-group [data-severity]');
+    let activeSeverity = 'All';
+    
+    legendItems.forEach(item => {
+        item.addEventListener('click', function() {
+            const severity = this.getAttribute('data-severity');
+            
+            if (activeSeverity === severity) {
+                // Clicking the active one resets the filter to show All
+                activeSeverity = 'All';
+                legendItems.forEach(li => li.classList.remove('active-legend-filter'));
+            } else {
+                activeSeverity = severity;
+                legendItems.forEach(li => li.classList.remove('active-legend-filter'));
+                this.classList.add('active-legend-filter');
+            }
+            
+            // Push selection to the Vega-Lite signal
+            view.signal('select_severity', activeSeverity).runAsync().catch(console.error);
+        });
+    });
 }).catch(console.error);
