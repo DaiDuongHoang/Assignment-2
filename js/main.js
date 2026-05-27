@@ -1,5 +1,6 @@
-const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260520_v9";
-const streamgraphSpec = "js/streamgraph.vg.json?v=20260520_v9";
+const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
+const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
+const economicShockSpec = "js/economic_shock.vg.json?v=20260527_economic_no_year";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
@@ -102,8 +103,11 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
   .catch(console.error);
 
 // Embed the streamgraph (Row 2)
-vegaEmbed("#vis-horizon", streamgraphSpec, { "actions": false })
-  .then(function (result) {
+vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).then(function(result) {
     console.log("Streamgraph loaded successfully");
-  })
-  .catch(console.error);
+}).catch(console.error);
+
+// Embed the Economic Shock Timeline (Row 4)
+vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(function(result) {
+    console.log("Economic Shock Timeline loaded successfully");
+}).catch(console.error);

@@ -4,8 +4,8 @@
   "height": 415,
   "projection": {
     "type": "mercator",
-    "center": {"expr": "center_to"},
-    "scale": {"expr": "zoom_level"}
+    "center": { "expr": "center_to" },
+    "scale": { "expr": "zoom_level" }
   },
   "params": [
     {
@@ -102,14 +102,8 @@
           "type": "quantitative",
           "title": "Fire Radiative Power (MW)",
           "scale": {
-            "domain": [
-              0,
-              500
-            ],
-            "range": [
-              1,
-              30
-            ]
+            "domain": [0, 500],
+            "range": [1, 30]
           },
           "legend": null
         },
@@ -119,10 +113,7 @@
           "title": "Brightness Temperature (K)",
           "scale": {
             "scheme": "yelloworangered",
-            "domain": [
-              300,
-              500
-            ]
+            "domain": [300, 500]
           },
           "legend": null
         },
@@ -188,7 +179,7 @@
           {
             "city": "Brisbane",
             "lat": -27.4705,
-            "lon": 153.0260
+            "lon": 153.026
           },
           {
             "city": "Perth",
@@ -254,7 +245,7 @@
             "area": "Black Summer",
             "lon": 141,
             "lat": -40,
-            "lon2": 149,
+            "lon2": 148.7,
             "lat2": -36.5,
             "region": "Southeast"
           },
@@ -268,7 +259,7 @@
           },
           {
             "area": "Top End west",
-            "lon": 139,
+            "lon": 150.7,
             "lat": -15,
             "lon2": 144,
             "lat2": -20.0,
@@ -276,7 +267,7 @@
           },
           {
             "area": "Top End centre",
-            "lon": 139,
+            "lon": 150.7,
             "lat": -15,
             "lon2": 143.5,
             "lat2": -14.5,
@@ -284,7 +275,7 @@
           },
           {
             "area": "Top End east",
-            "lon": 139,
+            "lon": 150.7,
             "lat": -15,
             "lon2": 145,
             "lat2": -18,
@@ -319,12 +310,10 @@
               "type": "quantitative"
             },
             "longitude2": {
-              "field": "lon2",
-              "type": "quantitative"
+              "field": "lon2"
             },
             "latitude2": {
-              "field": "lat2",
-              "type": "quantitative"
+              "field": "lat2"
             },
             "color": {
               "condition": {
@@ -348,7 +337,7 @@
             "shape": "circle",
             "fill": "#ffffff",
             "strokeWidth": 1.5,
-            "opacity": 0.70,
+            "opacity": 0.7,
             "cursor": "pointer"
           },
           "encoding": {
@@ -395,7 +384,7 @@
           },
           {
             "text": "Seasonal Savanna Burns (NT)",
-            "lon": 151.0,
+            "lon": 170.0,
             "lat": -15,
             "region": "North"
           }

@@ -15,9 +15,7 @@
           "name": "legendFilter",
           "select": {
             "type": "point",
-            "fields": [
-              "Fire Type"
-            ]
+            "fields": ["Fire Type"]
           },
           "bind": "legend"
         },
@@ -25,9 +23,7 @@
           "name": "areaFilter",
           "select": {
             "type": "point",
-            "fields": [
-              "Fire Type"
-            ],
+            "fields": ["Fire Type"],
             "on": "click",
             "clear": "dblclick"
           }
@@ -41,10 +37,7 @@
             "Temperate_forest_wildfires",
             "Temperate_forest_hazard_reduction"
           ],
-          "as": [
-            "Category",
-            "Area"
-          ]
+          "as": ["Category", "Area"]
         },
         {
           "calculate": "toNumber(datum.Area)",
@@ -107,12 +100,7 @@
               "Temperate Forest Wildfires",
               "Hazard Reduction Burns"
             ],
-            "range": [
-              "#388e3c",
-              "#8d6e63",
-              "#c62828",
-              "#ff8f00"
-            ]
+            "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
           },
           "legend": null
         },
@@ -170,10 +158,7 @@
       },
       "mark": {
         "type": "rule",
-        "strokeDash": [
-          6,
-          4
-        ],
+        "strokeDash": [6, 4],
         "strokeWidth": 1.5,
         "opacity": 0.25
       },
@@ -197,10 +182,7 @@
       },
       "mark": {
         "type": "rule",
-        "strokeDash": [
-          6,
-          4
-        ],
+        "strokeDash": [6, 4],
         "strokeWidth": 1.5,
         "opacity": 0.25
       },
@@ -284,12 +266,7 @@
                   "Temperate Forest Wildfires",
                   "Hazard Reduction Burns"
                 ],
-                "range": [
-                  "#388e3c",
-                  "#8d6e63",
-                  "#c62828",
-                  "#ff8f00"
-                ]
+                "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
               },
               "legend": null
             },
@@ -347,12 +324,7 @@
                   "Temperate Forest Wildfires",
                   "Hazard Reduction Burns"
                 ],
-                "range": [
-                  "#388e3c",
-                  "#4e342e",
-                  "#c62828",
-                  "#ff8f00"
-                ]
+                "range": ["#388e3c", "#4e342e", "#c62828", "#ff8f00"]
               },
               "legend": null
             },
