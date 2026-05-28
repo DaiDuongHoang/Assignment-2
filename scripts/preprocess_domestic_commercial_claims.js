@@ -102,6 +102,8 @@ try {
     const normalisedLoss = cleanNumeric(row[columnIndex['NORMALISED LOSS VALUE (2022)']]);
     const domesticShare = domesticTotal / totalDomesticCommercial;
     const commercialShare = commercialTotal / totalDomesticCommercial;
+    const domesticSharePct = domesticShare * 100;
+    const commercialSharePct = commercialShare * 100;
     const rawEventName = String(row[columnIndex['Event Name']] ?? '').trim();
     const eventName = rawEventName || 'Bushfire';
 
@@ -110,19 +112,26 @@ try {
       event_name: eventName,
       display_label: year ? `${eventName} (${year})` : eventName,
       state: String(row[columnIndex.State] ?? '').trim() || 'N/A',
+      domestic_claims: domesticTotal,
+      commercial_claims: commercialTotal,
       domestic_total: domesticTotal,
       commercial_total: commercialTotal,
       total_domestic_commercial: totalDomesticCommercial,
       total_claims: totalClaims,
       normalised_loss: normalisedLoss,
+      normalised_loss_billion: normalisedLoss !== null ? normalisedLoss / 1000000000 : null,
       domestic_share: domesticShare,
       commercial_share: commercialShare,
-      domestic_share_signed: -domesticShare * 100,
-      commercial_share_signed: commercialShare * 100,
+      domestic_share_pct: domesticSharePct,
+      commercial_share_pct: commercialSharePct,
+      domestic_share_signed: -domesticSharePct,
+      commercial_share_signed: commercialSharePct,
       domestic_claims_label: formatCount(domesticTotal),
       commercial_claims_label: formatCount(commercialTotal),
       total_claims_label: formatCount(totalDomesticCommercial),
       workbook_total_claims_label: totalClaims !== null ? formatCount(totalClaims) : 'N/A',
+      domestic_share_pct_label: `${Math.round(domesticSharePct)}%`,
+      commercial_share_pct_label: `${Math.round(commercialSharePct)}%`,
       domestic_share_label: `${(domesticShare * 100).toFixed(1)}%`,
       commercial_share_label: `${(commercialShare * 100).toFixed(1)}%`,
       normalised_loss_label: formatCurrency(normalisedLoss)

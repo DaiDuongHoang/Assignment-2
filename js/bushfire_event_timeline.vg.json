@@ -2,8 +2,8 @@
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "description": "Selected historical timeline of major Australian bushfire events and normalised insured losses with severity tags and card boxes.",
   "width": 1040,
-  "height": 455,
-  "padding": { "top": 6, "bottom": 18, "left": 38, "right": 38 },
+  "height": 435,
+  "padding": { "top": 6, "bottom": 4, "left": 38, "right": 38 },
   "autosize": { "type": "fit", "contains": "padding", "resize": true },
   "background": "#ffffff",
   "signals": [
@@ -32,6 +32,7 @@
           "side": "top",
           "severity": "Catastrophic",
           "severityColor": "#f03b20",
+          "severityTextColor": "#f03b20",
           "color": "#f03b20"
         },
         {
@@ -44,6 +45,7 @@
           "side": "bottom",
           "severity": "Medium",
           "severityColor": "#ffeda0",
+          "severityTextColor": "#cca400",
           "color": "#cca400"
         },
         {
@@ -56,6 +58,7 @@
           "side": "top",
           "severity": "Catastrophic",
           "severityColor": "#f03b20",
+          "severityTextColor": "#f03b20",
           "color": "#f03b20"
         },
         {
@@ -68,6 +71,7 @@
           "side": "bottom",
           "severity": "High",
           "severityColor": "#feb24c",
+          "severityTextColor": "#e67e22",
           "color": "#feb24c"
         },
         {
@@ -80,6 +84,7 @@
           "side": "top",
           "severity": "High",
           "severityColor": "#feb24c",
+          "severityTextColor": "#e67e22",
           "color": "#feb24c"
         },
         {
@@ -92,6 +97,7 @@
           "side": "bottom",
           "severity": "Catastrophic",
           "severityColor": "#f03b20",
+          "severityTextColor": "#f03b20",
           "color": "#f03b20"
         },
         {
@@ -104,6 +110,7 @@
           "side": "top",
           "severity": "Catastrophic",
           "severityColor": "#f03b20",
+          "severityTextColor": "#f03b20",
           "color": "#f03b20"
         }
       ]
@@ -231,10 +238,10 @@
         },
         "update": {
           "stroke": {
-            "signal": "hoveredYear === datum.year ? datum.severityColor : 'rgba(43, 38, 33, 0.08)'"
+            "signal": "hoveredYear === datum.year ? datum.severityColor : 'rgba(43, 38, 33, 0.22)'"
           },
           "strokeWidth": {
-            "signal": "hoveredYear === datum.year ? 1.75 : 1"
+            "signal": "hoveredYear === datum.year ? 2.2 : 1.2"
           },
           "opacity": {
             "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
@@ -328,7 +335,7 @@
           "limit": { "value": 166 }
         },
         "update": {
-          "fill": { "field": "severityColor" },
+          "fill": { "field": "severityTextColor" },
           "opacity": {
             "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
           }

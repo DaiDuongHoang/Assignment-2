@@ -959,7 +959,7 @@ h1, h2, h3, h4, h5, h6 {
 #vis-bushfire-timeline {
     width: calc(100% - 80px);
     max-width: none;
-    min-height: 500px;
+    min-height: 440px;
     margin: 0 14px 0 70px;
     display: block;
 }
@@ -996,6 +996,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .claims-split-card {
+    margin-top: 4px;
+}
+
+.claims-split-card .chart-card-note {
+    font-size: 0.72rem;
+    color: #8A8178;
     margin-top: 4px;
 }
 

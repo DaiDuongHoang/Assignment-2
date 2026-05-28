@@ -1,243 +1,892 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "description": "Diverging domestic and commercial claim shares for bushfire events with explicit ICA claim-type breakdowns.",
-  "data": {
-    "url": "data/domestic_commercial_bushfire_claims.json"
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "description": "Coordinated domestic/commercial claim composition and total claim scale for ICA bushfire records with explicit claim-type breakdowns.",
+  "width": 1120,
+  "height": 238,
+  "autosize": {
+    "type": "fit-x",
+    "contains": "padding",
+    "resize": true
   },
-  "width": "container",
-  "height": 260,
   "padding": {
-    "top": 24,
-    "right": 96,
-    "bottom": 20,
-    "left": 12
+    "top": 8,
+    "right": 24,
+    "bottom": 30,
+    "left": 6
   },
-  "config": {
-    "background": "#ffffff",
-    "view": {
-      "stroke": null
-    },
-    "axis": {
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFont": "Inter, Arial, sans-serif",
-      "labelColor": "#536173",
-      "titleColor": "#536173",
-      "gridColor": "#e8edf3",
-      "tickColor": "#ccd4dd",
-      "domainColor": "#ccd4dd"
-    },
-    "legend": {
-      "labelFont": "Inter, Arial, sans-serif",
-      "titleFont": "Inter, Arial, sans-serif",
-      "labelColor": "#253247",
-      "titleColor": "#1b2330",
-      "orient": "top",
-      "direction": "horizontal",
-      "symbolType": "square",
-      "symbolSize": 140,
-      "title": null,
-      "padding": 0,
-      "offset": 2
-    }
-  },
-  "layer": [
+  "signals": [
     {
-      "mark": {
-        "type": "rule",
-        "stroke": "#2c333a",
-        "strokeWidth": 1.3,
-        "opacity": 0.85
-      },
-      "encoding": {
-        "x": {
-          "datum": 0,
-          "type": "quantitative"
+      "name": "leftLabelWidth",
+      "value": 205
+    },
+    {
+      "name": "leftPlotX",
+      "value": 205
+    },
+    {
+      "name": "leftPlotWidth",
+      "value": 575
+    },
+    {
+      "name": "gap",
+      "value": 28
+    },
+    {
+      "name": "rightPlotX",
+      "update": "leftPlotX + leftPlotWidth + gap"
+    },
+    {
+      "name": "rightPlotWidth",
+      "value": 250
+    },
+    {
+      "name": "plotTop",
+      "value": 70
+    },
+    {
+      "name": "plotBottom",
+      "value": 205
+    },
+    {
+      "name": "rowHeight",
+      "value": 22
+    },
+    {
+      "name": "eventHover",
+      "value": null,
+      "on": [
+        {
+          "events": "mouseover",
+          "update": "datum && datum.event_name ? datum.event_name : eventHover"
+        },
+        {
+          "events": "mouseout",
+          "update": "datum && datum.event_name ? null : eventHover"
         }
-      }
-    },
+      ]
+    }
+  ],
+  "data": [
     {
+      "name": "claims",
+      "url": "data/domestic_commercial_bushfire_claims.json",
+      "format": {
+        "type": "json"
+      },
       "transform": [
         {
-          "fold": [
-            "domestic_share_signed",
-            "commercial_share_signed"
-          ],
-          "as": [
-            "claim_type",
-            "claim_share_signed"
-          ]
+          "type": "formula",
+          "as": "total_claims_text",
+          "expr": "datum.total_claims_label + ' claims'"
+        }
+      ]
+    },
+    {
+      "name": "shareTicks",
+      "values": [
+        {
+          "value": -100
         },
         {
-          "calculate": "datum.claim_type === 'domestic_share_signed' ? 'Domestic claims' : 'Commercial claims'",
-          "as": "claim_group"
+          "value": -50
         },
         {
-          "calculate": "abs(datum.claim_share_signed)",
-          "as": "claim_share_abs"
+          "value": 0
+        },
+        {
+          "value": 50
+        },
+        {
+          "value": 100
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "y",
+      "type": "band",
+      "domain": {
+        "data": "claims",
+        "field": "event_name",
+        "sort": {
+          "op": "min",
+          "field": "sort_order"
+        }
+      },
+      "range": [
+        {
+          "signal": "plotTop"
+        },
+        {
+          "signal": "plotBottom"
         }
       ],
-      "mark": {
-        "type": "bar",
-        "cornerRadiusEnd": 4,
-        "size": 24,
-        "tooltip": true
-      },
-      "encoding": {
-        "x": {
-          "field": "claim_share_signed",
-          "type": "quantitative",
-          "scale": {
-            "domain": [
-              -100,
-              100
-            ],
-            "nice": false
-          },
-          "axis": {
-            "title": "Share of domestic + commercial claims",
-            "format": ".0f",
-            "labelExpr": "abs(datum.value) + '%'",
-            "values": [
-              -100,
-              -50,
-              0,
-              50,
-              100
-            ],
-            "grid": true
-          }
+      "paddingInner": 0.44,
+      "paddingOuter": 0.18
+    },
+    {
+      "name": "xShare",
+      "type": "linear",
+      "domain": [
+        -100,
+        100
+      ],
+      "range": [
+        {
+          "signal": "leftPlotX"
         },
-        "y": {
-          "field": "display_label",
-          "type": "nominal",
-          "sort": {
-            "field": "sort_order",
-            "order": "ascending"
-          },
-          "axis": {
-            "title": null,
-            "labelFontWeight": 700,
-            "labelColor": "#1b2330",
-            "labelLimit": 210,
-            "labelPadding": 8
-          }
+        {
+          "signal": "leftPlotX + leftPlotWidth"
+        }
+      ],
+      "nice": false,
+      "zero": true
+    },
+    {
+      "name": "xClaims",
+      "type": "linear",
+      "domain": [
+        0,
+        5200
+      ],
+      "range": [
+        {
+          "signal": "rightPlotX"
         },
-        "color": {
-          "field": "claim_group",
-          "type": "nominal",
-          "scale": {
-            "domain": [
-              "Domestic claims",
-              "Commercial claims"
-            ],
-            "range": [
-              "#f0a33a",
-              "#8f2f21"
-            ]
-          },
-          "legend": {
-            "orient": "top",
-            "columns": 2
+        {
+          "signal": "rightPlotX + rightPlotWidth"
+        }
+      ],
+      "nice": false,
+      "zero": true
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "xShare",
+      "title": "Share of domestic + commercial claims",
+      "values": [
+        -100,
+        -50,
+        0,
+        50,
+        100
+      ],
+      "labelColor": "#536173",
+      "labelFont": "Inter, Arial, sans-serif",
+      "labelFontSize": 11,
+      "titleColor": "#536173",
+      "titleFont": "Inter, Arial, sans-serif",
+      "titleFontSize": 12,
+      "domainColor": "#cfd7df",
+      "tickColor": "#cfd7df",
+      "grid": false,
+      "zindex": 1,
+      "encode": {
+        "labels": {
+          "update": {
+            "text": {
+              "signal": "abs(datum.value) + '%'"
+            }
           }
-        },
-        "tooltip": [
-          {
-            "field": "event_name",
-            "type": "nominal",
-            "title": "Event"
-          },
-          {
-            "field": "year",
-            "type": "quantitative",
-            "title": "Year",
-            "format": ".0f"
-          },
-          {
-            "field": "domestic_claims_label",
-            "type": "nominal",
-            "title": "Domestic claims"
-          },
-          {
-            "field": "commercial_claims_label",
-            "type": "nominal",
-            "title": "Commercial claims"
-          },
-          {
-            "field": "total_claims_label",
-            "type": "nominal",
-            "title": "Domestic + commercial claims"
-          },
-          {
-            "field": "domestic_share_label",
-            "type": "nominal",
-            "title": "Domestic share"
-          },
-          {
-            "field": "commercial_share_label",
-            "type": "nominal",
-            "title": "Commercial share"
-          },
-          {
-            "field": "normalised_loss_label",
-            "type": "nominal",
-            "title": "Normalised insured loss"
-          }
-        ]
+        }
       }
     },
     {
-      "mark": {
-        "type": "text",
-        "align": "left",
-        "baseline": "middle",
-        "dx": 10,
-        "font": "Inter, Arial, sans-serif",
-        "fontSize": 12,
-        "fontWeight": 700,
-        "fill": "#536173",
-        "clip": false
+      "orient": "bottom",
+      "scale": "xClaims",
+      "title": "Total claims",
+      "tickCount": 4,
+      "format": "~s",
+      "labelColor": "#536173",
+      "labelFont": "Inter, Arial, sans-serif",
+      "labelFontSize": 11,
+      "titleColor": "#536173",
+      "titleFont": "Inter, Arial, sans-serif",
+      "titleFontSize": 12,
+      "domainColor": "#cfd7df",
+      "tickColor": "#cfd7df",
+      "grid": false,
+      "zindex": 1
+    }
+  ],
+  "marks": [
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftPlotX"
+          },
+          "y": {
+            "value": 14
+          },
+          "text": {
+            "value": "Claim composition"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": 800
+          },
+          "fill": {
+            "value": "#2B2621"
+          },
+          "baseline": {
+            "value": "top"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "rightPlotX"
+          },
+          "y": {
+            "value": 14
+          },
+          "text": {
+            "value": "Total claims"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 13
+          },
+          "fontWeight": {
+            "value": 800
+          },
+          "fill": {
+            "value": "#2B2621"
+          },
+          "baseline": {
+            "value": "top"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftPlotX"
+          },
+          "y": {
+            "value": 44
+          },
+          "size": {
+            "value": 110
+          },
+          "shape": {
+            "value": "square"
+          },
+          "fill": {
+            "value": "#f0a33a"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftPlotX + 14"
+          },
+          "y": {
+            "value": 44
+          },
+          "text": {
+            "value": "Domestic claims"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#253247"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftPlotX + 142"
+          },
+          "y": {
+            "value": 44
+          },
+          "size": {
+            "value": 110
+          },
+          "shape": {
+            "value": "square"
+          },
+          "fill": {
+            "value": "#8f2f21"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftPlotX + 156"
+          },
+          "y": {
+            "value": 44
+          },
+          "text": {
+            "value": "Commercial claims"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#253247"
+          },
+          "baseline": {
+            "value": "middle"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "shareTicks"
       },
-      "encoding": {
-        "x": {
-          "datum": 100,
-          "type": "quantitative"
-        },
-        "y": {
-          "field": "display_label",
-          "type": "nominal",
-          "sort": {
-            "field": "sort_order",
-            "order": "ascending"
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "field": "value"
+          },
+          "y": {
+            "signal": "plotTop - 4"
+          },
+          "y2": {
+            "signal": "plotBottom + 4"
+          },
+          "stroke": {
+            "value": "#e8edf3"
+          },
+          "strokeWidth": {
+            "value": 1
           }
         },
-        "text": {
-          "field": "total_claims_label"
-        },
-        "tooltip": [
-          {
+        "update": {
+          "opacity": {
+            "signal": "datum.value === 0 ? 0 : 1"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "value": -63
+          },
+          "y": {
+            "signal": "plotTop - 10"
+          },
+          "text": {
+            "value": "Domestic"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "bottom"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#8a8178"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "value": 63
+          },
+          "y": {
+            "signal": "plotTop - 10"
+          },
+          "text": {
+            "value": "Commercial"
+          },
+          "align": {
+            "value": "center"
+          },
+          "baseline": {
+            "value": "bottom"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 10
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#8a8178"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "value": 0
+          },
+          "y": {
+            "signal": "plotTop - 8"
+          },
+          "y2": {
+            "signal": "plotBottom + 8"
+          },
+          "stroke": {
+            "value": "#2c333a"
+          },
+          "strokeWidth": {
+            "value": 1.35
+          },
+          "opacity": {
+            "value": 0.88
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "eventLabels",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "signal": "leftPlotX - 12"
+          },
+          "y": {
+            "scale": "y",
             "field": "event_name",
-            "type": "nominal",
-            "title": "Event"
+            "band": 0.5
           },
-          {
-            "field": "year",
-            "type": "quantitative",
-            "title": "Year",
-            "format": ".0f"
+          "text": {
+            "field": "event_name"
           },
-          {
-            "field": "total_claims_label",
-            "type": "nominal",
-            "title": "Domestic + commercial claims"
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 12
+          },
+          "limit": {
+            "value": 190
           }
-        ]
+        },
+        "update": {
+          "fill": {
+            "signal": "eventHover === datum.event_name ? '#111827' : '#1b2330'"
+          },
+          "fontWeight": {
+            "signal": "eventHover === datum.event_name ? 800 : 700"
+          },
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.46"
+          },
+          "tooltip": {
+            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Total claims': datum.total_claims_label}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "domesticBars",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "field": "domestic_share_signed"
+          },
+          "x2": {
+            "scale": "xShare",
+            "value": 0
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5,
+            "offset": {
+              "signal": "-rowHeight / 2"
+            }
+          },
+          "height": {
+            "signal": "rowHeight"
+          },
+          "fill": {
+            "value": "#f0a33a"
+          },
+          "cornerRadius": {
+            "value": 3
+          },
+          "cursor": {
+            "value": "default"
+          }
+        },
+        "update": {
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.24"
+          },
+          "tooltip": {
+            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Claim type': 'Domestic claims', 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Domestic share': datum.domestic_share_label, 'Commercial share': datum.commercial_share_label, 'Total claims': datum.total_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "commercialBars",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "value": 0
+          },
+          "x2": {
+            "scale": "xShare",
+            "field": "commercial_share_signed"
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5,
+            "offset": {
+              "signal": "-rowHeight / 2"
+            }
+          },
+          "height": {
+            "signal": "rowHeight"
+          },
+          "fill": {
+            "value": "#8f2f21"
+          },
+          "cornerRadius": {
+            "value": 3
+          },
+          "cursor": {
+            "value": "default"
+          }
+        },
+        "update": {
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.24"
+          },
+          "tooltip": {
+            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Claim type': 'Commercial claims', 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Domestic share': datum.domestic_share_label, 'Commercial share': datum.commercial_share_label, 'Total claims': datum.total_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "field": "domestic_share_signed",
+            "offset": -7
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5
+          },
+          "align": {
+            "value": "right"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": 800
+          },
+          "fill": {
+            "value": "#a76412"
+          }
+        },
+        "update": {
+          "text": {
+            "field": "domestic_share_pct_label"
+          },
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.3"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xShare",
+            "field": "commercial_share_signed",
+            "offset": 7
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": 800
+          },
+          "fill": {
+            "value": "#8f2f21"
+          }
+        },
+        "update": {
+          "text": {
+            "field": "commercial_share_pct_label"
+          },
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.3"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xClaims",
+            "value": 0
+          },
+          "x2": {
+            "scale": "xClaims",
+            "field": "total_claims"
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5
+          },
+          "stroke": {
+            "value": "#9aa8b6"
+          },
+          "strokeWidth": {
+            "value": 3
+          },
+          "strokeCap": {
+            "value": "round"
+          },
+          "cursor": {
+            "value": "default"
+          }
+        },
+        "update": {
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 0.9 : 0.22"
+          },
+          "tooltip": {
+            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Total claims': datum.total_claims_label, 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+          }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xClaims",
+            "field": "total_claims"
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5
+          },
+          "shape": {
+            "value": "circle"
+          },
+          "size": {
+            "value": 120
+          },
+          "fill": {
+            "value": "#435466"
+          },
+          "stroke": {
+            "value": "#ffffff"
+          },
+          "strokeWidth": {
+            "value": 1.6
+          },
+          "cursor": {
+            "value": "default"
+          }
+        },
+        "update": {
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.28"
+          },
+          "size": {
+            "signal": "eventHover === datum.event_name ? 165 : 120"
+          },
+          "tooltip": {
+            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Total claims': datum.total_claims_label, 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {
+        "data": "claims"
+      },
+      "encode": {
+        "enter": {
+          "x": {
+            "scale": "xClaims",
+            "field": "total_claims",
+            "offset": 10
+          },
+          "y": {
+            "scale": "y",
+            "field": "event_name",
+            "band": 0.5
+          },
+          "align": {
+            "value": "left"
+          },
+          "baseline": {
+            "value": "middle"
+          },
+          "font": {
+            "value": "Inter, Arial, sans-serif"
+          },
+          "fontSize": {
+            "value": 11
+          },
+          "fontWeight": {
+            "value": 700
+          },
+          "fill": {
+            "value": "#536173"
+          },
+          "limit": {
+            "value": 92
+          }
+        },
+        "update": {
+          "text": {
+            "field": "total_claims_text"
+          },
+          "opacity": {
+            "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.32"
+          }
+        }
       }
     }
   ],
-  "resolve": {
-    "scale": {
-      "x": "shared",
-      "y": "shared"
-    }
+  "config": {
+    "background": "#ffffff"
   }
 }
