@@ -80,8 +80,8 @@
             "tickCount": 8,
             "labelFont": "Inter",
             "labelFontSize": 11,
-            "labelColor": "#555",
-            "domainColor": "#bbb"
+            "labelColor": "#5F6B7A",
+            "domainColor": "rgba(43, 38, 33, 0.25)"
           }
         },
         "y": {
@@ -422,10 +422,15 @@
     "view": {
       "stroke": null
     },
-    "background": "transparent",
+    "background": "#FFFDF9",
     "axis": {
       "labelFont": "Inter",
-      "titleFont": "Inter"
+      "titleFont": "Inter",
+      "labelColor": "#5F6B7A",
+      "titleColor": "#3A332E",
+      "domainColor": "rgba(43, 38, 33, 0.25)",
+      "tickColor": "rgba(43, 38, 33, 0.25)",
+      "gridColor": "rgba(43, 38, 33, 0.10)"
     },
     "title": {
       "font": "Outfit",

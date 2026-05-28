@@ -5,7 +5,7 @@
   "height": 435,
   "padding": { "top": 6, "bottom": 4, "left": 38, "right": 38 },
   "autosize": { "type": "fit", "contains": "padding", "resize": true },
-  "background": "#ffffff",
+  "background": "#FFFDF9",
   "signals": [
     {
       "name": "hoveredYear",

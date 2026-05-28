@@ -174,14 +174,14 @@
         50,
         100
       ],
-      "labelColor": "#536173",
+      "labelColor": "#5F6B7A",
       "labelFont": "Inter, Arial, sans-serif",
       "labelFontSize": 11,
-      "titleColor": "#536173",
+      "titleColor": "#3A332E",
       "titleFont": "Inter, Arial, sans-serif",
       "titleFontSize": 12,
-      "domainColor": "#cfd7df",
-      "tickColor": "#cfd7df",
+      "domainColor": "rgba(43, 38, 33, 0.25)",
+      "tickColor": "rgba(43, 38, 33, 0.25)",
       "grid": false,
       "zindex": 1,
       "encode": {
@@ -200,14 +200,14 @@
       "title": "Total claims",
       "tickCount": 4,
       "format": "~s",
-      "labelColor": "#536173",
+      "labelColor": "#5F6B7A",
       "labelFont": "Inter, Arial, sans-serif",
       "labelFontSize": 11,
-      "titleColor": "#536173",
+      "titleColor": "#3A332E",
       "titleFont": "Inter, Arial, sans-serif",
       "titleFontSize": 12,
-      "domainColor": "#cfd7df",
-      "tickColor": "#cfd7df",
+      "domainColor": "rgba(43, 38, 33, 0.25)",
+      "tickColor": "rgba(43, 38, 33, 0.25)",
       "grid": false,
       "zindex": 1
     }
@@ -887,6 +887,6 @@
     }
   ],
   "config": {
-    "background": "#ffffff"
+    "background": "#FFFDF9"
   }
 }

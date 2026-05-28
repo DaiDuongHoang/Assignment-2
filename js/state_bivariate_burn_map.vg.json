@@ -49,11 +49,7 @@
         }
       ],
       "transform": [
-        { "filter": "datum.properties.season === selectedSeason" },
-        {
-          "calculate": "'Burned raster cells are used as a proxy for burned area'",
-          "as": "area_proxy_note"
-        }
+        { "filter": "datum.properties.season === selectedSeason" }
       ],
       "mark": {
         "type": "geoshape"
@@ -77,8 +73,8 @@
           "value": "#fffaf4"
         },
         "strokeWidth": {
-          "condition": { "param": "state_hover", "empty": false, "value": 0.8 },
-          "value": 1.0
+          "condition": { "param": "state_hover", "empty": false, "value": 0.4 },
+          "value": 0.6
         },
         "tooltip": [
           {
@@ -110,8 +106,7 @@
             "field": "properties.unplanned_share_label",
             "type": "nominal",
             "title": "Unplanned share"
-          },
-          { "field": "area_proxy_note", "type": "nominal", "title": "Note" }
+          }
         ]
       }
     },
@@ -122,10 +117,6 @@
       },
       "transform": [
         { "filter": "datum.season === selectedSeason" },
-        {
-          "calculate": "'Burned raster cells are used as a proxy for burned area'",
-          "as": "area_proxy_note"
-        },
         {
           "calculate": "datum.state_code === 'NSW' ? toNumber(datum.centroid_lon) - 0.55 : toNumber(datum.centroid_lon)",
           "as": "circle_lon"
@@ -177,8 +168,7 @@
             "field": "unplanned_share_label",
             "type": "nominal",
             "title": "Unplanned share"
-          },
-          { "field": "area_proxy_note", "type": "nominal", "title": "Note" }
+          }
         ]
       }
     },

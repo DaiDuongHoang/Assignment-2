@@ -1,5 +1,5 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
-const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260528_v20";
+const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260529_clean_tooltip_v22";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_card_borders_v18";
 const economicShockSpec = "js/economic_shock.vg.json?v=20260529_bg_contrast_v1";
