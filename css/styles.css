@@ -460,6 +460,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Responsive Vega Charts ===== */
 #vis-fire-hotspots,
+#vis-state-bivariate-burn-map,
 #vis-horizon,
 #vis-bushfire-timeline,
 #vis-economic-shock {
@@ -478,7 +479,8 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 12px;
+    margin-top: 4px;
+    margin-bottom: 0px;
 }
 
 /* Make vega embeds fully responsive */
@@ -532,37 +534,48 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Vega Bind (Dynamic Controls) Styling ===== */
 .vega-bind {
-    margin: 14px auto;
-    padding: 8px 16px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    margin: 4px auto;
+    padding: 6px 14px;
+    background: #FAF9F6;
+    border: 1px solid rgba(43, 38, 33, 0.1);
     border-radius: 8px;
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-size: 0.85rem;
+    font-size: 0.86rem;
     font-weight: 600;
-    color: #475569;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+    color: #2B2621;
+    box-shadow: 0 2px 6px rgba(43, 38, 33, 0.03);
 }
 
 .vega-bind select {
-    padding: 6px 12px;
-    border-radius: 6px;
-    border: 1px solid #cbd5e1;
-    background: white;
     font-family: 'Inter', sans-serif;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: #1e293b;
-    outline: none;
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: #4a4038;
+    background-color: #ffffff;
+    border: 1px solid rgba(43, 38, 33, 0.15);
+    border-radius: 6px;
+    padding: 6px 28px 6px 12px;
     cursor: pointer;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(43, 38, 33, 0.03);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237b726a' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 13px;
+}
+
+.vega-bind select:hover {
+    border-color: #7b726a;
+    background-color: #ffffff;
 }
 
 .vega-bind select:focus {
-    border-color: #b71c1c;
-    box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.15);
+    border-color: #2B2621;
+    box-shadow: 0 0 0 3px rgba(43, 38, 33, 0.08);
 }
 
 /* ===== Custom HTML Legend for Economic Shock Timeline ===== */
@@ -884,7 +897,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chart-card-header {
-    padding: 24px 28px 16px;
+    padding: 16px 28px 10px;
     border-bottom: 1px solid #e2e8f0;
 }
 
@@ -906,7 +919,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .chart-card-body {
-    padding: 20px 28px 24px;
+    padding: 12px 28px 20px;
 }
 
 .premium-section.sec3 .chart-card-header {
@@ -960,7 +973,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 16px 28px;
+    padding: 10px 28px;
     background: #FAFAFD;
     border-top: 1px solid rgba(43, 38, 33, 0.06);
     font-size: 0.78rem;
@@ -1158,3 +1171,398 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid;
     border-radius: 6px;
 }
+
+.wildlife-waffle-card .chart-card-body {
+    padding: 20px 28px 26px;
+}
+
+.wildlife-waffle-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.85fr);
+    gap: 28px;
+    align-items: start;
+}
+
+.wildlife-waffle-main {
+    min-width: 0;
+}
+
+.wildlife-waffle-topline {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 20px;
+    align-items: start;
+    margin-bottom: 18px;
+}
+
+.wildlife-waffle-topline h3 {
+    margin: 0 0 4px;
+    color: #2B2621;
+    font-size: 1.15rem;
+    font-weight: 800;
+    line-height: 1.25;
+}
+
+.wildlife-waffle-topline p {
+    max-width: 620px;
+    margin: 0;
+    color: #52606b;
+    font-size: 0.9rem;
+    line-height: 1.55;
+}
+
+.wildlife-waffle {
+    display: grid;
+    grid-template-columns: repeat(10, minmax(18px, 1fr));
+    gap: 8px;
+    width: min(100%, 560px);
+    padding: 18px;
+    border: 1px solid rgba(43, 38, 33, 0.08);
+    border-radius: 12px;
+    background: #fffaf4;
+}
+
+.wildlife-dot {
+    aspect-ratio: 1;
+    border: 0;
+    border-radius: 8px;
+    background: var(--dot-color);
+    cursor: pointer;
+    opacity: 0.9;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.12), 0 1px 2px rgba(43, 38, 33, 0.08);
+    transition: opacity 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.wildlife-dot:hover,
+.wildlife-dot.is-active {
+    opacity: 1;
+    transform: translateY(-1px) scale(1.06);
+    box-shadow: 0 5px 12px rgba(43, 38, 33, 0.16);
+}
+
+.wildlife-waffle.has-highlight .wildlife-dot:not(.is-active) {
+    opacity: 0.22;
+}
+
+.wildlife-waffle-legend {
+    display: grid;
+    gap: 8px;
+    min-width: 190px;
+    padding: 10px 12px;
+    border: 1px solid #d8dde2;
+    border-radius: 10px;
+    background: #fffaf4;
+}
+
+.wildlife-legend-item {
+    display: grid;
+    grid-template-columns: 14px 1fr auto;
+    gap: 8px;
+    align-items: center;
+    border: 0;
+    background: transparent;
+    padding: 2px;
+    color: #3b322b;
+    font: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.wildlife-legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 4px;
+    background: var(--group-color);
+}
+
+.wildlife-legend-name,
+.wildlife-legend-share {
+    font-size: 0.76rem;
+    font-weight: 700;
+}
+
+.wildlife-legend-share {
+    color: #69737d;
+}
+
+.wildlife-summary {
+    display: grid;
+    gap: 12px;
+}
+
+.wildlife-summary-card {
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 13px 14px;
+    border: 1px solid rgba(43, 38, 33, 0.08);
+    border-left: 5px solid var(--group-color);
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 18px rgba(53, 41, 31, 0.06);
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+}
+
+.wildlife-summary-card:hover,
+.wildlife-summary-card.is-active {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(53, 41, 31, 0.11);
+    border-color: rgba(43, 38, 33, 0.12);
+    border-left-color: var(--group-color);
+}
+
+.wildlife-summary.has-highlight .wildlife-summary-card:not(.is-active) {
+    opacity: 0.46;
+}
+
+.wildlife-summary-icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: color-mix(in srgb, var(--group-color) 13%, white);
+}
+
+.wildlife-summary-icon img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+}
+
+.wildlife-summary-name {
+    color: #2B2621;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.wildlife-summary-count {
+    margin-top: 2px;
+    color: var(--group-color);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.wildlife-summary-label {
+    margin-top: 3px;
+    color: #69737d;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+}
+
+.wildlife-summary-status {
+    margin-top: 5px;
+    color: #4b5563;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.wildlife-tooltip {
+    position: fixed;
+    z-index: 20;
+    pointer-events: none;
+    max-width: 220px;
+    padding: 9px 11px;
+    border: 1px solid rgba(43, 38, 33, 0.1);
+    border-radius: 8px;
+    background: rgba(255, 250, 244, 0.98);
+    box-shadow: 0 10px 28px rgba(43, 38, 33, 0.16);
+    color: #332b25;
+    font-size: 0.78rem;
+    line-height: 1.4;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity 0.12s ease, transform 0.12s ease;
+}
+
+.wildlife-tooltip.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wildlife-tooltip strong {
+    display: block;
+    margin-bottom: 3px;
+    font-size: 0.84rem;
+}
+
+@media (max-width: 900px) {
+    .wildlife-waffle-layout,
+    .wildlife-waffle-topline {
+        grid-template-columns: 1fr;
+    }
+
+    .wildlife-waffle {
+        width: 100%;
+    }
+}
+
+/* ===== Redesigned Bivariate Burn Map Layout ===== */
+.bivariate-map-card .chart-card-body {
+    padding: 14px 24px 18px;
+}
+
+.map-grid.reverse-grid {
+    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.bivariate-map-viz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+}
+
+#vis-state-bivariate-burn-map {
+    width: 100%;
+}
+
+.bivariate-control-panel {
+    gap: 10px;
+    padding-right: 0;
+}
+
+.bivariate-control-panel h2 {
+    margin-bottom: 2px;
+}
+
+.bivariate-control-panel p {
+    margin-bottom: 0;
+}
+
+.bivariate-season-control {
+    width: 100%;
+}
+
+.bivariate-season-control .vega-bindings {
+    justify-content: flex-start;
+    margin: 0;
+}
+
+.bivariate-season-control .vega-bind {
+    margin: 0;
+    width: 100%;
+    padding: 7px 10px;
+}
+
+.bivariate-season-control .vega-bind select {
+    min-width: 132px;
+}
+
+.bivariate-season-description {
+    margin: 0;
+    padding: 9px 11px;
+    border-left: 4px solid #fec44f;
+    border-radius: 8px;
+    background: #fffaf4;
+    color: #5b5149 !important;
+    font-size: 0.84rem !important;
+    line-height: 1.45 !important;
+}
+
+.legend-gradient-bivariate {
+    height: 10px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #fff7bc 0%, #fec44f 33%, #f03b20 66%, #99000d 100%);
+    border: 1px solid rgba(99, 47, 23, 0.18);
+}
+
+.burn-legend {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(40px, 1fr));
+    column-gap: 12px;
+    align-items: end;
+    width: 100%;
+    padding: 0 2px;
+}
+
+.burn-step {
+    min-width: 0;
+    display: grid;
+    grid-template-rows: 34px auto;
+    justify-items: center;
+    align-items: end;
+}
+
+.burn-circle {
+    display: block;
+    border-radius: 50%;
+    background: rgba(91, 42, 24, 0.46);
+    border: 2.4px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(91, 42, 24, 0.18);
+}
+
+.burn-circle.small {
+    width: 14px;
+    height: 14px;
+}
+
+.burn-circle.medium {
+    width: 24px;
+    height: 24px;
+}
+
+.burn-circle.large {
+    width: 36px;
+    height: 36px;
+}
+
+.bivariate-control-panel .combined-legend {
+    gap: 9px;
+    padding: 9px 12px;
+}
+
+.bivariate-control-panel .legend-title {
+    margin-bottom: 6px;
+}
+
+.bivariate-insight {
+    padding: 10px 12px;
+    border-left: 4px solid #f03b20;
+    border-radius: 8px;
+    background: #fffaf4;
+    color: #4f463e !important;
+    font-size: 0.84rem !important;
+    line-height: 1.45 !important;
+}
+
+/* Responsive adjustment for reverse grid */
+@media (max-width: 968px) {
+    .map-grid.reverse-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== Interactive Description Micro-Animation ===== */
+.interactive-description {
+    transition: opacity 0.3s ease;
+    opacity: 0.85;
+}
+
+.interactive-description.fade-in-active {
+    animation: fadeInDesc 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInDesc {
+    from {
+        opacity: 0.3;
+        transform: translateY(3px);
+    }
+    to {
+        opacity: 0.85;
+        transform: translateY(0);
+    }
+}
+
+

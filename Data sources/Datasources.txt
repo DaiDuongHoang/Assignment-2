@@ -1,2 +1,4 @@
 https://fed.dcceew.gov.au/datasets/erin::national-indicative-aggregated-fire-extent-dataset/about
-https://insurancecouncil.com.au/industry-members/data-hub/
+https://insurancecouncil.com.au/industry-members/data-hub
+https://www.agriculture.gov.au/abares/forestsaustralia/forest-data-maps-and-tools/spatial-data/forest-fire/
+https://wwf.org.au/news/2020/3-billion-animals-impacted-by-australia-bushfire-crisis/

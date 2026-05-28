@@ -1,0 +1,231 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": "container",
+  "height": 460,
+  "background": "#ffffff",
+  "projection": {
+    "type": "mercator",
+    "center": [134, -28.5],
+    "scale": 650
+  },
+  "config": {
+    "font": "Inter",
+    "view": { "stroke": null },
+    "legend": {
+      "orient": "right",
+      "titleFont": "Outfit",
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "labelFont": "Inter",
+      "labelFontSize": 11,
+      "labelColor": "#4a4038",
+      "titleColor": "#2B2621",
+      "symbolStrokeWidth": 0,
+      "gradientLength": 150,
+      "gradientThickness": 12
+    }
+  },
+  "params": [
+    {
+      "name": "selectedSeason",
+      "value": "2019–20",
+      "bind": {
+        "input": "select",
+        "options": ["2016–17", "2017–18", "2018–19", "2019–20", "2020–21"],
+        "name": "Season: "
+      }
+    }
+  ],
+  "layer": [
+    {
+      "data": {
+        "url": "data/australia_states_fire_seasons.geojson?v=20260528_v20",
+        "format": { "type": "json", "property": "features" }
+      },
+      "params": [
+        {
+          "name": "state_hover",
+          "select": { "type": "point", "on": "mouseover", "clear": "mouseout" }
+        }
+      ],
+      "transform": [
+        { "filter": "datum.properties.season === selectedSeason" },
+        {
+          "calculate": "'Burned raster cells are used as a proxy for burned area'",
+          "as": "area_proxy_note"
+        }
+      ],
+      "mark": {
+        "type": "geoshape"
+      },
+      "encoding": {
+        "color": {
+          "field": "properties.unplanned_share",
+          "type": "quantitative",
+          "scale": {
+            "domain": [0, 1],
+            "range": ["#fff7bc", "#fec44f", "#f03b20", "#99000d"]
+          },
+          "legend": null
+        },
+        "stroke": {
+          "condition": {
+            "param": "state_hover",
+            "empty": false,
+            "value": "#b0a89e"
+          },
+          "value": "#fffaf4"
+        },
+        "strokeWidth": {
+          "condition": { "param": "state_hover", "empty": false, "value": 0.8 },
+          "value": 1.0
+        },
+        "tooltip": [
+          {
+            "field": "properties.state_name",
+            "type": "nominal",
+            "title": "State"
+          },
+          {
+            "field": "properties.season",
+            "type": "nominal",
+            "title": "Season"
+          },
+          {
+            "field": "properties.planned_label",
+            "type": "nominal",
+            "title": "Planned burned cells"
+          },
+          {
+            "field": "properties.unplanned_label",
+            "type": "nominal",
+            "title": "Unplanned burned cells"
+          },
+          {
+            "field": "properties.total_label",
+            "type": "nominal",
+            "title": "Total burned cells"
+          },
+          {
+            "field": "properties.unplanned_share_label",
+            "type": "nominal",
+            "title": "Unplanned share"
+          },
+          { "field": "area_proxy_note", "type": "nominal", "title": "Note" }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_fire_season_summary.csv?v=20260528_v20",
+        "format": { "type": "csv" }
+      },
+      "transform": [
+        { "filter": "datum.season === selectedSeason" },
+        {
+          "calculate": "'Burned raster cells are used as a proxy for burned area'",
+          "as": "area_proxy_note"
+        },
+        {
+          "calculate": "datum.state_code === 'NSW' ? toNumber(datum.centroid_lon) - 0.55 : toNumber(datum.centroid_lon)",
+          "as": "circle_lon"
+        },
+        {
+          "calculate": "datum.state_code === 'NSW' ? toNumber(datum.centroid_lat) + 0.45 : datum.state_code === 'ACT' ? toNumber(datum.centroid_lat) - 0.35 : toNumber(datum.centroid_lat)",
+          "as": "circle_lat"
+        }
+      ],
+      "mark": {
+        "type": "circle",
+        "fill": "#5B2A18",
+        "fillOpacity": 0.32,
+        "stroke": "#ffffff",
+        "strokeWidth": 1.5,
+        "strokeOpacity": 0.7
+      },
+      "encoding": {
+        "longitude": { "field": "circle_lon", "type": "quantitative" },
+        "latitude": { "field": "circle_lat", "type": "quantitative" },
+        "size": {
+          "field": "total_burn_count",
+          "type": "quantitative",
+          "scale": {
+            "type": "sqrt",
+            "range": [260, 3100]
+          },
+          "legend": null
+        },
+        "tooltip": [
+          { "field": "state_name", "type": "nominal", "title": "State" },
+          { "field": "season", "type": "nominal", "title": "Season" },
+          {
+            "field": "planned_label",
+            "type": "nominal",
+            "title": "Planned burned cells"
+          },
+          {
+            "field": "unplanned_label",
+            "type": "nominal",
+            "title": "Unplanned burned cells"
+          },
+          {
+            "field": "total_label",
+            "type": "nominal",
+            "title": "Total burned cells"
+          },
+          {
+            "field": "unplanned_share_label",
+            "type": "nominal",
+            "title": "Unplanned share"
+          },
+          { "field": "area_proxy_note", "type": "nominal", "title": "Note" }
+        ]
+      }
+    },
+    {
+      "data": {
+        "url": "data/state_fire_season_summary.csv?v=20260528_v20",
+        "format": { "type": "csv" }
+      },
+      "transform": [
+        {
+          "filter": "datum.season === selectedSeason && datum.state_code !== 'ACT'"
+        },
+        {
+          "calculate": "upper(datum.state_code)",
+          "as": "state_label"
+        },
+        {
+          "calculate": "datum.state_code === 'NSW' || datum.state_code === 'VIC' || datum.state_code === 'TAS' ? 7.5 : 9.5",
+          "as": "label_font_size"
+        },
+        {
+          "calculate": "datum.state_code === 'NSW' ? toNumber(datum.centroid_lon) - 0.55 : toNumber(datum.centroid_lon)",
+          "as": "label_lon"
+        },
+        {
+          "calculate": "datum.state_code === 'NSW' ? toNumber(datum.centroid_lat) + 0.45 : datum.state_code === 'ACT' ? toNumber(datum.centroid_lat) - 0.35 : toNumber(datum.centroid_lat)",
+          "as": "label_lat"
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "font": "Inter",
+        "fontWeight": "bold",
+        "fill": "#ffffff",
+        "opacity": 0.95
+      },
+      "encoding": {
+        "longitude": { "field": "label_lon", "type": "quantitative" },
+        "latitude": { "field": "label_lat", "type": "quantitative" },
+        "text": { "field": "state_label", "type": "nominal" },
+        "size": {
+          "field": "label_font_size",
+          "type": "quantitative",
+          "scale": null,
+          "legend": null
+        }
+      }
+    }
+  ]
+}

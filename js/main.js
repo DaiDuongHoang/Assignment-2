@@ -1,4 +1,5 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
+const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260528_v20";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260528_final_polish_v16";
 const economicShockSpec = "js/economic_shock.vg.json?v=20260527_label_tooltips";
@@ -87,6 +88,37 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
 
 // Embed the streamgraph (Row 2)
 vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).catch(console.error);
+
+// Embed the state-level bivariate Black Summer burn map (Section 2)
+vegaEmbed('#vis-state-bivariate-burn-map', stateBivariateBurnMapSpec, { "actions": false })
+  .then(function(result) {
+    const view = result.view;
+    const target = document.querySelector('#bivariate-season-control');
+    const bindings = document.querySelector('#vis-state-bivariate-burn-map .vega-bindings');
+    const descriptions = {
+      '2016–17': 'Queensland and Northern Territory dominated burning in 2016–17, with large areas of tropical savanna affected. Unplanned burns remained moderate across the southeast.',
+      '2017–18': 'The 2017–18 season saw elevated activity in Queensland and NSW, with unplanned burns beginning to increase as drought conditions developed across eastern Australia.',
+      '2018–19': 'Drought intensified across eastern Australia in 2018–19, with NSW recording its driest year on record. Unplanned burning increased sharply — a precursor to the Black Summer ahead.',
+      '2019–20': 'The catastrophic Black Summer of 2019–20 stands out clearly: NSW, Victoria, and South Australia recorded near-100% unplanned burns, with unprecedented scale across the eastern seaboard.',
+      '2020–21': 'Following the Black Summer, 2020–21 saw significantly reduced burning in the southeast. Queensland remained active, with a higher proportion of planned burns returning to normal seasonal patterns.'
+    };
+
+    if (target && bindings) {
+      target.appendChild(bindings);
+    }
+
+    view.addSignalListener('selectedSeason', function(name, value) {
+      const descEl = document.querySelector('#map-description');
+
+      if (descEl && descriptions[value]) {
+        descEl.classList.remove('fade-in-active');
+        void descEl.offsetWidth;
+        descEl.textContent = descriptions[value];
+        descEl.classList.add('fade-in-active');
+      }
+    });
+  })
+  .catch(console.error);
 
 // Embed the major bushfire events timeline (Section 3)
 vegaEmbed('#vis-bushfire-timeline', bushfireTimelineSpec, { "actions": false, "renderer": "svg" }).catch(console.error);

@@ -24,7 +24,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260528_timeline_align_v2" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260528_wildlife_v3" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -247,6 +247,70 @@
             <span>NASA FIRMS · MODIS & VIIRS Satellite Data 2020</span>
           </div>
         </div>
+
+        <div class="chart-card bivariate-map-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-orange">Fig. 2B · Bivariate Burn Map</div>
+            <div class="chart-card-title font-display">Where Burns Were Biggest - and Most Unplanned</div>
+            <div class="chart-card-caption serif-note">Colour shows the share of unplanned forest burning; circle size shows total burned raster cells by state or territory. Use the season control to compare fire years.</div>
+          </div>
+          <div class="chart-card-body">
+            <div class="map-grid reverse-grid">
+              <div class="map-viz bivariate-map-viz">
+                <div id="vis-state-bivariate-burn-map"></div>
+              </div>
+
+              <div class="map-story bivariate-control-panel">
+                <h2>How to read this map</h2>
+                <p>
+                  This map compares two dimensions of forest burning by state and territory. Colour shows the share of burned forest cells classified as unplanned, while circle size shows the total number of burned raster cells.
+                </p>
+
+                <div id="bivariate-season-control" class="bivariate-season-control" aria-label="Season control"></div>
+
+                <p id="map-description" class="interactive-description bivariate-season-description fade-in-active">
+                  The catastrophic Black Summer of 2019–20 stands out clearly: NSW, Victoria, and South Australia recorded near-100% unplanned burns, with unprecedented scale across the eastern seaboard.
+                </p>
+
+                <div class="combined-legend vertical-legend" aria-label="Bivariate map legend">
+                  <div class="legend-block">
+                    <span class="legend-title">Unplanned share (%)</span>
+                    <div class="legend-gradient-bivariate" aria-hidden="true"></div>
+                    <div class="legend-scale">
+                      <span>0%</span>
+                      <span>100%</span>
+                    </div>
+                  </div>
+                  <div class="legend-block">
+                    <span class="legend-title">Total burned cells</span>
+                    <div class="burn-legend" aria-hidden="true">
+                      <span class="burn-step">
+                        <span class="burn-circle small"></span>
+                        <span class="power-label">2M</span>
+                      </span>
+                      <span class="burn-step">
+                        <span class="burn-circle medium"></span>
+                        <span class="power-label">4M</span>
+                      </span>
+                      <span class="burn-step">
+                        <span class="burn-circle large"></span>
+                        <span class="power-label">6M</span>
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <p class="bivariate-insight">
+                  Read colour and circle size together: a state can have a high unplanned share without having the largest burned-cell total.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>Fire_For16-21 attributes · burned raster cell counts are used as an area proxy</span>
+          </div>
+        </div>
       </section>
 
       <!-- Section 3 - Economic & Human Cost (Economic Shockwaves) -->
@@ -374,59 +438,38 @@
           </div>
         </div>
 
-        <div class="wildlife-grid">
-          <!-- Card 1: Reptiles -->
-          <div class="wildlife-card">
-            <div class="wildlife-rank">Impact Rank 01</div>
-            <div class="wildlife-name">Reptiles</div>
-            <div class="wildlife-metric">2.46 Billion</div>
-            <div class="wildlife-impact">Killed or Displaced</div>
-            <p class="wildlife-desc">
-              Including skinks, dragons, and geckos. Small forest-floor reptiles were highly vulnerable due to limited mobility and leaf-litter fires.
-            </p>
-            <div class="wildlife-badge" style="color:#b71c1c; border-color:#b71c1c; background-color:#fff5f5;">High Risk</div>
+        <div class="chart-card wildlife-waffle-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-blue">Fig. 4A · Wildlife Under Fire</div>
+            <div class="chart-card-title font-display">Estimated Wildlife Affected During Black Summer</div>
+            <div class="chart-card-caption serif-note">Each mark represents roughly 1% of the estimated total, equal to about 28 million animals. Hover a group, card, or mark to isolate the corresponding share.</div>
           </div>
-          
-          <!-- Card 2: Birds -->
-          <div class="wildlife-card">
-            <div class="wildlife-rank">Impact Rank 02</div>
-            <div class="wildlife-name">Birds</div>
-            <div class="wildlife-metric">180 Million</div>
-            <div class="wildlife-impact">Killed or Displaced</div>
-            <p class="wildlife-desc">
-              Including honeyeaters, parrots, and lyrebirds. Smoke inhalation, thermal stress, and total canopy loss decimated avian nesting habitats.
-            </p>
-            <div class="wildlife-badge" style="color:#f57c00; border-color:#f57c00; background-color:#fffbf5;">Severe</div>
+          <div class="chart-card-body">
+            <div class="wildlife-waffle-layout">
+              <div class="wildlife-waffle-main">
+                <div class="wildlife-waffle-topline">
+                  <div>
+                    <h3>100-part wildlife impact composition</h3>
+                    <p>Reptiles dominate the estimated total, while birds, mammals, and frogs make up smaller but ecologically important shares.</p>
+                  </div>
+                  <div id="wildlife-waffle-legend" class="wildlife-waffle-legend" aria-label="Wildlife waffle legend"></div>
+                </div>
+                <div id="wildlife-waffle" class="wildlife-waffle" role="img" aria-label="10 by 10 waffle chart of wildlife groups affected by Black Summer"></div>
+              </div>
+
+              <div id="wildlife-summary" class="wildlife-summary" aria-label="Wildlife impact summary cards"></div>
+            </div>
           </div>
-          
-          <!-- Card 3: Mammals -->
-          <div class="wildlife-card">
-            <div class="wildlife-rank">Impact Rank 03</div>
-            <div class="wildlife-name">Mammals</div>
-            <div class="wildlife-metric">143 Million</div>
-            <div class="wildlife-impact">Killed or Displaced</div>
-            <p class="wildlife-desc">
-              Including koalas, gliders, and wallabies. Marsupials suffered intense losses from crown fires and post-fire starvation in ash deserts.
-            </p>
-            <div class="wildlife-badge" style="color:#b71c1c; border-color:#b71c1c; background-color:#fff5f5;">High Risk</div>
-          </div>
-          
-          <!-- Card 4: Frogs -->
-          <div class="wildlife-card">
-            <div class="wildlife-rank">Impact Rank 04</div>
-            <div class="wildlife-name">Frogs</div>
-            <div class="wildlife-metric">51 Million</div>
-            <div class="wildlife-impact">Killed or Displaced</div>
-            <p class="wildlife-desc">
-              Including alpine and stream-dwelling frogs. Stream siltation from burnt ash completely altered water chemistry, destroying spawning cycles.
-            </p>
-            <div class="wildlife-badge" style="color:#64748b; border-color:#64748b; background-color:#f8fafc;">Extreme Threat</div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>WWF Australia estimates for animals affected, killed, or displaced during the 2019–20 Black Summer bushfires</span>
           </div>
         </div>
       </section>
     </div>
 
     <!-- Main JS for Vega-embed -->
-    <script src="js/main.js?v=20260528_timeline_width_v2"></script>
+    <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
+    <script src="js/main.js?v=20260528_bivariate_restore_v20"></script>
   </body>
 </html>
