@@ -24,7 +24,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260528_wildlife_v6" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260529_claims_split_v1" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -406,7 +406,7 @@
               <div>
                 <h3>Key Economic Insight</h3>
                 <p>
-                  Historical insurance data shows that bushfire losses are highly skewed. A small number of extreme events-most notably the <strong>1967 Tasmanian Bushfires</strong>, the <strong>1983 Ash Wednesday fires</strong>, the <strong>2009 Black Saturday fires</strong>, and the <strong>2019/20 Black Summer</strong>-account for the vast majority of insured losses.
+                  Historical insurance data shows that bushfire losses are highly skewed. A small number of extreme events-most notably the <strong class="event-catastrophic">1967 Tasmanian Bushfires</strong>, the <strong class="event-catastrophic">1983 Ash Wednesday fires</strong>, the <strong class="event-catastrophic">2009 Black Saturday fires</strong>, and the <strong class="event-catastrophic">2019/20 Black Summer</strong>-account for the vast majority of insured losses.
                 </p>
                 <p>
                   The colour palette matches the hotspot map: yellow-gold indicates medium severity and deep red marks catastrophic losses.
@@ -417,6 +417,22 @@
           <div class="chart-card-footer">
             <span class="source-label label-tag">Source</span>
             <span>Insurance Council of Australia Historical Catastrophe Data 2024</span>
+          </div>
+        </div>
+
+        <div class="chart-card claims-split-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-red">Fig. 3C · Domestic vs Commercial Claims</div>
+            <div class="chart-card-title font-display">Who Filed the Claims?</div>
+            <div class="chart-card-caption serif-note">Domestic and commercial claim shares for selected major bushfire catastrophes.</div>
+            <p class="chart-card-note">Only bushfire events with explicit ICA domestic and commercial claim-count breakdowns are shown.</p>
+          </div>
+          <div class="chart-card-body">
+            <div id="vis-domestic-commercial-claims"></div>
+          </div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
           </div>
         </div>
       </section>
@@ -466,6 +482,6 @@
 
     <!-- Main JS for Vega-embed -->
     <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-    <script src="js/main.js?v=20260528_bivariate_restore_v20"></script>
+    <script src="js/main.js?v=20260529_claims_split_v1"></script>
   </body>
 </html>

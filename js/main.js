@@ -1,8 +1,9 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260528_v20";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
-const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260528_final_polish_v16";
+const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260528_unified_colors_v17";
 const economicShockSpec = "js/economic_shock.vg.json?v=20260527_label_tooltips";
+const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_v1";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
@@ -149,3 +150,6 @@ vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(f
         });
     });
 }).catch(console.error);
+
+// Embed the domestic vs commercial claims diverging bar chart (Section 3)
+vegaEmbed('#vis-domestic-commercial-claims', domesticCommercialClaimsSpec, { "actions": false }).catch(console.error);

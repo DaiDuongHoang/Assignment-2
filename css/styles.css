@@ -458,12 +458,28 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
+.streamgraph-insight .event-medium {
+    color: #cca400; /* Dark gold for text contrast */
+    font-weight: 700;
+}
+
+.streamgraph-insight .event-high {
+    color: #e67e22; /* Readable orange for text */
+    font-weight: 700;
+}
+
+.streamgraph-insight .event-catastrophic {
+    color: #f03b20; /* Deep red used in legend/palette */
+    font-weight: 700;
+}
+
 /* ===== Responsive Vega Charts ===== */
 #vis-fire-hotspots,
 #vis-state-bivariate-burn-map,
 #vis-horizon,
 #vis-bushfire-timeline,
-#vis-economic-shock {
+#vis-economic-shock,
+#vis-domestic-commercial-claims {
     width: 100%;
     display: block;
     overflow: visible;
@@ -967,6 +983,24 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 400;
     line-height: 1.4;
     letter-spacing: 0.01em;
+}
+
+.chart-card-note {
+    font-size: 0.76rem;
+    color: #7A7068;
+    margin: 5px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+}
+
+.claims-split-card {
+    margin-top: 4px;
+}
+
+.claims-split-card .chart-card-body {
+    padding-top: 8px;
 }
 
 .chart-card-footer {

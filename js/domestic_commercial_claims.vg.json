@@ -1,0 +1,243 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "description": "Diverging domestic and commercial claim shares for bushfire events with explicit ICA claim-type breakdowns.",
+  "data": {
+    "url": "data/domestic_commercial_bushfire_claims.json"
+  },
+  "width": "container",
+  "height": 260,
+  "padding": {
+    "top": 24,
+    "right": 96,
+    "bottom": 20,
+    "left": 12
+  },
+  "config": {
+    "background": "#ffffff",
+    "view": {
+      "stroke": null
+    },
+    "axis": {
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "labelColor": "#536173",
+      "titleColor": "#536173",
+      "gridColor": "#e8edf3",
+      "tickColor": "#ccd4dd",
+      "domainColor": "#ccd4dd"
+    },
+    "legend": {
+      "labelFont": "Inter, Arial, sans-serif",
+      "titleFont": "Inter, Arial, sans-serif",
+      "labelColor": "#253247",
+      "titleColor": "#1b2330",
+      "orient": "top",
+      "direction": "horizontal",
+      "symbolType": "square",
+      "symbolSize": 140,
+      "title": null,
+      "padding": 0,
+      "offset": 2
+    }
+  },
+  "layer": [
+    {
+      "mark": {
+        "type": "rule",
+        "stroke": "#2c333a",
+        "strokeWidth": 1.3,
+        "opacity": 0.85
+      },
+      "encoding": {
+        "x": {
+          "datum": 0,
+          "type": "quantitative"
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "fold": [
+            "domestic_share_signed",
+            "commercial_share_signed"
+          ],
+          "as": [
+            "claim_type",
+            "claim_share_signed"
+          ]
+        },
+        {
+          "calculate": "datum.claim_type === 'domestic_share_signed' ? 'Domestic claims' : 'Commercial claims'",
+          "as": "claim_group"
+        },
+        {
+          "calculate": "abs(datum.claim_share_signed)",
+          "as": "claim_share_abs"
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "cornerRadiusEnd": 4,
+        "size": 24,
+        "tooltip": true
+      },
+      "encoding": {
+        "x": {
+          "field": "claim_share_signed",
+          "type": "quantitative",
+          "scale": {
+            "domain": [
+              -100,
+              100
+            ],
+            "nice": false
+          },
+          "axis": {
+            "title": "Share of domestic + commercial claims",
+            "format": ".0f",
+            "labelExpr": "abs(datum.value) + '%'",
+            "values": [
+              -100,
+              -50,
+              0,
+              50,
+              100
+            ],
+            "grid": true
+          }
+        },
+        "y": {
+          "field": "display_label",
+          "type": "nominal",
+          "sort": {
+            "field": "sort_order",
+            "order": "ascending"
+          },
+          "axis": {
+            "title": null,
+            "labelFontWeight": 700,
+            "labelColor": "#1b2330",
+            "labelLimit": 210,
+            "labelPadding": 8
+          }
+        },
+        "color": {
+          "field": "claim_group",
+          "type": "nominal",
+          "scale": {
+            "domain": [
+              "Domestic claims",
+              "Commercial claims"
+            ],
+            "range": [
+              "#f0a33a",
+              "#8f2f21"
+            ]
+          },
+          "legend": {
+            "orient": "top",
+            "columns": 2
+          }
+        },
+        "tooltip": [
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Event"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": ".0f"
+          },
+          {
+            "field": "domestic_claims_label",
+            "type": "nominal",
+            "title": "Domestic claims"
+          },
+          {
+            "field": "commercial_claims_label",
+            "type": "nominal",
+            "title": "Commercial claims"
+          },
+          {
+            "field": "total_claims_label",
+            "type": "nominal",
+            "title": "Domestic + commercial claims"
+          },
+          {
+            "field": "domestic_share_label",
+            "type": "nominal",
+            "title": "Domestic share"
+          },
+          {
+            "field": "commercial_share_label",
+            "type": "nominal",
+            "title": "Commercial share"
+          },
+          {
+            "field": "normalised_loss_label",
+            "type": "nominal",
+            "title": "Normalised insured loss"
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "font": "Inter, Arial, sans-serif",
+        "fontSize": 12,
+        "fontWeight": 700,
+        "fill": "#536173",
+        "clip": false
+      },
+      "encoding": {
+        "x": {
+          "datum": 100,
+          "type": "quantitative"
+        },
+        "y": {
+          "field": "display_label",
+          "type": "nominal",
+          "sort": {
+            "field": "sort_order",
+            "order": "ascending"
+          }
+        },
+        "text": {
+          "field": "total_claims_label"
+        },
+        "tooltip": [
+          {
+            "field": "event_name",
+            "type": "nominal",
+            "title": "Event"
+          },
+          {
+            "field": "year",
+            "type": "quantitative",
+            "title": "Year",
+            "format": ".0f"
+          },
+          {
+            "field": "total_claims_label",
+            "type": "nominal",
+            "title": "Domestic + commercial claims"
+          }
+        ]
+      }
+    }
+  ],
+  "resolve": {
+    "scale": {
+      "x": "shared",
+      "y": "shared"
+    }
+  }
+}

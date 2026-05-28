@@ -311,7 +311,7 @@
       },
       "transform": [
         {
-          "calculate": "datum.year === 1967 ? '1967 Bushfire' : datum.event_name === 'Ash Wednesday Bushfire (VIC)' ? 'Ash Wednesday' : datum.event_name === 'Black Saturday Bushfire' ? 'Black Saturday' : datum.event_name === '2019/20 Bushfires (NSW,QLD,SA,VIC)' ? 'Black Summer' : datum.event_name === 'Canberra Bushfire' ? 'Canberra' : datum.event_name",
+          "calculate": "datum.year === 1967 ? '1967 Bushfire' : datum.event_name === 'Ash Wednesday Bushfire (VIC)' ? 'Ash Wednesday' : datum.event_name === 'Black Saturday Bushfire' ? 'Black Saturday' : datum.event_name === '2019/20 Bushfires (NSW,QLD,SA,VIC)' ? 'Black Summer' : datum.event_name === 'Canberra Bushfire' ? 'Canberra Bushfire' : datum.event_name",
           "as": "short_label"
         }
       ],

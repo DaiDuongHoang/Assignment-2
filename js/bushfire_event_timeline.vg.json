@@ -31,8 +31,8 @@
           "tooltipDescription": "Deadliest bushfire in Tasmanian history. Largest normalised insured loss.",
           "side": "top",
           "severity": "Catastrophic",
-          "severityColor": "#c0392b",
-          "color": "#c0392b"
+          "severityColor": "#f03b20",
+          "color": "#f03b20"
         },
         {
           "year": 1969,
@@ -42,9 +42,9 @@
           "description": "Fast-moving fire near\nLara, Victoria.\nMedium loss severity.",
           "tooltipDescription": "Fast-moving fire near Lara, Victoria. Medium loss severity.",
           "side": "bottom",
-          "severity": "High",
-          "severityColor": "#e8824a",
-          "color": "#e8824a"
+          "severity": "Medium",
+          "severityColor": "#ffeda0",
+          "color": "#cca400"
         },
         {
           "year": 1983,
@@ -55,8 +55,8 @@
           "tooltipDescription": "Major fires across Victoria and South Australia.",
           "side": "top",
           "severity": "Catastrophic",
-          "severityColor": "#c0392b",
-          "color": "#c0392b"
+          "severityColor": "#f03b20",
+          "color": "#f03b20"
         },
         {
           "year": 1985,
@@ -67,8 +67,8 @@
           "tooltipDescription": "Large fires swept through the Victorian Alpine region.",
           "side": "bottom",
           "severity": "High",
-          "severityColor": "#e8824a",
-          "color": "#e8824a"
+          "severityColor": "#feb24c",
+          "color": "#feb24c"
         },
         {
           "year": 2003,
@@ -79,8 +79,8 @@
           "tooltipDescription": "Fires entered Canberra suburbs and destroyed homes.",
           "side": "top",
           "severity": "High",
-          "severityColor": "#e8824a",
-          "color": "#e8824a"
+          "severityColor": "#feb24c",
+          "color": "#feb24c"
         },
         {
           "year": 2009,
@@ -91,8 +91,8 @@
           "tooltipDescription": "Australia's deadliest bushfire disaster. 173 lives lost.",
           "side": "bottom",
           "severity": "Catastrophic",
-          "severityColor": "#c0392b",
-          "color": "#c0392b"
+          "severityColor": "#f03b20",
+          "color": "#f03b20"
         },
         {
           "year": 2019,
@@ -103,8 +103,8 @@
           "tooltipDescription": "Unprecedented fires from late 2019 into 2020.",
           "side": "top",
           "severity": "Catastrophic",
-          "severityColor": "#c0392b",
-          "color": "#c0392b"
+          "severityColor": "#f03b20",
+          "color": "#f03b20"
         }
       ]
     }
