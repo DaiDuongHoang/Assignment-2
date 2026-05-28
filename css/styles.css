@@ -1173,25 +1173,23 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .wildlife-waffle-card .chart-card-body {
-    padding: 18px 24px 24px;
+    padding: 18px 24px 22px;
 }
 
 .wildlife-waffle-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.62fr) minmax(280px, 0.78fr);
-    gap: 24px;
-    align-items: start;
+    grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.82fr);
+    gap: 26px;
+    align-items: stretch;
 }
 
 .wildlife-waffle-main {
     min-width: 0;
+    display: flex;
+    align-items: stretch;
 }
 
 .wildlife-waffle-topline {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 16px;
-    align-items: start;
     margin-bottom: 14px;
 }
 
@@ -1213,10 +1211,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .wildlife-waffle {
     display: grid;
-    grid-template-columns: repeat(10, minmax(20px, 1fr));
-    gap: 9px;
-    width: min(100%, 640px);
-    padding: 16px;
+    grid-template-columns: repeat(10, minmax(22px, 1fr));
+    gap: 10px;
+    width: min(100%, 720px);
+    padding: 18px;
     border: 1px solid rgba(43, 38, 33, 0.08);
     border-radius: 12px;
     background: #fffaf4;
@@ -1246,12 +1244,24 @@ h1, h2, h3, h4, h5, h6 {
 
 .wildlife-waffle-legend {
     display: grid;
-    gap: 7px;
+    gap: 8px;
     min-width: 178px;
     padding: 9px 11px;
     border: 1px solid #d8dde2;
     border-radius: 10px;
     background: #fffaf4;
+}
+
+.wildlife-legend-column {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    gap: 14px;
+    align-content: stretch;
+    height: 100%;
+}
+
+.wildlife-legend-column .wildlife-waffle-legend {
+    width: 100%;
 }
 
 .wildlife-legend-item {
@@ -1287,7 +1297,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .wildlife-summary {
     display: grid;
+    grid-template-rows: repeat(4, 1fr);
     gap: 12px;
+    height: 100%;
 }
 
 .wildlife-summary-card {
@@ -1295,7 +1307,7 @@ h1, h2, h3, h4, h5, h6 {
     grid-template-columns: 48px minmax(0, 1fr);
     gap: 12px;
     align-items: center;
-    padding: 13px 14px;
+    padding: 14px 14px;
     border: 1px solid rgba(43, 38, 33, 0.08);
     border-left: 5px solid var(--group-color);
     border-radius: 12px;
@@ -1396,8 +1408,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 900px) {
-    .wildlife-waffle-layout,
-    .wildlife-waffle-topline {
+    .wildlife-waffle-layout {
         grid-template-columns: 1fr;
     }
 

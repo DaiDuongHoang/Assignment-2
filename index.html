@@ -24,7 +24,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260528_wildlife_v4" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260528_wildlife_v6" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -447,17 +447,13 @@
           <div class="chart-card-body">
             <div class="wildlife-waffle-layout">
               <div class="wildlife-waffle-main">
-                <div class="wildlife-waffle-topline">
-                  <div>
-                    <h3>100-part wildlife impact composition</h3>
-                    <p>Reptiles dominate the estimated total, while birds, mammals, and frogs make up smaller but ecologically important shares.</p>
-                  </div>
-                  <div id="wildlife-waffle-legend" class="wildlife-waffle-legend" aria-label="Wildlife waffle legend"></div>
-                </div>
                 <div id="wildlife-waffle" class="wildlife-waffle" role="img" aria-label="10 by 10 waffle chart of wildlife groups affected by Black Summer"></div>
               </div>
 
-              <div id="wildlife-summary" class="wildlife-summary" aria-label="Wildlife impact summary cards"></div>
+              <div class="wildlife-legend-column">
+                <div id="wildlife-summary" class="wildlife-summary" aria-label="Wildlife impact summary cards"></div>
+                <div id="wildlife-waffle-legend" class="wildlife-waffle-legend" aria-label="Wildlife waffle percentage legend"></div>
+              </div>
             </div>
           </div>
           <div class="chart-card-footer">
