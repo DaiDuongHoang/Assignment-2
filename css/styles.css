@@ -1173,13 +1173,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .wildlife-waffle-card .chart-card-body {
-    padding: 20px 28px 26px;
+    padding: 18px 24px 24px;
 }
 
 .wildlife-waffle-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.85fr);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1.62fr) minmax(280px, 0.78fr);
+    gap: 24px;
     align-items: start;
 }
 
@@ -1190,9 +1190,9 @@ h1, h2, h3, h4, h5, h6 {
 .wildlife-waffle-topline {
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
-    gap: 20px;
+    gap: 16px;
     align-items: start;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .wildlife-waffle-topline h3 {
@@ -1213,10 +1213,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .wildlife-waffle {
     display: grid;
-    grid-template-columns: repeat(10, minmax(18px, 1fr));
-    gap: 8px;
-    width: min(100%, 560px);
-    padding: 18px;
+    grid-template-columns: repeat(10, minmax(20px, 1fr));
+    gap: 9px;
+    width: min(100%, 640px);
+    padding: 16px;
     border: 1px solid rgba(43, 38, 33, 0.08);
     border-radius: 12px;
     background: #fffaf4;
@@ -1246,9 +1246,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .wildlife-waffle-legend {
     display: grid;
-    gap: 8px;
-    min-width: 190px;
-    padding: 10px 12px;
+    gap: 7px;
+    min-width: 178px;
+    padding: 9px 11px;
     border: 1px solid #d8dde2;
     border-radius: 10px;
     background: #fffaf4;
