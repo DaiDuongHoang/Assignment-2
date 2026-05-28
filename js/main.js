@@ -1,6 +1,6 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
-const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260527_short_cards_dark_year_v15";
+const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260528_final_polish_v16";
 const economicShockSpec = "js/economic_shock.vg.json?v=20260527_label_tooltips";
 
 // Embed the Fire.csv hotspot map (Row 1)

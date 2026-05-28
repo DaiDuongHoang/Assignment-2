@@ -224,14 +224,14 @@
           "height": { "value": 125 },
           "cornerRadius": { "value": 10 },
           "fill": { "value": "#ffffff" },
-          "shadowColor": { "value": "rgba(43, 38, 33, 0.05)" },
-          "shadowBlur": { "value": 10 },
+          "shadowColor": { "value": "rgba(43, 38, 33, 0.04)" },
+          "shadowBlur": { "value": 8 },
           "shadowOffsetX": { "value": 0 },
-          "shadowOffsetY": { "value": 4 }
+          "shadowOffsetY": { "value": 2 }
         },
         "update": {
           "stroke": {
-            "signal": "hoveredYear === datum.year ? datum.severityColor : 'rgba(43, 38, 33, 0.09)'"
+            "signal": "hoveredYear === datum.year ? datum.severityColor : 'rgba(43, 38, 33, 0.08)'"
           },
           "strokeWidth": {
             "signal": "hoveredYear === datum.year ? 1.75 : 1"
@@ -258,10 +258,10 @@
         },
         "update": {
           "fill": {
-            "signal": "hoveredYear === datum.year ? datum.color : '#453f3a'"
+            "signal": "hoveredYear === datum.year ? datum.color : 'rgba(43, 38, 33, 0.62)'"
           },
           "opacity": {
-            "signal": "hoveredYear === datum.year ? 1.0 : 0.9"
+            "signal": "hoveredYear === datum.year ? 1.0 : 0.95"
           }
         }
       }

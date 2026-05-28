@@ -1023,7 +1023,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .premium-section.sec3 .chart-card-header {
-    padding-bottom: 12px;
+    padding-bottom: 4px;
 }
 
 .premium-section.sec3 .chart-card-body {
@@ -1035,7 +1035,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .timeline-chart-card .chart-card-body {
-    padding-top: 14px;
+    padding-top: 0px;
     padding-bottom: 4px;
     overflow-x: hidden;
 }
@@ -1053,11 +1053,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .timeline-scope-note {
-    font-size: 0.73rem;
-    color: #7b726a;
-    margin: 6px 0 0;
+    font-size: 0.76rem;
+    color: #7A7068;
+    margin: 5px 0 0;
     font-family: 'Inter', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
+    line-height: 1.4;
     letter-spacing: 0.01em;
 }
 
