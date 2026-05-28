@@ -1036,12 +1036,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .timeline-chart-card .chart-card-body {
     padding-top: 14px;
-    overflow-x: auto;
+    padding-bottom: 4px;
+    overflow-x: hidden;
 }
 
 #vis-bushfire-timeline {
-    min-width: 1040px;
-    min-height: 420px;
+    width: 82%;
+    max-width: 1116px;
+    min-height: 460px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    left: 38px;
+}
+
+.timeline-scope-note {
+    font-size: 0.73rem;
+    color: #7b726a;
+    margin: 6px 0 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
 }
 
 .chart-card-footer {

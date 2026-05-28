@@ -1,9 +1,9 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "Timeline of major Australian bushfire events and normalised insured losses.",
-  "width": 980,
-  "height": 420,
-  "padding": { "top": 18, "bottom": 28, "left": 30, "right": 30 },
+  "description": "Selected historical timeline of major Australian bushfire events and normalised insured losses with severity tags and card boxes.",
+  "width": 1040,
+  "height": 455,
+  "padding": { "top": 6, "bottom": 18, "left": 38, "right": 38 },
   "autosize": { "type": "fit", "contains": "padding", "resize": true },
   "background": "#ffffff",
   "signals": [
@@ -11,22 +11,10 @@
       "name": "hoveredYear",
       "value": null,
       "on": [
-        {
-          "events": "@event_card_hit:mouseover",
-          "update": "datum.year"
-        },
-        {
-          "events": "@event_point_hit:mouseover",
-          "update": "datum.year"
-        },
-        {
-          "events": "@event_card_hit:mouseout",
-          "update": "null"
-        },
-        {
-          "events": "@event_point_hit:mouseout",
-          "update": "null"
-        }
+        { "events": "@event_hit:mouseover", "update": "datum.year" },
+        { "events": "@event_point_hit:mouseover", "update": "datum.year" },
+        { "events": "@event_hit:mouseout", "update": "null" },
+        { "events": "@event_point_hit:mouseout", "update": "null" }
       ]
     }
   ],
@@ -38,78 +26,85 @@
           "year": 1967,
           "name": "1967 Bushfire",
           "state": "TAS",
-          "loss": 4.1,
           "lossLabel": "$4.10B",
           "description": "Deadliest bushfire in\nTasmanian history.\nLargest insured loss.",
-          "tooltipDescription": "Deadliest bushfire in Tasmanian history. Largest normalised insured loss in the dataset.",
+          "tooltipDescription": "Deadliest bushfire in Tasmanian history. Largest normalised insured loss.",
           "side": "top",
-          "highlight": false
+          "severity": "Catastrophic",
+          "severityColor": "#c0392b",
+          "color": "#c0392b"
         },
         {
           "year": 1969,
           "name": "Lara Bushfire",
           "state": "VIC",
-          "loss": 0.76,
           "lossLabel": "$0.76B",
-          "description": "Fast-moving fire\nnear Lara, Victoria.\nMedium loss severity.",
-          "tooltipDescription": "Fast-moving fire near Lara, Victoria, killing 17 people in under an hour.",
+          "description": "Fast-moving fire near\nLara, Victoria.\nMedium loss severity.",
+          "tooltipDescription": "Fast-moving fire near Lara, Victoria. Medium loss severity.",
           "side": "bottom",
-          "highlight": false
+          "severity": "High",
+          "severityColor": "#e8824a",
+          "color": "#e8824a"
         },
         {
           "year": 1983,
           "name": "Ash Wednesday",
           "state": "VIC & SA",
-          "loss": 2.71,
           "lossLabel": "$2.71B",
           "description": "Major fires across\nVictoria and South\nAustralia.",
-          "tooltipDescription": "Fires across Victoria and South Australia on 16 February 1983. One of the largest normalised insured losses.",
+          "tooltipDescription": "Major fires across Victoria and South Australia.",
           "side": "top",
-          "highlight": false
+          "severity": "Catastrophic",
+          "severityColor": "#c0392b",
+          "color": "#c0392b"
         },
         {
           "year": 1985,
           "name": "Victorian Alpine",
           "state": "VIC",
-          "loss": 1.23,
           "lossLabel": "$1.23B",
           "description": "Large fires swept\nthrough the Victorian\nAlpine region.",
-          "tooltipDescription": "Large bushfires swept through the Victorian Alpine region in early 1985.",
+          "tooltipDescription": "Large fires swept through the Victorian Alpine region.",
           "side": "bottom",
-          "highlight": false
+          "severity": "High",
+          "severityColor": "#e8824a",
+          "color": "#e8824a"
         },
         {
           "year": 2003,
           "name": "Canberra Bushfire",
           "state": "ACT",
-          "loss": 1.27,
           "lossLabel": "$1.27B",
           "description": "Fires entered\nCanberra suburbs and\ndestroyed homes.",
-          "tooltipDescription": "Fires entered Canberra's suburbs, destroying over 500 homes and killing 4 people.",
+          "tooltipDescription": "Fires entered Canberra suburbs and destroyed homes.",
           "side": "top",
-          "highlight": false
+          "severity": "High",
+          "severityColor": "#e8824a",
+          "color": "#e8824a"
         },
         {
           "year": 2009,
           "name": "Black Saturday",
           "state": "VIC",
-          "loss": 2.57,
           "lossLabel": "$2.57B",
           "description": "Australia's deadliest\nbushfire disaster.\n173 lives lost.",
-          "tooltipDescription": "Australia's deadliest bushfire disaster. 173 lives lost on 7 February 2009.",
+          "tooltipDescription": "Australia's deadliest bushfire disaster. 173 lives lost.",
           "side": "bottom",
-          "highlight": false
+          "severity": "Catastrophic",
+          "severityColor": "#c0392b",
+          "color": "#c0392b"
         },
         {
           "year": 2019,
           "name": "Black Summer",
           "state": "NSW, VIC, QLD, SA",
-          "loss": 2.41,
           "lossLabel": "$2.41B",
-          "description": "Unprecedented fires\nfrom late 2019 into\n2020.",
-          "tooltipDescription": "Unprecedented fires burned across southeast Australia from late 2019 into 2020.",
+          "description": "Unprecedented fires\nfrom late 2019\ninto 2020.",
+          "tooltipDescription": "Unprecedented fires from late 2019 into 2020.",
           "side": "top",
-          "highlight": true
+          "severity": "Catastrophic",
+          "severityColor": "#c0392b",
+          "color": "#c0392b"
         }
       ]
     }
@@ -117,10 +112,11 @@
   "scales": [
     {
       "name": "x",
-      "type": "point",
-      "domain": { "data": "events", "field": "year" },
+      "type": "linear",
+      "domain": [1960, 2028],
       "range": "width",
-      "padding": 0.6
+      "zero": false,
+      "nice": false
     }
   ],
   "marks": [
@@ -130,9 +126,50 @@
         "enter": {
           "x": { "value": 0 },
           "x2": { "signal": "width" },
-          "y": { "value": 210 },
-          "stroke": { "value": "#d6dde3" },
-          "strokeWidth": { "value": 2 }
+          "y": { "value": 228 },
+          "stroke": { "value": "#3f4448" },
+          "strokeWidth": { "value": 2.2 },
+          "strokeCap": { "value": "round" }
+        }
+      }
+    },
+    {
+      "type": "symbol",
+      "encode": {
+        "enter": {
+          "x": { "value": 0 },
+          "y": { "value": 228 },
+          "shape": { "value": "circle" },
+          "size": { "value": 72 },
+          "fill": { "value": "#111111" }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": { "signal": "width" },
+          "x2": { "signal": "width - 9" },
+          "y": { "value": 228 },
+          "y2": { "value": 224 },
+          "stroke": { "value": "#3f4448" },
+          "strokeWidth": { "value": 2.1 },
+          "strokeCap": { "value": "round" }
+        }
+      }
+    },
+    {
+      "type": "rule",
+      "encode": {
+        "enter": {
+          "x": { "signal": "width" },
+          "x2": { "signal": "width - 9" },
+          "y": { "value": 228 },
+          "y2": { "value": 232 },
+          "stroke": { "value": "#3f4448" },
+          "strokeWidth": { "value": 2.1 },
+          "strokeCap": { "value": "round" }
         }
       }
     },
@@ -142,119 +179,15 @@
       "encode": {
         "enter": {
           "x": { "scale": "x", "field": "year" },
-          "y": { "value": 210 },
-          "y2": { "signal": "datum.side === 'top' ? 148 : 292" },
-          "strokeDash": { "value": [3, 3] }
+          "y": { "value": 228 },
+          "y2": { "signal": "datum.side === 'top' ? 145 : 296" },
+          "strokeWidth": { "value": 1.25 },
+          "strokeCap": { "value": "round" }
         },
         "update": {
-          "stroke": {
-            "signal": "datum.highlight ? '#f03b20' : '#cfd6dc'"
-          },
-          "strokeWidth": {
-            "signal": "hoveredYear === datum.year ? 1.8 : 1"
-          },
+          "stroke": { "field": "color" },
           "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.35"
-          }
-        }
-      }
-    },
-    {
-      "type": "rect",
-      "from": { "data": "events" },
-      "encode": {
-        "enter": {
-          "x": { "scale": "x", "field": "year", "offset": -68 },
-          "y": { "signal": "datum.side === 'top' ? 46 : 292" },
-          "width": { "value": 136 },
-          "height": { "value": 102 },
-          "cornerRadius": { "value": 7 }
-        },
-        "update": {
-          "fill": {
-            "signal": "datum.highlight ? '#fee2e2' : '#fff7ed'"
-          },
-          "stroke": {
-            "signal": "datum.highlight ? '#f03b20' : '#feb24c'"
-          },
-          "strokeWidth": {
-            "signal": "datum.highlight || hoveredYear === datum.year ? 2 : 1"
-          },
-          "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.45"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "events" },
-      "encode": {
-        "enter": {
-          "x": { "scale": "x", "field": "year" },
-          "y": { "signal": "datum.side === 'top' ? 61 : 307" },
-          "text": { "field": "name" },
-          "align": { "value": "center" },
-          "baseline": { "value": "top" },
-          "font": { "value": "Outfit" },
-          "fontSize": { "value": 11 },
-          "fontWeight": { "value": 800 },
-          "limit": { "value": 125 }
-        },
-        "update": {
-          "fill": {
-            "signal": "datum.highlight ? '#8f241c' : '#2B2621'"
-          },
-          "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.45"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "events" },
-      "encode": {
-        "enter": {
-          "x": { "scale": "x", "field": "year" },
-          "y": { "signal": "datum.side === 'top' ? 80 : 326" },
-          "text": { "signal": "datum.lossLabel + ' / ' + datum.state" },
-          "align": { "value": "center" },
-          "baseline": { "value": "top" },
-          "font": { "value": "Inter" },
-          "fontSize": { "value": 10 },
-          "fontWeight": { "value": 700 },
-          "fill": { "value": "#d9481f" },
-          "limit": { "value": 128 }
-        },
-        "update": {
-          "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.45"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "from": { "data": "events" },
-      "encode": {
-        "enter": {
-          "x": { "scale": "x", "field": "year" },
-          "y": { "signal": "datum.side === 'top' ? 98 : 344" },
-          "text": { "field": "description" },
-          "align": { "value": "center" },
-          "baseline": { "value": "top" },
-          "font": { "value": "Inter" },
-          "fontSize": { "value": 9 },
-          "fontWeight": { "value": 500 },
-          "fill": { "value": "#596268" },
-          "lineBreak": { "value": "\n" },
-          "lineHeight": { "value": 12 },
-          "limit": { "value": 126 }
-        },
-        "update": {
-          "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.45"
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 0.95 : 0.24"
           }
         }
       }
@@ -265,24 +198,46 @@
       "encode": {
         "enter": {
           "x": { "scale": "x", "field": "year" },
-          "y": { "value": 210 },
-          "shape": { "value": "circle" }
+          "y": { "value": 228 },
+          "shape": { "value": "circle" },
+          "fill": { "value": "#ffffff" },
+          "strokeWidth": { "value": 2.4 }
         },
         "update": {
-          "size": {
-            "signal": "datum.highlight || hoveredYear === datum.year ? 150 : 92"
-          },
-          "fill": {
-            "signal": "datum.highlight ? '#f03b20' : '#feb24c'"
-          },
+          "size": { "signal": "hoveredYear === datum.year ? 190 : 142" },
+          "stroke": { "field": "color" },
+          "opacity": {
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
+          }
+        }
+      }
+    },
+    {
+      "name": "card_box",
+      "type": "rect",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "x", "field": "year", "offset": -88 },
+          "y": { "signal": "datum.side === 'top' ? 20 : 296" },
+          "width": { "value": 176 },
+          "height": { "value": 125 },
+          "cornerRadius": { "value": 10 },
+          "fill": { "value": "#ffffff" },
+          "shadowColor": { "value": "rgba(43, 38, 33, 0.05)" },
+          "shadowBlur": { "value": 10 },
+          "shadowOffsetX": { "value": 0 },
+          "shadowOffsetY": { "value": 4 }
+        },
+        "update": {
           "stroke": {
-            "signal": "datum.highlight ? '#8f241c' : '#d9481f'"
+            "signal": "hoveredYear === datum.year ? datum.severityColor : 'rgba(43, 38, 33, 0.09)'"
           },
           "strokeWidth": {
-            "signal": "datum.highlight || hoveredYear === datum.year ? 2.2 : 1.2"
+            "signal": "hoveredYear === datum.year ? 1.75 : 1"
           },
           "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.38"
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
           }
         }
       }
@@ -293,39 +248,151 @@
       "encode": {
         "enter": {
           "x": { "scale": "x", "field": "year" },
-          "y": { "signal": "datum.side === 'top' ? 226 : 190" },
+          "y": { "signal": "datum.side === 'top' ? 256 : 200" },
           "text": { "signal": "datum.year + ''" },
           "align": { "value": "center" },
           "baseline": { "value": "middle" },
           "font": { "value": "Outfit" },
-          "fontSize": { "value": 10 },
+          "fontSize": { "value": 18 },
           "fontWeight": { "value": 800 }
         },
         "update": {
           "fill": {
-            "signal": "datum.highlight ? '#8f241c' : '#6a737a'"
+            "signal": "hoveredYear === datum.year ? datum.color : '#453f3a'"
           },
           "opacity": {
-            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.45"
+            "signal": "hoveredYear === datum.year ? 1.0 : 0.9"
           }
         }
       }
     },
     {
-      "name": "event_card_hit",
-      "type": "rect",
+      "type": "text",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "x", "field": "year" },
+          "y": { "signal": "datum.side === 'top' ? 32 : 308" },
+          "text": { "field": "name" },
+          "align": { "value": "center" },
+          "baseline": { "value": "top" },
+          "font": { "value": "Outfit" },
+          "fontSize": { "value": 13.5 },
+          "fontWeight": { "value": 800 },
+          "fill": { "value": "#2b2621" },
+          "limit": { "value": 166 }
+        },
+        "update": {
+          "opacity": {
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "x", "field": "year" },
+          "y": { "signal": "datum.side === 'top' ? 52 : 328" },
+          "text": { "signal": "datum.lossLabel + '  •  ' + datum.state" },
+          "align": { "value": "center" },
+          "baseline": { "value": "top" },
+          "font": { "value": "Inter" },
+          "fontSize": { "value": 10.5 },
+          "fontWeight": { "value": 700 },
+          "limit": { "value": 166 }
+        },
+        "update": {
+          "fill": { "value": "#5c544d" },
+          "opacity": {
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "x", "field": "year" },
+          "y": { "signal": "datum.side === 'top' ? 71 : 347" },
+          "text": { "signal": "'●  ' + datum.severity" },
+          "align": { "value": "center" },
+          "baseline": { "value": "top" },
+          "font": { "value": "Inter" },
+          "fontSize": { "value": 9.5 },
+          "fontWeight": { "value": 800 },
+          "limit": { "value": 166 }
+        },
+        "update": {
+          "fill": { "field": "severityColor" },
+          "opacity": {
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
+          }
+        }
+      }
+    },
+    {
+      "type": "rule",
       "from": { "data": "events" },
       "encode": {
         "enter": {
           "x": { "scale": "x", "field": "year", "offset": -68 },
-          "y": { "signal": "datum.side === 'top' ? 46 : 292" },
-          "width": { "value": 136 },
-          "height": { "value": 102 },
+          "x2": { "scale": "x", "field": "year", "offset": 68 },
+          "y": { "signal": "datum.side === 'top' ? 86 : 362" },
+          "stroke": { "value": "#e2e8f0" },
+          "strokeWidth": { "value": 0.75 }
+        },
+        "update": {
+          "opacity": {
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "x", "field": "year" },
+          "y": { "signal": "datum.side === 'top' ? 95 : 371" },
+          "text": { "field": "description" },
+          "align": { "value": "center" },
+          "baseline": { "value": "top" },
+          "font": { "value": "Inter" },
+          "fontSize": { "value": 9.5 },
+          "fontWeight": { "value": 500 },
+          "fill": { "value": "#5a626a" },
+          "lineBreak": { "value": "\n" },
+          "lineHeight": { "value": 13 },
+          "limit": { "value": 166 }
+        },
+        "update": {
+          "opacity": {
+            "signal": "hoveredYear === null || hoveredYear === datum.year ? 1 : 0.36"
+          }
+        }
+      }
+    },
+    {
+      "name": "event_hit",
+      "type": "rect",
+      "from": { "data": "events" },
+      "encode": {
+        "enter": {
+          "x": { "scale": "x", "field": "year", "offset": -88 },
+          "y": { "signal": "datum.side === 'top' ? 20 : 296" },
+          "width": { "value": 176 },
+          "height": { "value": 125 },
           "fill": { "value": "#ffffff" },
           "fillOpacity": { "value": 0.001 },
           "cursor": { "value": "pointer" },
           "tooltip": {
-            "signal": "{'Event': datum.name, 'Year': datum.year, 'State': datum.state, 'Normalised insured loss': datum.lossLabel, 'Note': datum.tooltipDescription}"
+            "signal": "{'Event': datum.name, 'Year': datum.year, 'Normalised insured loss': datum.lossLabel, 'State': datum.state, 'Severity': datum.severity, 'Description': datum.tooltipDescription}"
           }
         }
       }
@@ -337,15 +404,15 @@
       "encode": {
         "enter": {
           "x": { "scale": "x", "field": "year" },
-          "y": { "value": 210 },
+          "y": { "value": 228 },
           "shape": { "value": "circle" },
-          "size": { "value": 650 },
+          "size": { "value": 760 },
           "fill": { "value": "#ffffff" },
           "fillOpacity": { "value": 0.001 },
           "strokeOpacity": { "value": 0 },
           "cursor": { "value": "pointer" },
           "tooltip": {
-            "signal": "{'Event': datum.name, 'Year': datum.year, 'State': datum.state, 'Normalised insured loss': datum.lossLabel, 'Note': datum.tooltipDescription}"
+            "signal": "{'Event': datum.name, 'Year': datum.year, 'Normalised insured loss': datum.lossLabel, 'State': datum.state, 'Severity': datum.severity, 'Description': datum.tooltipDescription}"
           }
         }
       }
