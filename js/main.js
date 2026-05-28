@@ -6,8 +6,6 @@ const economicShockSpec = "js/economic_shock.vg.json?v=20260527_label_tooltips";
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
   .then(function (result) {
-    console.log("Fire hotspots map loaded successfully");
-
     const view = result.view;
 
     // Function to calculate and update zoom target dynamically
@@ -26,16 +24,6 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
         scale = 1400;
       }
 
-      console.log(
-        "Programmatic zoom - region:",
-        regionName,
-        "center:",
-        center,
-        "scale:",
-        scale
-      );
-
-      // Update both signals so they propagate to the map projection and the HTML controls!
       view
         .signal("center_to", center)
         .signal("zoom_level", scale)
@@ -43,9 +31,7 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
         .catch(console.error);
     }
 
-    // 1. Listen to changes on the 'zoom_region' signal (triggers when user clicks annotations on the map)
     view.addSignalListener("zoom_region", function (name, value) {
-      console.log("zoom_region click signal changed:", value);
       let region = "All";
 
       if (value) {
@@ -68,9 +54,7 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
       updateZoom(region);
     });
 
-    // 2. Listen to changes on the 'center_to' signal (triggers when user manually interacts with the dropdown)
     view.addSignalListener("center_to", function (name, value) {
-      console.log("center_to dropdown signal changed:", value);
       let region = "All";
       let scale = 600;
 
@@ -88,12 +72,10 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
         }
       }
 
-      // Update the zoom slider value to match the region default scale
       if (view.signal("zoom_level") !== scale) {
         view.signal("zoom_level", scale);
       }
 
-      // Update the highlight selection to match the active region
       if (view.signal("zoom_region_region") !== region) {
         view.signal("zoom_region_region", region === "All" ? null : region);
       }
@@ -104,18 +86,13 @@ vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
   .catch(console.error);
 
 // Embed the streamgraph (Row 2)
-vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).then(function(result) {
-    console.log("Streamgraph loaded successfully");
-}).catch(console.error);
+vegaEmbed('#vis-horizon', streamgraphSpec, { "actions": false }).catch(console.error);
 
 // Embed the major bushfire events timeline (Section 3)
-vegaEmbed('#vis-bushfire-timeline', bushfireTimelineSpec, { "actions": false }).then(function(result) {
-    console.log("Bushfire event timeline loaded successfully");
-}).catch(console.error);
+vegaEmbed('#vis-bushfire-timeline', bushfireTimelineSpec, { "actions": false, "renderer": "svg" }).catch(console.error);
 
 // Embed the Economic Shock Bubble Chart (Section 3)
 vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(function(result) {
-    console.log("Economic Shock Timeline loaded successfully");
     const view = result.view;
     
     // Custom HTML Legend interactive filter
@@ -136,7 +113,6 @@ vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(f
                 this.classList.add('active-legend-filter');
             }
             
-            // Push selection to the Vega-Lite signal
             view.signal('select_severity', activeSeverity).runAsync().catch(console.error);
         });
     });

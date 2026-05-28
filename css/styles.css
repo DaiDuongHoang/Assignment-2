@@ -275,58 +275,6 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* ===== Visualization Cards ===== */
-.viz-container {
-    padding: 18px 20px;
-    margin: 10px 15px;
-    background: rgba(255, 255, 255, 0.98);
-    border: 1px solid rgba(210, 215, 220, 0.9);
-    border-radius: 14px;
-    box-shadow: 0 14px 35px rgba(31, 38, 46, 0.07);
-}
-
-.row-aligned {
-    display: flex;
-    align-items: stretch;
-}
-
-.story-container {
-    padding: 18px 20px;
-    margin: 10px 0 10px 15px;
-    background: rgba(255, 255, 255, 0.98);
-    border: 1px solid rgba(210, 215, 220, 0.9);
-    border-right: 0;
-    border-radius: 14px 0 0 14px;
-    box-shadow: 0 14px 35px rgba(31, 38, 46, 0.07);
-    height: calc(100% - 20px);
-    display: flex;
-    flex-direction: column;
-}
-
-.story-container h2 {
-    font-family: 'Outfit', sans-serif;
-    margin: 0 0 12px;
-    color: #232323;
-    font-size: 1.6rem;
-    font-weight: 700;
-    line-height: 1.2;
-}
-
-.story-text {
-    margin: 0 0 12px;
-    color: #4a4a4a;
-    font-size: 0.95rem;
-    line-height: 1.6;
-}
-
-.map-container {
-    margin-left: 0;
-    border-left: 0;
-    border-radius: 0 14px 14px 0;
-    height: calc(100% - 20px);
-    display: block;
-}
-
 .vertical-legend {
     margin-top: auto;
 }
@@ -512,9 +460,6 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== Responsive Vega Charts ===== */
 #vis-fire-hotspots,
-#vis-map,
-#vis-bar,
-#vis-timeline,
 #vis-horizon,
 #vis-bushfire-timeline,
 #vis-economic-shock {
@@ -527,16 +472,6 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     padding-top: 8px;
     margin-top: 0;
-}
-
-#vis-economic-shock .vega-bindings {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: auto;
-    margin: 0;
-    justify-content: flex-end;
-    z-index: 2;
 }
 
 .vega-bindings {
@@ -556,11 +491,6 @@ h1, h2, h3, h4, h5, h6 {
     height: auto !important;
 }
 
-/* Hide default Vega Actions (the three dots) if we want a cleaner look, though we disabled them in JS */
-.vega-actions {
-    display: none !important;
-}
-
 /* ===== Grid Adjustments ===== */
 .pure-g > [class*="pure-u"] {
     font-family: 'Inter', sans-serif;
@@ -572,21 +502,9 @@ h1, h2, h3, h4, h5, h6 {
         padding: 30px 24px;
     }
 
-    .chart-topline {
-        flex-direction: column;
-    }
-
     .combined-legend {
         width: 100%;
         grid-template-columns: 1fr;
-    }
-
-    .story-container,
-    .map-container {
-        margin-left: 15px;
-        margin-right: 15px;
-        border: 1px solid rgba(210, 215, 220, 0.9);
-        border-radius: 14px;
     }
 }
 
@@ -596,10 +514,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .header-section,
-    .overview-section,
-    .viz-container,
-    .story-container,
-    .map-container {
+    .overview-section {
         margin-left: 0;
         margin-right: 0;
     }
@@ -648,26 +563,6 @@ h1, h2, h3, h4, h5, h6 {
 .vega-bind select:focus {
     border-color: #b71c1c;
     box-shadow: 0 0 0 2px rgba(183, 28, 28, 0.15);
-}
-
-#vis-economic-shock .vega-bind {
-    margin: 0;
-    padding: 7px 10px;
-    background: #fffaf4;
-    border-color: #e5d3c9;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(31, 38, 46, 0.06);
-    color: #4c4039;
-    font-size: 0.78rem;
-}
-
-#vis-economic-shock .vega-bind select {
-    min-width: 128px;
-    border-color: #d4c3ba;
-    border-radius: 8px;
-    color: #342f2b;
-    background: #fff;
-    font-size: 0.78rem;
 }
 
 /* ===== Custom HTML Legend for Economic Shock Timeline ===== */
@@ -823,13 +718,6 @@ h1, h2, h3, h4, h5, h6 {
         padding-top: 12px;
     }
 
-    #vis-economic-shock .vega-bindings {
-        left: 0;
-        right: auto;
-        justify-content: flex-start;
-        width: 100%;
-    }
-
     .custom-chart-legend {
         justify-content: flex-start;
         width: 100%;
@@ -839,7 +727,6 @@ h1, h2, h3, h4, h5, h6 {
     }
     
     .legend-group {
-        flex-direction: column;
         flex-direction: column;
         align-items: flex-start;
         gap: 8px;
@@ -1037,19 +924,26 @@ h1, h2, h3, h4, h5, h6 {
 .timeline-chart-card .chart-card-body {
     padding-top: 0px;
     padding-bottom: 4px;
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 
 #vis-bushfire-timeline {
-    width: 82%;
-    max-width: 1116px;
-    min-height: 460px;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    left: 38px;
+    width: calc(100% - 80px);
+    max-width: none;
+    min-height: 500px;
+    margin: 0 14px 0 70px;
+    display: block;
+}
+
+#vis-bushfire-timeline .vega-embed {
+    width: 100% !important;
+}
+
+#vis-bushfire-timeline .vega-embed svg,
+#vis-bushfire-timeline .vega-embed canvas {
+    display: block;
+    width: 100% !important;
+    height: auto !important;
 }
 
 .timeline-scope-note {
