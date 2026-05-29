@@ -80,32 +80,32 @@
           {
             "field": "properties.state_name",
             "type": "nominal",
-            "title": "State"
+            "title": "State:"
           },
           {
             "field": "properties.season",
             "type": "nominal",
-            "title": "Season"
+            "title": "Season:"
           },
           {
             "field": "properties.planned_label",
             "type": "nominal",
-            "title": "Planned burned cells"
+            "title": "Planned burned cells:"
           },
           {
             "field": "properties.unplanned_label",
             "type": "nominal",
-            "title": "Unplanned burned cells"
+            "title": "Unplanned burned cells:"
           },
           {
             "field": "properties.total_label",
             "type": "nominal",
-            "title": "Total burned cells"
+            "title": "Total burned cells:"
           },
           {
             "field": "properties.unplanned_share_label",
             "type": "nominal",
-            "title": "Unplanned share"
+            "title": "Unplanned share:"
           }
         ]
       }
@@ -147,27 +147,27 @@
           "legend": null
         },
         "tooltip": [
-          { "field": "state_name", "type": "nominal", "title": "State" },
-          { "field": "season", "type": "nominal", "title": "Season" },
+          { "field": "state_name", "type": "nominal", "title": "State:" },
+          { "field": "season", "type": "nominal", "title": "Season:" },
           {
             "field": "planned_label",
             "type": "nominal",
-            "title": "Planned burned cells"
+            "title": "Planned burned cells:"
           },
           {
             "field": "unplanned_label",
             "type": "nominal",
-            "title": "Unplanned burned cells"
+            "title": "Unplanned burned cells:"
           },
           {
             "field": "total_label",
             "type": "nominal",
-            "title": "Total burned cells"
+            "title": "Total burned cells:"
           },
           {
             "field": "unplanned_share_label",
             "type": "nominal",
-            "title": "Unplanned share"
+            "title": "Unplanned share:"
           }
         ]
       }

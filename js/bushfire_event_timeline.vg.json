@@ -399,7 +399,7 @@
           "fillOpacity": { "value": 0.001 },
           "cursor": { "value": "pointer" },
           "tooltip": {
-            "signal": "{'Event': datum.name, 'Year': datum.year, 'Normalised insured loss': datum.lossLabel, 'State': datum.state, 'Severity': datum.severity, 'Description': datum.tooltipDescription}"
+            "signal": "{'Event:': datum.name, 'Year:': datum.year, 'Normalised insured loss:': datum.lossLabel, 'State:': datum.state, 'Severity:': datum.severity, 'Description:': datum.tooltipDescription}"
           }
         }
       }
@@ -419,7 +419,7 @@
           "strokeOpacity": { "value": 0 },
           "cursor": { "value": "pointer" },
           "tooltip": {
-            "signal": "{'Event': datum.name, 'Year': datum.year, 'Normalised insured loss': datum.lossLabel, 'State': datum.state, 'Severity': datum.severity, 'Description': datum.tooltipDescription}"
+            "signal": "{'Event:': datum.name, 'Year:': datum.year, 'Normalised insured loss:': datum.lossLabel, 'State:': datum.state, 'Severity:': datum.severity, 'Description:': datum.tooltipDescription}"
           }
         }
       }

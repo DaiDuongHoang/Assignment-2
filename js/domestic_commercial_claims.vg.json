@@ -550,7 +550,7 @@
             "signal": "eventHover === null || eventHover === datum.event_name ? 1 : 0.46"
           },
           "tooltip": {
-            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Total claims': datum.total_claims_label}"
+            "signal": "{'Event:': datum.event_name, 'Year:': datum.year, 'Domestic claims:': datum.domestic_claims_label, 'Commercial claims:': datum.commercial_claims_label, 'Total claims:': datum.total_claims_label}"
           }
         }
       }
@@ -597,7 +597,7 @@
             "signal": "claimTypeHover === 'Commercial' ? 0.18 : (eventHover === null || eventHover === datum.event_name ? 1 : 0.24)"
           },
           "tooltip": {
-            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Claim type': 'Domestic claims', 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Domestic share': datum.domestic_share_label, 'Commercial share': datum.commercial_share_label, 'Total claims': datum.total_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+            "signal": "{'Event:': datum.event_name, 'Year:': datum.year, 'Claim type:': 'Domestic claims', 'Domestic claims:': datum.domestic_claims_label, 'Commercial claims:': datum.commercial_claims_label, 'Domestic share:': datum.domestic_share_label, 'Commercial share:': datum.commercial_share_label, 'Total claims:': datum.total_claims_label, 'Normalised insured loss:': datum.normalised_loss_label}"
           }
         }
       }
@@ -644,7 +644,7 @@
             "signal": "claimTypeHover === 'Domestic' ? 0.18 : (eventHover === null || eventHover === datum.event_name ? 1 : 0.24)"
           },
           "tooltip": {
-            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Claim type': 'Commercial claims', 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Domestic share': datum.domestic_share_label, 'Commercial share': datum.commercial_share_label, 'Total claims': datum.total_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+            "signal": "{'Event:': datum.event_name, 'Year:': datum.year, 'Claim type:': 'Commercial claims', 'Domestic claims:': datum.domestic_claims_label, 'Commercial claims:': datum.commercial_claims_label, 'Domestic share:': datum.domestic_share_label, 'Commercial share:': datum.commercial_share_label, 'Total claims:': datum.total_claims_label, 'Normalised insured loss:': datum.normalised_loss_label}"
           }
         }
       }
@@ -779,7 +779,7 @@
             "signal": "eventHover === null || eventHover === datum.event_name ? 0.9 : 0.22"
           },
           "tooltip": {
-            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Total claims': datum.total_claims_label, 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+            "signal": "{'Event:': datum.event_name, 'Year:': datum.year, 'Total claims:': datum.total_claims_label, 'Domestic claims:': datum.domestic_claims_label, 'Commercial claims:': datum.commercial_claims_label, 'Normalised insured loss:': datum.normalised_loss_label}"
           }
         }
       }
@@ -827,7 +827,7 @@
             "signal": "eventHover === datum.event_name ? 165 : 120"
           },
           "tooltip": {
-            "signal": "{'Event': datum.event_name, 'Year': datum.year, 'Total claims': datum.total_claims_label, 'Domestic claims': datum.domestic_claims_label, 'Commercial claims': datum.commercial_claims_label, 'Normalised insured loss': datum.normalised_loss_label}"
+            "signal": "{'Event:': datum.event_name, 'Year:': datum.year, 'Total claims:': datum.total_claims_label, 'Domestic claims:': datum.domestic_claims_label, 'Commercial claims:': datum.commercial_claims_label, 'Normalised insured loss:': datum.normalised_loss_label}"
           }
         }
       }

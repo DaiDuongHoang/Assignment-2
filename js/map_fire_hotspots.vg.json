@@ -16,7 +16,7 @@
         "min": 1,
         "max": 31,
         "step": 1,
-        "name": "Day (Jan 2020): "
+        "name": "Day: "
       }
     },
     {
@@ -121,44 +121,44 @@
           {
             "field": "latitude",
             "type": "quantitative",
-            "title": "Latitude",
+            "title": "Latitude:",
             "format": ".3f"
           },
           {
             "field": "longitude",
             "type": "quantitative",
-            "title": "Longitude",
+            "title": "Longitude:",
             "format": ".3f"
           },
           {
             "field": "brightness",
             "type": "quantitative",
-            "title": "Brightness (K)"
+            "title": "Brightness (K):"
           },
           {
             "field": "frp",
             "type": "quantitative",
-            "title": "Fire Power (MW)"
+            "title": "Fire Power (MW):"
           },
           {
             "field": "acq_date",
             "type": "nominal",
-            "title": "Date"
+            "title": "Date:"
           },
           {
             "field": "confidence",
             "type": "quantitative",
-            "title": "Confidence (%)"
+            "title": "Confidence (%):"
           },
           {
             "field": "satellite",
             "type": "nominal",
-            "title": "Satellite"
+            "title": "Satellite:"
           },
           {
             "field": "daynight",
             "type": "nominal",
-            "title": "Day/Night"
+            "title": "Day/Night:"
           }
         ]
       }

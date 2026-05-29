@@ -122,28 +122,28 @@
           {
             "field": "event_name",
             "type": "nominal",
-            "title": "Catastrophe Event"
+            "title": "Catastrophe Event:"
           },
-          { "field": "year", "type": "quantitative", "title": "Year" },
+          { "field": "year", "type": "quantitative", "title": "Year:" },
           {
             "field": "loss_billion_label",
             "type": "nominal",
-            "title": "Normalised Insured Loss"
+            "title": "Normalised Insured Loss:"
           },
           {
             "field": "original_loss_label",
             "type": "nominal",
-            "title": "Original Insured Loss"
+            "title": "Original Insured Loss:"
           },
           {
             "field": "claims_label",
             "type": "nominal",
-            "title": "Total Claims Received"
+            "title": "Total Claims Received:"
           },
           {
             "field": "severity_category",
             "type": "nominal",
-            "title": "Severity Category"
+            "title": "Severity Category:"
           }
         ],
         "opacity": {
@@ -376,28 +376,28 @@
           {
             "field": "event_name",
             "type": "nominal",
-            "title": "Catastrophe Event"
+            "title": "Catastrophe Event:"
           },
-          { "field": "year", "type": "quantitative", "title": "Year" },
+          { "field": "year", "type": "quantitative", "title": "Year:" },
           {
             "field": "loss_billion_label",
             "type": "nominal",
-            "title": "Normalised Insured Loss"
+            "title": "Normalised Insured Loss:"
           },
           {
             "field": "original_loss_label",
             "type": "nominal",
-            "title": "Original Insured Loss"
+            "title": "Original Insured Loss:"
           },
           {
             "field": "claims_label",
             "type": "nominal",
-            "title": "Total Claims Received"
+            "title": "Total Claims Received:"
           },
           {
             "field": "severity_category",
             "type": "nominal",
-            "title": "Severity Category"
+            "title": "Severity Category:"
           }
         ]
       }
@@ -511,28 +511,28 @@
           {
             "field": "event_name",
             "type": "nominal",
-            "title": "Catastrophe Event"
+            "title": "Catastrophe Event:"
           },
-          { "field": "year", "type": "quantitative", "title": "Year" },
+          { "field": "year", "type": "quantitative", "title": "Year:" },
           {
             "field": "loss_billion_label",
             "type": "nominal",
-            "title": "Normalised Insured Loss"
+            "title": "Normalised Insured Loss:"
           },
           {
             "field": "original_loss_label",
             "type": "nominal",
-            "title": "Original Insured Loss"
+            "title": "Original Insured Loss:"
           },
           {
             "field": "claims_label",
             "type": "nominal",
-            "title": "Total Claims Received"
+            "title": "Total Claims Received:"
           },
           {
             "field": "severity_category",
             "type": "nominal",
-            "title": "Severity Category"
+            "title": "Severity Category:"
           }
         ]
       }

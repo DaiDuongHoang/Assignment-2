@@ -1,0 +1,314 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "background": "#FFFDF9",
+  "autosize": "none",
+  "width": 1000,
+  "height": 250,
+  "padding": {"top": 28, "right": 128, "bottom": 96, "left": 92},
+  "signals": [
+    {
+      "name": "selectedRegion",
+      "value": "Southeast focus",
+      "bind": {
+        "input": "select",
+        "name": "Region: ",
+        "options": ["National", "Southeast focus"]
+      }
+    },
+    {
+      "name": "selectedMetric",
+      "value": "Detection count",
+      "bind": {
+        "input": "select",
+        "name": "Metric: ",
+        "options": ["Detection count", "Share of season total"]
+      }
+    },
+    {
+      "name": "hoverCell",
+      "value": null,
+      "on": [
+        {"events": "@cell:mouseover", "update": "datum"},
+        {"events": "@cell:mouseout", "update": "null"}
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "national_activity",
+      "url": "data/monthly_fire_activity_national.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "month_order": "number",
+          "detection_count": "number"
+        }
+      },
+      "transform": [
+        {"type": "formula", "expr": "'National'", "as": "region_scope"},
+        {"type": "formula", "expr": "'all Australia'", "as": "region_definition"}
+      ]
+    },
+    {
+      "name": "southeast_activity",
+      "url": "data/monthly_fire_activity_southeast.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "month_order": "number",
+          "detection_count": "number"
+        }
+      },
+      "transform": [
+        {"type": "formula", "expr": "'Southeast focus'", "as": "region_scope"},
+        {"type": "formula", "expr": "'NSW, VIC, ACT and SA'", "as": "region_definition"}
+      ]
+    },
+    {
+      "name": "fire_activity",
+      "source": ["national_activity", "southeast_activity"]
+    },
+    {
+      "name": "selected_activity",
+      "source": "fire_activity",
+      "transform": [
+        {"type": "filter", "expr": "datum.region_scope === selectedRegion"},
+        {
+          "type": "joinaggregate",
+          "groupby": ["fire_season"],
+          "fields": ["detection_count"],
+          "ops": ["sum"],
+          "as": ["season_total"]
+        },
+        {
+          "type": "formula",
+          "expr": "datum.detection_count / datum.season_total",
+          "as": "season_share"
+        },
+        {
+          "type": "formula",
+          "expr": "selectedMetric === 'Share of season total' ? datum.season_share : datum.detection_count",
+          "as": "display_value"
+        }
+      ]
+    },
+    {
+      "name": "seasons",
+      "source": "selected_activity",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["fire_season"]
+        }
+      ]
+    },
+    {
+      "name": "months",
+      "values": [
+        {"month_name": "Jul", "month_order": 1},
+        {"month_name": "Aug", "month_order": 2},
+        {"month_name": "Sep", "month_order": 3},
+        {"month_name": "Oct", "month_order": 4},
+        {"month_name": "Nov", "month_order": 5},
+        {"month_name": "Dec", "month_order": 6},
+        {"month_name": "Jan", "month_order": 7},
+        {"month_name": "Feb", "month_order": 8},
+        {"month_name": "Mar", "month_order": 9},
+        {"month_name": "Apr", "month_order": 10},
+        {"month_name": "May", "month_order": 11},
+        {"month_name": "Jun", "month_order": 12}
+      ]
+    },
+    {
+      "name": "black_summer",
+      "values": [
+        {"fire_season": "2019-20"}
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "band",
+      "domain": ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+      "range": "width",
+      "paddingInner": 0.08,
+      "paddingOuter": 0.02
+    },
+    {
+      "name": "y",
+      "type": "band",
+      "domain": ["2018-19", "2019-20", "2020-21", "2021-22", "2022-23", "2023-24"],
+      "range": "height",
+      "paddingInner": 0.12,
+      "paddingOuter": 0.08
+    },
+    {
+      "name": "colour",
+      "type": "linear",
+      "domain": {"data": "selected_activity", "field": "display_value"},
+      "nice": true,
+      "zero": true,
+      "range": ["#FFF4D8", "#FDD37A", "#F9913D", "#E34A24", "#9E1B32"]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "top",
+      "scale": "x",
+      "title": null,
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 8,
+      "labelFont": "Inter",
+      "labelFontSize": 12,
+      "labelFontWeight": 700,
+      "labelColor": "#334155"
+    },
+    {
+      "orient": "left",
+      "scale": "y",
+      "title": null,
+      "domain": false,
+      "ticks": false,
+      "labelPadding": 10,
+      "labelFont": "Inter",
+      "labelFontSize": 12,
+      "labelFontWeight": 700,
+      "labelColor": "#201A16"
+    }
+  ],
+  "legends": [
+    {
+      "fill": "colour",
+      "orient": "bottom",
+      "direction": "horizontal",
+      "title": {"signal": "selectedMetric === 'Share of season total' ? 'Share of season total' : 'MODIS active fire detections'"},
+      "titleFont": "Inter",
+      "titleFontSize": 12,
+      "titleFontWeight": 800,
+      "titleColor": "#334155",
+      "labelFont": "Inter",
+      "labelFontSize": 11,
+      "labelColor": "#5F6B7A",
+      "gradientLength": 340,
+      "gradientThickness": 11,
+      "offset": 24,
+      "values": {
+        "signal": "selectedMetric === 'Share of season total' ? [0, 0.1, 0.2, 0.3, 0.4] : (selectedRegion === 'National' ? [0, 40000, 80000, 120000] : [0, 15000, 30000, 45000])"
+      },
+      "encode": {
+        "labels": {
+          "update": {
+            "text": {
+              "signal": "selectedMetric === 'Share of season total' ? format(datum.value, '.0%') : (datum.value === 0 ? '0' : format(datum.value, ','))"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "seasons"},
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "x2": {"signal": "width"},
+          "y": {"scale": "y", "field": "fire_season"},
+          "height": {"signal": "bandwidth('y')"},
+          "fill": {"value": "#201A16"},
+          "cornerRadius": {"value": 5}
+        },
+        "update": {
+          "opacity": {
+            "signal": "hoverCell && hoverCell.fire_season === datum.fire_season ? 0.055 : 0"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "months"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "month_name"},
+          "width": {"signal": "bandwidth('x')"},
+          "y": {"value": 0},
+          "y2": {"signal": "height"},
+          "fill": {"value": "#201A16"},
+          "cornerRadius": {"value": 5}
+        },
+        "update": {
+          "opacity": {
+            "signal": "hoverCell && hoverCell.month_order === datum.month_order ? 0.035 : 0"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "from": {"data": "black_summer"},
+      "encode": {
+        "enter": {
+          "x": {"value": -4},
+          "x2": {"signal": "width + 4"},
+          "y": {"scale": "y", "field": "fire_season", "offset": -3},
+          "height": {"signal": "bandwidth('y') + 6"},
+          "fill": {"value": "transparent"},
+          "stroke": {"value": "#B83246"},
+          "strokeWidth": {"value": 1.4},
+          "cornerRadius": {"value": 7}
+        }
+      }
+    },
+    {
+      "name": "cell",
+      "type": "rect",
+      "from": {"data": "selected_activity"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "month_name"},
+          "width": {"signal": "bandwidth('x')"},
+          "y": {"scale": "y", "field": "fire_season"},
+          "height": {"signal": "bandwidth('y')"},
+          "cornerRadius": {"value": 4},
+          "tooltip": {
+            "signal": "{'Region scope:': datum.region_scope, 'Region definition:': datum.region_definition, 'Fire season:': datum.fire_season, 'Month:': datum.month_name, 'MODIS active fire detections:': format(datum.detection_count, ','), 'Share of season total:': format(datum.season_share, '.1%')}"
+          }
+        },
+        "update": {
+          "fill": {"scale": "colour", "field": "display_value"},
+          "stroke": {
+            "signal": "hoverCell && hoverCell.fire_season === datum.fire_season && hoverCell.month_name === datum.month_name ? '#201A16' : '#FFFDF9'"
+          },
+          "strokeWidth": {
+            "signal": "hoverCell && hoverCell.fire_season === datum.fire_season && hoverCell.month_name === datum.month_name ? 1.6 : 0.8"
+          },
+          "opacity": {"value": 1}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "black_summer"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "width + 14"},
+          "y": {"scale": "y", "field": "fire_season", "band": 0.5},
+          "text": {"value": "Black Summer"},
+          "align": {"value": "left"},
+          "baseline": {"value": "middle"},
+          "font": {"value": "Inter"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": 800},
+          "fill": {"value": "#B83246"}
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}

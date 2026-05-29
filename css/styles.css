@@ -513,9 +513,17 @@ h1, h2, h3, h4, h5, h6 {
 .vega-bindings {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
     width: 100%;
-    margin-top: 4px;
+    margin-top: 8px;
     margin-bottom: 0px;
+}
+
+#vis-fire-hotspots .vega-bindings {
+    flex-wrap: nowrap;
+    gap: 24px;
+    margin-top: 12px;
 }
 
 /* Make vega embeds fully responsive */
@@ -581,6 +589,15 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     color: #2B2621;
     box-shadow: 0 2px 6px rgba(43, 38, 33, 0.03);
+}
+
+/* Align range slider output numbers vertically and add margin to prevent overlap */
+.vega-bind input[type="range"] ~ span,
+.vega-bind input[type="range"] ~ output {
+    position: relative;
+    top: -2.5px;
+    margin-left: 6px;
+    display: inline-block;
 }
 
 .vega-bind select {

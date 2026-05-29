@@ -131,18 +131,18 @@
           {
             "field": "Year",
             "type": "quantitative",
-            "title": "Year",
+            "title": "Year:",
             "format": "d"
           },
           {
             "field": "Fire Type",
             "type": "nominal",
-            "title": "Vegetation Type"
+            "title": "Vegetation Type:"
           },
           {
             "field": "Area",
             "type": "quantitative",
-            "title": "Area (M ha)",
+            "title": "Area (M ha):",
             "format": ".0f"
           }
         ]
