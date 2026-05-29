@@ -5,7 +5,7 @@ const wildlifeGroups = [
     count: 2492000000,
     countLabel: "2.49 Billion",
     share: 87,
-    color: "#b71c1c",
+    color: "#c0392b",
     icon: "Images/Icons/reptile.svg",
     label: "Skinks, dragons, geckos"
   },
@@ -15,7 +15,7 @@ const wildlifeGroups = [
     count: 180000000,
     countLabel: "180 Million",
     share: 6,
-    color: "#f57c00",
+    color: "#e8824a",
     icon: "Images/Icons/bird.svg",
     label: "Honeyeaters, parrots, lyrebirds"
   },
@@ -25,7 +25,7 @@ const wildlifeGroups = [
     count: 143000000,
     countLabel: "143 Million",
     share: 5,
-    color: "#8b5e3c",
+    color: "#92400e",
     icon: "Images/Icons/mammals.svg",
     label: "Koalas, gliders, wallabies"
   },
@@ -35,7 +35,7 @@ const wildlifeGroups = [
     count: 51000000,
     countLabel: "51 Million",
     share: 2,
-    color: "#0284c7",
+    color: "#f59e0b",
     icon: "Images/Icons/frog.svg",
     label: "Alpine and stream frogs"
   }

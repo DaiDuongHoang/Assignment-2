@@ -24,7 +24,7 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260529_design_system_v1" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260529_wildlife_recovery_v3" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
     <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -477,11 +477,37 @@
             <span>WWF Australia estimates for animals affected, killed, or displaced during the 2019–20 Black Summer bushfires</span>
           </div>
         </div>
+
+        <div class="chart-card wildlife-recovery-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-blue">FIG. 4B · WILDLIFE RECOVERY ACTION MATRIX</div>
+            <div class="chart-card-title font-display">What Recovery Actions Were Needed?</div>
+            <div class="chart-card-caption serif-note">Management interventions identified for 119 priority animal species after the 2019–20 bushfires.</div>
+            <p class="chart-card-note">Counts are derived from a published management-intervention report, not a standalone machine-readable dataset.</p>
+          </div>
+          <div class="chart-card-body">
+            <div id="vis-wildlife-recovery-matrix"></div>
+
+            <div class="streamgraph-insight wildlife-recovery-insight">
+              <div class="insight-marker" aria-hidden="true"></div>
+              <div>
+                <h3>What does this add?</h3>
+                <p>
+                  The WWF estimate shows the scale of individual animal impact, while this recovery matrix shows what kinds of intervention were needed. Recovery was not only about rescue: assessment, habitat protection, predator control, and management of unburnt refuges all formed part of the post-fire response.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>DCCEEW, Management interventions for 119 priority animal species, 2020</span>
+          </div>
+        </div>
       </section>
     </div>
 
     <!-- Main JS for Vega-embed -->
     <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-    <script src="js/main.js?v=20260529_clean_tooltip_v23"></script>
+    <script src="js/main.js?v=20260529_wildlife_recovery_v4"></script>
   </body>
 </html>

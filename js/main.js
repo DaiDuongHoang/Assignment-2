@@ -1,9 +1,11 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260526_v13";
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260529_clean_tooltip_v22";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
-const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_card_borders_v18";
+const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";
+
 const economicShockSpec = "js/economic_shock.vg.json?v=20260529_bg_contrast_v1";
-const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_v5";
+const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_full_width_v9";
+const wildlifeRecoveryMatrixSpec = "js/wildlife_recovery_matrix.vg.json?v=20260529_recovery_matrix_v4";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
@@ -153,3 +155,6 @@ vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(f
 
 // Embed the domestic vs commercial claims diverging bar chart (Section 3)
 vegaEmbed('#vis-domestic-commercial-claims', domesticCommercialClaimsSpec, { "actions": false }).catch(console.error);
+
+// Embed the wildlife recovery action matrix (Section 4)
+vegaEmbed('#vis-wildlife-recovery-matrix', wildlifeRecoveryMatrixSpec, { "actions": false }).catch(console.error);

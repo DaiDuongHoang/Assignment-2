@@ -479,7 +479,8 @@ h1, h2, h3, h4, h5, h6 {
 #vis-horizon,
 #vis-bushfire-timeline,
 #vis-economic-shock,
-#vis-domestic-commercial-claims {
+#vis-domestic-commercial-claims,
+#vis-wildlife-recovery-matrix {
     width: 100%;
     display: block;
     overflow: visible;
@@ -957,10 +958,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #vis-bushfire-timeline {
-    width: calc(100% - 80px);
+    width: 100%;
     max-width: none;
     min-height: 440px;
-    margin: 0 14px 0 70px;
+    margin: 0;
     display: block;
 }
 
@@ -1007,6 +1008,25 @@ h1, h2, h3, h4, h5, h6 {
 
 .claims-split-card .chart-card-body {
     padding-top: 8px;
+    padding-bottom: 14px;
+}
+
+.claims-split-insight {
+    margin-top: 12px;
+    padding: 12px 14px;
+}
+
+.claims-split-insight .insight-marker {
+    background: linear-gradient(180deg, #f0a33a, #8f2f21);
+}
+
+.claims-split-insight h3 {
+    font-size: 1rem;
+}
+
+.claims-split-insight p {
+    font-size: 0.88rem;
+    line-height: 1.45;
 }
 
 .chart-card-footer {
@@ -1935,6 +1955,31 @@ h6 {
 .bivariate-map-card .chart-card-body,
 .wildlife-waffle-card .chart-card-body {
     padding: 18px 24px 22px;
+}
+
+.wildlife-recovery-card .chart-card-body {
+    padding: 18px 24px 16px;
+    background: var(--plot-bg);
+}
+
+.wildlife-recovery-card .chart-card-note {
+    margin: 8px 0 0;
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.wildlife-recovery-insight {
+    margin-top: 14px;
+    border-left-color: var(--color-sec4);
+}
+
+.wildlife-recovery-insight .insight-marker {
+    background: linear-gradient(180deg, #7fc6de, #0277A8);
+}
+
+.wildlife-recovery-insight p {
+    font-size: 0.9rem;
+    line-height: 1.5;
 }
 
 .map-grid {

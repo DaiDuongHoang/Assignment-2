@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "description": "Coordinated domestic/commercial claim composition and total claim scale for ICA bushfire records with explicit claim-type breakdowns.",
-  "width": 1120,
-  "height": 238,
+  "width": 1200,
+  "height": 226,
   "autosize": {
     "type": "fit-x",
     "contains": "padding",
@@ -11,7 +11,7 @@
   "padding": {
     "top": 8,
     "right": 24,
-    "bottom": 30,
+    "bottom": 22,
     "left": 6
   },
   "signals": [
@@ -37,7 +37,7 @@
     },
     {
       "name": "rightPlotWidth",
-      "value": 250
+      "value": 330
     },
     {
       "name": "plotTop",
@@ -45,7 +45,7 @@
     },
     {
       "name": "plotBottom",
-      "value": 205
+      "value": 198
     },
     {
       "name": "rowHeight",
@@ -174,7 +174,7 @@
         50,
         100
       ],
-      "labelColor": "#5F6B7A",
+      "labelColor": "#786e66",
       "labelFont": "Inter, Arial, sans-serif",
       "labelFontSize": 11,
       "titleColor": "#3A332E",
@@ -200,7 +200,7 @@
       "title": "Total claims",
       "tickCount": 4,
       "format": "~s",
-      "labelColor": "#5F6B7A",
+      "labelColor": "#786e66",
       "labelFont": "Inter, Arial, sans-serif",
       "labelFontSize": 11,
       "titleColor": "#3A332E",
@@ -320,7 +320,7 @@
             "value": 700
           },
           "fill": {
-            "value": "#253247"
+            "value": "#2B2621"
           },
           "baseline": {
             "value": "middle"
@@ -373,7 +373,7 @@
             "value": 700
           },
           "fill": {
-            "value": "#253247"
+            "value": "#2B2621"
           },
           "baseline": {
             "value": "middle"
@@ -399,7 +399,7 @@
             "signal": "plotBottom + 4"
           },
           "stroke": {
-            "value": "#e8edf3"
+            "value": "#f3ede6"
           },
           "strokeWidth": {
             "value": 1
@@ -408,76 +408,6 @@
         "update": {
           "opacity": {
             "signal": "datum.value === 0 ? 0 : 1"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "x": {
-            "scale": "xShare",
-            "value": -63
-          },
-          "y": {
-            "signal": "plotTop - 10"
-          },
-          "text": {
-            "value": "Domestic"
-          },
-          "align": {
-            "value": "center"
-          },
-          "baseline": {
-            "value": "bottom"
-          },
-          "font": {
-            "value": "Inter, Arial, sans-serif"
-          },
-          "fontSize": {
-            "value": 10
-          },
-          "fontWeight": {
-            "value": 700
-          },
-          "fill": {
-            "value": "#8a8178"
-          }
-        }
-      }
-    },
-    {
-      "type": "text",
-      "encode": {
-        "enter": {
-          "x": {
-            "scale": "xShare",
-            "value": 63
-          },
-          "y": {
-            "signal": "plotTop - 10"
-          },
-          "text": {
-            "value": "Commercial"
-          },
-          "align": {
-            "value": "center"
-          },
-          "baseline": {
-            "value": "bottom"
-          },
-          "font": {
-            "value": "Inter, Arial, sans-serif"
-          },
-          "fontSize": {
-            "value": 10
-          },
-          "fontWeight": {
-            "value": 700
-          },
-          "fill": {
-            "value": "#8a8178"
           }
         }
       }
@@ -766,7 +696,7 @@
             "band": 0.5
           },
           "stroke": {
-            "value": "#9aa8b6"
+            "value": "#d5c5b5"
           },
           "strokeWidth": {
             "value": 3
@@ -811,7 +741,7 @@
             "value": 120
           },
           "fill": {
-            "value": "#435466"
+            "value": "#c0392b"
           },
           "stroke": {
             "value": "#ffffff"
@@ -869,7 +799,7 @@
             "value": 700
           },
           "fill": {
-            "value": "#536173"
+            "value": "#5a4a42"
           },
           "limit": {
             "value": 92

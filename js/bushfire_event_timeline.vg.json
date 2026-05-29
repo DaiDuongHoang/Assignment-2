@@ -1,10 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "description": "Selected historical timeline of major Australian bushfire events and normalised insured losses with severity tags and card boxes.",
-  "width": 1040,
+  "width": 1200,
   "height": 435,
-  "padding": { "top": 6, "bottom": 4, "left": 38, "right": 38 },
-  "autosize": { "type": "fit", "contains": "padding", "resize": true },
+  "padding": { "top": 6, "bottom": 4, "left": 8, "right": 8 },
+  "autosize": { "type": "fit-x", "contains": "padding", "resize": true },
   "background": "#FFFDF9",
   "signals": [
     {
