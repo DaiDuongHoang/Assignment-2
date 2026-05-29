@@ -1,0 +1,36 @@
+class,threat_status,species_count,total_records,class_total_species
+Aves,Critically Endangered,7,3015,68
+Aves,Endangered,20,17236,68
+Aves,Vulnerable,39,17707,68
+Aves,Extinct,2,71,68
+Mammalia,Critically Endangered,1,3,56
+Mammalia,Endangered,29,29979,56
+Mammalia,Vulnerable,24,12210,56
+Mammalia,Extinct,2,3,56
+Reptilia,Critically Endangered,5,383,46
+Reptilia,Endangered,22,3159,46
+Reptilia,Vulnerable,19,1548,46
+Amphibia,Critically Endangered,4,293,28
+Amphibia,Endangered,10,1627,28
+Amphibia,Vulnerable,13,4514,28
+Amphibia,Extinct,1,13,28
+Malacostraca,Critically Endangered,7,54,26
+Malacostraca,Endangered,17,346,26
+Malacostraca,Vulnerable,2,78,26
+Actinopterygii,Critically Endangered,7,100,25
+Actinopterygii,Endangered,13,233,25
+Actinopterygii,Vulnerable,4,220,25
+Actinopterygii,Conservation Dependent,1,1,25
+Chondrichthyes,Critically Endangered,1,2577,6
+Chondrichthyes,Endangered,2,918,6
+Chondrichthyes,Vulnerable,2,26,6
+Chondrichthyes,Conservation Dependent,1,234,6
+Gastropoda,Critically Endangered,3,3,5
+Gastropoda,Endangered,2,78,5
+Arachnida,Critically Endangered,1,2,4
+Arachnida,Endangered,2,32,4
+Arachnida,Vulnerable,1,17,4
+Insecta,Endangered,2,16,4
+Insecta,Vulnerable,2,106,4
+Sarcopterygii,Vulnerable,1,2,1
+Unknown,Endangered,1,2,1

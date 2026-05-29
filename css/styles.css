@@ -480,7 +480,7 @@ h1, h2, h3, h4, h5, h6 {
 #vis-bushfire-timeline,
 #vis-economic-shock,
 #vis-domestic-commercial-claims,
-#vis-wildlife-recovery-matrix {
+#vis-threatened-animals-by-class {
     width: 100%;
     display: block;
     overflow: visible;
@@ -1957,27 +1957,27 @@ h6 {
     padding: 18px 24px 22px;
 }
 
-.wildlife-recovery-card .chart-card-body {
+.wildlife-threatened-card .chart-card-body {
     padding: 18px 24px 16px;
     background: var(--plot-bg);
 }
 
-.wildlife-recovery-card .chart-card-note {
+.wildlife-threatened-card .chart-card-note {
     margin: 8px 0 0;
     color: var(--text-muted);
     font-size: 0.8rem;
 }
 
-.wildlife-recovery-insight {
-    margin-top: 14px;
+.wildlife-threatened-insight {
+    margin-top: 6px;
     border-left-color: var(--color-sec4);
 }
 
-.wildlife-recovery-insight .insight-marker {
+.wildlife-threatened-insight .insight-marker {
     background: linear-gradient(180deg, #7fc6de, #0277A8);
 }
 
-.wildlife-recovery-insight p {
+.wildlife-threatened-insight p {
     font-size: 0.9rem;
     line-height: 1.5;
 }

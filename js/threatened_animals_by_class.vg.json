@@ -1,0 +1,297 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v6.json",
+  "background": "#FFFDF9",
+  "width": 1040,
+  "height": 318,
+  "padding": {"top": 8, "right": 40, "bottom": 56, "left": 130},
+  "signals": [
+    {
+      "name": "segmentHover",
+      "value": null,
+      "on": [
+        {"events": "@bar:mouseover", "update": "datum"},
+        {"events": "@bar:mouseout", "update": "null"}
+      ]
+    },
+    {
+      "name": "statusHover",
+      "value": null,
+      "on": [
+        {"events": "@legendItem:mouseover, @legendSwatch:mouseover, @legendLabel:mouseover", "update": "datum.threat_status"},
+        {"events": "@legendItem:mouseout, @legendSwatch:mouseout, @legendLabel:mouseout", "update": "null"}
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "status_legend",
+      "values": [
+        {"threat_status": "Extinct", "x": 170},
+        {"threat_status": "Critically Endangered", "x": 250},
+        {"threat_status": "Endangered", "x": 450},
+        {"threat_status": "Vulnerable", "x": 590},
+        {"threat_status": "Conservation Dependent", "x": 705}
+      ]
+    },
+    {
+      "name": "threats_raw",
+      "url": "data/threatened_animals_by_class.csv",
+      "format": {
+        "type": "csv",
+        "parse": {
+          "species_count": "number",
+          "total_records": "number",
+          "class_total_species": "number"
+        }
+      },
+      "transform": [
+        {"type": "filter", "expr": "datum.class_total_species >= 2"},
+        {
+          "type": "formula",
+          "as": "status_order",
+          "expr": "datum.threat_status === 'Extinct' ? 1 : datum.threat_status === 'Critically Endangered' ? 2 : datum.threat_status === 'Endangered' ? 3 : datum.threat_status === 'Vulnerable' ? 4 : 5"
+        },
+        {
+          "type": "formula",
+          "as": "class_label",
+          "expr": "datum.class === 'Aves' ? 'Birds' : datum.class === 'Mammalia' ? 'Mammals' : datum.class === 'Reptilia' ? 'Reptiles' : datum.class === 'Amphibia' ? 'Amphibians' : datum.class === 'Malacostraca' ? 'Crustaceans' : datum.class === 'Actinopterygii' ? 'Ray-finned fish' : datum.class === 'Chondrichthyes' ? 'Sharks & rays' : datum.class === 'Gastropoda' ? 'Snails & slugs' : datum.class === 'Arachnida' ? 'Spiders & allies' : datum.class === 'Insecta' ? 'Insects' : datum.class"
+        }
+      ]
+    },
+    {
+      "name": "bars",
+      "source": "threats_raw",
+      "transform": [
+        {
+          "type": "stack",
+          "groupby": ["class"],
+          "sort": {"field": "status_order", "order": "ascending"},
+          "field": "species_count",
+          "as": ["x0", "x1"]
+        }
+      ]
+    },
+    {
+      "name": "class_totals",
+      "source": "threats_raw",
+      "transform": [
+        {
+          "type": "aggregate",
+          "groupby": ["class", "class_label"],
+          "fields": ["class_total_species"],
+          "ops": ["max"],
+          "as": ["class_total_species"]
+        }
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "x",
+      "type": "linear",
+      "domain": {"data": "class_totals", "field": "class_total_species"},
+      "nice": true,
+      "zero": true,
+      "range": "width"
+    },
+    {
+      "name": "y",
+      "type": "band",
+      "domain": {
+        "data": "class_totals",
+        "field": "class_label",
+        "sort": {"op": "max", "field": "class_total_species", "order": "descending"}
+      },
+      "range": "height",
+      "paddingInner": 0.18,
+      "paddingOuter": 0.08
+    },
+    {
+      "name": "statusColour",
+      "type": "ordinal",
+      "domain": [
+        "Extinct",
+        "Critically Endangered",
+        "Endangered",
+        "Vulnerable",
+        "Conservation Dependent"
+      ],
+      "range": ["#2F2A26", "#9E1B32", "#D84A2B", "#F2A93B", "#7D94A6"]
+    }
+  ],
+  "axes": [
+    {
+      "orient": "bottom",
+      "scale": "x",
+      "title": "EPBC-listed threatened species count",
+      "titleFont": "Inter",
+      "titleFontSize": 12,
+      "titleFontWeight": 700,
+      "titleColor": "#334155",
+      "labelFont": "Inter",
+      "labelColor": "#5F6B7A",
+      "grid": true,
+      "gridColor": "rgba(43, 38, 33, 0.10)",
+      "domainColor": "rgba(43, 38, 33, 0.25)",
+      "tickColor": "rgba(43, 38, 33, 0.25)"
+    },
+    {
+      "orient": "left",
+      "scale": "y",
+      "title": null,
+      "labelFont": "Inter",
+      "labelFontSize": 12,
+      "labelFontWeight": 700,
+      "labelColor": "#201A16",
+      "labelPadding": 10,
+      "domain": false,
+      "ticks": false
+    }
+  ],
+  "marks": [
+    {
+      "name": "rowHighlight",
+      "type": "rect",
+      "from": {"data": "class_totals"},
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "x2": {"signal": "width"},
+          "y": {"scale": "y", "field": "class_label"},
+          "height": {"signal": "bandwidth('y')"},
+          "cornerRadius": {"value": 6},
+          "fill": {"value": "#201A16"}
+        },
+        "update": {
+          "opacity": {
+            "signal": "segmentHover && segmentHover.class === datum.class ? 0.055 : 0"
+          }
+        }
+      }
+    },
+    {
+      "name": "bar",
+      "type": "rect",
+      "from": {"data": "bars"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "x0"},
+          "x2": {"scale": "x", "field": "x1"},
+          "y": {"scale": "y", "field": "class_label"},
+          "height": {"signal": "bandwidth('y')"},
+          "cornerRadius": {"value": 4},
+          "tooltip": {
+            "signal": "{'Animal group': datum.class_label, 'Scientific class': datum.class, 'EPBC threat status': datum.threat_status, 'Species count': datum.species_count, 'Total occurrence records': datum.total_records, 'Record count note': 'Occurrence records, not individual animals affected'}"
+          }
+        },
+        "update": {
+          "fill": {"scale": "statusColour", "field": "threat_status"},
+          "stroke": {
+            "signal": "(segmentHover && segmentHover.class === datum.class && segmentHover.threat_status === datum.threat_status) || (statusHover && statusHover === datum.threat_status) ? '#201A16' : '#FFFDF9'"
+          },
+          "strokeWidth": {
+            "signal": "(segmentHover && segmentHover.class === datum.class && segmentHover.threat_status === datum.threat_status) || (statusHover && statusHover === datum.threat_status) ? 1.4 : 0.8"
+          },
+          "opacity": {
+            "signal": "statusHover ? (statusHover === datum.threat_status ? 1 : 0.24) : (!segmentHover || segmentHover.class === datum.class ? 1 : 0.42)"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": {"data": "class_totals"},
+      "encode": {
+        "enter": {
+          "x": {"scale": "x", "field": "class_total_species", "offset": 7},
+          "y": {"scale": "y", "field": "class_label", "band": 0.5},
+          "text": {"signal": "datum.class_total_species + ' species'"},
+          "align": {"value": "left"},
+          "baseline": {"value": "middle"},
+          "font": {"value": "Inter"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": 700},
+          "fill": {"value": "#5F6B7A"}
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": {"value": 0},
+          "y": {"signal": "height + 35"},
+          "text": {"value": "EPBC threatened status"},
+          "align": {"value": "left"},
+          "baseline": {"value": "middle"},
+          "font": {"value": "Inter"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": 800},
+          "fill": {"value": "#334155"}
+        }
+      }
+    },
+    {
+      "name": "legendItem",
+      "type": "rect",
+      "from": {"data": "status_legend"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x", "offset": -6},
+          "y": {"signal": "height + 24"},
+          "width": {"signal": "datum.threat_status === 'Critically Endangered' ? 184 : datum.threat_status === 'Conservation Dependent' ? 210 : datum.threat_status === 'Endangered' ? 126 : datum.threat_status === 'Vulnerable' ? 110 : 72"},
+          "height": {"value": 24},
+          "cornerRadius": {"value": 6},
+          "cursor": {"value": "default"},
+          "fill": {"value": "#201A16"}
+        },
+        "update": {
+          "opacity": {"signal": "statusHover === datum.threat_status ? 0.07 : 0"}
+        }
+      }
+    },
+    {
+      "name": "legendSwatch",
+      "type": "symbol",
+      "from": {"data": "status_legend"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x"},
+          "y": {"signal": "height + 36"},
+          "shape": {"value": "square"},
+          "size": {"value": 105},
+          "fill": {"scale": "statusColour", "field": "threat_status"},
+          "stroke": {"value": "rgba(43, 38, 33, 0.16)"},
+          "strokeWidth": {"value": 0.8}
+        },
+        "update": {
+          "opacity": {"signal": "statusHover && statusHover !== datum.threat_status ? 0.42 : 1"}
+        }
+      }
+    },
+    {
+      "name": "legendLabel",
+      "type": "text",
+      "from": {"data": "status_legend"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x", "offset": 13},
+          "y": {"signal": "height + 36"},
+          "text": {"field": "threat_status"},
+          "align": {"value": "left"},
+          "baseline": {"value": "middle"},
+          "font": {"value": "Inter"},
+          "fontSize": {"value": 11},
+          "fontWeight": {"value": 600},
+          "fill": {"value": "#334155"}
+        },
+        "update": {
+          "opacity": {"signal": "statusHover && statusHover !== datum.threat_status ? 0.45 : 1"}
+        }
+      }
+    }
+  ],
+  "config": {
+    "view": {"stroke": null}
+  }
+}
