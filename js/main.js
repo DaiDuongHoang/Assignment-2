@@ -4,8 +4,8 @@ const streamgraphSpec = "js/streamgraph.vg.json?v=20260526_v13";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";
 
 const economicShockSpec = "js/economic_shock.vg.json?v=20260529_bg_contrast_v1";
-const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_full_width_v9";
-const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260529_threatened_animals_v4";
+const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_legend_hover_v1";
+const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260530_fig4b_insight_v1";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })

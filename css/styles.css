@@ -1958,8 +1958,12 @@ h6 {
 }
 
 .wildlife-threatened-card .chart-card-body {
-    padding: 18px 24px 16px;
+    padding: 18px 24px 14px;
     background: var(--plot-bg);
+}
+
+#vis-threatened-animals-by-class svg {
+    display: block;
 }
 
 .wildlife-threatened-card .chart-card-note {
@@ -1969,7 +1973,7 @@ h6 {
 }
 
 .wildlife-threatened-insight {
-    margin-top: 6px;
+    margin-top: 8px;
     border-left-color: var(--color-sec4);
 }
 
@@ -1979,7 +1983,7 @@ h6 {
 
 .wildlife-threatened-insight p {
     font-size: 0.9rem;
-    line-height: 1.5;
+    line-height: 1.45;
 }
 
 .map-grid {

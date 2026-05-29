@@ -1,9 +1,10 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "background": "#FFFDF9",
+  "autosize": "none",
   "width": 1040,
-  "height": 318,
-  "padding": {"top": 8, "right": 40, "bottom": 56, "left": 130},
+  "height": 220,
+  "padding": {"top": 8, "right": 30, "bottom": 90, "left": 110},
   "signals": [
     {
       "name": "segmentHover",
@@ -20,17 +21,29 @@
         {"events": "@legendItem:mouseover, @legendSwatch:mouseover, @legendLabel:mouseover", "update": "datum.threat_status"},
         {"events": "@legendItem:mouseout, @legendSwatch:mouseout, @legendLabel:mouseout", "update": "null"}
       ]
+    },
+    {
+      "name": "legendY",
+      "value": 72
+    },
+    {
+      "name": "legendItemY",
+      "value": 61
+    },
+    {
+      "name": "legendItemHeight",
+      "value": 22
     }
   ],
   "data": [
     {
       "name": "status_legend",
       "values": [
-        {"threat_status": "Extinct", "x": 170},
-        {"threat_status": "Critically Endangered", "x": 250},
-        {"threat_status": "Endangered", "x": 450},
-        {"threat_status": "Vulnerable", "x": 590},
-        {"threat_status": "Conservation Dependent", "x": 705}
+        {"threat_status": "Extinct", "x": 160},
+        {"threat_status": "Critically Endangered", "x": 234},
+        {"threat_status": "Endangered", "x": 408},
+        {"threat_status": "Vulnerable", "x": 532},
+        {"threat_status": "Conservation Dependent", "x": 640}
       ]
     },
     {
@@ -128,6 +141,7 @@
       "titleFontSize": 12,
       "titleFontWeight": 700,
       "titleColor": "#334155",
+      "titlePadding": 12,
       "labelFont": "Inter",
       "labelColor": "#5F6B7A",
       "grid": true,
@@ -220,7 +234,7 @@
       "encode": {
         "enter": {
           "x": {"value": 0},
-          "y": {"signal": "height + 35"},
+          "y": {"signal": "height + legendY"},
           "text": {"value": "EPBC threatened status"},
           "align": {"value": "left"},
           "baseline": {"value": "middle"},
@@ -238,9 +252,9 @@
       "encode": {
         "enter": {
           "x": {"field": "x", "offset": -6},
-          "y": {"signal": "height + 24"},
+          "y": {"signal": "height + legendItemY"},
           "width": {"signal": "datum.threat_status === 'Critically Endangered' ? 184 : datum.threat_status === 'Conservation Dependent' ? 210 : datum.threat_status === 'Endangered' ? 126 : datum.threat_status === 'Vulnerable' ? 110 : 72"},
-          "height": {"value": 24},
+          "height": {"signal": "legendItemHeight"},
           "cornerRadius": {"value": 6},
           "cursor": {"value": "default"},
           "fill": {"value": "#201A16"}
@@ -257,7 +271,7 @@
       "encode": {
         "enter": {
           "x": {"field": "x"},
-          "y": {"signal": "height + 36"},
+          "y": {"signal": "height + legendY + 1"},
           "shape": {"value": "square"},
           "size": {"value": 105},
           "fill": {"scale": "statusColour", "field": "threat_status"},
@@ -276,13 +290,13 @@
       "encode": {
         "enter": {
           "x": {"field": "x", "offset": 13},
-          "y": {"signal": "height + 36"},
+          "y": {"signal": "height + legendY + 1"},
           "text": {"field": "threat_status"},
           "align": {"value": "left"},
           "baseline": {"value": "middle"},
           "font": {"value": "Inter"},
-          "fontSize": {"value": 11},
-          "fontWeight": {"value": 600},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": 700},
           "fill": {"value": "#334155"}
         },
         "update": {
