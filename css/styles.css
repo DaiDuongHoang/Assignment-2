@@ -492,6 +492,24 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 0;
 }
 
+.economic-shock-card #vis-economic-shock {
+    padding-top: 0;
+}
+
+.economic-shock-card .custom-chart-legend {
+    margin-top: 8px;
+    margin-bottom: 6px;
+    padding: 12px 16px;
+}
+
+.economic-shock-card .legend-note {
+    margin: 6px auto 12px;
+}
+
+.economic-shock-card .streamgraph-insight {
+    margin-top: 12px;
+}
+
 .vega-bindings {
     display: flex;
     justify-content: center;
@@ -1958,8 +1976,13 @@ h6 {
 }
 
 .wildlife-threatened-card .chart-card-body {
-    padding: 18px 24px 14px;
+    padding: 18px 28px 16px;
     background: var(--plot-bg);
+}
+
+#vis-threatened-animals-by-class {
+    max-width: 1180px;
+    margin: 0 auto;
 }
 
 #vis-threatened-animals-by-class svg {
@@ -1973,7 +1996,9 @@ h6 {
 }
 
 .wildlife-threatened-insight {
-    margin-top: 8px;
+    margin: 12px auto 0;
+    max-width: 1180px;
+    padding: 13px 16px;
     border-left-color: var(--color-sec4);
 }
 

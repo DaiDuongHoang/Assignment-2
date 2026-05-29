@@ -2,9 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega/v6.json",
   "background": "#FFFDF9",
   "autosize": "none",
-  "width": 1040,
+  "width": 1000,
   "height": 220,
-  "padding": {"top": 8, "right": 30, "bottom": 90, "left": 110},
+  "padding": {"top": 8, "right": 70, "bottom": 90, "left": 110},
   "signals": [
     {
       "name": "segmentHover",
@@ -39,11 +39,11 @@
     {
       "name": "status_legend",
       "values": [
-        {"threat_status": "Extinct", "x": 160},
-        {"threat_status": "Critically Endangered", "x": 234},
-        {"threat_status": "Endangered", "x": 408},
-        {"threat_status": "Vulnerable", "x": 532},
-        {"threat_status": "Conservation Dependent", "x": 640}
+        {"threat_status": "Extinct", "x": 285},
+        {"threat_status": "Critically Endangered", "x": 360},
+        {"threat_status": "Endangered", "x": 525},
+        {"threat_status": "Vulnerable", "x": 645},
+        {"threat_status": "Conservation Dependent", "x": 750}
       ]
     },
     {
@@ -233,7 +233,7 @@
       "type": "text",
       "encode": {
         "enter": {
-          "x": {"value": 0},
+          "x": {"value": 115},
           "y": {"signal": "height + legendY"},
           "text": {"value": "EPBC threatened status"},
           "align": {"value": "left"},
@@ -253,7 +253,7 @@
         "enter": {
           "x": {"field": "x", "offset": -6},
           "y": {"signal": "height + legendItemY"},
-          "width": {"signal": "datum.threat_status === 'Critically Endangered' ? 184 : datum.threat_status === 'Conservation Dependent' ? 210 : datum.threat_status === 'Endangered' ? 126 : datum.threat_status === 'Vulnerable' ? 110 : 72"},
+          "width": {"signal": "datum.threat_status === 'Critically Endangered' ? 158 : datum.threat_status === 'Conservation Dependent' ? 178 : datum.threat_status === 'Endangered' ? 112 : datum.threat_status === 'Vulnerable' ? 102 : 66"},
           "height": {"signal": "legendItemHeight"},
           "cornerRadius": {"value": 6},
           "cursor": {"value": "default"},
