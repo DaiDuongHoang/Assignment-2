@@ -93,7 +93,7 @@
     "x": {
       "type": "quantitative",
       "scale": {
-        "domain": {"signal": "displayMode === 'Change from baseline' ? [-1500000, 5000000] : [0, 8000000]"}
+        "domain": {"signal": "displayMode === 'Change from baseline' ? [-1500000, 5000000] : [-300000, 8000000]"}
       },
       "axis": {
         "title": {"signal": "displayMode === 'Change from baseline' ? 'Absolute Change in Burned Cells' : 'Burned Cell Totals'"},
@@ -134,7 +134,7 @@
         "size": 26
       },
       "encoding": {
-        "x": {"signal": "displayMode === 'Change from baseline' ? -1500000 : 0"},
+        "x": {"signal": "displayMode === 'Change from baseline' ? -1500000 : -300000"},
         "x2": {"signal": "displayMode === 'Change from baseline' ? 5000000 : 8000000"},
         "tooltip": [
           {"field": "state_name", "type": "nominal", "title": "State:"},

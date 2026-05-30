@@ -1,13 +1,14 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260530_control_spacing_v2";
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260529_clean_tooltip_v22";
+const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v2";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v14";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260530_v15";
-const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260530_shift_v12";
+const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260530_shift_v13";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";
 
 const economicShockSpec = "js/economic_shock.vg.json?v=20260530_compact_v1";
 const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_legend_hover_v2";
-const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260530_fig4b_editorial_v2";
+const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260531_fig4b_editorial_v3";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
@@ -167,6 +168,18 @@ vegaEmbed('#vis-state-bivariate-burn-map', stateBivariateBurnMapSpec, { "actions
         descEl.classList.add('fade-in-active');
       }
     });
+  })
+  .catch(console.error);
+
+// Embed the Fire Season Calendar (Section 2)
+vegaEmbed('#vis-fire-calendar', fireSeasonCalendarSpec, { "actions": false })
+  .then(function(result) {
+    const view = result.view;
+    const target = document.querySelector('#calendar-chart-control');
+    const bindings = document.querySelector('#vis-fire-calendar .vega-bindings');
+    if (target && bindings) {
+      target.appendChild(bindings);
+    }
   })
   .catch(console.error);
 

@@ -195,7 +195,7 @@
           "height": {"signal": "bandwidth('y')"},
           "cornerRadius": {"value": 4},
           "tooltip": {
-            "signal": "{'Animal group:': datum.class_label, 'Scientific class:': datum.class, 'EPBC threat status:': datum.threat_status, 'Species count:': datum.species_count, 'Total occurrence records:': datum.total_records, 'Record count note:': 'Occurrence records, not individual animals affected'}"
+            "signal": "{'Animal group:': datum.class_label, 'Scientific class:': datum.class, 'EPBC threat status:': datum.threat_status, 'Species count:': datum.species_count, 'Total occurrence records:': datum.total_records}"
           }
         },
         "update": {

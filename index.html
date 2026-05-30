@@ -4,6 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="An interactive editorial-style data visualisation dashboard exploring the multidimensional impact of the 2019-20 Black Summer bushfires in Australia, focusing on burned area, unplanned fire share, fire seasonality, economic shock, and wildlife vulnerability." />
+  <meta name="author" content="Dai Duong Hoang" />
+  <meta name="date" content="May 2026" />
+  <meta name="dcterms.rightsHolder" content="Dai Duong Hoang" />
+  <meta name="dcterms.educationalUse" content="FIT2179 Data Visualisation Assignment 2, Monash University" />
   <title>Australia Bushfire Visualisation Dashboard</title>
 
   <!-- Google Font -->
@@ -18,7 +23,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/styles.css?v=20260530_fig1b_shift_v12" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260531_hd_polish_v2" />
 
   <!-- Vega & Vega-Lite & Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -151,7 +156,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Department of Climate Change, Energy, the Environment and Water 2024</span>
+          <span><a href="https://www.dcceew.gov.au/" target="_blank" rel="noopener noreferrer" class="chart-link-green">Department of Climate Change, Energy, the Environment and Water 2024</a></span>
         </div>
       </div>
 
@@ -190,7 +195,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
+          <span><a href="https://www.agriculture.gov.au/abares" target="_blank" rel="noopener noreferrer" class="chart-link-green">Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes</a></span>
         </div>
       </div>
     </section>
@@ -287,7 +292,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>NASA FIRMS · MODIS & VIIRS Satellite Data 2020</span>
+          <span><a href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noopener noreferrer" class="chart-link-orange">NASA FIRMS · MODIS & VIIRS Satellite Data 2020</a></span>
         </div>
       </div>
 
@@ -356,7 +361,34 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Fire_For16-21 attributes · burned raster cell counts are used as an area proxy</span>
+          <span><a href="https://www.agriculture.gov.au/abares" target="_blank" rel="noopener noreferrer" class="chart-link-orange">Fire_For16-21 attributes</a> · burned raster cell counts are used as an area proxy</span>
+        </div>
+      </div>
+
+      <div class="chart-card fire-calendar-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-orange">FIG. 2C · FIRE SEASON CALENDAR</div>
+          <div class="chart-card-title font-display">When is Fire Activity Most Concentrated?</div>
+          <div class="chart-card-caption serif-note">MODIS satellite fire detection counts and monthly shares across seasons. Select a region and metric to compare regional timing.</div>
+          <p class="chart-note">The fire season in Australia's southeast peaks sharply between December and February, which stands out dramatically in the 2019-20 Black Summer. Nationally, burning occurs almost year-round due to seasonal savannas in the north.</p>
+        </div>
+        <div class="chart-card-body">
+          <div id="calendar-chart-control" class="custom-vega-bindings-container" style="margin-bottom: 12px; display: flex; justify-content: center; gap: 16px;"></div>
+          <div id="vis-fire-calendar" style="overflow-x: auto;"></div>
+
+          <div class="streamgraph-insight calendar-insight">
+            <div class="insight-marker" aria-hidden="true" style="background: linear-gradient(180deg, #FF9800, #B83246);"></div>
+            <div>
+              <h3>What does the calendar tell us?</h3>
+              <p>
+                In the <strong>Southeast focus</strong>, fire activity is extremely seasonal, concentrating heavily in the summer months (Dec–Feb). The 2019-20 season shows a dramatic spike starting early in November and peaking in January. Nationally, the pattern is entirely different: fires occur year-round with a broad peak from August to November, reflecting the seasonal burning of northern tropical savannas. This illustrates that a single "national fire season" is a myth; fire timing is highly region-dependent.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span><a href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noopener noreferrer" class="chart-link-orange">NASA FIRMS MODIS Active Fire Detections</a></span>
         </div>
       </div>
 
@@ -388,7 +420,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
+          <span><a href="https://www.agriculture.gov.au/abares" target="_blank" rel="noopener noreferrer" class="chart-link-orange">Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes</a></span>
         </div>
       </div>
     </section>
@@ -428,8 +460,8 @@
           <div id="vis-bushfire-timeline"></div>
         </div>
         <div class="chart-card-footer">
-          <span class="source-label label-tag">SOURCE</span>
-          <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
+          <span class="source-label label-tag">Source</span>
+          <span><a href="https://insurancecouncil.com.au/" target="_blank" rel="noopener noreferrer" class="chart-link-red">Insurance Council of Australia Historical Normalised Catastrophe Data</a></span>
         </div>
       </div>
 
@@ -511,7 +543,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Insurance Council of Australia Historical Catastrophe Data 2024</span>
+          <span><a href="https://insurancecouncil.com.au/" target="_blank" rel="noopener noreferrer" class="chart-link-red">Insurance Council of Australia Historical Catastrophe Data 2024</a></span>
         </div>
       </div>
 
@@ -529,7 +561,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
+          <span><a href="https://insurancecouncil.com.au/" target="_blank" rel="noopener noreferrer" class="chart-link-red">Insurance Council of Australia Historical Normalised Catastrophe Data</a></span>
         </div>
       </div>
     </section>
@@ -578,8 +610,7 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>WWF Australia estimates for animals affected, killed, or displaced during the 2019–20 Black Summer
-            bushfires</span>
+          <span><a href="https://wwf.org.au/" target="_blank" rel="noopener noreferrer" class="chart-link-blue">WWF Australia estimates for animals affected, killed, or displaced during the 2019–20 Black Summer bushfires</a></span>
         </div>
       </div>
 
@@ -609,16 +640,76 @@
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
-          <span>Bushfire-associated species checklist records; EPBC threatened status fields. Occurrence records are
-            used here as biodiversity context, not as counts of animals harmed.</span>
+          <span><a href="https://www.dcceew.gov.au/environment/biodiversity/threatened" target="_blank" rel="noopener noreferrer" class="chart-link-blue">Bushfire-associated species checklist records</a>; EPBC threatened status fields. Occurrence records are used here as biodiversity context, not as counts of animals harmed.</span>
         </div>
       </div>
     </section>
+
+    <!-- Dashboard Footer with Complete Metadata & Sources -->
+    <footer class="dashboard-footer" aria-labelledby="footer-title">
+      <div class="footer-container">
+        <div class="pure-g">
+          <!-- Student Info Column -->
+          <div class="pure-u-1 pure-u-md-1-3">
+            <div class="footer-metadata-card">
+              <h3 id="footer-title" class="font-display">Metadata & Authorship</h3>
+              <ul class="metadata-list">
+                <li><span class="meta-label">Author:</span> <span class="meta-value">Dai Duong Hoang</span></li>
+                <li><span class="meta-label">Date:</span> <span class="meta-value">May 2026</span></li>
+                <li><span class="meta-label">Unit:</span> <span class="meta-value">FIT2179 Data Visualisation</span></li>
+                <li><span class="meta-label">Institution:</span> <span class="meta-value">Monash University</span></li>
+                <li><span class="meta-label">Repository:</span> <span class="meta-value"><a href="https://github.com/DaiDuongHoang/Assignment-2" target="_blank" rel="noopener noreferrer" class="footer-link">DaiDuongHoang/Assignment-2</a></span></li>
+              </ul>
+            </div>
+          </div>
+          
+          <!-- Methodology & Sources Column -->
+          <div class="pure-u-1 pure-u-md-2-3">
+            <div class="footer-sources-card">
+              <h3 class="font-display">Data Sources & Design Rationale</h3>
+              <p class="footer-rationale">
+                This interactive editorial-style dashboard argues that bushfire impact is a layered, multidimensional story. Burned area, fire timing, unplanned burning share, insurance losses, and wildlife vulnerability describe distinct facets of the crisis and should not be conflated. Savanna baseline burning is a recurring ecosystem cycle, whereas southeast wildfires represent catastrophic ecological and economic shocks.
+              </p>
+              
+              <div class="sources-grid">
+                <div class="source-item">
+                  <strong>DCCEEW Hectares:</strong> 30-year continental landscape trends. 
+                  <a href="https://www.dcceew.gov.au/" target="_blank" rel="noopener noreferrer" class="footer-link">DCCEEW Portal</a>
+                </div>
+                <div class="source-item">
+                  <strong>ABARES Forest Fires:</strong> Planned/unplanned burned shares (2016-21). 
+                  <a href="https://www.agriculture.gov.au/abares" target="_blank" rel="noopener noreferrer" class="footer-link">ABARES Science</a>
+                </div>
+                <div class="source-item">
+                  <strong>NASA FIRMS:</strong> MODIS satellite active hotspots (Jan 2020). 
+                  <a href="https://firms.modaps.eosdis.nasa.gov/" target="_blank" rel="noopener noreferrer" class="footer-link">NASA FIRMS</a>
+                </div>
+                <div class="source-item">
+                  <strong>ICA Catastrophes:</strong> Claims, domestic vs commercial splits. 
+                  <a href="https://insurancecouncil.com.au/" target="_blank" rel="noopener noreferrer" class="footer-link">ICA database</a>
+                </div>
+                <div class="source-item">
+                  <strong>WWF Australia:</strong> Estimated 3 billion animals affected. 
+                  <a href="https://wwf.org.au/" target="_blank" rel="noopener noreferrer" class="footer-link">WWF Australia</a>
+                </div>
+                <div class="source-item">
+                  <strong>DCCEEW EPBC Status:</strong> Priority species checklist context. 
+                  <a href="https://www.dcceew.gov.au/environment/biodiversity/threatened" target="_blank" rel="noopener noreferrer" class="footer-link">EPBC List</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright font-display">
+          &copy; May 2026 Dai Duong Hoang. Released under Creative Commons (CC BY-NC 4.0).
+        </div>
+      </div>
+    </footer>
   </div>
 
   <!-- Main JS for Vega-embed -->
   <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-  <script src="js/main.js?v=20260530_fig1b_shift_v12"></script>
+  <script src="js/main.js?v=20260531_hd_polish_v2"></script>
 </body>
 
 </html>
