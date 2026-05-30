@@ -1108,6 +1108,12 @@ h1, h2, h3, h4, h5, h6 {
     border-color: #ffe0b2;
 }
 
+.accent-cam {
+    background-color: #FFF2EC;
+    color: #e8824a;
+    border-color: #FDD8C4;
+}
+
 .accent-red {
     background-color: #ffebee;
     color: #b71c1c;
@@ -1827,6 +1833,12 @@ h6 {
     border-color: #F1D3AF;
 }
 
+.accent-cam {
+    background: #FFF2EC;
+    color: #e8824a;
+    border-color: #FDD8C4;
+}
+
 .accent-red {
     background: #FCE8E7;
     color: #B83246;
@@ -2052,6 +2064,78 @@ h6 {
     .chart-card-title {
         font-size: 1.35rem;
     }
+}
+
+/* ===== FIG. 1B · BLACK SUMMER SHIFT BY STATE (Lollipop Change Chart) Styles ===== */
+#vis-annual-burned-area-extremes {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+#vis-annual-burned-area-extremes .vega-embed,
+#vis-annual-burned-area-extremes svg {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.burned-area-extremes-card {
+    margin-top: 28px;
+}
+
+.burned-area-extremes-card .chart-card-body {
+    padding: 18px 28px 16px;
+    background: #FFFDF9;
+}
+
+.burned-area-extremes-legend {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    max-width: 1080px;
+    margin: 4px auto 0;
+    color: #334155;
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+}
+
+.burned-area-extremes-legend .legend-title {
+    display: inline-flex;
+    align-items: center;
+    min-height: 16px;
+    color: #5F6B7A;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.burned-area-extremes-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-height: 16px;
+    line-height: 1;
+}
+
+.burned-area-extremes-legend i {
+    flex-shrink: 0;
+    width: 9px;
+    height: 9px;
+    border-radius: 999px;
+    box-shadow: 0 0 0 1px rgba(255, 253, 249, 0.9);
+}
+
+.burned-area-extremes-insight {
+    max-width: 1080px;
+    margin: 12px auto 0;
+    background: #FFFDF9;
+    border-left-color: #e8824a !important;
+}
+
+.burned-area-extremes-insight .insight-marker {
+    background: #e8824a !important;
 }
 
 

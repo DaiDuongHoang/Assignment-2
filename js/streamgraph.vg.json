@@ -8,6 +8,12 @@
       "type": "csv"
     }
   },
+  "params": [
+    {
+      "name": "externalYearHover",
+      "value": null
+    }
+  ],
   "layer": [
     {
       "params": [
@@ -146,6 +152,36 @@
             "format": ".0f"
           }
         ]
+      }
+    },
+    {
+      "data": {
+        "values": [{}]
+      },
+      "transform": [
+        {
+          "calculate": "externalYearHover === null ? 1990 : externalYearHover",
+          "as": "YearNumeric"
+        }
+      ],
+      "mark": {
+        "type": "rule",
+        "stroke": "#201A16",
+        "strokeDash": [3, 3],
+        "strokeWidth": 2
+      },
+      "encoding": {
+        "x": {
+          "field": "YearNumeric",
+          "type": "quantitative"
+        },
+        "opacity": {
+          "condition": {
+            "test": "externalYearHover !== null",
+            "value": 0.55
+          },
+          "value": 0
+        }
       }
     },
     {
@@ -324,7 +360,7 @@
                   "Temperate Forest Wildfires",
                   "Hazard Reduction Burns"
                 ],
-                "range": ["#388e3c", "#4e342e", "#c62828", "#ff8f00"]
+                "range": ["#388e3c", "#8d6e63", "#c62828", "#ff8f00"]
               },
               "legend": null
             },

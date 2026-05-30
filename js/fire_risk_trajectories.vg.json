@@ -1,0 +1,242 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "background": "#FFFDF9",
+  "autosize": {
+    "type": "pad",
+    "contains": "padding",
+    "resize": true
+  },
+  "padding": {"top": 12, "right": 10, "bottom": 12, "left": 10},
+  "data": {
+    "url": "data/fire_risk_trajectories_state_season.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "planned_burned_cells": "number",
+        "unplanned_burned_cells": "number",
+        "total_burned_cells": "number",
+        "unplanned_share_pct": "number"
+      }
+    }
+  },
+  "params": [
+    {
+      "name": "scopeSelection",
+      "value": "Southeast focus",
+      "bind": {
+        "input": "select",
+        "options": ["Southeast focus", "All states"],
+        "name": "Scope: "
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "scopeSelection === 'All states' || datum.southeast_focus === 'Yes'"
+    },
+    {
+      "calculate": "datum.state_code === 'ACT' ? 'Volatile share due to lower totals' : ''",
+      "as": "territory_note"
+    }
+  ],
+  "columns": 4,
+  "spacing": {
+    "column": 12,
+    "row": 16
+  },
+  "facet": {
+    "field": "state_name",
+    "type": "nominal",
+    "sort": [
+      "Australian Capital Territory",
+      "New South Wales",
+      "Northern Territory",
+      "Queensland",
+      "South Australia",
+      "Tasmania",
+      "Victoria",
+      "Western Australia"
+    ],
+    "title": null,
+    "header": {
+      "labelFont": "Outfit, sans-serif",
+      "labelFontSize": 12.5,
+      "labelFontWeight": 800,
+      "labelColor": "#201A16",
+      "labelPadding": 8
+    }
+  },
+  "spec": {
+    "width": 240,
+    "height": 130,
+    "layer": [
+      {
+        "params": [
+          {
+            "name": "pointHover",
+            "select": {
+              "type": "point",
+              "on": "mouseover",
+              "clear": "mouseout",
+              "nearest": false
+            }
+          }
+        ],
+        "mark": {
+          "type": "line",
+          "strokeWidth": 2
+        },
+        "encoding": {
+          "x": {
+            "field": "fire_season",
+            "type": "ordinal",
+            "axis": {
+              "title": null,
+              "labelAngle": 0,
+              "labelColor": "#786e66",
+              "labelFont": "Inter, sans-serif",
+              "labelFontSize": 9.5,
+              "domainColor": "rgba(43, 38, 33, 0.2)"
+            },
+            "sort": ["2016–17", "2017–18", "2018–19", "2019–20", "2020–21"]
+          },
+          "y": {
+            "field": "unplanned_share_pct",
+            "type": "quantitative",
+            "scale": {"domain": [0, 100]},
+            "axis": {
+              "title": "Unplanned Share",
+              "titleFont": "Inter, sans-serif",
+              "titleFontSize": 10,
+              "titleFontWeight": 600,
+              "titleColor": "#786e66",
+              "labelExpr": "format(datum.value, '.0f') + '%'",
+              "labelColor": "#786e66",
+              "labelFont": "Inter, sans-serif",
+              "labelFontSize": 10,
+              "grid": true,
+              "gridColor": "#f0ede6",
+              "tickCount": 5,
+              "domainColor": "rgba(43, 38, 33, 0.2)"
+            }
+          },
+          "stroke": {
+            "condition": {
+              "param": "pointHover",
+              "empty": false,
+              "value": "#8E8276"
+            },
+            "value": "#D8CFC7"
+          },
+          "strokeWidth": {
+            "condition": {
+              "param": "pointHover",
+              "empty": false,
+              "value": 3.2
+            },
+            "value": 2
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "circle",
+          "filled": true
+        },
+        "encoding": {
+          "x": {
+            "field": "fire_season",
+            "type": "ordinal",
+            "sort": ["2016–17", "2017–18", "2018–19", "2019–20", "2020–21"]
+          },
+          "y": {
+            "field": "unplanned_share_pct",
+            "type": "quantitative"
+          },
+          "size": {
+            "field": "total_burned_cells",
+            "type": "quantitative",
+            "title": "Total burned cells (area proxy)",
+            "scale": {
+              "type": "sqrt",
+              "range": [30, 420],
+              "domain": [0, 9000000]
+            },
+            "legend": {
+              "orient": "bottom",
+              "direction": "horizontal",
+              "titleFont": "Inter, sans-serif",
+              "titleFontSize": 10,
+              "titleFontWeight": 600,
+              "titleColor": "#5C544F",
+              "labelFont": "Inter, sans-serif",
+              "labelFontSize": 9.5,
+              "labelColor": "#786e66",
+              "offset": 12,
+              "values": [0, 1000000, 5000000, 8000000],
+              "labelExpr": "datum.value === 0 ? '<0.1M' : (datum.value / 1000000) + 'M'",
+              "symbolFillColor": "#D2C9BF",
+              "symbolStrokeColor": "#FFFDF9",
+              "symbolStrokeWidth": 1,
+              "symbolOpacity": 0.5,
+              "symbolSize": 80
+            }
+          },
+          "color": {
+            "field": "fire_season",
+            "type": "nominal",
+            "scale": {
+              "domain": ["2016–17", "2017–18", "2018–19", "2019–20", "2020–21"],
+              "range": ["#B0A499", "#B0A499", "#B0A499", "#B83246", "#B0A499"]
+            },
+            "legend": null
+          },
+          "stroke": {
+            "condition": {
+              "param": "pointHover",
+              "empty": false,
+              "value": "#201A16"
+            },
+            "value": "#FFFDF9"
+          },
+          "strokeWidth": {
+            "condition": {
+              "param": "pointHover",
+              "empty": false,
+              "value": 2
+            },
+            "value": 1.2
+          },
+          "opacity": {
+            "condition": {
+              "param": "pointHover",
+              "value": 0.92
+            },
+            "value": 0.6
+          },
+          "tooltip": [
+            {"field": "state_name", "type": "nominal", "title": "State:"},
+            {"field": "fire_season", "type": "nominal", "title": "Fire season:"},
+            {"field": "unplanned_share_label", "type": "nominal", "title": "Unplanned share:"},
+            {"field": "total_label", "type": "nominal", "title": "Total burned cells:"},
+            {"field": "planned_label", "type": "nominal", "title": "Planned burned cells:"},
+            {"field": "unplanned_label", "type": "nominal", "title": "Unplanned burned cells:"}
+          ]
+        }
+      }
+    ]
+  },
+  "resolve": {
+    "scale": {
+      "y": "shared",
+      "x": "shared"
+    },
+    "legend": {
+      "size": "shared"
+    }
+  },
+  "config": {
+    "font": "Inter, sans-serif",
+    "view": {"stroke": null}
+  }
+}

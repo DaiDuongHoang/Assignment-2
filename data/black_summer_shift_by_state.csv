@@ -1,0 +1,9 @@
+state_name,state_code,baseline_avg_burned_cells,black_summer_burned_cells,absolute_change,percent_change
+New South Wales,NSW,225384.00,4916544.00,4691160.00,2081.41
+Victoria,VIC,124575.00,1433799.00,1309224.00,1050.95
+Western Australia,WA,875692.67,1374363.00,498670.33,56.95
+South Australia,SA,11388.33,171665.00,160276.67,1407.38
+Australian Capital Territory,ACT,1434.33,82326.00,80891.67,5639.67
+Tasmania,TAS,57704.00,44599.00,-13105.00,-22.71
+Northern Territory,NT,7242155.33,7165243.00,-76912.33,-1.06
+Queensland,QLD,6735278.00,5909144.00,-826134.00,-12.27

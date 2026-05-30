@@ -11,7 +11,7 @@
   "padding": {
     "top": 8,
     "right": 24,
-    "bottom": 22,
+    "bottom": 30,
     "left": 6
   },
   "signals": [
@@ -198,6 +198,7 @@
       "titleColor": "#3A332E",
       "titleFont": "Inter, Arial, sans-serif",
       "titleFontSize": 12,
+      "titlePadding": 10,
       "domainColor": "rgba(43, 38, 33, 0.25)",
       "tickColor": "rgba(43, 38, 33, 0.25)",
       "grid": false,
@@ -224,6 +225,7 @@
       "titleColor": "#3A332E",
       "titleFont": "Inter, Arial, sans-serif",
       "titleFontSize": 12,
+      "titlePadding": 10,
       "domainColor": "rgba(43, 38, 33, 0.25)",
       "tickColor": "rgba(43, 38, 33, 0.25)",
       "grid": false,

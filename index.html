@@ -24,12 +24,12 @@
     />
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260530_fig3b_compact_v3" />
+    <link rel="stylesheet" href="./css/styles.css?v=20260530_fig1b_shift_v9" />
 
     <!-- Vega & Vega-Lite & Vega-Embed -->
-    <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@6"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@7"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
   </head>
   <body>
     <div class="page-container">
@@ -152,6 +152,38 @@
           <div class="chart-card-footer">
             <span class="source-label label-tag">Source</span>
             <span>Department of Climate Change, Energy, the Environment and Water 2024</span>
+          </div>
+        </div>
+
+        <div class="chart-card burned-area-extremes-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-cam">FIG. 1B · BLACK SUMMER SHIFT BY STATE</div>
+            <div class="chart-card-title font-display">Which States Increased Most During Black Summer?</div>
+            <div class="chart-card-caption serif-note">Change in burned-cell totals from the 2016–17 to 2018–19 average to the 2019–20 Black Summer season.</div>
+            <p id="shift-chart-explanatory-note" class="chart-note">Burned cell counts are used as an area proxy and should not be interpreted as exact hectares. Zero marks no change from the pre-Black Summer average; bars to the right increased in 2019–20, while bars to the left decreased.</p>
+          </div>
+          <div class="chart-card-body">
+            <div id="vis-annual-burned-area-extremes"></div>
+
+            <div class="burned-area-extremes-legend" aria-label="Fire season scale comparison legend">
+              <span class="legend-title">Comparison</span>
+              <span><i style="background: #B83246;"></i>Increase from baseline</span>
+              <span><i style="background: #8E8276;"></i>Decrease from baseline</span>
+            </div>
+
+            <div class="streamgraph-insight burned-area-extremes-insight">
+              <div class="insight-marker" aria-hidden="true"></div>
+              <div>
+                <h3>What stands out?</h3>
+                <p>
+                  This view turns the Section 1 scale story into a state-level shift. NSW and Victoria show the clearest increases during Black Summer compared with the previous three-season baseline. Queensland and the Northern Territory remain large in absolute burned area, but they do not show the same Black Summer jump, reinforcing that national scale and regional shock are not the same thing.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
           </div>
         </div>
       </section>
@@ -309,6 +341,33 @@
           <div class="chart-card-footer">
             <span class="source-label label-tag">Source</span>
             <span>Fire_For16-21 attributes · burned raster cell counts are used as an area proxy</span>
+          </div>
+        </div>
+
+        <div class="chart-card fire-risk-trajectories-card">
+          <div class="chart-card-header">
+            <div class="chart-card-tag label-tag accent-orange">FIG. 2D · STATE FIRE PROFILES</div>
+            <div class="chart-card-title font-display">How Did Fire Profiles Shift by State?</div>
+            <div class="chart-card-caption serif-note">Unplanned burning share by fire season; dot size shows total burned cells as an area proxy. Red marks 2019–20 Black Summer.</div>
+            <p class="chart-card-note">Burned cell counts are used as an area proxy and should not be interpreted as exact hectares. Smaller territories can show volatile shares because burned-cell totals are lower.</p>
+          </div>
+          <div class="chart-card-body">
+            <div id="trajectories-scope-control" class="custom-vega-bindings-container"></div>
+            <div id="vis-fire-risk-trajectories"></div>
+
+            <div class="streamgraph-insight fire-risk-trajectories-insight">
+              <div class="insight-marker" aria-hidden="true"></div>
+              <div>
+                <h3>What does this add?</h3>
+                <p>
+                  This view shows how fire profiles changed within each state. The bivariate map compares states in one selected season, while these small multiples show whether high unplanned burning was a one-off spike or part of a recurring pattern. In the southeast, 2019–20 stands out across several states, but the dot sizes show that share and scale are not the same thing.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="chart-card-footer">
+            <span class="source-label label-tag">Source</span>
+            <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
           </div>
         </div>
       </section>
@@ -483,7 +542,6 @@
             <div class="chart-card-tag label-tag accent-blue">FIG. 4B · THREATENED SPECIES IN BUSHFIRE RECORDS</div>
             <div class="chart-card-title font-display">Which Threatened Animal Groups Stand Out?</div>
             <div class="chart-card-caption serif-note">EPBC-listed animal species in 2019–20 bushfire-associated records, grouped by taxonomic class.</div>
-            <p class="chart-card-note">Record counts indicate occurrence records, not individual animals affected.</p>
           </div>
           <div class="chart-card-body">
             <div id="vis-threatened-animals-by-class"></div>
@@ -508,6 +566,6 @@
 
     <!-- Main JS for Vega-embed -->
     <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-    <script src="js/main.js?v=20260530_fig3b_compact_v2"></script>
+    <script src="js/main.js?v=20260530_fig1b_shift_v9"></script>
   </body>
 </html>
