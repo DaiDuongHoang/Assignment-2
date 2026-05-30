@@ -1,571 +1,623 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Australia Bushfire Visualisation Dashboard</title>
 
-    <!-- Google Font -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Australia Bushfire Visualisation Dashboard</title>
 
-    <!-- Pure.css -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css"
-    />
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap"
+    rel="stylesheet" />
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./css/styles.css?v=20260530_fig1b_shift_v9" />
+  <!-- Pure.css -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
-    <!-- Vega & Vega-Lite & Vega-Embed -->
-    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
-    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-  </head>
-  <body>
-    <div class="page-container">
-      <!-- Header -->
-      <div class="pure-g">
-        <div class="pure-u-1">
-          <div class="header-section">
-            <div class="header-content">
-              <p class="eyebrow">FIT2179 Data Visualisation</p>
-              <h1>Australian Bushfires</h1>
-              <p>When Australia burns, the damage spreads far beyond the flames.</p>
-            </div>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/styles.css?v=20260530_fig1b_shift_v12" />
+
+  <!-- Vega & Vega-Lite & Vega-Embed -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+  <div class="page-container">
+    <!-- Header -->
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <div class="header-section">
+          <div class="header-content">
+            <p class="eyebrow">FIT2179 Data Visualisation</p>
+            <h1>Australian Bushfires</h1>
+            <p>When Australia burns, the damage spreads far beyond the flames.</p>
           </div>
         </div>
       </div>
-
-      <!-- Overview -->
-      <div class="pure-g">
-        <div class="pure-u-1">
-          <section class="overview-section" aria-labelledby="overview-title">
-            <div class="overview-grid">
-              <div class="overview-text-column">
-                <div class="overview-kicker">Overview</div>
-                <h2 id="overview-title">
-                  Australia has always lived with fire, but not like this.
-                </h2>
-                <div class="overview-content">
-                  <p class="overview-lead">
-                    Over the past three decades, the scale and intensity of
-                    bushfires have grown dramatically, culminating in the
-                    catastrophic Black Summer of 2019-2020.
-                  </p>
-                  <p>
-                    This visualisation explores Australia's bushfire crisis through
-                    multiple lenses: satellite-detected hotspots from January 2020,
-                    thirty years of burning trends across the continent's major
-                    landscapes, and the wider consequences for wildlife, air
-                    quality, and communities.
-                  </p>
-                  <p>
-                    The data tells a story not just of one terrible summer, but of a
-                    long-term crisis that is still unfolding.
-                  </p>
-                </div>
-                <div class="overview-lenses" aria-label="Dashboard focus areas">
-                  <span>Hotspots</span>
-                  <span>Long-term trends</span>
-                  <span>Vegetation types</span>
-                  <span>Impacts</span>
-                </div>
-              </div>
-
-              <!-- Metric Boxes -->
-              <div class="overview-metrics">
-                <div class="metric-box">
-                  <span class="metric-value">60M+</span>
-                  <span class="metric-label">Hectares burned during 2015 peaks</span>
-                </div>
-                <div class="metric-box">
-                  <span class="metric-value highlight">3B+</span>
-                  <span class="metric-label">Animals impacted in 2019-2020</span>
-                </div>
-                <div class="metric-box">
-                  <span class="metric-value">30 Years</span>
-                  <span class="metric-label">Of escalating fire trends mapped</span>
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
-      </div>
-
-      <!-- Section 1 - Scale of Fire (Streamgraph) -->
-      <section class="premium-section sec1" aria-labelledby="sec1-title">
-        <div class="section-header">
-          <div class="section-left">
-            <span class="section-name">
-              <span class="section-number font-display" style="color: var(--color-sec1);">01</span>
-              Section 1 - Scale of Fire
-            </span>
-            <h2 id="sec1-title" class="section-heading">How Much of Australia Burns?</h2>
-          </div>
-          <div class="section-right">
-            <p class="section-description">
-              Australia has always been a fire-prone continent - but the scale of burning has grown dramatically over recent decades. Tropical savannas and arid rangelands account for the vast majority of land burned each year, yet it is the temperate forest wildfires that cause the most devastating ecological and economic damage. The 2019-2020 Black Summer marked a turning point, burning over 18 million hectares of forest - more than any season on record.
-            </p>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-green">Fig. 1 · Streamgraph</div>
-            <div class="chart-card-title font-display">Thirty Years of Burning Trends Across Australia</div>
-            <div class="chart-card-caption serif-note">Hover streams to inspect vegetation types, annual burn area, and specific timelines.</div>
-          </div>
-          <div class="chart-card-body">
-            <div id="vis-horizon"></div>
-            
-            <div class="streamgraph-insight">
-              <div class="insight-marker" aria-hidden="true"></div>
-              <div>
-                <h3>What stands out?</h3>
-                <p>
-                  <span class="veg-savanna">Tropical savanna woodlands</span>
-                  and
-                  <span class="veg-rangelands">arid or semi-arid rangelands</span>
-                  form the widest streams, showing that most burned area occurs
-                  across northern and inland vegetation systems.
-                  <span class="veg-wildfires">Temperate forest wildfires</span>
-                  and <span class="veg-hazard">hazard reduction burns</span>
-                  are smaller by comparison, but they remain important because
-                  they are closely tied to populated forest regions and fire
-                  management activity. The dataset reaches its largest total in
-                  2015, while the 2019 marker provides context for the beginning
-                  of the Black Summer period.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Department of Climate Change, Energy, the Environment and Water 2024</span>
-          </div>
-        </div>
-
-        <div class="chart-card burned-area-extremes-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-cam">FIG. 1B · BLACK SUMMER SHIFT BY STATE</div>
-            <div class="chart-card-title font-display">Which States Increased Most During Black Summer?</div>
-            <div class="chart-card-caption serif-note">Change in burned-cell totals from the 2016–17 to 2018–19 average to the 2019–20 Black Summer season.</div>
-            <p id="shift-chart-explanatory-note" class="chart-note">Burned cell counts are used as an area proxy and should not be interpreted as exact hectares. Zero marks no change from the pre-Black Summer average; bars to the right increased in 2019–20, while bars to the left decreased.</p>
-          </div>
-          <div class="chart-card-body">
-            <div id="vis-annual-burned-area-extremes"></div>
-
-            <div class="burned-area-extremes-legend" aria-label="Fire season scale comparison legend">
-              <span class="legend-title">Comparison</span>
-              <span><i style="background: #B83246;"></i>Increase from baseline</span>
-              <span><i style="background: #8E8276;"></i>Decrease from baseline</span>
-            </div>
-
-            <div class="streamgraph-insight burned-area-extremes-insight">
-              <div class="insight-marker" aria-hidden="true"></div>
-              <div>
-                <h3>What stands out?</h3>
-                <p>
-                  This view turns the Section 1 scale story into a state-level shift. NSW and Victoria show the clearest increases during Black Summer compared with the previous three-season baseline. Queensland and the Northern Territory remain large in absolute burned area, but they do not show the same Black Summer jump, reinforcing that national scale and regional shock are not the same thing.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 2 - Where Fires Burn (Hotspot Map) -->
-      <section class="premium-section sec2" aria-labelledby="sec2-title">
-        <div class="section-header">
-          <div class="section-left">
-            <span class="section-name">
-              <span class="section-number font-display" style="color: var(--color-sec2);">02</span>
-              Section 2 - Where Fires Burn
-            </span>
-            <h2 id="sec2-title" class="section-heading">Mapping the Fire Crisis</h2>
-          </div>
-          <div class="section-right">
-            <p class="section-description">
-              Fire does not burn evenly across Australia. Satellite data from January 2020 reveals intense hotspots concentrated along the southeast coast - the epicentre of the Black Summer. Meanwhile, Western Australia's Wheatbelt and the Northern Territory's seasonal savanna burns tell a different story: fires driven by lightning, dry grass, and land management rather than catastrophic drought conditions.
-            </p>
-          </div>
-        </div>
-
-        <div class="chart-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-orange">Fig. 2 · Geographic Hotspot Map</div>
-            <div class="chart-card-title font-display">Satellite Fire Detections Across Australia (January 2020)</div>
-            <div class="chart-card-caption serif-note">Adjust the map view using programmatic zoom controls. Hover hotspots for radiative power and brightness details.</div>
-          </div>
-          <div class="chart-card-body">
-            <div class="map-grid">
-              <!-- Left Column: Story & Legend -->
-              <div class="map-story">
-                <h2>Fire Hotspots Across Australia</h2>
-                <p>
-                  During the
-                  <span style="color: #b71c1c; font-weight: 700">Black Summer</span>
-                  of 2019-2020, Australia experienced one of its most catastrophic
-                  bushfire seasons. This map reveals the sheer scale of the crisis,
-                  displaying satellite detections in January 2020.
-                </p>
-                <p>
-                  The
-                  <span style="color: #f57c00; font-weight: 700">massive clusters</span>
-                  along the southeast coast show the devastating intensity of the
-                  fires. Meanwhile, the
-                  <span style="color: #e65100; font-weight: 700">Wheatbelt fires</span>
-                  in Western Australia and
-                  <span style="color: #ff9800; font-weight: 700">savanna burns</span>
-                  in the Northern Territory highlight the widespread,
-                  continent-spanning nature of the fire activity.
-                </p>
-
-                <div class="combined-legend vertical-legend" aria-label="Fire hotspot map legend">
-                  <div class="legend-block">
-                    <span class="legend-title">Brightness Temp (K)</span>
-                    <div class="legend-gradient" aria-hidden="true"></div>
-                    <div class="legend-scale">
-                      <span>300</span>
-                      <span>500</span>
-                    </div>
-                  </div>
-                  <div class="legend-block">
-                    <span class="legend-title">Radiative Power (MW)</span>
-                    <div class="power-legend" aria-hidden="true">
-                      <span class="power-step">
-                        <span class="fire-dot small"></span>
-                        <span class="power-label">50</span>
-                      </span>
-                      <span class="power-step">
-                        <span class="fire-dot medium"></span>
-                        <span class="power-label">150</span>
-                      </span>
-                      <span class="power-step">
-                        <span class="fire-dot large"></span>
-                        <span class="power-label">300</span>
-                      </span>
-                      <span class="power-step">
-                        <span class="fire-dot xlarge"></span>
-                        <span class="power-label">500</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Right Column: The Map -->
-              <div class="map-viz">
-                <div id="vis-fire-hotspots"></div>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>NASA FIRMS · MODIS & VIIRS Satellite Data 2020</span>
-          </div>
-        </div>
-
-        <div class="chart-card bivariate-map-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-orange">Fig. 2B · Bivariate Burn Map</div>
-            <div class="chart-card-title font-display">Where Burns Were Biggest - and Most Unplanned</div>
-            <div class="chart-card-caption serif-note">Colour shows the share of unplanned forest burning; circle size shows total burned raster cells by state or territory. Use the season control to compare fire years.</div>
-          </div>
-          <div class="chart-card-body">
-            <div class="map-grid reverse-grid">
-              <div class="map-viz bivariate-map-viz">
-                <div id="vis-state-bivariate-burn-map"></div>
-              </div>
-
-              <div class="map-story bivariate-control-panel">
-                <h2>How to read this map</h2>
-                <p>
-                  This map compares two dimensions of forest burning by state and territory. Colour shows the share of burned forest cells classified as unplanned, while circle size shows the total number of burned raster cells.
-                </p>
-
-                <div id="bivariate-season-control" class="bivariate-season-control" aria-label="Season control"></div>
-
-                <p id="map-description" class="interactive-description bivariate-season-description fade-in-active">
-                  The catastrophic Black Summer of 2019–20 stands out clearly: NSW, Victoria, and South Australia recorded near-100% unplanned burns, with unprecedented scale across the eastern seaboard.
-                </p>
-
-                <div class="combined-legend vertical-legend" aria-label="Bivariate map legend">
-                  <div class="legend-block">
-                    <span class="legend-title">Unplanned share (%)</span>
-                    <div class="legend-gradient-bivariate" aria-hidden="true"></div>
-                    <div class="legend-scale">
-                      <span>0%</span>
-                      <span>100%</span>
-                    </div>
-                  </div>
-                  <div class="legend-block">
-                    <span class="legend-title">Total burned cells</span>
-                    <div class="burn-legend" aria-hidden="true">
-                      <span class="burn-step">
-                        <span class="burn-circle small"></span>
-                        <span class="power-label">2M</span>
-                      </span>
-                      <span class="burn-step">
-                        <span class="burn-circle medium"></span>
-                        <span class="power-label">4M</span>
-                      </span>
-                      <span class="burn-step">
-                        <span class="burn-circle large"></span>
-                        <span class="power-label">6M</span>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <p class="bivariate-insight">
-                  Read colour and circle size together: a state can have a high unplanned share without having the largest burned-cell total.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Fire_For16-21 attributes · burned raster cell counts are used as an area proxy</span>
-          </div>
-        </div>
-
-        <div class="chart-card fire-risk-trajectories-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-orange">FIG. 2D · STATE FIRE PROFILES</div>
-            <div class="chart-card-title font-display">How Did Fire Profiles Shift by State?</div>
-            <div class="chart-card-caption serif-note">Unplanned burning share by fire season; dot size shows total burned cells as an area proxy. Red marks 2019–20 Black Summer.</div>
-            <p class="chart-card-note">Burned cell counts are used as an area proxy and should not be interpreted as exact hectares. Smaller territories can show volatile shares because burned-cell totals are lower.</p>
-          </div>
-          <div class="chart-card-body">
-            <div id="trajectories-scope-control" class="custom-vega-bindings-container"></div>
-            <div id="vis-fire-risk-trajectories"></div>
-
-            <div class="streamgraph-insight fire-risk-trajectories-insight">
-              <div class="insight-marker" aria-hidden="true"></div>
-              <div>
-                <h3>What does this add?</h3>
-                <p>
-                  This view shows how fire profiles changed within each state. The bivariate map compares states in one selected season, while these small multiples show whether high unplanned burning was a one-off spike or part of a recurring pattern. In the southeast, 2019–20 stands out across several states, but the dot sizes show that share and scale are not the same thing.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 3 - Economic & Human Cost (Economic Shockwaves) -->
-      <section class="premium-section sec3" aria-labelledby="sec3-title">
-        <div class="section-header">
-          <div class="section-left">
-            <span class="section-name">
-              <span class="section-number font-display" style="color: var(--color-sec3);">03</span>
-              Section 3 - Economic & Human Cost
-            </span>
-            <h2 id="sec3-title" class="section-heading">The Financial Shockwaves</h2>
-          </div>
-          <div class="section-right">
-            <p class="section-description">
-              When fire reaches communities, the economic consequences can be severe and long-lasting. Insurance records dating back to the 1960s reveal that a small number of catastrophic events dominate Australia's total insured bushfire losses. Black Summer, Black Saturday, and Ash Wednesday each sent shockwaves through households and businesses - yet the largest single insured loss in Australian history occurred not in 2019, but in 1967.
-            </p>
-          </div>
-        </div>
-
-        <div class="chart-card timeline-chart-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-red">FIG. 3A · EVENT TIMELINE</div>
-            <div class="chart-card-title font-display">Major Australian Bushfire Events</div>
-            <div class="chart-card-caption serif-note">Selected historical bushfire catastrophes from ICA records, positioned by year and labelled by normalised insured losses in 2022 Australian Dollars. Hover each card or point for more detail.</div>
-            <p class="chart-card-note timeline-scope-note">Selected events only; not all bushfire catastrophes are shown.</p>
-          </div>
-          <div class="chart-card-body">
-            <div id="vis-bushfire-timeline"></div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">SOURCE</span>
-            <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
-          </div>
-        </div>
-
-        <div class="chart-card economic-shock-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-red">Fig. 3b · Economic Shock Bubble Chart</div>
-            <div class="chart-card-title font-display">Economic Shockwaves from Australian Bushfires</div>
-            <div class="chart-card-caption serif-note">Insured losses normalised to 2022 Australian Dollars. Hover bubbles to view details. Click Severity below to filter.</div>
-          </div>
-          <div class="chart-card-body">
-            <div id="vis-economic-shock"></div>
-
-            <div class="custom-chart-legend" aria-label="Economic shock chart legend">
-              <div class="legend-group">
-                <span class="legend-group-title">Claims</span>
-                <div class="legend-items">
-                  <div class="legend-item">
-                    <span class="bubble-icon size-none"></span>
-                    <span class="legend-label">No claims data</span>
-                  </div>
-                  <div class="legend-item">
-                    <span class="bubble-icon size-10k"></span>
-                    <span class="legend-label">10,000</span>
-                  </div>
-                  <div class="legend-item">
-                    <span class="bubble-icon size-30k"></span>
-                    <span class="legend-label">30,000</span>
-                  </div>
-                  <div class="legend-item">
-                    <span class="bubble-icon size-60k"></span>
-                    <span class="legend-label">60,000</span>
-                  </div>
-                </div>
-              </div>
-              
-              <div class="legend-group">
-                <span class="legend-group-title">Severity</span>
-                <div class="legend-items">
-                  <div class="legend-item" data-severity="Medium">
-                    <span class="swatch-icon severity-medium"></span>
-                    <span class="legend-label">Medium &lt; $1B</span>
-                  </div>
-                  <div class="legend-item" data-severity="High">
-                    <span class="swatch-icon severity-high"></span>
-                    <span class="legend-label">High $1B - $2B</span>
-                  </div>
-                  <div class="legend-item" data-severity="Catastrophic">
-                    <span class="swatch-icon severity-catastrophic"></span>
-                    <span class="legend-label">Catastrophic &gt; $2B</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <p class="legend-note">
-              Bubble size shows total claims where available; missing claim counts use small default bubbles.
-            </p>
-
-            <div class="streamgraph-insight" style="border-left-color: #f03b20;">
-              <div class="insight-marker" style="background: linear-gradient(180deg, #ffeda0, #feb24c, #f03b20);" aria-hidden="true"></div>
-              <div>
-                <h3>Key Economic Insight</h3>
-                <p>
-                  Historical insurance data shows that bushfire losses are highly skewed. A small number of extreme events-most notably the <strong class="event-catastrophic">1967 Tasmanian Bushfires</strong>, the <strong class="event-catastrophic">1983 Ash Wednesday fires</strong>, the <strong class="event-catastrophic">2009 Black Saturday fires</strong>, and the <strong class="event-catastrophic">2019/20 Black Summer</strong>-account for the vast majority of insured losses.
-                </p>
-                <p>
-                  The colour palette matches the hotspot map: yellow-gold indicates medium severity and deep red marks catastrophic losses.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Insurance Council of Australia Historical Catastrophe Data 2024</span>
-          </div>
-        </div>
-
-        <div class="chart-card claims-split-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-red">FIG. 3C · DOMESTIC VS COMMERCIAL CLAIMS</div>
-            <div class="chart-card-title font-display">Who Filed the Claims &mdash; and How Many?</div>
-            <div class="chart-card-caption serif-note">Domestic and commercial claim shares are shown for ICA bushfire records with explicit breakdowns; total claims provide scale.</div>
-            <p class="chart-card-note">Only bushfire events with explicit ICA domestic and commercial claim-count breakdowns are shown.</p>
-          </div>
-          <div class="chart-card-body">
-            <div id="vis-domestic-commercial-claims"></div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 4 - Wildlife & What We Learn (Beyond Property: Nature in the Firing Line) -->
-      <section class="premium-section sec4" aria-labelledby="sec4-title">
-        <div class="section-header">
-          <div class="section-left">
-            <span class="section-name">
-              <span class="section-number font-display" style="color: var(--color-sec4);">04</span>
-              Section 4 - Wildlife & What We Learn
-            </span>
-            <h2 id="sec4-title" class="section-heading">Beyond Property: Nature in the Firing Line</h2>
-          </div>
-          <div class="section-right">
-            <p class="section-description">
-              The true cost of Australia's bushfire crisis extends far beyond dollars and damaged buildings. An estimated three billion animals were killed or displaced during the Black Summer alone - reptiles, birds, mammals, and frogs across the continent's most biodiverse forests. Yet the data also reveals a sobering truth: the size of a fire does not determine the scale of its damage. Where fires burn, and what lies in their path, matters far more than how many hectares are consumed.
-            </p>
-          </div>
-        </div>
-
-        <div class="chart-card wildlife-waffle-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-blue">Fig. 4A · Wildlife Under Fire</div>
-            <div class="chart-card-title font-display">Estimated Wildlife Affected During Black Summer</div>
-            <div class="chart-card-caption serif-note">Each mark represents roughly 1% of the estimated total, about 28 million animals. Hover a group, card, or mark to isolate its share.</div>
-          </div>
-          <div class="chart-card-body">
-            <div class="wildlife-waffle-layout">
-              <div class="wildlife-waffle-main">
-                <div id="wildlife-waffle" class="wildlife-waffle" role="img" aria-label="10 by 10 waffle chart of wildlife groups affected by Black Summer"></div>
-              </div>
-
-              <div class="wildlife-legend-column">
-                <div id="wildlife-summary" class="wildlife-summary" aria-label="Wildlife impact summary cards"></div>
-                <div id="wildlife-waffle-legend" class="wildlife-waffle-legend" aria-label="Wildlife waffle percentage legend"></div>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>WWF Australia estimates for animals affected, killed, or displaced during the 2019–20 Black Summer bushfires</span>
-          </div>
-        </div>
-
-        <div class="chart-card wildlife-threatened-card">
-          <div class="chart-card-header">
-            <div class="chart-card-tag label-tag accent-blue">FIG. 4B · THREATENED SPECIES IN BUSHFIRE RECORDS</div>
-            <div class="chart-card-title font-display">Which Threatened Animal Groups Stand Out?</div>
-            <div class="chart-card-caption serif-note">EPBC-listed animal species in 2019–20 bushfire-associated records, grouped by taxonomic class.</div>
-          </div>
-          <div class="chart-card-body">
-            <div id="vis-threatened-animals-by-class"></div>
-
-            <div class="streamgraph-insight wildlife-threatened-insight">
-              <div class="insight-marker" aria-hidden="true"></div>
-              <div>
-                <h3>What does this add?</h3>
-                <p>
-                  The waffle chart shows the scale of estimated animal impact, but this chart shifts the story from numbers to vulnerability. Birds, mammals and reptiles contain the most EPBC-listed threatened species in the bushfire-associated records, while amphibians, fish and invertebrate groups show that conservation concern was spread across less visible fauna as well. Together, the two views show that bushfire impact is not only about how many animals were affected, but also which species were already at risk.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="chart-card-footer">
-            <span class="source-label label-tag">Source</span>
-            <span>Bushfire-associated species checklist records; EPBC threatened status fields. Occurrence records are used here as biodiversity context, not as counts of animals harmed.</span>
-          </div>
-        </div>
-      </section>
     </div>
 
-    <!-- Main JS for Vega-embed -->
-    <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-    <script src="js/main.js?v=20260530_fig1b_shift_v9"></script>
-  </body>
+    <!-- Overview -->
+    <div class="pure-g">
+      <div class="pure-u-1">
+        <section class="overview-section" aria-labelledby="overview-title">
+          <div class="overview-grid">
+            <div class="overview-text-column">
+              <div class="overview-kicker">Overview</div>
+              <h2 id="overview-title">
+                Australia has always lived with fire, but not like this.
+              </h2>
+              <div class="overview-content">
+                <p class="overview-lead">
+                  Over the past three decades, the scale and intensity of
+                  bushfires have grown dramatically, culminating in the
+                  catastrophic Black Summer of 2019-2020.
+                </p>
+                <p>
+                  This visualisation explores Australia's bushfire crisis through
+                  multiple lenses: satellite-detected hotspots from January 2020,
+                  thirty years of burning trends across the continent's major
+                  landscapes, and the wider consequences for wildlife, air
+                  quality, and communities.
+                </p>
+                <p>
+                  The data tells a story not just of one terrible summer, but of a
+                  long-term crisis that is still unfolding.
+                </p>
+              </div>
+              <div class="overview-lenses" aria-label="Dashboard focus areas">
+                <span>Hotspots</span>
+                <span>Long-term trends</span>
+                <span>Vegetation types</span>
+                <span>Impacts</span>
+              </div>
+            </div>
+
+            <!-- Metric Boxes -->
+            <div class="overview-metrics">
+              <div class="metric-box">
+                <span class="metric-value">60M+</span>
+                <span class="metric-label">Hectares burned during 2015 peaks</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-value highlight">3B+</span>
+                <span class="metric-label">Animals impacted in 2019-2020</span>
+              </div>
+              <div class="metric-box">
+                <span class="metric-value">30 Years</span>
+                <span class="metric-label">Of escalating fire trends mapped</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <!-- Section 1 - Scale of Fire (Streamgraph) -->
+    <section class="premium-section sec1" aria-labelledby="sec1-title">
+      <div class="section-header">
+        <div class="section-left">
+          <span class="section-name">
+            <span class="section-number font-display" style="color: var(--color-sec1);">01</span>
+            Section 1 - Scale of Fire
+          </span>
+          <h2 id="sec1-title" class="section-heading">How Much of Australia Burns?</h2>
+        </div>
+        <div class="section-right">
+          <p class="section-description">
+            Australia has always been a fire-prone continent - but the scale of burning has grown dramatically over
+            recent decades. Tropical savannas and arid rangelands account for the vast majority of land burned each
+            year, yet it is the temperate forest wildfires that cause the most devastating ecological and economic
+            damage. The 2019-2020 Black Summer marked a turning point, burning over 18 million hectares of forest - more
+            than any season on record.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-green">Fig. 1 · Streamgraph</div>
+          <div class="chart-card-title font-display">Thirty Years of Burning Trends Across Australia</div>
+          <div class="chart-card-caption serif-note">Hover streams to inspect vegetation types, annual burn area, and
+            specific timelines.</div>
+        </div>
+        <div class="chart-card-body">
+          <div id="vis-horizon"></div>
+
+          <div class="streamgraph-insight">
+            <div class="insight-marker" aria-hidden="true"></div>
+            <div>
+              <h3>What stands out?</h3>
+              <p>
+                <span class="veg-savanna">Tropical savanna woodlands</span>
+                and
+                <span class="veg-rangelands">arid or semi-arid rangelands</span>
+                form the widest streams, showing that most burned area occurs
+                across northern and inland vegetation systems.
+                <span class="veg-wildfires">Temperate forest wildfires</span>
+                and <span class="veg-hazard">hazard reduction burns</span>
+                are smaller by comparison, but they remain important because
+                they are closely tied to populated forest regions and fire
+                management activity. The dataset reaches its largest total in
+                2015, while the 2019 marker provides context for the beginning
+                of the Black Summer period.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Department of Climate Change, Energy, the Environment and Water 2024</span>
+        </div>
+      </div>
+
+      <div class="chart-card burned-area-extremes-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-cam">FIG. 1B · BLACK SUMMER SHIFT BY STATE</div>
+          <div class="chart-card-title font-display">Which States Increased Most During Black Summer?</div>
+          <div class="chart-card-caption serif-note">Change in burned-cell totals from the 2016–17 to 2018–19 average to
+            the 2019–20 Black Summer season.</div>
+          <p id="shift-chart-explanatory-note" class="chart-note">Burned cell counts are used as an area proxy and
+            should not be interpreted as exact hectares. Zero marks no change from the pre-Black Summer average; bars to
+            the right increased in 2019–20, while bars to the left decreased.</p>
+        </div>
+        <div class="chart-card-body">
+          <div id="vis-annual-burned-area-extremes"></div>
+
+          <div class="burned-area-extremes-legend" aria-label="Fire season scale comparison legend">
+            <span class="legend-title">Comparison</span>
+            <span><i style="background: #B83246;"></i>Increase from baseline</span>
+            <span><i style="background: #8E8276;"></i>Decrease from baseline</span>
+          </div>
+
+          <div class="streamgraph-insight burned-area-extremes-insight">
+            <div class="insight-marker" aria-hidden="true"></div>
+            <div>
+              <h3>What stands out?</h3>
+              <p>
+                This view turns the Section 1 scale story into a state-level shift. NSW and Victoria show the clearest
+                increases during Black Summer compared with the previous three-season baseline. Queensland and the
+                Northern Territory remain large in absolute burned area, but they do not show the same Black Summer
+                jump, reinforcing that national scale and regional shock are not the same thing.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2 - Where Fires Burn (Hotspot Map) -->
+    <section class="premium-section sec2" aria-labelledby="sec2-title">
+      <div class="section-header">
+        <div class="section-left">
+          <span class="section-name">
+            <span class="section-number font-display" style="color: var(--color-sec2);">02</span>
+            Section 2 - Where Fires Burn
+          </span>
+          <h2 id="sec2-title" class="section-heading">Mapping the Fire Crisis</h2>
+        </div>
+        <div class="section-right">
+          <p class="section-description">
+            Fire does not burn evenly across Australia. Satellite data from January 2020 reveals intense hotspots
+            concentrated along the southeast coast - the epicentre of the Black Summer. Meanwhile, Western Australia's
+            Wheatbelt and the Northern Territory's seasonal savanna burns tell a different story: fires driven by
+            lightning, dry grass, and land management rather than catastrophic drought conditions.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-orange">Fig. 2 · Geographic Hotspot Map</div>
+          <div class="chart-card-title font-display">Satellite Fire Detections Across Australia (January 2020)</div>
+          <div class="chart-card-caption serif-note">Adjust the map view using programmatic zoom controls. Hover
+            hotspots for radiative power and brightness details.</div>
+        </div>
+        <div class="chart-card-body">
+          <div class="map-grid">
+            <!-- Left Column: Story & Legend -->
+            <div class="map-story">
+              <h2>Fire Hotspots Across Australia</h2>
+              <p>
+                During the
+                <span style="color: #b71c1c; font-weight: 700">Black Summer</span>
+                of 2019-2020, Australia experienced one of its most catastrophic
+                bushfire seasons. This map reveals the sheer scale of the crisis,
+                displaying satellite detections in January 2020.
+              </p>
+              <p>
+                The
+                <span style="color: #f57c00; font-weight: 700">massive clusters</span>
+                along the southeast coast show the devastating intensity of the
+                fires. Meanwhile, the
+                <span style="color: #e65100; font-weight: 700">Wheatbelt fires</span>
+                in Western Australia and
+                <span style="color: #ff9800; font-weight: 700">savanna burns</span>
+                in the Northern Territory highlight the widespread,
+                continent-spanning nature of the fire activity.
+              </p>
+
+              <div class="combined-legend vertical-legend" aria-label="Fire hotspot map legend">
+                <div class="legend-block">
+                  <span class="legend-title">Brightness Temp (K)</span>
+                  <div class="legend-gradient" aria-hidden="true"></div>
+                  <div class="legend-scale">
+                    <span>300</span>
+                    <span>500</span>
+                  </div>
+                </div>
+                <div class="legend-block">
+                  <span class="legend-title">Radiative Power (MW)</span>
+                  <div class="power-legend" aria-hidden="true">
+                    <span class="power-step">
+                      <span class="fire-dot small"></span>
+                      <span class="power-label">50</span>
+                    </span>
+                    <span class="power-step">
+                      <span class="fire-dot medium"></span>
+                      <span class="power-label">150</span>
+                    </span>
+                    <span class="power-step">
+                      <span class="fire-dot large"></span>
+                      <span class="power-label">300</span>
+                    </span>
+                    <span class="power-step">
+                      <span class="fire-dot xlarge"></span>
+                      <span class="power-label">500</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: The Map -->
+            <div class="map-viz">
+              <div id="vis-fire-hotspots"></div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>NASA FIRMS · MODIS & VIIRS Satellite Data 2020</span>
+        </div>
+      </div>
+
+      <div class="chart-card bivariate-map-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-orange">Fig. 2B · Bivariate Burn Map</div>
+          <div class="chart-card-title font-display">Where Burns Were Biggest - and Most Unplanned</div>
+          <div class="chart-card-caption serif-note">Colour shows the share of unplanned forest burning; circle size
+            shows total burned raster cells by state or territory. Use the season control to compare fire years.</div>
+        </div>
+        <div class="chart-card-body">
+          <div class="map-grid reverse-grid">
+            <div class="map-viz bivariate-map-viz">
+              <div id="vis-state-bivariate-burn-map"></div>
+            </div>
+
+            <div class="map-story bivariate-control-panel">
+              <h2>How to read this map</h2>
+              <p>
+                This map compares two dimensions of forest burning by state and territory. Colour shows the share of
+                burned forest cells classified as unplanned, while circle size shows the total number of burned raster
+                cells.
+              </p>
+
+              <div id="bivariate-season-control" class="bivariate-season-control" aria-label="Season control"></div>
+
+              <p id="map-description" class="interactive-description bivariate-season-description fade-in-active">
+                The catastrophic Black Summer of 2019–20 stands out clearly: NSW, Victoria, and South Australia recorded
+                near-100% unplanned burns, with unprecedented scale across the eastern seaboard.
+              </p>
+
+              <div class="combined-legend vertical-legend" aria-label="Bivariate map legend">
+                <div class="legend-block">
+                  <span class="legend-title">Unplanned share (%)</span>
+                  <div class="legend-gradient-bivariate" aria-hidden="true"></div>
+                  <div class="legend-scale">
+                    <span>0%</span>
+                    <span>100%</span>
+                  </div>
+                </div>
+                <div class="legend-block">
+                  <span class="legend-title">Total burned cells</span>
+                  <div class="burn-legend" aria-hidden="true">
+                    <span class="burn-step">
+                      <span class="burn-circle small"></span>
+                      <span class="power-label">2M</span>
+                    </span>
+                    <span class="burn-step">
+                      <span class="burn-circle medium"></span>
+                      <span class="power-label">4M</span>
+                    </span>
+                    <span class="burn-step">
+                      <span class="burn-circle large"></span>
+                      <span class="power-label">6M</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <p class="bivariate-insight">
+                Read colour and circle size together: a state can have a high unplanned share without having the largest
+                burned-cell total.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Fire_For16-21 attributes · burned raster cell counts are used as an area proxy</span>
+        </div>
+      </div>
+
+      <div class="chart-card fire-risk-trajectories-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-orange">FIG. 2D · STATE FIRE PROFILES</div>
+          <div class="chart-card-title font-display">How Did Fire Profiles Shift by State?</div>
+          <div class="chart-card-caption serif-note">Unplanned burning share by fire season; dot size shows total burned
+            cells as an area proxy. Red marks 2019–20 Black Summer.</div>
+          <p class="chart-card-note">Burned cell counts are used as an area proxy and should not be interpreted as exact
+            hectares. Smaller territories can show volatile shares because burned-cell totals are lower.</p>
+        </div>
+        <div class="chart-card-body">
+          <div id="trajectories-scope-control" class="custom-vega-bindings-container"></div>
+          <div id="vis-fire-risk-trajectories"></div>
+
+          <div class="streamgraph-insight fire-risk-trajectories-insight">
+            <div class="insight-marker" aria-hidden="true"></div>
+            <div>
+              <h3>What does this add?</h3>
+              <p>
+                This view shows how fire profiles changed within each state. The bivariate map compares states in one
+                selected season, while these small multiples show whether high unplanned burning was a one-off spike or
+                part of a recurring pattern. In the southeast, 2019–20 stands out across several states, but the dot
+                sizes show that share and scale are not the same thing.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 - Economic & Human Cost (Economic Shockwaves) -->
+    <section class="premium-section sec3" aria-labelledby="sec3-title">
+      <div class="section-header">
+        <div class="section-left">
+          <span class="section-name">
+            <span class="section-number font-display" style="color: var(--color-sec3);">03</span>
+            Section 3 - Economic & Human Cost
+          </span>
+          <h2 id="sec3-title" class="section-heading">The Financial Shockwaves</h2>
+        </div>
+        <div class="section-right">
+          <p class="section-description">
+            When fire reaches communities, the economic consequences can be severe and long-lasting. Insurance records
+            dating back to the 1960s reveal that a small number of catastrophic events dominate Australia's total
+            insured bushfire losses. Black Summer, Black Saturday, and Ash Wednesday each sent shockwaves through
+            households and businesses - yet the largest single insured loss in Australian history occurred not in 2019,
+            but in 1967.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-card timeline-chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-red">FIG. 3A · EVENT TIMELINE</div>
+          <div class="chart-card-title font-display">Major Australian Bushfire Events</div>
+          <div class="chart-card-caption serif-note">Selected historical bushfire catastrophes from ICA records,
+            positioned by year and labelled by normalised insured losses in 2022 Australian Dollars. Hover each card or
+            point for more detail.</div>
+          <p class="chart-card-note timeline-scope-note">Selected events only; not all bushfire catastrophes are shown.
+          </p>
+        </div>
+        <div class="chart-card-body">
+          <div id="vis-bushfire-timeline"></div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">SOURCE</span>
+          <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
+        </div>
+      </div>
+
+      <div class="chart-card economic-shock-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-red">Fig. 3b · Economic Shock Bubble Chart</div>
+          <div class="chart-card-title font-display">Economic Shockwaves from Australian Bushfires</div>
+          <div class="chart-card-caption serif-note">Insured losses normalised to 2022 Australian Dollars. Hover bubbles
+            to view details. Click Severity below to filter.</div>
+        </div>
+        <div class="chart-card-body">
+          <div id="vis-economic-shock"></div>
+
+          <div class="custom-chart-legend" aria-label="Economic shock chart legend">
+            <div class="legend-group">
+              <span class="legend-group-title">Claims</span>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="bubble-icon size-none"></span>
+                  <span class="legend-label">No claims data</span>
+                </div>
+                <div class="legend-item">
+                  <span class="bubble-icon size-10k"></span>
+                  <span class="legend-label">10,000</span>
+                </div>
+                <div class="legend-item">
+                  <span class="bubble-icon size-30k"></span>
+                  <span class="legend-label">30,000</span>
+                </div>
+                <div class="legend-item">
+                  <span class="bubble-icon size-60k"></span>
+                  <span class="legend-label">60,000</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="legend-group">
+              <span class="legend-group-title">Severity</span>
+              <div class="legend-items">
+                <div class="legend-item" data-severity="Medium">
+                  <span class="swatch-icon severity-medium"></span>
+                  <span class="legend-label">Medium &lt; $1B</span>
+                </div>
+                <div class="legend-item" data-severity="High">
+                  <span class="swatch-icon severity-high"></span>
+                  <span class="legend-label">High $1B - $2B</span>
+                </div>
+                <div class="legend-item" data-severity="Catastrophic">
+                  <span class="swatch-icon severity-catastrophic"></span>
+                  <span class="legend-label">Catastrophic &gt; $2B</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="legend-note">
+            Bubble size shows total claims where available; missing claim counts use small default bubbles.
+          </p>
+
+          <div class="streamgraph-insight" style="border-left-color: #f03b20;">
+            <div class="insight-marker" style="background: linear-gradient(180deg, #ffeda0, #feb24c, #f03b20);"
+              aria-hidden="true"></div>
+            <div>
+              <h3>Key Economic Insight</h3>
+              <p>
+                Historical insurance data shows that bushfire losses are highly skewed. A small number of extreme
+                events-most notably the <strong class="event-catastrophic">1967 Tasmanian Bushfires</strong>, the
+                <strong class="event-catastrophic">1983 Ash Wednesday fires</strong>, the <strong
+                  class="event-catastrophic">2009 Black Saturday fires</strong>, and the <strong
+                  class="event-catastrophic">2019/20 Black Summer</strong>-account for the vast majority of insured
+                losses.
+              </p>
+              <p>
+                The colour palette matches the hotspot map: yellow-gold indicates medium severity and deep red marks
+                catastrophic losses.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Insurance Council of Australia Historical Catastrophe Data 2024</span>
+        </div>
+      </div>
+
+      <div class="chart-card claims-split-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-red">FIG. 3C · DOMESTIC VS COMMERCIAL CLAIMS</div>
+          <div class="chart-card-title font-display">Who Filed the Claims &mdash; and How Many?</div>
+          <div class="chart-card-caption serif-note">Domestic and commercial claim shares are shown for ICA bushfire
+            records with explicit breakdowns; total claims provide scale.</div>
+          <p class="chart-card-note">Only bushfire events with explicit ICA domestic and commercial claim-count
+            breakdowns are shown.</p>
+        </div>
+        <div class="chart-card-body">
+          <div id="vis-domestic-commercial-claims"></div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Insurance Council of Australia Historical Normalised Catastrophe Data</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 - Wildlife & What We Learn (Beyond Property: Nature in the Firing Line) -->
+    <section class="premium-section sec4" aria-labelledby="sec4-title">
+      <div class="section-header">
+        <div class="section-left">
+          <span class="section-name">
+            <span class="section-number font-display" style="color: var(--color-sec4);">04</span>
+            Section 4 - Wildlife & What We Learn
+          </span>
+          <h2 id="sec4-title" class="section-heading">Beyond Property: Nature in the Firing Line</h2>
+        </div>
+        <div class="section-right">
+          <p class="section-description">
+            The true cost of Australia's bushfire crisis extends far beyond dollars and damaged buildings. An estimated
+            three billion animals were killed or displaced during the Black Summer alone - reptiles, birds, mammals, and
+            frogs across the continent's most biodiverse forests. Yet the data also reveals a sobering truth: the size
+            of a fire does not determine the scale of its damage. Where fires burn, and what lies in their path, matters
+            far more than how many hectares are consumed.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-card wildlife-waffle-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-blue">Fig. 4A · Wildlife Under Fire</div>
+          <div class="chart-card-title font-display">Estimated Wildlife Affected During Black Summer</div>
+          <div class="chart-card-caption serif-note">Each mark represents roughly 1% of the estimated total, about 28
+            million animals. Hover a group, card, or mark to isolate its share.</div>
+        </div>
+        <div class="chart-card-body">
+          <div class="wildlife-waffle-layout">
+            <div class="wildlife-waffle-main">
+              <div id="wildlife-waffle" class="wildlife-waffle" role="img"
+                aria-label="10 by 10 waffle chart of wildlife groups affected by Black Summer"></div>
+            </div>
+
+            <div class="wildlife-legend-column">
+              <div id="wildlife-summary" class="wildlife-summary" aria-label="Wildlife impact summary cards"></div>
+              <div id="wildlife-waffle-legend" class="wildlife-waffle-legend"
+                aria-label="Wildlife waffle percentage legend"></div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>WWF Australia estimates for animals affected, killed, or displaced during the 2019–20 Black Summer
+            bushfires</span>
+        </div>
+      </div>
+
+      <div class="chart-card wildlife-threatened-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-blue">FIG. 4B · THREATENED SPECIES IN BUSHFIRE RECORDS</div>
+          <div class="chart-card-title font-display">Which Threatened Animal Groups Stand Out?</div>
+          <div class="chart-card-caption serif-note">EPBC-listed animal species in 2019–20 bushfire-associated records,
+            grouped by taxonomic class.</div>
+        </div>
+        <div class="chart-card-body">
+          <div id="vis-threatened-animals-by-class"></div>
+
+          <div class="streamgraph-insight wildlife-threatened-insight">
+            <div class="insight-marker" aria-hidden="true"></div>
+            <div>
+              <h3>What does this add?</h3>
+              <p>
+                The waffle chart shows the scale of estimated animal impact, but this chart shifts the story from
+                numbers to vulnerability. Birds, mammals and reptiles contain the most EPBC-listed threatened species in
+                the bushfire-associated records, while amphibians, fish and invertebrate groups show that conservation
+                concern was spread across less visible fauna as well. Together, the two views show that bushfire impact
+                is not only about how many animals were affected, but also which species were already at risk.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Bushfire-associated species checklist records; EPBC threatened status fields. Occurrence records are
+            used here as biodiversity context, not as counts of animals harmed.</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Main JS for Vega-embed -->
+  <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
+  <script src="js/main.js?v=20260530_fig1b_shift_v12"></script>
+</body>
+
 </html>

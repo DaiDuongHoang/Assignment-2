@@ -10,17 +10,6 @@
     "resize": true
   },
   "padding": {"top": 10, "right": 65, "bottom": 10, "left": 15},
-  "params": [
-    {
-      "name": "hoverState",
-      "select": {
-        "type": "point",
-        "fields": ["state_name"],
-        "on": "mouseover",
-        "clear": "mouseout"
-      }
-    }
-  ],
   "data": {
     "url": "data/black_summer_shift_by_state.csv",
     "format": {
@@ -108,6 +97,36 @@
   },
   "layer": [
     {
+      "name": "hover_target_rows",
+      "params": [
+        {
+          "name": "hoverState",
+          "select": {
+            "type": "point",
+            "fields": ["state_name"],
+            "on": "mouseover",
+            "clear": "mouseout"
+          }
+        }
+      ],
+      "mark": {
+        "type": "bar",
+        "color": "transparent",
+        "size": 26
+      },
+      "encoding": {
+        "x": {"datum": -1000000},
+        "x2": {"datum": 5000000},
+        "tooltip": [
+          {"field": "state_name", "type": "nominal", "title": "State"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change", "format": "+,.0f"},
+          {"field": "percent_change", "type": "quantitative", "title": "Percent change", "format": "+.1f"}
+        ]
+      }
+    },
+    {
       "name": "zero_line",
       "mark": {
         "type": "rule",
@@ -184,15 +203,20 @@
       }
     },
     {
-      "name": "direct_labels",
+      "name": "direct_labels_positive",
+      "transform": [
+        {
+          "filter": "datum.absolute_change > 0"
+        }
+      ],
       "mark": {
         "type": "text",
         "baseline": "middle",
         "fontWeight": 700,
         "fontSize": 11,
         "font": "Inter, sans-serif",
-        "align": {"expr": "datum.absolute_change > 0 ? 'left' : 'right'"},
-        "dx": {"expr": "datum.absolute_change > 0 ? 10 : -10"}
+        "align": "left",
+        "dx": 10
       },
       "encoding": {
         "x": {"field": "absolute_change"},
@@ -219,15 +243,36 @@
       }
     },
     {
-      "name": "hover_target_rows",
+      "name": "direct_labels_negative",
+      "transform": [
+        {
+          "filter": "datum.absolute_change < 0"
+        }
+      ],
       "mark": {
-        "type": "bar",
-        "color": "transparent",
-        "size": 26
+        "type": "text",
+        "baseline": "middle",
+        "fontWeight": 700,
+        "fontSize": 11,
+        "font": "Inter, sans-serif",
+        "align": "right",
+        "dx": -10
       },
       "encoding": {
-        "x": {"datum": -1000000},
-        "x2": {"datum": 5000000},
+        "x": {"field": "absolute_change"},
+        "text": {"field": "change_label", "type": "nominal"},
+        "color": {
+          "field": "dot_color",
+          "type": "nominal",
+          "scale": null
+        },
+        "opacity": {
+          "condition": {
+            "param": "hoverState",
+            "value": 1.0
+          },
+          "value": 0.3
+        },
         "tooltip": [
           {"field": "state_name", "type": "nominal", "title": "State"},
           {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
