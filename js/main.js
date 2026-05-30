@@ -100,6 +100,36 @@ const streamgraphEmbed = vegaEmbed('#vis-horizon', streamgraphSpec, { "actions":
 const annualBurnedAreaExtremesEmbed = vegaEmbed('#vis-annual-burned-area-extremes', annualBurnedAreaExtremesSpec, {
   "actions": false,
   "renderer": "svg"
+}).then(function(result) {
+  const view = result.view;
+  const target = document.querySelector('#shift-chart-control');
+  const bindings = document.querySelector('#vis-annual-burned-area-extremes .vega-bindings');
+  if (target && bindings) {
+    target.appendChild(bindings);
+  }
+
+  const explanatoryNote = document.querySelector('#shift-chart-explanatory-note');
+  const legendEl = document.querySelector('.burned-area-extremes-legend');
+
+  const descriptions = {
+    'Change from baseline': 'Burned cell counts are used as an area proxy and should not be interpreted as exact hectares. Zero marks no change from the pre-Black Summer average; bars to the right increased in 2019–20, while bars to the left decreased.',
+    'Before vs Black Summer': 'Burned cell counts are used as an area proxy and should not be interpreted as exact hectares. Grey points show the pre-Black Summer average; red points show the 2019–20 Black Summer burned-cell total.'
+  };
+
+  const legends = {
+    'Change from baseline': '<span class="legend-title">Comparison</span><span><i style="background: #B83246;"></i>Increase from baseline</span><span><i style="background: #8E8276;"></i>Decrease from baseline</span>',
+    'Before vs Black Summer': '<span class="legend-title">Comparison</span><span><i style="background: #8E8276;"></i>Pre-Black Summer average</span><span><i style="background: #B83246;"></i>2019–20 Black Summer</span>'
+  };
+
+  view.addSignalListener('displayMode', function(name, value) {
+    if (explanatoryNote && descriptions[value]) {
+      explanatoryNote.textContent = descriptions[value];
+    }
+    if (legendEl && legends[value]) {
+      legendEl.innerHTML = legends[value];
+    }
+  });
+  return result;
 }).catch(function(error) {
   console.error(error);
   return null;

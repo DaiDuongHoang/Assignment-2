@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "FIG. 1B · BLACK SUMMER SHIFT BY STATE. Diverging horizontal change lollipop chart.",
+  "description": "FIG. 1B · BLACK SUMMER SHIFT BY STATE. Diverging horizontal change lollipop / dumbbell hybrid chart.",
   "width": "container",
   "height": 280,
   "background": "#FFFDF9",
@@ -9,7 +9,18 @@
     "contains": "padding",
     "resize": true
   },
-  "padding": {"top": 10, "right": 65, "bottom": 10, "left": 15},
+  "padding": {"top": 10, "right": 65, "bottom": 10, "left": 35},
+  "params": [
+    {
+      "name": "displayMode",
+      "value": "Change from baseline",
+      "bind": {
+        "input": "select",
+        "options": ["Change from baseline", "Before vs Black Summer"],
+        "name": "Display Mode:"
+      }
+    }
+  ],
   "data": {
     "url": "data/black_summer_shift_by_state.csv",
     "format": {
@@ -24,11 +35,19 @@
   },
   "transform": [
     {
-      "calculate": "datum.absolute_change > 0 ? '#B83246' : '#8E8276'",
+      "calculate": "displayMode === 'Change from baseline' ? datum.absolute_change : datum.black_summer_burned_cells",
+      "as": "current_x"
+    },
+    {
+      "calculate": "displayMode === 'Change from baseline' ? 0 : datum.baseline_avg_burned_cells",
+      "as": "current_line_start"
+    },
+    {
+      "calculate": "displayMode === 'Change from baseline' ? (datum.absolute_change > 0 ? '#B83246' : '#8E8276') : '#B83246'",
       "as": "dot_color"
     },
     {
-      "calculate": "datum.absolute_change > 0 ? '#C97D84' : '#C4BBB4'",
+      "calculate": "displayMode === 'Change from baseline' ? (datum.absolute_change > 0 ? '#C97D84' : '#C4BBB4') : '#C4BBB4'",
       "as": "line_color"
     },
     {
@@ -74,10 +93,10 @@
     "x": {
       "type": "quantitative",
       "scale": {
-        "domain": [-1000000, 5000000]
+        "domain": {"signal": "displayMode === 'Change from baseline' ? [-1500000, 5000000] : [0, 8000000]"}
       },
       "axis": {
-        "title": "Absolute Change in Burned Cells",
+        "title": {"signal": "displayMode === 'Change from baseline' ? 'Absolute Change in Burned Cells' : 'Burned Cell Totals'"},
         "grid": true,
         "gridColor": "rgba(43, 38, 33, 0.08)",
         "gridWidth": 1,
@@ -115,14 +134,14 @@
         "size": 26
       },
       "encoding": {
-        "x": {"datum": -1000000},
-        "x2": {"datum": 5000000},
+        "x": {"signal": "displayMode === 'Change from baseline' ? -1500000 : 0"},
+        "x2": {"signal": "displayMode === 'Change from baseline' ? 5000000 : 8000000"},
         "tooltip": [
-          {"field": "state_name", "type": "nominal", "title": "State"},
-          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
-          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells", "format": ",.0f"},
-          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change", "format": "+,.0f"},
-          {"field": "percent_change", "type": "quantitative", "title": "Percent change", "format": "+.1f"}
+          {"field": "state_name", "type": "nominal", "title": "State:"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells:", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells:", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change:", "format": "+,.0f"},
+          {"field": "tooltip_pct_change", "type": "nominal", "title": "Percent change:"}
         ]
       }
     },
@@ -135,15 +154,18 @@
         "strokeDash": [4, 4]
       },
       "encoding": {
-        "x": {"datum": 0}
+        "x": {"datum": 0},
+        "opacity": {
+          "signal": "displayMode === 'Change from baseline' ? 1.0 : 0"
+        }
       }
     },
     {
       "name": "connecting_lines",
       "mark": {"type": "rule", "cap": "round"},
       "encoding": {
-        "x": {"datum": 0},
-        "x2": {"field": "absolute_change", "type": "quantitative"},
+        "x": {"field": "current_line_start", "type": "quantitative"},
+        "x2": {"field": "current_x", "type": "quantitative"},
         "color": {
           "field": "line_color",
           "type": "nominal",
@@ -162,11 +184,11 @@
           "value": 0.3
         },
         "tooltip": [
-          {"field": "state_name", "type": "nominal", "title": "State"},
-          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
-          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells", "format": ",.0f"},
-          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change", "format": "+,.0f"},
-          {"field": "percent_change", "type": "quantitative", "title": "Percent change", "format": "+.1f"}
+          {"field": "state_name", "type": "nominal", "title": "State:"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells:", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells:", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change:", "format": "+,.0f"},
+          {"field": "tooltip_pct_change", "type": "nominal", "title": "Percent change:"}
         ]
       }
     },
@@ -180,7 +202,7 @@
         "cursor": "pointer"
       },
       "encoding": {
-        "x": {"field": "absolute_change"},
+        "x": {"field": "current_x"},
         "color": {
           "field": "dot_color",
           "type": "nominal",
@@ -194,11 +216,39 @@
           "value": 0.4
         },
         "tooltip": [
-          {"field": "state_name", "type": "nominal", "title": "State"},
-          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
-          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells", "format": ",.0f"},
-          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change", "format": "+,.0f"},
-          {"field": "percent_change", "type": "quantitative", "title": "Percent change", "format": "+.1f"}
+          {"field": "state_name", "type": "nominal", "title": "State:"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells:", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells:", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change:", "format": "+,.0f"},
+          {"field": "tooltip_pct_change", "type": "nominal", "title": "Percent change:"}
+        ]
+      }
+    },
+    {
+      "name": "baseline_dots",
+      "mark": {
+        "type": "circle",
+        "size": 140,
+        "color": "#8E8276",
+        "stroke": "#FFFDF9",
+        "strokeWidth": 1.5,
+        "cursor": "pointer"
+      },
+      "encoding": {
+        "x": {"field": "baseline_avg_burned_cells", "type": "quantitative"},
+        "opacity": {
+          "condition": {
+            "param": "hoverState",
+            "value": 1.0
+          },
+          "signal": "displayMode === 'Before vs Black Summer' ? 0.4 : 0"
+        },
+        "tooltip": [
+          {"field": "state_name", "type": "nominal", "title": "State:"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells:", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells:", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change:", "format": "+,.0f"},
+          {"field": "tooltip_pct_change", "type": "nominal", "title": "Percent change:"}
         ]
       }
     },
@@ -229,16 +279,16 @@
         "opacity": {
           "condition": {
             "param": "hoverState",
-            "value": 1.0
+            "value": {"signal": "displayMode === 'Change from baseline' ? 1.0 : 0"}
           },
-          "value": 0.3
+          "value": {"signal": "displayMode === 'Change from baseline' ? 0.3 : 0"}
         },
         "tooltip": [
-          {"field": "state_name", "type": "nominal", "title": "State"},
-          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
-          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells", "format": ",.0f"},
-          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change", "format": "+,.0f"},
-          {"field": "percent_change", "type": "quantitative", "title": "Percent change", "format": "+.1f"}
+          {"field": "state_name", "type": "nominal", "title": "State:"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells:", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells:", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change:", "format": "+,.0f"},
+          {"field": "tooltip_pct_change", "type": "nominal", "title": "Percent change:"}
         ]
       }
     },
@@ -269,16 +319,16 @@
         "opacity": {
           "condition": {
             "param": "hoverState",
-            "value": 1.0
+            "value": {"signal": "displayMode === 'Change from baseline' ? 1.0 : 0"}
           },
-          "value": 0.3
+          "value": {"signal": "displayMode === 'Change from baseline' ? 0.3 : 0"}
         },
         "tooltip": [
-          {"field": "state_name", "type": "nominal", "title": "State"},
-          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells", "format": ",.0f"},
-          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells", "format": ",.0f"},
-          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change", "format": "+,.0f"},
-          {"field": "percent_change", "type": "quantitative", "title": "Percent change", "format": "+.1f"}
+          {"field": "state_name", "type": "nominal", "title": "State:"},
+          {"field": "baseline_avg_burned_cells", "type": "quantitative", "title": "Baseline average cells:", "format": ",.0f"},
+          {"field": "black_summer_burned_cells", "type": "quantitative", "title": "2019–20 Black Summer cells:", "format": ",.0f"},
+          {"field": "absolute_change", "type": "quantitative", "title": "Absolute change:", "format": "+,.0f"},
+          {"field": "tooltip_pct_change", "type": "nominal", "title": "Percent change:"}
         ]
       }
     }
