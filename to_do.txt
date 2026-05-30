@@ -1,3 +1,3 @@
-sửa sources ở dưới graph
-thêm metadata
-sửa refine lại một số graph
+sửa lại màu sắc layout sao cho đẹp nhất có thể và consistent
+check xem màu palette cả trang có consistent không
+thêm annotations vào charts

@@ -3,7 +3,7 @@ const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=2026052
 const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v2";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v14";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260530_v15";
-const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260530_shift_v13";
+const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v16";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";
 
 const economicShockSpec = "js/economic_shock.vg.json?v=20260530_compact_v1";

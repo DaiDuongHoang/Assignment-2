@@ -2113,6 +2113,7 @@ h6 {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     line-height: 16px;
+    margin-bottom: 0 !important;
 }
 
 .burned-area-extremes-legend span {
@@ -2124,11 +2125,41 @@ h6 {
 }
 
 .burned-area-extremes-legend i {
+    display: inline-block;
+    vertical-align: middle;
     flex-shrink: 0;
     width: 9px;
     height: 9px;
     border-radius: 999px;
     box-shadow: 0 0 0 1px rgba(255, 253, 249, 0.9);
+}
+
+#shift-chart-control .vega-bind select {
+    margin-left: 20px !important;
+}
+
+/* Premium Vega Tooltip styling to prevent awkward line breaks and match the editorial style */
+#vg-tooltip-element {
+    font-family: 'Inter', sans-serif !important;
+    font-size: 11px !important;
+    border-radius: 6px !important;
+    padding: 8px 12px !important;
+    background-color: rgba(44, 37, 32, 0.96) !important;
+    border: 1px solid rgba(255, 253, 249, 0.15) !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+    color: #FFFDF9 !important;
+}
+#vg-tooltip-element table tr td {
+    padding: 3px 6px !important;
+    white-space: nowrap !important;
+}
+#vg-tooltip-element table tr td.key {
+    color: #C4BBB4 !important;
+    font-weight: 600 !important;
+}
+#vg-tooltip-element table tr td.value {
+    color: #FFFDF9 !important;
+    font-weight: 700 !important;
 }
 
 .burned-area-extremes-insight {
@@ -2180,6 +2211,30 @@ h6 {
 
 .calendar-insight .insight-marker {
     background: linear-gradient(180deg, #FDD37A, #9E1B32) !important;
+}
+
+/* ===== FIG. 2D · STATE FIRE PROFILES (Trajectories) Styles ===== */
+.fire-risk-trajectories-card {
+    margin-top: 28px;
+}
+
+.fire-risk-trajectories-card .chart-card-body {
+    padding: 18px 28px 16px;
+    background: #FFFDF9;
+}
+
+#vis-fire-risk-trajectories {
+    max-width: 100%;
+    margin: 0 auto;
+    overflow-x: auto;
+    display: flex;
+    justify-content: center;
+}
+
+#vis-fire-risk-trajectories .vega-embed,
+#vis-fire-risk-trajectories svg {
+    display: block;
+    margin: 0 auto;
 }
 
 /* ===== Interactive Chart Footer Source Links ===== */
