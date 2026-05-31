@@ -132,8 +132,17 @@
       ]
     },
     {
-      "name": "black_summer",
-      "values": [{ "fire_season": "2019-20" }]
+      "name": "highlight",
+      "values": [
+        { "fire_season": "2019-20", "text": "Black Summer" },
+        { "fire_season": "2023-24", "text": "Western Downs" }
+      ],
+      "transform": [
+        {
+          "type": "filter",
+          "expr": "datum.text === 'Black Summer' || (datum.text === 'Western Downs' && (selectedRegion === 'National' || selectedMetric === 'Share of season total'))"
+        }
+      ]
     }
   ],
   "scales": [
@@ -281,17 +290,19 @@
     },
     {
       "type": "rect",
-      "from": { "data": "black_summer" },
+      "from": { "data": "highlight" },
       "encode": {
         "enter": {
           "x": { "value": -4 },
           "x2": { "signal": "width + 4" },
-          "y": { "scale": "y", "field": "fire_season", "offset": -3 },
-          "height": { "signal": "bandwidth('y') + 6" },
           "fill": { "value": "transparent" },
           "stroke": { "value": "#B83246" },
           "strokeWidth": { "value": 1.4 },
           "cornerRadius": { "value": 7 }
+        },
+        "update": {
+          "y": { "scale": "y", "field": "fire_season", "offset": -3 },
+          "height": { "signal": "bandwidth('y') + 6" }
         }
       }
     },
@@ -324,18 +335,20 @@
     },
     {
       "type": "text",
-      "from": { "data": "black_summer" },
+      "from": { "data": "highlight" },
       "encode": {
         "enter": {
           "x": { "signal": "width + 14" },
-          "y": { "scale": "y", "field": "fire_season", "band": 0.5 },
-          "text": { "value": "Black Summer" },
           "align": { "value": "left" },
           "baseline": { "value": "middle" },
           "font": { "value": "Inter" },
           "fontSize": { "value": 12 },
           "fontWeight": { "value": 800 },
           "fill": { "value": "#B83246" }
+        },
+        "update": {
+          "y": { "scale": "y", "field": "fire_season", "band": 0.5 },
+          "text": { "field": "text" }
         }
       }
     }

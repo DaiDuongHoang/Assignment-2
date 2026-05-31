@@ -31,9 +31,9 @@
           "tooltipDescription": "Deadliest bushfire in Tasmanian history. Largest normalised insured loss.",
           "side": "top",
           "severity": "Catastrophic",
-          "severityColor": "#f03b20",
-          "severityTextColor": "#f03b20",
-          "color": "#f03b20"
+          "severityColor": "#9D030E",
+          "severityTextColor": "#9D030E",
+          "color": "#9D030E"
         },
         {
           "year": 1969,
@@ -44,9 +44,9 @@
           "tooltipDescription": "Fast-moving fire near Lara, Victoria. Medium loss severity.",
           "side": "bottom",
           "severity": "Medium",
-          "severityColor": "#ffeda0",
+          "severityColor": "#F4B942",
           "severityTextColor": "#cca400",
-          "color": "#cca400"
+          "color": "#F4B942"
         },
         {
           "year": 1983,
@@ -57,9 +57,9 @@
           "tooltipDescription": "Major fires across Victoria and South Australia.",
           "side": "top",
           "severity": "Catastrophic",
-          "severityColor": "#f03b20",
-          "severityTextColor": "#f03b20",
-          "color": "#f03b20"
+          "severityColor": "#9D030E",
+          "severityTextColor": "#9D030E",
+          "color": "#9D030E"
         },
         {
           "year": 1985,
@@ -70,9 +70,9 @@
           "tooltipDescription": "Large fires swept through the Victorian Alpine region.",
           "side": "bottom",
           "severity": "High",
-          "severityColor": "#feb24c",
-          "severityTextColor": "#e67e22",
-          "color": "#feb24c"
+          "severityColor": "#EB371F",
+          "severityTextColor": "#EB371F",
+          "color": "#EB371F"
         },
         {
           "year": 2003,
@@ -83,9 +83,9 @@
           "tooltipDescription": "Fires entered Canberra suburbs and destroyed homes.",
           "side": "top",
           "severity": "High",
-          "severityColor": "#feb24c",
-          "severityTextColor": "#e67e22",
-          "color": "#feb24c"
+          "severityColor": "#EB371F",
+          "severityTextColor": "#EB371F",
+          "color": "#EB371F"
         },
         {
           "year": 2009,
@@ -96,9 +96,9 @@
           "tooltipDescription": "Australia's deadliest bushfire disaster. 173 lives lost.",
           "side": "bottom",
           "severity": "Catastrophic",
-          "severityColor": "#f03b20",
-          "severityTextColor": "#f03b20",
-          "color": "#f03b20"
+          "severityColor": "#9D030E",
+          "severityTextColor": "#9D030E",
+          "color": "#9D030E"
         },
         {
           "year": 2019,
@@ -109,9 +109,9 @@
           "tooltipDescription": "Unprecedented fires from late 2019 into 2020.",
           "side": "top",
           "severity": "Catastrophic",
-          "severityColor": "#f03b20",
-          "severityTextColor": "#f03b20",
-          "color": "#f03b20"
+          "severityColor": "#9D030E",
+          "severityTextColor": "#9D030E",
+          "color": "#9D030E"
         }
       ]
     }

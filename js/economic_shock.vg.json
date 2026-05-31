@@ -114,7 +114,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Medium", "High", "Catastrophic"],
-            "range": ["#ffeda0", "#feb24c", "#f03b20"]
+            "range": ["#F4B942", "#EB371F", "#9D030E"]
           },
           "legend": null
         },
@@ -168,8 +168,16 @@
               "value": 1.0
             },
             {
-              "test": "length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0",
-              "value": 1.0
+              "test": "(length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0) && datum.severity_category === 'Medium'",
+              "value": 0.55
+            },
+            {
+              "test": "(length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0) && datum.severity_category === 'High'",
+              "value": 0.80
+            },
+            {
+              "test": "(length(data('hover_bubble_store')) === 0 && length(data('hover_label_store')) === 0 && length(data('hover_note_store')) === 0) && datum.severity_category === 'Catastrophic'",
+              "value": 0.90
             }
           ],
           "value": 0.15
@@ -223,7 +231,7 @@
         "shape": "circle",
         "stroke": "#1F1F1F",
         "strokeWidth": 2,
-        "fill": "#f03b20"
+        "fill": "#9D030E"
       },
       "encoding": {
         "x": {

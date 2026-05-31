@@ -2,3 +2,33 @@ https://fed.dcceew.gov.au/datasets/erin::national-indicative-aggregated-fire-ext
 https://insurancecouncil.com.au/industry-members/data-hub
 https://www.agriculture.gov.au/abares/forestsaustralia/forest-data-maps-and-tools/spatial-data/forest-fire/
 https://wwf.org.au/news/2020/3-billion-animals-impacted-by-australia-bushfire-crisis/
+https://www.dcceew.gov.au/environment/biodiversity/bushfire-recovery/bushfire-impacts/priority-animals
+
+
+
+1. NASA FIRMS MODIS
+URL: https://firms.modaps.eosdis.nasa.gov/download/
+Dùng cho: Bubble/hotspot map (Viz 1), Fire season calendar heatmap (Viz 4)
+License: Public Domain
+
+2. Fire Attributes 2016–2021 (ABARES)
+URL: https://www.agriculture.gov.au/abares/forestsaustralia/sofr/criterion-3/indicator-3.1b
+Dùng cho: Bivariate burn map (Viz 3), Slope chart (Viz 10), Stream graph data nếu có
+License: CC BY 4.0
+
+3. Australian Annual Bushfire Area 1990–2020 (Kaggle)
+URL: https://www.kaggle.com/datasets/johnathansmith7528/australian-annual-bushfire-area-19902020
+Nguồn gốc: Compiled từ ABARES + IBRA
+Dùng cho: Stream graph (Viz 2)
+License: CC0 Public Domain
+
+4. ICA Historical Normalised Catastrophe Data
+URL: https://www.icadataglobe.com/access-catastrophe-data/
+Dùng cho: Economic bubble chart (Viz 6), Event timeline (Viz 5), Domestic vs Commercial bar (Viz 7)
+License: ICA terms of use
+
+5. WWF Australia — Wildlife Impact Report
+URL: https://www.wwf.org.au/news/news/2020/3-billion-animals-impacted-by-australia-s-bushfire-crisis
+Full report: https://www.wwf.org.au/ArticleDocuments/353/pub-three-billion-animals-interim-report-19jan21.pdf.aspx
+Dùng cho: Wildlife waffle chart (Viz 8)
+License: WWF — cite required
