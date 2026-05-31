@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/styles.css?v=20260531_fig3d_legend_v21" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260531_sankey_redesign_v25" />
 
   <!-- Vega & Vega-Lite & Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -178,9 +178,19 @@
           <div id="vis-annual-burned-area-extremes"></div>
 
           <div class="burned-area-extremes-legend" aria-label="Fire season scale comparison legend">
-            <span class="legend-title">Comparison</span>
-            <span><i style="background: #B83246;"></i>Increase from baseline</span>
-            <span><i style="background: #8E8276;"></i>Decrease from baseline</span>
+            <div class="legend-group">
+              <span class="legend-group-title">Comparison</span>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="swatch-icon" style="background: #B83246; border-radius: 50%;"></span>
+                  <span class="legend-label">Increase from baseline</span>
+                </div>
+                <div class="legend-item">
+                  <span class="swatch-icon" style="background: #8E8276; border-radius: 50%;"></span>
+                  <span class="legend-label">Decrease from baseline</span>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="streamgraph-insight burned-area-extremes-insight">
@@ -422,6 +432,43 @@
           <div id="trajectories-scope-control" class="custom-vega-bindings-container"></div>
           <div id="vis-fire-risk-trajectories"></div>
 
+          <div class="fire-risk-trajectories-legend" aria-label="Fire profile trajectory legend">
+            <div class="legend-group">
+              <span class="legend-group-title">Season</span>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="swatch-icon" style="background: #B83246; border-radius: 50%;"></span>
+                  <span class="legend-label">2019–20 Black Summer</span>
+                </div>
+                <div class="legend-item">
+                  <span class="swatch-icon" style="background: #B0A499; border-radius: 50%;"></span>
+                  <span class="legend-label">Other fire seasons</span>
+                </div>
+              </div>
+            </div>
+            <div class="legend-group">
+              <span class="legend-group-title">Burned cells scale</span>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="trajectory-bubble size-tiny"></span>
+                  <span class="legend-label">&lt;0.1M</span>
+                </div>
+                <div class="legend-item">
+                  <span class="trajectory-bubble size-small"></span>
+                  <span class="legend-label">1.0M</span>
+                </div>
+                <div class="legend-item">
+                  <span class="trajectory-bubble size-medium"></span>
+                  <span class="legend-label">5.0M</span>
+                </div>
+                <div class="legend-item">
+                  <span class="trajectory-bubble size-large"></span>
+                  <span class="legend-label">8.0M</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="streamgraph-insight fire-risk-trajectories-insight">
             <div class="insight-marker" aria-hidden="true"></div>
             <div>
@@ -431,6 +478,57 @@
                 selected season, while these small multiples show whether high unplanned burning was a one-off spike or
                 part of a recurring pattern. In the southeast, 2019–20 stands out across several states, but the dot
                 sizes show that share and scale are not the same thing.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span><a href="https://www.agriculture.gov.au/abares" target="_blank" rel="noopener noreferrer"
+              class="chart-link-orange">Fires in Australia’s Forests 2016–21 / Fire_For16–21 attributes</a></span>
+        </div>
+      </div>
+
+      <div class="chart-card tenure-sankey-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-orange">FIG. 2E · FOREST TENURE AND BURN OUTCOME</div>
+          <div class="chart-card-title font-display">How Did Forest Tenure Relate to Burn Outcomes?</div>
+          <div id="tenure-sankey-subtitle" class="chart-card-caption serif-note">A flow of burned forest area from land
+            tenure, through forest category, to burn outcome across 2016–21.</div>
+          <p class="chart-card-note">Flow width represents raster-cell count used as an area proxy, not exact hectares.
+            Forest only; tiny “Not Defined” tenure (≈0.03% of burned area) is omitted for clarity.</p>
+        </div>
+        <div class="chart-card-body">
+          <div id="tenure-sankey-control" class="custom-vega-bindings-container"></div>
+          <div id="vis-tenure-sankey" class="tenure-sankey-viz"></div>
+
+          <div class="burned-area-loss-legend tenure-sankey-legend" aria-label="Burn outcome colour legend">
+            <div class="legend-group">
+              <span class="legend-group-title">Burn outcome</span>
+              <div class="legend-items">
+                <div class="legend-item"><span class="swatch-icon" style="background:#B5202B;"></span><span
+                    class="legend-label">Unplanned only</span></div>
+                <div class="legend-item"><span class="swatch-icon" style="background:#E8842A;"></span><span
+                    class="legend-label">Both burns</span></div>
+                <div class="legend-item"><span class="swatch-icon" style="background:#6A994E;"></span><span
+                    class="legend-label">Planned only</span></div>
+                <div class="legend-item legend-notburnt-key"><span class="swatch-icon"
+                    style="background:#C9C0B2;"></span><span class="legend-label">Not burnt (all-area view)</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="streamgraph-insight tenure-sankey-insight">
+            <div class="insight-marker" aria-hidden="true"></div>
+            <div>
+              <h3>What does this add?</h3>
+              <p id="tenure-sankey-insight-text">
+                This view adds a land-management layer to the fire story. It shows how burned forest area connects land
+                tenure, forest type and burn outcome. Most burned forest area still sits in
+                <span class="sankey-key sankey-native">native forest</span>, and
+                <span class="sankey-key sankey-unplanned">unplanned-only burning</span> is larger than
+                <span class="sankey-key sankey-planned">planned-only burning</span>, indicating that the 2016–21 forest
+                fire pattern was shaped more by uncontrolled fire than by managed burning alone.
               </p>
             </div>
           </div>
@@ -578,6 +676,22 @@
         </div>
         <div class="chart-card-body">
           <div id="vis-domestic-commercial-claims"></div>
+
+          <div class="domestic-commercial-claims-legend" aria-label="Domestic vs commercial claims legend">
+            <div class="legend-group">
+              <span class="legend-group-title">Claim Type</span>
+              <div class="legend-items">
+                <div class="legend-item" data-claim-type="Domestic">
+                  <span class="swatch-icon" style="background: #f0a33a; border-radius: 2px;"></span>
+                  <span class="legend-label">Domestic claims</span>
+                </div>
+                <div class="legend-item" data-claim-type="Commercial">
+                  <span class="swatch-icon" style="background: #8f2f21; border-radius: 2px;"></span>
+                  <span class="legend-label">Commercial claims</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
@@ -814,7 +928,7 @@
 
   <!-- Main JS for Vega-embed -->
   <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-  <script src="js/main.js?v=20260531_fig3d_legend_v21"></script>
+  <script src="js/main.js?v=20260531_sankey_redesign_v25"></script>
 </body>
 
 </html>

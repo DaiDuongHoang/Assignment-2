@@ -5,3 +5,4 @@ chỉnh fig 2C highlights
 chỉnh data fig 3D
 thêm annotations fig 3D
 sửa legend fig 2D, fig 2C, 1B cho đẹp
+sửa lại hết insights/descriptions

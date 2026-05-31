@@ -683,12 +683,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .legend-item[data-severity],
-.legend-item[data-confidence] {
+.legend-item[data-confidence],
+.legend-item[data-claim-type] {
     cursor: pointer;
 }
 
 .legend-item[data-severity]:hover,
-.legend-item[data-confidence]:hover {
+.legend-item[data-confidence]:hover,
+.legend-item[data-claim-type]:hover {
     background-color: rgba(43, 38, 33, 0.05);
 }
 
@@ -2091,49 +2093,56 @@ h6 {
     background: #FFFDF9;
 }
 
-.burned-area-extremes-legend {
+.burned-area-extremes-legend,
+.fire-risk-trajectories-legend,
+.domestic-commercial-claims-legend,
+.burned-area-loss-legend {
     display: flex;
-    flex-wrap: nowrap;
-    align-items: center;
     justify-content: center;
-    gap: 16px;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 14px;
+    padding: 13px 18px;
+    background: rgba(255, 253, 249, 0.92);
+    border: 1px solid var(--border-warm);
+    border-radius: 12px;
     max-width: 1080px;
-    margin: 8px auto 0;
-    color: #334155;
-    font-size: 0.78rem;
-    font-weight: 600;
-    height: 16px;
-    line-height: 16px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.burned-area-extremes-legend .legend-title {
-    display: flex;
-    align-items: center;
-    height: 16px;
-    color: #5F6B7A;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    line-height: 16px;
-    margin-bottom: 0 !important;
-}
-
-.burned-area-extremes-legend span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    height: 16px;
-    line-height: 16px;
-}
-
-.burned-area-extremes-legend i {
+/* Trajectories size legend bubbles */
+.trajectory-bubble {
     display: inline-block;
+    border-radius: 50%;
+    background-color: #D2C9BF;
+    border: 1px solid rgba(43, 38, 33, 0.16);
     vertical-align: middle;
-    flex-shrink: 0;
-    width: 9px;
-    height: 9px;
-    border-radius: 999px;
-    box-shadow: 0 0 0 1px rgba(255, 253, 249, 0.9);
+    transition: transform 0.2s ease;
+}
+
+.trajectory-bubble.size-tiny {
+    width: 6px;
+    height: 6px;
+}
+
+.trajectory-bubble.size-small {
+    width: 10px;
+    height: 10px;
+}
+
+.trajectory-bubble.size-medium {
+    width: 16px;
+    height: 16px;
+}
+
+.trajectory-bubble.size-large {
+    width: 22px;
+    height: 22px;
+}
+
+.legend-item:hover .trajectory-bubble {
+    transform: scale(1.15);
 }
 
 #shift-chart-control .vega-bind select {
@@ -2482,17 +2491,7 @@ h6 {
     margin-right: auto;
 }
 
-.burned-area-loss-legend {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 28px;
-    margin-top: 14px;
-    padding: 13px 18px;
-    background: rgba(255, 253, 249, 0.92);
-    border: 1px solid var(--border-warm);
-    border-radius: 12px;
-}
+
 
 .burned-area-loss-insight {
     margin-top: 16px;
@@ -2509,5 +2508,93 @@ h6 {
     font-size: 0.85rem;
     color: #5E564E !important;
 }
+
+/* ===== FIG. 2E · FOREST TENURE AND BURN OUTCOME (ALLUVIAL) ===== */
+.tenure-sankey-viz {
+    width: 100%;
+    max-width: 1040px;
+    margin: 6px auto 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tenure-sankey-viz svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Toggle controls: lay the two radio groups out horizontally and centred */
+#tenure-sankey-control {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 6px;
+}
+
+#tenure-sankey-control .vega-bindings {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 16px;
+    background: var(--plot-bg);
+    border: 1px solid var(--border-warm);
+    border-radius: 12px;
+}
+
+#tenure-sankey-control .vega-bind {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+}
+
+#tenure-sankey-control .vega-bind-name {
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #6b5d50;
+}
+
+#tenure-sankey-control .vega-bind label {
+    font-size: 0.82rem;
+    color: #3b322b;
+    margin-right: 4px;
+}
+
+.tenure-sankey-legend {
+    max-width: 1060px;
+}
+
+.legend-notburnt-key {
+    opacity: 0.7;
+}
+
+.tenure-sankey-insight {
+    max-width: 1060px;
+    margin: 18px auto 0;
+    border-left-color: #9C6644 !important;
+}
+
+.tenure-sankey-insight .insight-marker {
+    background: linear-gradient(180deg, #9C6644, #4F772D, #B5202B) !important;
+}
+
+.sankey-key {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.sankey-key.sankey-lease { color: #9A6A48; }
+.sankey-key.sankey-priv { color: #8A5A3C; }
+.sankey-key.sankey-native { color: #3D6022; }
+.sankey-key.sankey-notburnt { color: #8C8175; }
+.sankey-key.sankey-unplanned { color: #B5202B; }
+.sankey-key.sankey-planned { color: #557A3E; }
 
 

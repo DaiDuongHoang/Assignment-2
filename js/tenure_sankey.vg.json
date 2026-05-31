@@ -1,0 +1,221 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "FIG. 2E · Forest tenure -> category -> burn outcome alluvial. Raw Vega; four precomputed layouts in flat node/link arrays, toggled by signals.",
+  "width": 1040,
+  "height": 620,
+  "padding": 5,
+  "autosize": "none",
+  "background": "transparent",
+  "config": { "text": { "font": "Inter, sans-serif" } },
+  "signals": [
+    {
+      "name": "areaView",
+      "value": "Burned forest only",
+      "bind": {
+        "input": "select",
+        "options": ["Burned forest only", "All forest area"],
+        "name": "View "
+      }
+    },
+    {
+      "name": "catDetail",
+      "value": "Simplified categories",
+      "bind": {
+        "input": "select",
+        "options": ["Simplified categories", "Detailed categories"],
+        "name": "Categories "
+      }
+    },
+    {
+      "name": "viewKey",
+      "update": "(areaView === 'All forest area' ? 'all' : 'burned') + '-' + (catDetail === 'Detailed categories' ? 'detailed' : 'simplified')"
+    },
+    {
+      "name": "hoverNode",
+      "value": null,
+      "on": [
+        { "events": "@nodeRects:mouseover", "update": "datum.name" },
+        { "events": "@nodeRects:mouseout", "update": "null" }
+      ]
+    },
+    {
+      "name": "hoverLink",
+      "value": null,
+      "on": [
+        { "events": "@ribbons:mouseover", "update": "datum.source + '>>' + datum.target" },
+        { "events": "@ribbons:mouseout", "update": "null" }
+      ]
+    },
+    {
+      "name": "hoverEndpoint",
+      "value": null,
+      "on": [
+        { "events": "@ribbons:mouseover", "update": "datum" },
+        { "events": "@ribbons:mouseout", "update": "null" }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "name": "allNodes",
+      "url": "data/tenure_sankey_nodes.json"
+    },
+    {
+      "name": "nodes",
+      "source": "allNodes",
+      "transform": [{ "type": "filter", "expr": "datum.viewKey === viewKey" }]
+    },
+    {
+      "name": "allLinks",
+      "url": "data/tenure_sankey_links.json"
+    },
+    {
+      "name": "links",
+      "source": "allLinks",
+      "transform": [{ "type": "filter", "expr": "datum.viewKey === viewKey" }]
+    }
+  ],
+  "marks": [
+    {
+      "type": "path",
+      "name": "ribbons",
+      "from": { "data": "links" },
+      "encode": {
+        "enter": {
+          "cursor": { "value": "pointer" }
+        },
+        "update": {
+          "path": { "field": "path" },
+          "fill": { "field": "fill" },
+          "stroke": {
+            "signal": "datum.value < 500000 ? '#7A7068' : 'rgba(43, 38, 33, 0.15)'"
+          },
+          "strokeWidth": {
+            "signal": "datum.value < 500000 ? 0.8 : 0.5"
+          },
+          "tooltip": {
+            "signal": "datum.stage === 1 ? {'Tenure': datum.source, 'Forest category': datum.target, 'Cell count': datum.valueFull, 'Share of view': datum.share + '%'} : {'Forest category': datum.source, 'Burn outcome': datum.target, 'Cell count': datum.valueFull, 'Share of view': datum.share + '%'}"
+          },
+          "fillOpacity": {
+            "signal": "(hoverLink === datum.source + '>>' + datum.target) ? 0.9 : (hoverLink === null && hoverNode === null ? 0.5 : ((hoverNode !== null && (datum.source === hoverNode || datum.target === hoverNode)) || (hoverEndpoint !== null && (datum.source === hoverEndpoint.source || datum.target === hoverEndpoint.target || datum.source === hoverEndpoint.target)) ? 0.78 : 0.1))"
+          }
+        }
+      }
+    },
+    {
+      "type": "rect",
+      "name": "nodeRects",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": {
+          "cornerRadius": { "value": 3 },
+          "stroke": { "value": "#FFFDF9" },
+          "strokeWidth": { "value": 1 },
+          "cursor": { "value": "pointer" }
+        },
+        "update": {
+          "x": { "field": "x" },
+          "x2": { "field": "x2" },
+          "y": { "field": "y" },
+          "y2": { "field": "y2" },
+          "fill": { "field": "color" },
+          "tooltip": {
+            "signal": "{'Node': datum.name, 'Cell count': datum.valueFull, 'Share of view': datum.share + '%'}"
+          },
+          "fillOpacity": {
+            "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.4"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "nodeLabels",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": {
+          "baseline": { "value": "middle" },
+          "fontSize": { "value": 12.5 },
+          "fontWeight": { "value": 600 }
+        },
+        "update": {
+          "x": { "field": "labelX" },
+          "y": { "signal": "isArray(datum.label) ? datum.labelY - 11 : datum.labelY - 6" },
+          "align": { "field": "labelAlign" },
+          "text": { "field": "label" },
+          "fill": { "signal": "datum.labelOutside ? '#2B2621' : '#FFFFFF'" },
+          "fillOpacity": {
+            "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.3"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "nodeValues",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": {
+          "baseline": { "value": "middle" },
+          "fontSize": { "value": 10.5 },
+          "fontWeight": { "value": 500 }
+        },
+        "update": {
+          "x": { "field": "labelX" },
+          "y": { "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9" },
+          "align": { "field": "labelAlign" },
+          "text": { "signal": "datum.valueLabel + '  ·  ' + datum.share + '%'" },
+          "fill": { "signal": "datum.labelOutside ? '#7A7068' : 'rgba(255, 255, 255, 0.85)'" },
+          "fillOpacity": {
+            "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.25"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": { "value": 148 },
+          "y": { "value": 16 },
+          "align": { "value": "right" },
+          "baseline": { "value": "top" },
+          "fontSize": { "value": 11.5 },
+          "fontWeight": { "value": 800 },
+          "fill": { "value": "#9C6644" },
+          "text": { "value": "TENURE" }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": { "value": 505 },
+          "y": { "value": 16 },
+          "align": { "value": "center" },
+          "baseline": { "value": "top" },
+          "fontSize": { "value": 11.5 },
+          "fontWeight": { "value": 800 },
+          "fill": { "value": "#4F772D" },
+          "text": { "value": "FOREST CATEGORY" }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "encode": {
+        "enter": {
+          "x": { "value": 862 },
+          "y": { "value": 16 },
+          "align": { "value": "left" },
+          "baseline": { "value": "top" },
+          "fontSize": { "value": 11.5 },
+          "fontWeight": { "value": 800 },
+          "fill": { "value": "#B5202B" },
+          "text": { "value": "BURN OUTCOME" }
+        }
+      }
+    }
+  ]
+}

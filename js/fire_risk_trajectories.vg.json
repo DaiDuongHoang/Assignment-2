@@ -162,25 +162,7 @@
               "range": [30, 420],
               "domain": [0, 9000000]
             },
-            "legend": {
-              "orient": "bottom",
-              "direction": "horizontal",
-              "titleFont": "Inter, sans-serif",
-              "titleFontSize": 10,
-              "titleFontWeight": 600,
-              "titleColor": "#5C544F",
-              "labelFont": "Inter, sans-serif",
-              "labelFontSize": 9.5,
-              "labelColor": "#786e66",
-              "offset": 12,
-              "values": [0, 1000000, 5000000, 8000000],
-              "labelExpr": "datum.value === 0 ? '<0.1M' : (datum.value / 1000000) + 'M'",
-              "symbolFillColor": "#D2C9BF",
-              "symbolStrokeColor": "#FFFDF9",
-              "symbolStrokeWidth": 1,
-              "symbolOpacity": 0.5,
-              "symbolSize": 80
-            }
+            "legend": null
           },
           "color": {
             "field": "fire_season",
