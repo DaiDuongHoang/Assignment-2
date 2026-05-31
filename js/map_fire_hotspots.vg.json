@@ -83,9 +83,10 @@
       ],
       "mark": {
         "type": "circle",
-        "opacity": 0.5,
-        "blend": "multiply",
-        "stroke": null
+        "opacity": 0.4,
+        "stroke": "white",
+        "strokeWidth": 0.1,
+        "strokeOpacity": 0.6
       },
       "encoding": {
         "longitude": {

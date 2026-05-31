@@ -1,4 +1,4 @@
-const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260531_savanna_label_v4";
+const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260531_savanna_label_v6";
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260531_color_ramp_v23";
 const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v6";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v15";
