@@ -1,4 +1,0 @@
-thêm annotations vào charts
-chỉnh data fig 3D
-thêm annotations fig 3D
-sửa lại hết insights/descriptions
