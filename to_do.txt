@@ -1,3 +1,7 @@
 sửa lại màu sắc layout sao cho đẹp nhất có thể và consistent
 check xem màu palette cả trang có consistent không
 thêm annotations vào charts
+chỉnh fig 2C highlights
+chỉnh data fig 3D
+thêm annotations fig 3D
+sửa legend fig 2D, fig 2C, 1B cho đẹp

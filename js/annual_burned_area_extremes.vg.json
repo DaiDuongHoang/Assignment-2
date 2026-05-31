@@ -111,7 +111,7 @@
     "x": {
       "type": "quantitative",
       "scale": {
-        "domain": {"signal": "displayMode === 'Change from baseline' ? [-1500000, 5200000] : [-500000, 8000000]"}
+        "domain": [-1500000, 8000000]
       },
       "axis": {
         "title": {"signal": "displayMode === 'Change from baseline' ? 'Change in Burned Cells from Pre-Black Summer Average' : 'Burned Cell Totals'"},
@@ -128,7 +128,7 @@
         "titleFontSize": 12,
         "titleFontWeight": 700,
         "titlePadding": 10,
-        "labelExpr": "displayMode === 'Before vs Black Summer' && datum.value < 0 ? '' : (abs(datum.value) >= 1000000 ? (datum.value / 1000000) + 'M' : abs(datum.value) >= 1000 ? (datum.value / 1000) + 'k' : datum.value)"
+        "labelExpr": "abs(datum.value) >= 1000000 ? (datum.value / 1000000) + 'M' : abs(datum.value) >= 1000 ? (datum.value / 1000) + 'k' : datum.value"
       }
     }
   },
