@@ -1110,6 +1110,17 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.45;
 }
 
+/* Data-encoded keywords matching the FIG. 3C claim-type bars */
+.claims-split-insight .claim-domestic {
+    color: #c2772a; /* darkened domestic orange (#f0a33a) for body-text contrast */
+    font-weight: 700;
+}
+
+.claims-split-insight .claim-commercial {
+    color: #8f2f21; /* commercial deep red */
+    font-weight: 700;
+}
+
 .chart-card-footer {
     display: flex;
     align-items: center;
@@ -2086,6 +2097,28 @@ h6 {
     line-height: 1.45;
 }
 
+.wildlife-waffle-insight {
+    margin: 14px auto 0;
+    max-width: 1180px;
+    padding: 13px 16px;
+    border-left-color: var(--color-sec4);
+}
+
+.wildlife-waffle-insight .insight-marker {
+    background: linear-gradient(180deg, #c0392b, #92400e 55%, #f59e0b);
+}
+
+.wildlife-waffle-insight p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+}
+
+/* Data-encoded fauna keywords matching the FIG. 4A waffle palette */
+.wildlife-waffle-insight .fauna-reptiles { color: #c0392b; font-weight: 700; }
+.wildlife-waffle-insight .fauna-birds    { color: #c25e22; font-weight: 700; } /* darkened from #e8824a */
+.wildlife-waffle-insight .fauna-mammals  { color: #92400e; font-weight: 700; }
+.wildlife-waffle-insight .fauna-frogs    { color: #b9760a; font-weight: 700; } /* darkened from #f59e0b */
+
 .map-grid {
     gap: 28px;
 }
@@ -2150,6 +2183,17 @@ h6 {
     max-width: 1080px;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* FIG. 3C · tighten the gap between the chart and its legend */
+.domestic-commercial-claims-legend {
+    margin-top: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#vis-domestic-commercial-claims {
+    margin-bottom: -6px;
 }
 
 /* Trajectories size legend bubbles */
