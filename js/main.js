@@ -7,7 +7,7 @@ const streamgraphSpec = "js/streamgraph.vg.json?v=20260531_label_v16";
 const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v18";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260531_premium_palette_v22";
 
-const economicShockSpec = "js/economic_shock.vg.json?v=20260531_overview_filter_v8";
+const economicShockSpec = "js/economic_shock.vg.json?v=20260531_zoompan_scales_v9";
 const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_legend_hover_v3";
 const burnedAreaLossSpec = "js/burned_area_vs_economic_loss.vg.json?v=20260531_fig3d_restore_v5";
 const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260531_fig4b_editorial_v4";

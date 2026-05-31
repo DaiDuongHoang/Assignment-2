@@ -1,5 +1,18 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": "container",
+  "height": 430,
+  "padding": {
+    "left": 8,
+    "right": 18,
+    "top": 6,
+    "bottom": 8
+  },
+  "resolve": {
+    "scale": {
+      "color": "independent"
+    }
+  },
   "data": {
     "url": "data/ica_bushfire_cleaned.json"
   },
@@ -35,13 +48,7 @@
       "titleFontWeight": 700
     }
   },
-  "vconcat": [
-    {
-    "width": "container",
-    "height": 400,
-    "padding": { "left": 8, "right": 18, "top": 6, "bottom": 4 },
-    "resolve": { "scale": { "color": "independent" } },
-    "layer": [
+  "layer": [
     {
       "params": [
         {
@@ -53,9 +60,33 @@
             "nearest": false,
             "fields": ["year", "loss_billion", "severity_category"]
           }
+        },
+        {
+          "name": "grid",
+          "select": {
+            "type": "interval",
+            "translate": "[mousedown[!event.shiftKey], window:mouseup] > window:mousemove!",
+            "zoom": "wheel!"
+          },
+          "bind": "scales"
+        },
+        {
+          "name": "brush",
+          "select": {
+            "type": "interval",
+            "encodings": ["x"],
+            "on": "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!",
+            "translate": "[mousedown[event.shiftKey], window:mouseup] > window:mousemove!",
+            "mark": {
+              "fill": "#3A332E",
+              "fillOpacity": 0.06,
+              "stroke": "#3A332E",
+              "strokeWidth": 1,
+              "strokeDash": [3, 3]
+            }
+          }
         }
       ],
-      "transform": [{ "filter": { "param": "brush" } }],
       "mark": {
         "type": "circle",
         "opacity": 0.85,
@@ -70,7 +101,7 @@
           "title": "Year of Disaster",
           "scale": {
             "zero": false,
-            "nice": true
+            "domain": [1965, 2028]
           },
           "axis": {
             "format": "d",
@@ -142,6 +173,10 @@
         ],
         "opacity": {
           "condition": [
+            {
+              "test": "length(data('brush_store')) > 0 && !vlSelectionTest('brush_store', datum)",
+              "value": 0.08
+            },
             {
               "test": "select_severity !== 'All' && datum.severity_category !== select_severity",
               "value": 0.05
@@ -219,10 +254,7 @@
       }
     },
     {
-      "transform": [
-        { "filter": "datum.is_black_summer === true" },
-        { "filter": { "param": "brush" } }
-      ],
+      "transform": [{ "filter": "datum.is_black_summer === true" }],
       "mark": {
         "type": "point",
         "shape": "circle",
@@ -249,6 +281,10 @@
         },
         "opacity": {
           "condition": [
+            {
+              "test": "length(data('brush_store')) > 0 && !vlSelectionTest('brush_store', datum)",
+              "value": 0.08
+            },
             {
               "test": "select_severity !== 'All' && select_severity !== 'Catastrophic'",
               "value": 0.05
@@ -310,12 +346,15 @@
         {
           "calculate": "datum.year === 1967 ? '1967 Bushfire' : datum.event_name === 'Ash Wednesday Bushfire (VIC)' ? 'Ash Wednesday' : datum.event_name === 'Black Saturday Bushfire' ? 'Black Saturday' : datum.event_name === '2019/20 Bushfires (NSW,QLD,SA,VIC)' ? 'Black Summer' : datum.event_name === 'Canberra Bushfire' ? 'Canberra Bushfire' : datum.event_name",
           "as": "short_label"
-        },
-        { "filter": { "param": "brush" } }
+        }
       ],
       "encoding": {
         "opacity": {
           "condition": [
+            {
+              "test": "length(data('brush_store')) > 0 && !vlSelectionTest('brush_store', datum)",
+              "value": 0.0
+            },
             {
               "test": "select_severity !== 'All' && datum.severity_category !== select_severity",
               "value": 0.0
@@ -430,7 +469,6 @@
           }
         }
       ],
-      "transform": [{ "filter": { "param": "brush" } }],
       "mark": {
         "type": "text",
         "font": "Inter",
@@ -462,6 +500,10 @@
         },
         "opacity": {
           "condition": [
+            {
+              "test": "length(data('brush_store')) > 0 && !vlSelectionTest('brush_store', datum)",
+              "value": 0.0
+            },
             {
               "test": "select_severity !== 'All' && select_severity !== 'Catastrophic'",
               "value": 0.0
@@ -518,54 +560,6 @@
             "title": "Severity Category:"
           }
         ]
-      }
-    }
-    ]
-    },
-    {
-      "width": "container",
-      "height": 64,
-      "padding": { "left": 8, "right": 18, "top": 2, "bottom": 4 },
-      "mark": { "type": "circle", "size": 34, "opacity": 0.65, "stroke": "#FFFDF9", "strokeWidth": 0.4 },
-      "params": [
-        {
-          "name": "brush",
-          "select": {
-            "type": "interval",
-            "encodings": ["x"],
-            "mark": {
-              "fill": "#3A332E",
-              "fillOpacity": 0.07,
-              "stroke": "#3A332E",
-              "strokeWidth": 1,
-              "strokeDash": [3, 3]
-            }
-          }
-        }
-      ],
-      "encoding": {
-        "x": {
-          "field": "year",
-          "type": "quantitative",
-          "title": "Overview · drag to select a time range to zoom; drag the band to pan; double-click to reset",
-          "scale": { "zero": false, "domain": [1965, 2028] },
-          "axis": { "format": "d", "grid": false, "tickCount": 8, "titlePadding": 6 }
-        },
-        "y": {
-          "field": "loss_billion",
-          "type": "quantitative",
-          "axis": null,
-          "scale": { "domain": [-0.125, 4.5], "nice": false }
-        },
-        "color": {
-          "field": "severity_category",
-          "type": "nominal",
-          "scale": {
-            "domain": ["Medium", "High", "Catastrophic"],
-            "range": ["#F4B942", "#EB371F", "#9D030E"]
-          },
-          "legend": null
-        }
       }
     }
   ]
