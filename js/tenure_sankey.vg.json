@@ -27,6 +27,10 @@
       }
     },
     {
+      "name": "chartHeight",
+      "update": "catDetail === 'Detailed categories' ? 760 : 640"
+    },
+    {
       "name": "viewKey",
       "update": "(areaView === 'All forest area' ? 'all' : 'burned') + '-' + (catDetail === 'Detailed categories' ? 'detailed' : 'simplified')"
     },
@@ -94,10 +98,10 @@
             "signal": "datum.value < 500000 ? 0.8 : 0.5"
           },
           "tooltip": {
-            "signal": "datum.stage === 1 ? {'Tenure': datum.source, 'Forest category': datum.target, 'Cell count': datum.valueFull, 'Share of view': datum.share + '%'} : {'Forest category': datum.source, 'Burn outcome': datum.target, 'Cell count': datum.valueFull, 'Share of view': datum.share + '%'}"
+            "signal": "datum.stage === 1 ? {'Tenure': datum.source, 'Forest category': datum.target, 'Cell count': datum.valueFull, 'Share of view': (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')} : {'Forest category': datum.source, 'Burn outcome': datum.target, 'Cell count': datum.valueFull, 'Share of view': (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')}"
           },
           "fillOpacity": {
-            "signal": "(hoverLink === datum.source + '>>' + datum.target) ? 0.9 : (hoverLink === null && hoverNode === null ? 0.5 : ((hoverNode !== null && (datum.source === hoverNode || datum.target === hoverNode)) || (hoverEndpoint !== null && (datum.source === hoverEndpoint.source || datum.target === hoverEndpoint.target || datum.source === hoverEndpoint.target)) ? 0.78 : 0.1))"
+            "signal": "(hoverLink === datum.source + '>>' + datum.target) ? 0.95 : (hoverLink === null && hoverNode === null ? (datum.value < 500000 ? 0.25 : (datum.stage === 1 ? 0.40 : 0.55)) : ((hoverNode !== null && (datum.source === hoverNode || datum.target === hoverNode)) || (hoverEndpoint !== null && (datum.source === hoverEndpoint.source || datum.target === hoverEndpoint.target || datum.source === hoverEndpoint.target)) ? 0.85 : 0.05))"
           }
         }
       }
@@ -120,10 +124,35 @@
           "y2": { "field": "y2" },
           "fill": { "field": "color" },
           "tooltip": {
-            "signal": "{'Node': datum.name, 'Cell count': datum.valueFull, 'Share of view': datum.share + '%'}"
+            "signal": "{'Node': datum.name, 'Cell count': datum.valueFull, 'Share of view': (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')}"
           },
           "fillOpacity": {
             "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.4"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "name": "nodeLabelsHalo",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": {
+          "baseline": { "value": "middle" },
+          "fontSize": { "value": 12.5 },
+          "fontWeight": { "value": 600 },
+          "stroke": { "value": "#FFFDF9" },
+          "strokeWidth": { "value": 4.5 },
+          "strokeJoin": { "value": "round" }
+        },
+        "update": {
+          "x": { "field": "labelX" },
+          "y": { "signal": "isArray(datum.label) ? datum.labelY - 11 : datum.labelY - 6" },
+          "align": { "field": "labelAlign" },
+          "text": { "field": "label" },
+          "stroke": { "signal": "datum.labelOutside ? '#FFFDF9' : 'transparent'" },
+          "fillOpacity": {
+            "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.3"
           }
         }
       }
@@ -152,6 +181,31 @@
     },
     {
       "type": "text",
+      "name": "nodeValuesHalo",
+      "from": { "data": "nodes" },
+      "encode": {
+        "enter": {
+          "baseline": { "value": "middle" },
+          "fontSize": { "value": 10.5 },
+          "fontWeight": { "value": 500 },
+          "stroke": { "value": "#FFFDF9" },
+          "strokeWidth": { "value": 3.5 },
+          "strokeJoin": { "value": "round" }
+        },
+        "update": {
+          "x": { "field": "labelX" },
+          "y": { "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9" },
+          "align": { "field": "labelAlign" },
+          "text": { "signal": "datum.valueLabel + '  ·  ' + (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')" },
+          "stroke": { "signal": "datum.labelOutside ? '#FFFDF9' : 'transparent'" },
+          "fillOpacity": {
+            "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.25"
+          }
+        }
+      }
+    },
+    {
+      "type": "text",
       "name": "nodeValues",
       "from": { "data": "nodes" },
       "encode": {
@@ -164,7 +218,7 @@
           "x": { "field": "labelX" },
           "y": { "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9" },
           "align": { "field": "labelAlign" },
-          "text": { "signal": "datum.valueLabel + '  ·  ' + datum.share + '%'" },
+          "text": { "signal": "datum.valueLabel + '  ·  ' + (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')" },
           "fill": { "signal": "datum.labelOutside ? '#7A7068' : 'rgba(255, 255, 255, 0.85)'" },
           "fillOpacity": {
             "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.25"

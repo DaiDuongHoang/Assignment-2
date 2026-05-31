@@ -36,13 +36,10 @@ const linksOut = path.join(__dirname, "..", "data", "tenure_sankey_links.json");
 
 // ---- Canvas geometry (larger + airier than v1) ----------------------------
 const W = 1040;
-const H = 620;
 const TOP = 40;
 const BOT = 30;
-const PAD = 26; // generous vertical gap between nodes in a column
 const COL_W = [30, 110, 30]; // custom widths per column to allow outer labels room
 const COL_X = [160, 450, 820]; // left edge of each column's node
-const MIN_NODE_H = 7; // floor so tiny nodes stay visible/hoverable
 const MIN_LINK_H = 3; // floor so thin flows are not hairlines
 
 // ---- Recoding --------------------------------------------------------------
@@ -149,30 +146,44 @@ function buildView({ burnedOnly, simplified }) {
   const catOrder = Object.keys(catTot).sort((a, b) => catTot[b] - catTot[a]);
   const burnOrder = outcomeOrder.filter((o) => burnTot[o]);
 
-  // 4. shared value->pixel scale with min-thickness floors.
-  //    We solve per column: heights = max(MIN_NODE_H, value*ky), gaps fixed.
-  //    Pick ky so the tallest column fits exactly.
-  function columnHeight(order, totals, ky) {
-    const hs = order.map((k) => Math.max(MIN_NODE_H, totals[k] * ky));
-    return hs.reduce((a, b) => a + b, 0) + (order.length - 1) * PAD;
+  // 4. Dynamic vertical settings based on simplified vs detailed mode
+  const viewH = simplified ? 640 : 760;
+  const colPAD = [
+    simplified ? 32 : 36,
+    simplified ? 36 : 60, // Wider vertical separation in detailed category column to prevent overlap
+    simplified ? 32 : 36
+  ];
+  const minNodeHCol = [
+    12,
+    simplified ? 20 : 25, // Minimum node height floor so tiny category nodes stay legible
+    12
+  ];
+  const MIN_INSIDE = simplified ? 30 : 35; // Threshold for holding the label inside rather than outside
+  const avail = viewH - TOP - BOT;
+
+  function columnHeight(order, totals, colIndex, ky) {
+    const hs = order.map((k) => Math.max(minNodeHCol[colIndex], totals[k] * ky));
+    return hs.reduce((a, b) => a + b, 0) + (order.length - 1) * colPAD[colIndex];
   }
-  const avail = H - TOP - BOT;
+  
   // initial ky ignoring floors
-  let ky = (avail - (Math.max(tenOrder.length, catOrder.length, burnOrder.length) - 1) * PAD) / total;
+  let ky = (avail - (Math.max(tenOrder.length, catOrder.length, burnOrder.length) - 1) * (simplified ? 36 : 60)) / total;
   // iterate: floors steal space from big nodes, so shrink ky until all columns fit
   for (let iter = 0; iter < 40; iter++) {
     const maxH = Math.max(
-      columnHeight(tenOrder, tenTot, ky),
-      columnHeight(catOrder, catTot, ky),
-      columnHeight(burnOrder, burnTot, ky)
+      columnHeight(tenOrder, tenTot, 0, ky),
+      columnHeight(catOrder, catTot, 1, ky),
+      columnHeight(burnOrder, burnTot, 2, ky)
     );
     if (maxH <= avail) break;
     ky *= (avail / maxH) * 0.999;
   }
 
   function layoutColumn(order, totals, colIndex, colorMap, isOutcome) {
-    const hs = order.map((k) => Math.max(MIN_NODE_H, totals[k] * ky));
-    const blockH = hs.reduce((a, b) => a + b, 0) + (order.length - 1) * PAD;
+    const pad = colPAD[colIndex];
+    const minH = minNodeHCol[colIndex];
+    const hs = order.map((k) => Math.max(minH, totals[k] * ky));
+    const blockH = hs.reduce((a, b) => a + b, 0) + (order.length - 1) * pad;
     let y = TOP + (avail - blockH) / 2;
     const nodes = {};
     order.forEach((key, i) => {
@@ -189,7 +200,7 @@ function buildView({ burnedOnly, simplified }) {
         outOff: y,
         inOff: y
       };
-      y += h + PAD;
+      y += h + pad;
     });
     return nodes;
   }
@@ -254,7 +265,7 @@ function buildView({ burnedOnly, simplified }) {
         value: l.value,
         valueLabel: fmtM(l.value),
         valueFull: fmt(l.value),
-        share: +((100 * l.value) / total).toFixed(1),
+        share: +((100 * l.value) / total).toFixed(2),
         fill: colorByTarget ? tgtNodes[l.g].color : srcNodes[l.s].color
       };
     });
@@ -264,9 +275,16 @@ function buildView({ burnedOnly, simplified }) {
   const links1 = makeStage((t) => t.ten, (t) => t.cat, tenNodes, catNodes, false);
   const links2 = makeStage((t) => t.cat, (t) => t.burn, catNodes, burnNodes, true);
 
+  // Expand node vertical sizes dynamically to perfectly encompass all incoming and outgoing links,
+  // preventing links from overflowing outside node boundaries due to link thickness clamping floors.
+  [tenNodes, catNodes, burnNodes].forEach((nodeMap) => {
+    Object.values(nodeMap).forEach((n) => {
+      n.y2 = Math.max(n.y2, n.inOff, n.outOff);
+    });
+  });
+
   // 6. emit node objects with label geometry. Outer columns label outside.
   //    Middle column: label inside if tall enough, else outside-right.
-  const MIN_INSIDE = 30;
   function emitNodes(nodes, colIndex) {
     const list = Object.values(nodes);
     const out = list.map((n) => {
@@ -285,7 +303,7 @@ function buildView({ burnedOnly, simplified }) {
         align = "center";
         outside = false;
       } else {
-        labelX = n.x2 + 12;
+        labelX = n.x2 + 14; // Wider margin for outside middle-column labels to prevent link overlap
         align = "left";
         outside = true;
       }
@@ -309,7 +327,7 @@ function buildView({ burnedOnly, simplified }) {
         value: n.value,
         valueLabel: fmtM(n.value),
         valueFull: fmt(n.value),
-        share: +((100 * n.value) / total).toFixed(1),
+        share: +((100 * n.value) / total).toFixed(2),
         color: n.color,
         labelX: +labelX.toFixed(2),
         labelY: +((n.y + n.y2) / 2).toFixed(2),

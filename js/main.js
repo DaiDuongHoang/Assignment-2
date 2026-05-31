@@ -2,7 +2,7 @@ const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260531_savanna_label_
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260531_color_ramp_v23";
 const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v3";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v15";
-const tenureSankeySpec = "js/tenure_sankey.vg.json?v=20260531_sankey_redesign_v4";
+const tenureSankeySpec = "js/tenure_sankey.vg.json?v=20260531_sankey_redesign_v5";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260531_label_v16";
 const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v18";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";
@@ -220,11 +220,12 @@ vegaEmbed('#vis-tenure-sankey', tenureSankeySpec, {
   const view = result.view;
   const container = document.querySelector('#vis-tenure-sankey');
 
-  // Make the fixed-size diagram scale responsively to its container width.
+  // Make the fixed-size diagram scale responsively to its container width and dynamic height.
   function makeResponsive() {
     const svg = container ? container.querySelector('svg') : null;
     if (svg) {
-      svg.setAttribute('viewBox', '0 0 1040 620');
+      const currentHeight = view.signal('chartHeight') || 640;
+      svg.setAttribute('viewBox', `0 0 1040 ${currentHeight}`);
       svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
       svg.style.width = '100%';
       svg.style.height = 'auto';
@@ -232,9 +233,14 @@ vegaEmbed('#vis-tenure-sankey', tenureSankeySpec, {
       svg.removeAttribute('height');
     }
   }
-  makeResponsive();
+  
+  // Set initial height layout
+  const initialHeight = view.signal('chartHeight') || 640;
+  view.height(initialHeight).runAsync().then(() => {
+    makeResponsive();
+  });
 
-  // Relocate the radio-button bindings into the styled control container.
+  // Relocate the select bindings into the styled control container.
   const target = document.querySelector('#tenure-sankey-control');
   const bindings = document.querySelector('#vis-tenure-sankey .vega-bindings');
   if (target && bindings) {
@@ -252,15 +258,40 @@ vegaEmbed('#vis-tenure-sankey', tenureSankeySpec, {
     'Burned forest only': 'This view adds a land-management layer to the fire story. It shows how burned forest area connects land tenure, forest type and burn outcome. Most burned forest area still sits in native forest, and unplanned-only burning is larger than planned-only burning, indicating that the 2016–21 forest fire pattern was shaped more by uncontrolled fire than by managed burning alone.',
     'All forest area': 'This broader view shows that most forest area was not burnt during 2016–21, but among the forest area that did burn, unplanned outcomes were more prominent than planned-only burning.'
   };
+
+  const notBurntKey = document.querySelector('.legend-notburnt-key');
+
   view.addSignalListener('areaView', function(name, value) {
     if (subtitleEl && subtitles[value]) subtitleEl.textContent = subtitles[value];
     if (insightEl && insights[value]) insightEl.textContent = insights[value];
-    // re-apply responsive sizing after the view re-renders
+    
+    // Dynamically show/hide "Not burnt" legend swatch so it does not compete in "Burned forest only" mode
+    if (notBurntKey) {
+      if (value === 'Burned forest only') {
+        notBurntKey.style.display = 'none';
+      } else {
+        notBurntKey.style.display = 'flex';
+      }
+    }
+    
     requestAnimationFrame(makeResponsive);
   });
-  view.addSignalListener('catDetail', function() {
-    requestAnimationFrame(makeResponsive);
+
+  view.addSignalListener('chartHeight', function(name, value) {
+    view.height(value).runAsync().then(() => {
+      requestAnimationFrame(makeResponsive);
+    });
   });
+
+  // Handle initial legend display state based on areaView
+  if (notBurntKey) {
+    const initialView = view.signal('areaView') || 'Burned forest only';
+    if (initialView === 'Burned forest only') {
+      notBurntKey.style.display = 'none';
+    } else {
+      notBurntKey.style.display = 'flex';
+    }
+  }
 }).catch(console.error);
 
 // Embed the major bushfire events timeline (Section 3)
