@@ -18,8 +18,10 @@
       "name": "statusHover",
       "value": null,
       "on": [
-        {"events": "@legendItem:mouseover, @legendSwatch:mouseover, @legendLabel:mouseover", "update": "datum.threat_status"},
-        {"events": "@legendItem:mouseout, @legendSwatch:mouseout, @legendLabel:mouseout", "update": "null"}
+        {
+          "events": "@legendItem:click, @legendSwatch:click, @legendLabel:click",
+          "update": "statusHover === datum.threat_status ? null : datum.threat_status"
+        }
       ]
     },
     {
@@ -256,7 +258,7 @@
           "width": {"signal": "datum.threat_status === 'Critically Endangered' ? 158 : datum.threat_status === 'Conservation Dependent' ? 178 : datum.threat_status === 'Endangered' ? 112 : datum.threat_status === 'Vulnerable' ? 102 : 66"},
           "height": {"signal": "legendItemHeight"},
           "cornerRadius": {"value": 6},
-          "cursor": {"value": "default"},
+          "cursor": {"value": "pointer"},
           "fill": {"value": "#201A16"}
         },
         "update": {
@@ -276,7 +278,8 @@
           "size": {"value": 105},
           "fill": {"scale": "statusColour", "field": "threat_status"},
           "stroke": {"value": "rgba(43, 38, 33, 0.16)"},
-          "strokeWidth": {"value": 0.8}
+          "strokeWidth": {"value": 0.8},
+          "cursor": {"value": "pointer"}
         },
         "update": {
           "opacity": {"signal": "statusHover && statusHover !== datum.threat_status ? 0.42 : 1"}
@@ -297,7 +300,8 @@
           "font": {"value": "Inter"},
           "fontSize": {"value": 12},
           "fontWeight": {"value": 700},
-          "fill": {"value": "#334155"}
+          "fill": {"value": "#334155"},
+          "cursor": {"value": "pointer"}
         },
         "update": {
           "opacity": {"signal": "statusHover && statusHover !== datum.threat_status ? 0.45 : 1"}

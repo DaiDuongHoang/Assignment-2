@@ -1,6 +1,6 @@
 const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260531_savanna_label_v3";
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260531_color_ramp_v23";
-const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v2";
+const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v3";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v14";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260531_label_v16";
 const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v17";
@@ -8,8 +8,8 @@ const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full
 
 const economicShockSpec = "js/economic_shock.vg.json?v=20260530_compact_v1";
 const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_legend_hover_v2";
-const burnedAreaLossSpec = "js/burned_area_vs_economic_loss.vg.json?v=20260531_fig3d_restore_v4";
-const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260531_fig4b_editorial_v3";
+const burnedAreaLossSpec = "js/burned_area_vs_economic_loss.vg.json?v=20260531_fig3d_restore_v5";
+const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260531_fig4b_editorial_v4";
 
 // Embed the Fire.csv hotspot map (Row 1)
 vegaEmbed("#vis-fire-hotspots", fireHotspotsSpec, { "actions": false })
@@ -247,11 +247,28 @@ vegaEmbed('#vis-domestic-commercial-claims', domesticCommercialClaimsSpec, { "ac
 // Embed the burned area vs economic loss scatter (Section 3, Fig 3D)
 vegaEmbed('#vis-burned-area-loss', burnedAreaLossSpec, { "actions": false })
   .then(function(result) {
+    const view = result.view;
     const target = document.querySelector('#burned-area-loss-control');
     const bindings = document.querySelector('#vis-burned-area-loss .vega-bindings');
     if (target && bindings) {
       target.appendChild(bindings);
     }
+
+    // Custom HTML Legend interactive hover highlight
+    const legendItems = document.querySelectorAll('.burned-area-loss-legend [data-confidence]');
+    legendItems.forEach(item => {
+      item.addEventListener('mouseenter', function() {
+        const confidence = this.getAttribute('data-confidence');
+        view.signal('hover_confidence', confidence).runAsync().catch(console.error);
+        legendItems.forEach(li => li.classList.remove('active-legend-filter'));
+        this.classList.add('active-legend-filter');
+      });
+
+      item.addEventListener('mouseleave', function() {
+        view.signal('hover_confidence', null).runAsync().catch(console.error);
+        legendItems.forEach(li => li.classList.remove('active-legend-filter'));
+      });
+    });
   })
   .catch(console.error);
 

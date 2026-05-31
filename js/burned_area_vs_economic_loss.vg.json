@@ -48,6 +48,10 @@
         "options": ["All matched events", "High confidence only"],
         "name": "Show: "
       }
+    },
+    {
+      "name": "hover_confidence",
+      "value": null
     }
   ],
   "encoding": {
@@ -129,7 +133,16 @@
           "legend": null
         },
         "opacity": {
-          "condition": {"param": "hover_point", "value": 1},
+          "condition": [
+            {
+              "test": "hover_confidence !== null && datum.matching_confidence !== hover_confidence",
+              "value": 0.15
+            },
+            {
+              "param": "hover_point",
+              "value": 1
+            }
+          ],
           "value": 0.82
         },
         "tooltip": [
@@ -138,8 +151,7 @@
           {"field": "burned_area_ha", "type": "quantitative", "title": "Burned area (ha)", "format": ",.0f"},
           {"field": "normalised_insured_loss_2022_aud", "type": "quantitative", "title": "Insured loss (2022 AUD)", "format": "$,.0f"},
           {"field": "claims_label", "type": "nominal", "title": "Claims"},
-          {"field": "matching_confidence", "type": "nominal", "title": "Match confidence"},
-          {"field": "notes", "type": "nominal", "title": "Notes"}
+          {"field": "matching_confidence", "type": "nominal", "title": "Match confidence"}
         ]
       }
     },
@@ -161,7 +173,13 @@
       },
       "encoding": {
         "text": {"field": "event_name", "type": "nominal"},
-        "opacity": {"value": 0.92}
+        "opacity": {
+          "condition": {
+            "test": "hover_confidence !== null && datum.matching_confidence !== hover_confidence",
+            "value": 0.15
+          },
+          "value": 0.92
+        }
       }
     }
   ]

@@ -682,11 +682,13 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.2s ease;
 }
 
-.legend-item[data-severity] {
+.legend-item[data-severity],
+.legend-item[data-confidence] {
     cursor: pointer;
 }
 
-.legend-item[data-severity]:hover {
+.legend-item[data-severity]:hover,
+.legend-item[data-confidence]:hover {
     background-color: rgba(43, 38, 33, 0.05);
 }
 
