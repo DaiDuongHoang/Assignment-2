@@ -7,7 +7,8 @@
   <meta name="description"
     content="An interactive editorial-style data visualisation dashboard exploring the multidimensional impact of the 2019-20 Black Summer bushfires in Australia, focusing on burned area, unplanned fire share, fire seasonality, economic shock, and wildlife vulnerability." />
   <meta name="author" content="Dai Duong Hoang" />
-  <meta name="date" content="May 2026" />
+  <meta name="student_id" content="35814527" />
+  <meta name="date" content="31 May 2026" />
   <meta name="dcterms.rightsHolder" content="Dai Duong Hoang" />
   <meta name="dcterms.educationalUse" content="FIT2179 Data Visualisation Assignment 2, Monash University" />
   <title>Australia Bushfire Visualisation Dashboard</title>
@@ -24,7 +25,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/styles.css?v=20260531_3c_legend_gap_v46" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260531_profile_chart_v47" />
 
   <!-- Vega & Vega-Lite & Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -723,10 +724,8 @@
         <div class="chart-card-header">
           <div class="chart-card-tag label-tag accent-red">FIG. 3D · BURNED AREA VS ECONOMIC LOSS</div>
           <div class="chart-card-title font-display">Does More Burned Area Mean Greater Economic Loss?</div>
-          <div class="chart-card-caption serif-note">Selected major bushfire events compared by burned area and
-            normalised insured loss.</div>
-          <p class="chart-card-note">Selected events only. Burned area and insured loss are matched at event level
-            where possible; burned area uses a log scale because event sizes span several orders of magnitude.</p>
+          <div class="chart-card-caption serif-note">Selected major bushfire events compared by burned area and normalised insured loss.</div>
+          <p class="chart-card-note">How to read: each bubble is one matched bushfire event. Moving right means more burned area; moving up means greater insured loss. Bubble size shows claims where available. Note: Burned area uses a log scale.</p>
         </div>
         <div class="chart-card-body">
           <div id="burned-area-loss-control" class="custom-vega-bindings-container"></div>
@@ -764,15 +763,12 @@
           <div class="streamgraph-insight burned-area-loss-insight">
             <div class="insight-marker" aria-hidden="true"></div>
             <div>
-              <h3>Key economic insight</h3>
+              <h3>What does this add?</h3>
               <p>
-                This chart tests whether physical fire scale translates directly into economic loss. If large
-                burned-area events do not always sit highest on the loss axis, it shows that financial impact depends
-                not only on how much land burned, but also on where fires occurred and what assets were exposed.
+                This chart compares physical fire scale with financial exposure. Black Summer sits apart because of its enormous burned area and major insured loss, but events such as Ash Wednesday and Black Saturday show that smaller burned areas can still produce severe economic losses when fires reach exposed communities and assets. The chart is intentionally limited to event-level matches, so it should be read as a comparison of selected disasters rather than a statistical model.
               </p>
               <p class="burned-area-loss-caveat">
-                Burned area and insured loss are matched at event level where possible. Selected events only; this
-                chart should not be read as a complete model of economic damage.
+                Selected matched events only. Burned area and insured loss are matched at event level where possible. Low-confidence candidate matches are shown only for context and are not used as primary evidence.
               </p>
             </div>
           </div>
@@ -780,8 +776,7 @@
         <div class="chart-card-footer">
           <span class="source-label label-tag">Source</span>
           <span>Burned-area event sources; <a href="https://www.icadataglobe.com/access-catastrophe-data/" target="_blank"
-              rel="noopener noreferrer" class="chart-link-red">Insurance Council of Australia Historical Normalised
-              Catastrophe Data</a>.</span>
+              rel="noopener noreferrer" class="chart-link-red">Insurance Council of Australia Historical Normalised Catastrophe Data</a>.</span>
         </div>
       </div>
     </section>
@@ -963,13 +958,16 @@
               <h3 id="footer-title" class="font-display">Metadata & Authorship</h3>
               <ul class="metadata-list">
                 <li><span class="meta-label">Author:</span> <span class="meta-value">Dai Duong Hoang</span></li>
-                <li><span class="meta-label">Date:</span> <span class="meta-value">May 2026</span></li>
-                <li><span class="meta-label">Unit:</span> <span class="meta-value">FIT2179 Data Visualisation</span>
-                </li>
+                <li><span class="meta-label">Student ID:</span> <span class="meta-value">35814527</span></li>
+                <li><span class="meta-label">Date:</span> <span class="meta-value">31 May 2026</span></li>
+                <li><span class="meta-label">Unit:</span> <span class="meta-value">FIT2179 Data Visualisation</span></li>
                 <li><span class="meta-label">Institution:</span> <span class="meta-value">Monash University</span></li>
                 <li><span class="meta-label">Repository:</span> <span class="meta-value"><a
                       href="https://github.com/DaiDuongHoang/Assignment-2" target="_blank" rel="noopener noreferrer"
-                      class="footer-link">DaiDuongHoang/Assignment-2</a></span></li>
+                      class="footer-link">GitHub Repo</a></span></li>
+                <li><span class="meta-label">Deployment:</span> <span class="meta-value"><a
+                      href="https://daiduonghoang.github.io/Assignment-2/" target="_blank" rel="noopener noreferrer"
+                      class="footer-link">Live Site</a></span></li>
               </ul>
             </div>
           </div>
@@ -1017,12 +1015,17 @@
                   <a href="https://www.dcceew.gov.au/environment/biodiversity/bushfire-recovery/bushfire-impacts/priority-animals" target="_blank"
                     rel="noopener noreferrer" class="footer-link">EPBC List</a>
                 </div>
+                <div class="source-item">
+                  <strong>ABS Boundaries:</strong> Map base digital boundary files (Edition 3).
+                  <a href="https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs/edition-3-july-2021-june-2026/access-and-downloads/digital-boundary-files" target="_blank"
+                    rel="noopener noreferrer" class="footer-link">ABS Geographies</a>
+                </div>
               </div>
             </div>
           </div>
         </div>
         <div class="footer-copyright font-display">
-          Created by Dai Duong Hoang
+          Created by Dai Duong Hoang (Student ID: 35814527) — 31 May 2026
         </div>
       </div>
     </footer>
@@ -1030,7 +1033,7 @@
 
   <!-- Main JS for Vega-embed -->
   <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-  <script src="js/main.js?v=20260531_zoompan_scales_v44"></script>
+  <script src="js/main.js?v=20260531_bubble_polish_v49"></script>
 </body>
 
 </html>

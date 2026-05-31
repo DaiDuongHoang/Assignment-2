@@ -2,9 +2,9 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "description": "FIG. 3D · BURNED AREA VS ECONOMIC LOSS. Bubble scatter testing whether larger burned area means greater insured loss.",
   "width": "container",
-  "height": 440,
+  "height": 360,
   "background": "transparent",
-  "padding": {"top": 20, "right": 36, "bottom": 10, "left": 10},
+  "padding": {"top": 10, "right": 36, "bottom": 10, "left": 60},
   "data": {
     "url": "data/bushfire_event_burned_area_loss.csv",
     "format": {
@@ -42,10 +42,10 @@
   "params": [
     {
       "name": "confidence_filter",
-      "value": "All matched events",
+      "value": "Reliable matches only",
       "bind": {
         "input": "select",
-        "options": ["All matched events", "High confidence only"],
+        "options": ["Reliable matches only", "High confidence only", "All candidate matches"],
         "name": "Show: "
       }
     },
@@ -62,15 +62,15 @@
       "axis": {
         "title": "Burned area (ha, log scale)",
         "titleColor": "#5F6B7A",
-        "titleFontSize": 12,
+        "titleFontSize": 11,
         "titleFont": "Inter, sans-serif",
         "titleFontWeight": 600,
-        "titlePadding": 12,
+        "titlePadding": 10,
         "grid": true,
         "gridColor": "#EDE7DF",
         "gridDash": [2, 4],
         "labelColor": "#5F6B7A",
-        "labelFontSize": 11,
+        "labelFontSize": 10,
         "labelFont": "Inter, sans-serif",
         "values": [1000, 10000, 100000, 1000000, 10000000],
         "labelExpr": "datum.value >= 1000000 ? (datum.value / 1000000) + 'M' : datum.value >= 1000 ? (datum.value / 1000) + 'k' : datum.value"
@@ -83,15 +83,15 @@
       "axis": {
         "title": "Normalised insured loss (Billion AUD, 2022)",
         "titleColor": "#5F6B7A",
-        "titleFontSize": 12,
+        "titleFontSize": 11,
         "titleFont": "Inter, sans-serif",
         "titleFontWeight": 600,
-        "titlePadding": 14,
+        "titlePadding": 10,
         "grid": true,
         "gridColor": "#EDE7DF",
         "gridDash": [2, 4],
         "labelColor": "#5F6B7A",
-        "labelFontSize": 11,
+        "labelFontSize": 10,
         "labelFont": "Inter, sans-serif",
         "format": "$.1f",
         "tickCount": 6
@@ -100,9 +100,123 @@
   },
   "layer": [
     {
+      "name": "vertical_ref_line",
+      "data": {"values": [{"x": 1000000}]},
+      "mark": {
+        "type": "rule",
+        "color": "#7F8C8D",
+        "strokeDash": [4, 4],
+        "strokeWidth": 1.5,
+        "opacity": 0.5
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"}
+      }
+    },
+    {
+      "name": "horizontal_ref_line",
+      "data": {"values": [{"y": 1.0}]},
+      "mark": {
+        "type": "rule",
+        "color": "#7F8C8D",
+        "strokeDash": [4, 4],
+        "strokeWidth": 1.5,
+        "opacity": 0.5
+      },
+      "encoding": {
+        "y": {"field": "y", "type": "quantitative"}
+      }
+    },
+    {
+      "name": "ref_line_labels",
+      "data": {
+        "values": [
+          {"x": 1000000, "y": 3.1, "text": "1M ha Threshold", "align": "left", "dx": 6, "dy": -2},
+          {"x": 1800, "y": 1.0, "text": "$1B Insured Loss Threshold", "align": "left", "dx": 6, "dy": -8}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "fontWeight": 600,
+        "fill": "#7F8C8D",
+        "font": "Inter, sans-serif"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "text", "type": "nominal"},
+        "align": {"field": "align", "type": "nominal"},
+        "dx": {"field": "dx", "type": "quantitative"},
+        "dy": {"field": "dy", "type": "quantitative"}
+      }
+    },
+    {
+      "name": "quadrant_labels",
+      "data": {
+        "values": [
+          {"x": 10000000, "y": 3.0, "text": "High burn / high loss", "align": "right", "dx": -15},
+          {"x": 1800, "y": 3.0, "text": "Lower burn / high loss", "align": "left", "dx": 15},
+          {"x": 10000000, "y": 0.15, "text": "High burn / lower loss", "align": "right", "dx": -15},
+          {"x": 1800, "y": 0.15, "text": "Lower burn / lower loss", "align": "left", "dx": 15}
+        ]
+      },
+      "mark": {
+        "type": "text",
+        "fontSize": 9,
+        "fontWeight": 500,
+        "fill": "#95A5A6",
+        "opacity": 0.45,
+        "font": "Inter, sans-serif"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "text", "type": "nominal"},
+        "align": {"field": "align", "type": "nominal"},
+        "dx": {"field": "dx", "type": "quantitative"}
+      }
+    },
+    {
+      "name": "leader_lines",
+      "data": {
+        "values": [
+          {
+            "x1": 8000000,
+            "y1": 2.8,
+            "x2": 21000000,
+            "y2": 2.88,
+            "matching_confidence": "Medium"
+          },
+          {
+            "x1": 2000000,
+            "y1": 2.0,
+            "x2": 520000,
+            "y2": 2.0,
+            "matching_confidence": "Medium"
+          }
+        ]
+      },
+      "transform": [
+        {"filter": "confidence_filter === 'All candidate matches' || (confidence_filter === 'Reliable matches only' && (datum.matching_confidence === 'High' || datum.matching_confidence === 'Medium')) || (confidence_filter === 'High confidence only' && datum.matching_confidence === 'High')"}
+      ],
+      "mark": {
+        "type": "rule",
+        "color": "#7F8C8D",
+        "strokeWidth": 1.2,
+        "opacity": 0.6
+      },
+      "encoding": {
+        "x": {"field": "x1", "type": "quantitative"},
+        "y": {"field": "y1", "type": "quantitative"},
+        "x2": {"field": "x2", "type": "quantitative"},
+        "y2": {"field": "y2", "type": "quantitative"}
+      }
+    },
+    {
       "name": "bubbles",
       "transform": [
-        {"filter": "confidence_filter === 'All matched events' || datum.matching_confidence === 'High'"}
+        {"filter": "confidence_filter === 'All candidate matches' || (confidence_filter === 'Reliable matches only' && (datum.matching_confidence === 'High' || datum.matching_confidence === 'Medium')) || (confidence_filter === 'High confidence only' && datum.matching_confidence === 'High')"}
       ],
       "params": [
         {
@@ -120,15 +234,15 @@
         "size": {
           "field": "claims_for_size",
           "type": "quantitative",
-          "scale": {"domain": [0, 40000], "range": [150, 1400]},
+          "scale": {"domain": [0, 40000], "range": [100, 1000]},
           "legend": null
         },
         "color": {
           "field": "matching_confidence",
           "type": "nominal",
           "scale": {
-            "domain": ["High", "Medium"],
-            "range": ["#B5202B", "#E8A33D"]
+            "domain": ["High", "Medium", "Low"],
+            "range": ["#B5202B", "#E8A33D", "#95A5A6"]
           },
           "legend": null
         },
@@ -136,37 +250,38 @@
           "condition": [
             {
               "test": "hover_confidence !== null && datum.matching_confidence !== hover_confidence",
-              "value": 0.15
+              "value": 0.12
             },
             {
               "param": "hover_point",
-              "value": 1
+              "value": 1.0
             }
           ],
-          "value": 0.82
+          "value": {"expr": "datum.matching_confidence === 'Low' ? 0.45 : 0.82"}
         },
         "tooltip": [
-          {"field": "event_name", "type": "nominal", "title": "Event"},
+          {"field": "event_name", "type": "nominal", "title": "Event Name"},
           {"field": "event_period", "type": "nominal", "title": "Period"},
-          {"field": "burned_area_ha", "type": "quantitative", "title": "Burned area (ha)", "format": ",.0f"},
-          {"field": "normalised_insured_loss_2022_aud", "type": "quantitative", "title": "Insured loss (2022 AUD)", "format": "$,.0f"},
-          {"field": "claims_label", "type": "nominal", "title": "Claims"},
-          {"field": "matching_confidence", "type": "nominal", "title": "Match confidence"}
+          {"field": "burned_area_ha", "type": "quantitative", "title": "Burned Area (ha)", "format": ",.0f"},
+          {"field": "normalised_insured_loss_2022_aud", "type": "quantitative", "title": "Insured Loss (2022 AUD)", "format": "$,.0f"},
+          {"field": "claims_label", "type": "nominal", "title": "Claims Count"},
+          {"field": "matching_confidence", "type": "nominal", "title": "Match Confidence"},
+          {"field": "notes", "type": "nominal", "title": "Matching Notes"}
         ]
       }
     },
     {
       "name": "key_event_labels",
       "transform": [
-        {"filter": "confidence_filter === 'All matched events' || datum.matching_confidence === 'High'"},
+        {"filter": "confidence_filter === 'All candidate matches' || (confidence_filter === 'Reliable matches only' && (datum.matching_confidence === 'High' || datum.matching_confidence === 'Medium')) || (confidence_filter === 'High confidence only' && datum.matching_confidence === 'High')"},
         {"filter": "datum.is_key_event"}
       ],
       "mark": {
         "type": "text",
         "align": "center",
         "baseline": "bottom",
-        "dy": -16,
-        "fontSize": 11,
+        "dy": -14,
+        "fontSize": 10.5,
         "fontWeight": 700,
         "font": "Inter, sans-serif",
         "fill": "#2B2621"
@@ -176,10 +291,68 @@
         "opacity": {
           "condition": {
             "test": "hover_confidence !== null && datum.matching_confidence !== hover_confidence",
-            "value": 0.15
+            "value": 0.12
           },
-          "value": 0.92
+          "value": {"expr": "datum.matching_confidence === 'Low' ? 0.45 : 0.92"}
         }
+      }
+    },
+    {
+      "name": "story_annotations",
+      "data": {
+        "values": [
+          {
+            "x": 8000000,
+            "y": 2.8,
+            "text": "Black Summer: Massive area + major insured loss",
+            "align": "right",
+            "dx": -8,
+            "dy": -2,
+            "color": "#2C3E50",
+            "weight": "bold",
+            "matching_confidence": "Medium"
+          },
+          {
+            "x": 2000000,
+            "y": 2.0,
+            "text": "Ash Wednesday & Black Saturday: Smaller area, very high insured loss",
+            "align": "left",
+            "dx": 8,
+            "dy": -2,
+            "color": "#2C3E50",
+            "weight": "bold",
+            "matching_confidence": "Medium"
+          },
+          {
+            "x": 10000,
+            "y": 0.45,
+            "text": "Most matched events sit far below the largest insured-loss disasters",
+            "align": "left",
+            "dx": 0,
+            "dy": 0,
+            "color": "#7F8C8D",
+            "weight": "normal",
+            "matching_confidence": "High"
+          }
+        ]
+      },
+      "transform": [
+        {"filter": "confidence_filter === 'All candidate matches' || (confidence_filter === 'Reliable matches only' && (datum.matching_confidence === 'High' || datum.matching_confidence === 'Medium')) || (confidence_filter === 'High confidence only' && datum.matching_confidence === 'High')"}
+      ],
+      "mark": {
+        "type": "text",
+        "fontSize": 9.5,
+        "font": "Inter, sans-serif"
+      },
+      "encoding": {
+        "x": {"field": "x", "type": "quantitative"},
+        "y": {"field": "y", "type": "quantitative"},
+        "text": {"field": "text", "type": "nominal"},
+        "align": {"field": "align", "type": "nominal"},
+        "dx": {"field": "dx", "type": "quantitative"},
+        "dy": {"field": "dy", "type": "quantitative"},
+        "fill": {"field": "color", "type": "nominal", "scale": null},
+        "fontWeight": {"field": "weight", "type": "nominal", "scale": null}
       }
     }
   ]
