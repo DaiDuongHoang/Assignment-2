@@ -46,7 +46,10 @@
       "name": "hoverLink",
       "value": null,
       "on": [
-        { "events": "@ribbons:mouseover", "update": "datum.source + '>>' + datum.target" },
+        {
+          "events": "@ribbons:mouseover",
+          "update": "datum.source + '>>' + datum.target"
+        },
         { "events": "@ribbons:mouseout", "update": "null" }
       ]
     },
@@ -101,7 +104,7 @@
             "signal": "datum.stage === 1 ? {'Tenure': datum.source, 'Forest category': datum.target, 'Cell count': datum.valueFull, 'Share of view': (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')} : {'Forest category': datum.source, 'Burn outcome': datum.target, 'Cell count': datum.valueFull, 'Share of view': (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')}"
           },
           "fillOpacity": {
-            "signal": "(hoverLink === datum.source + '>>' + datum.target) ? 0.95 : (hoverLink === null && hoverNode === null ? (datum.value < 500000 ? 0.25 : (datum.stage === 1 ? 0.40 : 0.55)) : ((hoverNode !== null && (datum.source === hoverNode || datum.target === hoverNode)) || (hoverEndpoint !== null && (datum.source === hoverEndpoint.source || datum.target === hoverEndpoint.target || datum.source === hoverEndpoint.target)) ? 0.85 : 0.05))"
+            "signal": "hoverLink !== null ? (hoverLink === datum.source + '>>' + datum.target ? 0.95 : 0.25) : (hoverNode !== null ? (datum.source === hoverNode || datum.target === hoverNode ? 0.85 : 0.65) : (datum.value < 500000 ? 0.25 : (datum.stage === 1 ? 0.40 : 0.55)))"
           }
         }
       }
@@ -147,10 +150,14 @@
         },
         "update": {
           "x": { "field": "labelX" },
-          "y": { "signal": "isArray(datum.label) ? datum.labelY - 11 : datum.labelY - 6" },
+          "y": {
+            "signal": "isArray(datum.label) ? datum.labelY - 11 : datum.labelY - 6"
+          },
           "align": { "field": "labelAlign" },
           "text": { "field": "label" },
-          "stroke": { "signal": "datum.labelOutside ? '#FFFDF9' : 'transparent'" },
+          "stroke": {
+            "signal": "datum.labelOutside ? '#FFFDF9' : 'transparent'"
+          },
           "fillOpacity": {
             "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.3"
           }
@@ -169,7 +176,9 @@
         },
         "update": {
           "x": { "field": "labelX" },
-          "y": { "signal": "isArray(datum.label) ? datum.labelY - 11 : datum.labelY - 6" },
+          "y": {
+            "signal": "isArray(datum.label) ? datum.labelY - 11 : datum.labelY - 6"
+          },
           "align": { "field": "labelAlign" },
           "text": { "field": "label" },
           "fill": { "signal": "datum.labelOutside ? '#2B2621' : '#FFFFFF'" },
@@ -194,10 +203,16 @@
         },
         "update": {
           "x": { "field": "labelX" },
-          "y": { "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9" },
+          "y": {
+            "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9"
+          },
           "align": { "field": "labelAlign" },
-          "text": { "signal": "datum.valueLabel + '  ·  ' + (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')" },
-          "stroke": { "signal": "datum.labelOutside ? '#FFFDF9' : 'transparent'" },
+          "text": {
+            "signal": "datum.valueLabel + '  ·  ' + (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')"
+          },
+          "stroke": {
+            "signal": "datum.labelOutside ? '#FFFDF9' : 'transparent'"
+          },
           "fillOpacity": {
             "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.25"
           }
@@ -216,10 +231,16 @@
         },
         "update": {
           "x": { "field": "labelX" },
-          "y": { "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9" },
+          "y": {
+            "signal": "isArray(datum.label) ? datum.labelY + 14 : datum.labelY + 9"
+          },
           "align": { "field": "labelAlign" },
-          "text": { "signal": "datum.valueLabel + '  ·  ' + (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')" },
-          "fill": { "signal": "datum.labelOutside ? '#7A7068' : 'rgba(255, 255, 255, 0.85)'" },
+          "text": {
+            "signal": "datum.valueLabel + '  ·  ' + (datum.share < 0.1 ? '<0.1%' : format(datum.share, '.1f') + '%')"
+          },
+          "fill": {
+            "signal": "datum.labelOutside ? '#7A7068' : 'rgba(255, 255, 255, 0.85)'"
+          },
           "fillOpacity": {
             "signal": "hoverNode === null || hoverNode === datum.name ? 1 : 0.25"
           }
