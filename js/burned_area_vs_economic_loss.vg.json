@@ -104,10 +104,10 @@
       "data": {"values": [{"x": 1000000}]},
       "mark": {
         "type": "rule",
-        "color": "#7F8C8D",
+        "color": "#2D3748",
         "strokeDash": [4, 4],
-        "strokeWidth": 1.5,
-        "opacity": 0.5
+        "strokeWidth": 1.8,
+        "opacity": 1.0
       },
       "encoding": {
         "x": {"field": "x", "type": "quantitative"}
@@ -118,10 +118,10 @@
       "data": {"values": [{"y": 1.0}]},
       "mark": {
         "type": "rule",
-        "color": "#7F8C8D",
+        "color": "#2D3748",
         "strokeDash": [4, 4],
-        "strokeWidth": 1.5,
-        "opacity": 0.5
+        "strokeWidth": 1.8,
+        "opacity": 1.0
       },
       "encoding": {
         "y": {"field": "y", "type": "quantitative"}
@@ -132,14 +132,14 @@
       "data": {
         "values": [
           {"x": 1000000, "y": 3.1, "text": "1M ha Threshold", "align": "left", "dx": 6, "dy": -2},
-          {"x": 1800, "y": 1.0, "text": "$1B Insured Loss Threshold", "align": "left", "dx": 6, "dy": -8}
+          {"x": 5000, "y": 1.0, "text": "$1B Insured Loss Threshold", "align": "left", "dx": 6, "dy": -8}
         ]
       },
       "mark": {
         "type": "text",
-        "fontSize": 9,
+        "fontSize": 9.5,
         "fontWeight": 600,
-        "fill": "#7F8C8D",
+        "fill": "#2D3748",
         "font": "Inter, sans-serif"
       },
       "encoding": {
@@ -156,17 +156,17 @@
       "data": {
         "values": [
           {"x": 10000000, "y": 3.0, "text": "High burn / high loss", "align": "right", "dx": -15},
-          {"x": 1800, "y": 3.0, "text": "Lower burn / high loss", "align": "left", "dx": 15},
+          {"x": 3000, "y": 3.0, "text": "Lower burn / high loss", "align": "left", "dx": 15},
           {"x": 10000000, "y": 0.15, "text": "High burn / lower loss", "align": "right", "dx": -15},
-          {"x": 1800, "y": 0.15, "text": "Lower burn / lower loss", "align": "left", "dx": 15}
+          {"x": 3000, "y": 0.15, "text": "Lower burn / lower loss", "align": "left", "dx": 15}
         ]
       },
       "mark": {
         "type": "text",
-        "fontSize": 9,
-        "fontWeight": 500,
-        "fill": "#95A5A6",
-        "opacity": 0.45,
+        "fontSize": 9.5,
+        "fontWeight": 600,
+        "fill": "#7F8C8D",
+        "opacity": 0.8,
         "font": "Inter, sans-serif"
       },
       "encoding": {
@@ -175,42 +175,6 @@
         "text": {"field": "text", "type": "nominal"},
         "align": {"field": "align", "type": "nominal"},
         "dx": {"field": "dx", "type": "quantitative"}
-      }
-    },
-    {
-      "name": "leader_lines",
-      "data": {
-        "values": [
-          {
-            "x1": 8000000,
-            "y1": 2.8,
-            "x2": 21000000,
-            "y2": 2.88,
-            "matching_confidence": "Medium"
-          },
-          {
-            "x1": 2000000,
-            "y1": 2.0,
-            "x2": 520000,
-            "y2": 2.0,
-            "matching_confidence": "Medium"
-          }
-        ]
-      },
-      "transform": [
-        {"filter": "confidence_filter === 'All candidate matches' || (confidence_filter === 'Reliable matches only' && (datum.matching_confidence === 'High' || datum.matching_confidence === 'Medium')) || (confidence_filter === 'High confidence only' && datum.matching_confidence === 'High')"}
-      ],
-      "mark": {
-        "type": "rule",
-        "color": "#7F8C8D",
-        "strokeWidth": 1.2,
-        "opacity": 0.6
-      },
-      "encoding": {
-        "x": {"field": "x1", "type": "quantitative"},
-        "y": {"field": "y1", "type": "quantitative"},
-        "x2": {"field": "x2", "type": "quantitative"},
-        "y2": {"field": "y2", "type": "quantitative"}
       }
     },
     {
@@ -303,36 +267,25 @@
         "values": [
           {
             "x": 8000000,
-            "y": 2.8,
+            "y": 2.7,
             "text": "Black Summer: Massive area + major insured loss",
             "align": "right",
             "dx": -8,
-            "dy": -2,
+            "dy": 0,
             "color": "#2C3E50",
             "weight": "bold",
             "matching_confidence": "Medium"
           },
           {
-            "x": 2000000,
-            "y": 2.0,
+            "x": 40000,
+            "y": 2.1,
             "text": "Ash Wednesday & Black Saturday: Smaller area, very high insured loss",
             "align": "left",
-            "dx": 8,
-            "dy": -2,
+            "dx": 10,
+            "dy": 0,
             "color": "#2C3E50",
             "weight": "bold",
             "matching_confidence": "Medium"
-          },
-          {
-            "x": 10000,
-            "y": 0.45,
-            "text": "Most matched events sit far below the largest insured-loss disasters",
-            "align": "left",
-            "dx": 0,
-            "dy": 0,
-            "color": "#7F8C8D",
-            "weight": "normal",
-            "matching_confidence": "High"
           }
         ]
       },
