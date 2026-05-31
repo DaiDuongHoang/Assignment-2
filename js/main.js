@@ -2,7 +2,7 @@ const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260531_savanna_label_
 const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260531_color_ramp_v23";
 const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v3";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v15";
-const tenureSankeySpec = "js/tenure_sankey.vg.json?v=20260531_sankey_redesign_v7";
+const tenureSankeySpec = "js/tenure_sankey.vg.json?v=20260531_sankey_redesign_v9";
 const streamgraphSpec = "js/streamgraph.vg.json?v=20260531_label_v16";
 const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v18";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";

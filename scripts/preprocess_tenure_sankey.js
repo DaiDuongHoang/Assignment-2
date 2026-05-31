@@ -30,7 +30,12 @@
 const fs = require("fs");
 const path = require("path");
 
-const inputPath = path.join(__dirname, "..", "Datasets", "Fire_For16-21_Attributes.csv");
+const inputPath = path.join(
+  __dirname,
+  "..",
+  "Datasets",
+  "Fire_For16-21_Attributes.csv"
+);
 const nodesOut = path.join(__dirname, "..", "data", "tenure_sankey_nodes.json");
 const linksOut = path.join(__dirname, "..", "data", "tenure_sankey_links.json");
 
@@ -39,7 +44,7 @@ const W = 1040;
 const TOP = 40;
 const BOT = 30;
 const COL_W = [30, 110, 30]; // custom widths per column to allow outer labels room
-const COL_X = [160, 450, 820]; // left edge of each column's node
+const COL_X = [230, 520, 890]; // left edge of each column's node
 const MIN_LINK_H = 3; // floor so thin flows are not hairlines
 
 // ---- Recoding --------------------------------------------------------------
@@ -57,10 +62,16 @@ const outcomeMap = {
   "Planned burns only": "Planned only",
   "Forest not burnt": "Not burnt"
 };
-const simplifyCategory = (c) => (c === "Native forest" ? "Native forest" : "Plantation / other forest");
+const simplifyCategory = (c) =>
+  c === "Native forest" ? "Native forest" : "Plantation / other forest";
 
 // Outcome order + colours (outcome carries the story)
-const outcomeOrder = ["Unplanned only", "Both burns", "Planned only", "Not burnt"];
+const outcomeOrder = [
+  "Unplanned only",
+  "Both burns",
+  "Planned only",
+  "Not burnt"
+];
 const outcomeColor = {
   "Unplanned only": "#B5202B",
   "Both burns": "#E8842A",
@@ -93,7 +104,10 @@ function fmtM(v) {
 }
 
 // ---- Read + aggregate full paths -------------------------------------------
-const lines = fs.readFileSync(inputPath, "utf8").split(/\r?\n/).filter((l) => l.length);
+const lines = fs
+  .readFileSync(inputPath, "utf8")
+  .split(/\r?\n/)
+  .filter((l) => l.length);
 const HEAD = lines[0].split(",");
 const iC = HEAD.indexOf("COUNT"),
   iT = HEAD.indexOf("FOR_TEN"),
@@ -112,7 +126,12 @@ for (let k = 1; k < lines.length; k++) {
   if (cat === "Non-forest") continue;
   if (ten === "ND") continue; // hidden hairline tenure
   if (!tenureMap[ten]) continue;
-  paths.push({ ten: tenureMap[ten], cat, burn: outcomeMap[burn] || burn, count: c });
+  paths.push({
+    ten: tenureMap[ten],
+    cat,
+    burn: outcomeMap[burn] || burn,
+    count: c
+  });
 }
 
 // ---- Build one view --------------------------------------------------------
@@ -162,12 +181,20 @@ function buildView({ burnedOnly, simplified }) {
   const avail = viewH - TOP - BOT;
 
   function columnHeight(order, totals, colIndex, ky) {
-    const hs = order.map((k) => Math.max(minNodeHCol[colIndex], totals[k] * ky));
-    return hs.reduce((a, b) => a + b, 0) + (order.length - 1) * colPAD[colIndex];
+    const hs = order.map((k) =>
+      Math.max(minNodeHCol[colIndex], totals[k] * ky)
+    );
+    return (
+      hs.reduce((a, b) => a + b, 0) + (order.length - 1) * colPAD[colIndex]
+    );
   }
-  
+
   // initial ky ignoring floors
-  let ky = (avail - (Math.max(tenOrder.length, catOrder.length, burnOrder.length) - 1) * (simplified ? 36 : 60)) / total;
+  let ky =
+    (avail -
+      (Math.max(tenOrder.length, catOrder.length, burnOrder.length) - 1) *
+        (simplified ? 36 : 60)) /
+    total;
   // iterate: floors steal space from big nodes, so shrink ky until all columns fit
   for (let iter = 0; iter < 40; iter++) {
     const maxH = Math.max(
@@ -218,7 +245,8 @@ function buildView({ burnedOnly, simplified }) {
       const s = getSrc(t),
         g = getTgt(t);
       const key = s + "||" + g;
-      (grouped[key] = grouped[key] || { s, g, value: 0, members: [] }).value += t.value;
+      (grouped[key] = grouped[key] || { s, g, value: 0, members: [] }).value +=
+        t.value;
       grouped[key].members.push(t);
     });
     const arr = Object.values(grouped);
@@ -272,8 +300,20 @@ function buildView({ burnedOnly, simplified }) {
   }
 
   // stage 1 tenure->category coloured by tenure (muted); stage 2 category->outcome coloured by outcome (story)
-  const links1 = makeStage((t) => t.ten, (t) => t.cat, tenNodes, catNodes, false);
-  const links2 = makeStage((t) => t.cat, (t) => t.burn, catNodes, burnNodes, true);
+  const links1 = makeStage(
+    (t) => t.ten,
+    (t) => t.cat,
+    tenNodes,
+    catNodes,
+    false
+  );
+  const links2 = makeStage(
+    (t) => t.cat,
+    (t) => t.burn,
+    catNodes,
+    burnNodes,
+    true
+  );
 
   // Expand node vertical sizes dynamically to perfectly encompass all incoming and outgoing links,
   // preventing links from overflowing outside node boundaries due to link thickness clamping floors.
@@ -349,7 +389,8 @@ function buildView({ burnedOnly, simplified }) {
     Object.values(groups).forEach((arr) => {
       arr.sort((a, b) => a.labelY - b.labelY);
       for (let i = 1; i < arr.length; i++) {
-        if (arr[i].labelY - arr[i - 1].labelY < MINGAP) arr[i].labelY = arr[i - 1].labelY + MINGAP;
+        if (arr[i].labelY - arr[i - 1].labelY < MINGAP)
+          arr[i].labelY = arr[i - 1].labelY + MINGAP;
       }
     });
   }
@@ -377,9 +418,22 @@ viewDefs.forEach(([key, opts]) => {
   const v = buildView(opts);
   v.nodes.forEach((n) => allNodes.push(Object.assign({ viewKey: key }, n)));
   v.links.forEach((l) => allLinks.push(Object.assign({ viewKey: key }, l)));
-  console.log(key.padEnd(20), "nodes", v.nodes.length, "links", v.links.length, "total", fmt(v.total));
+  console.log(
+    key.padEnd(20),
+    "nodes",
+    v.nodes.length,
+    "links",
+    v.links.length,
+    "total",
+    fmt(v.total)
+  );
 });
 
 fs.writeFileSync(nodesOut, JSON.stringify(allNodes));
 fs.writeFileSync(linksOut, JSON.stringify(allLinks));
-console.log("Wrote", path.relative(process.cwd(), nodesOut), "and", path.relative(process.cwd(), linksOut));
+console.log(
+  "Wrote",
+  path.relative(process.cwd(), nodesOut),
+  "and",
+  path.relative(process.cwd(), linksOut)
+);
