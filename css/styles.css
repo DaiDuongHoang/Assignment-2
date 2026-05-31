@@ -12,9 +12,9 @@
     --color-sec3-bg: #ffebee;
     --color-sec3-accent: #d32f2f;
 
-    --color-sec4: #0284c7;
-    --color-sec4-bg: #f0f9ff;
-    --color-sec4-accent: #0284c7;
+    --color-sec4: #0f766e;
+    --color-sec4-bg: #e6f3f1;
+    --color-sec4-accent: #0f766e;
 }
 
 * {
@@ -1014,7 +1014,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .timeline-scope-note {
     font-size: 0.76rem;
-    color: #7A7068;
+    color: #5E564E;
     margin: 5px 0 0;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -1024,7 +1024,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .chart-card-note {
     font-size: 0.76rem;
-    color: #7A7068;
+    color: #5E564E;
     margin: 5px 0 0;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
@@ -1122,9 +1122,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .accent-blue {
-    background-color: #f0f9ff;
-    color: #0284c7;
-    border-color: #bae6fd;
+    background-color: #e6f3f1;
+    color: #0f766e;
+    border-color: #b8ddd7;
 }
 
 .accent-terracotta {
@@ -1587,7 +1587,7 @@ h1, h2, h3, h4, h5, h6 {
 .legend-gradient-bivariate {
     height: 10px;
     border-radius: 999px;
-    background: linear-gradient(90deg, #fff7bc 0%, #fec44f 33%, #f03b20 66%, #99000d 100%);
+    background: linear-gradient(90deg, #fff7bc 0%, #fee391 50%, #fec44f 70%, #fb8d3c 85%, #f03b20 95%, #99000d 100%);
     border: 1px solid rgba(99, 47, 23, 0.18);
 }
 
@@ -1689,7 +1689,7 @@ h1, h2, h3, h4, h5, h6 {
     --axis-warm: rgba(43, 38, 33, 0.25);
     --text-primary: #201A16;
     --text-secondary: #5F6B7A;
-    --text-muted: #7A7068;
+    --text-muted: #5E564E;
     --text-soft: rgba(43, 38, 33, 0.65);
     --shadow-soft: 0 4px 18px rgba(43, 38, 33, 0.04);
     --shadow-hover: 0 8px 24px rgba(43, 38, 33, 0.08);
@@ -1847,9 +1847,9 @@ h6 {
 }
 
 .accent-blue {
-    background: #EAF6FC;
-    color: #0277A8;
-    border-color: #C8E5F2;
+    background: #E6F3F1;
+    color: #0E6B63;
+    border-color: #B8DDD7;
 }
 
 .combined-legend,
@@ -2345,9 +2345,21 @@ h6 {
     font-size: 0.88rem;
     line-height: 1.4;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 4px 16px;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
     padding-bottom: 6px;
+}
+
+.meta-label {
+    flex: 0 0 auto;
+}
+
+.meta-value {
+    flex: 1 1 auto;
+    min-width: 0;
+    word-break: break-word;
 }
 
 .metadata-list li:last-child {
@@ -2452,6 +2464,48 @@ h6 {
     .footer-metadata-card {
         margin-bottom: 24px;
     }
+}
+
+/* ===== FIG. 3D · BURNED AREA VS ECONOMIC LOSS ===== */
+#vis-burned-area-loss {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+.burned-area-loss-card .custom-vega-bindings-container,
+.burned-area-loss-legend,
+.burned-area-loss-insight {
+    max-width: 1080px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.burned-area-loss-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 28px;
+    margin-top: 14px;
+    padding: 13px 18px;
+    background: rgba(255, 253, 249, 0.92);
+    border: 1px solid var(--border-warm);
+    border-radius: 12px;
+}
+
+.burned-area-loss-insight {
+    margin-top: 16px;
+    background: var(--plot-bg);
+    border-left-color: #B5202B !important;
+}
+
+.burned-area-loss-insight .insight-marker {
+    background: #B5202B !important;
+}
+
+.burned-area-loss-caveat {
+    margin-top: 10px !important;
+    font-size: 0.85rem;
+    color: #5E564E !important;
 }
 
 

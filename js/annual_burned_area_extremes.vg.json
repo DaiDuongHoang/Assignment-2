@@ -73,6 +73,22 @@
     {
       "calculate": "(datum.percent_change > 0 ? '+' : '') + format(datum.percent_change, '.1f') + '%'",
       "as": "tooltip_pct_change"
+    },
+    {
+      "calculate": "displayMode === 'Change from baseline' ? 0 : 0.7",
+      "as": "baseline_opacity_default"
+    },
+    {
+      "calculate": "displayMode === 'Change from baseline' ? 0 : 1.0",
+      "as": "baseline_opacity_hover"
+    },
+    {
+      "calculate": "displayMode === 'Change from baseline' ? 0.3 : 0",
+      "as": "neg_label_opacity_default"
+    },
+    {
+      "calculate": "displayMode === 'Change from baseline' ? 1.0 : 0",
+      "as": "neg_label_opacity_hover"
     }
   ],
   "encoding": {
@@ -95,7 +111,7 @@
     "x": {
       "type": "quantitative",
       "scale": {
-        "domain": {"signal": "displayMode === 'Change from baseline' ? [-1000000, 5200000] : [-100000, 8000000]"}
+        "domain": {"signal": "displayMode === 'Change from baseline' ? [-1500000, 5200000] : [-500000, 8000000]"}
       },
       "axis": {
         "title": {"signal": "displayMode === 'Change from baseline' ? 'Change in Burned Cells from Pre-Black Summer Average' : 'Burned Cell Totals'"},
@@ -179,7 +195,7 @@
       ],
       "mark": {
         "type": "circle",
-        "size": 160,
+        "size": 100,
         "stroke": "#FFFDF9",
         "strokeWidth": 1.5,
         "cursor": "pointer"
@@ -211,7 +227,7 @@
       "name": "baseline_dots",
       "mark": {
         "type": "circle",
-        "size": 140,
+        "size": 80,
         "color": "#8E8276",
         "stroke": "#FFFDF9",
         "strokeWidth": 1.5,
@@ -222,9 +238,13 @@
         "opacity": {
           "condition": {
             "param": "hoverState",
-            "value": {"signal": "displayMode === 'Before vs Black Summer' ? 1.0 : 0"}
+            "field": "baseline_opacity_hover",
+            "type": "quantitative",
+            "scale": null
           },
-          "signal": "displayMode === 'Before vs Black Summer' ? 0.7 : 0"
+          "field": "baseline_opacity_default",
+          "type": "quantitative",
+          "scale": null
         },
         "tooltip": [
           {"field": "state_name", "type": "nominal", "title": "State / Territory:"},
@@ -302,9 +322,13 @@
         "opacity": {
           "condition": {
             "param": "hoverState",
-            "value": {"signal": "displayMode === 'Change from baseline' ? 1.0 : 0"}
+            "field": "neg_label_opacity_hover",
+            "type": "quantitative",
+            "scale": null
           },
-          "value": {"signal": "displayMode === 'Change from baseline' ? 0.3 : 0"}
+          "field": "neg_label_opacity_default",
+          "type": "quantitative",
+          "scale": null
         },
         "tooltip": [
           {"field": "state_name", "type": "nominal", "title": "State / Territory:"},

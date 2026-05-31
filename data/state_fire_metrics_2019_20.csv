@@ -1,0 +1,9 @@
+state_code,state_name,burned_cells_2019_20,planned_burned_cells_2019_20,unplanned_burned_cells_2019_20,unplanned_pct_2019_20
+NSW,New South Wales,4916544,4222,4912322,99.9
+VIC,Victoria,1433799,23261,1410538,98.4
+QLD,Queensland,5909144,1525279,4383865,74.2
+WA,Western Australia,1374363,190834,1183529,86.1
+SA,South Australia,171665,1076,170589,99.4
+TAS,Tasmania,44599,11708,32891,73.7
+NT,Northern Territory,7165243,2598483,4566760,63.7
+ACT,Australian Capital Territory,82326,2,82324,100.0

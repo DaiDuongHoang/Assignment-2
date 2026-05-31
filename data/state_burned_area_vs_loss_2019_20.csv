@@ -1,0 +1,9 @@
+state_code,state_name,burned_cells_2019_20,planned_burned_cells_2019_20,unplanned_burned_cells_2019_20,unplanned_pct_2019_20,insured_loss_2019_20,total_claims_2019_20,ica_events_included,matching_confidence,matching_notes
+NSW,New South Wales,4916544,4222,4912322,99.9,,,,None,"No state-isolated ICA loss for 2019-20. NSW is bundled into the multi-state '2019/20 Bushfires (NSW,QLD,SA,VIC)' catastrophe. Missing = not matched, not zero."
+VIC,Victoria,1433799,23261,1410538,98.4,,,,None,"No state-isolated 2019-20 ICA loss. VIC is part of the multi-state Black Summer aggregate; the only VIC-tagged record (Bunyip) is a March 2019 event. Missing = not matched, not zero."
+QLD,Queensland,5909144,1525279,4383865,74.2,,,,None,"No state-isolated ICA loss for 2019-20. QLD is bundled into the multi-state Black Summer aggregate. Missing = not matched, not zero."
+WA,Western Australia,1374363,190834,1183529,86.1,,,,None,"No 2019-20 ICA bushfire record attributable to WA. Missing = not matched, not zero."
+SA,South Australia,171665,1076,170589,99.4,,,,None,"No state-isolated ICA loss for 2019-20. SA is bundled into the multi-state Black Summer aggregate. Missing = not matched, not zero."
+TAS,Tasmania,44599,11708,32891,73.7,,,,None,"No 2019-20 ICA bushfire record attributable to TAS. Missing = not matched, not zero."
+NT,Northern Territory,7165243,2598483,4566760,63.7,,,,None,"No 2019-20 ICA bushfire record attributable to NT. Missing = not matched, not zero."
+ACT,Australian Capital Territory,82326,2,82324,100.0,,,,None,"No state-isolated ICA loss for 2019-20. ACT not separately listed in ICA 2019-20 bushfire records. Missing = not matched, not zero."

@@ -1,0 +1,4 @@
+event_name,event_year,ica_state_field,insured_loss_2022_aud,total_claims,reason_unmatched
+"2019/20 Bushfires (NSW,QLD,SA,VIC)",2019,SEQ,2405400000,38936,"Multi-state aggregate spanning NSW, QLD, SA and VIC reported as a single catastrophe; cannot be apportioned to individual states without fabrication."
+"NSW/QLD September 2019 Bushfires",2019,SEQ,15900000,,"Spans NSW and QLD; ICA state field 'SEQ' is a multi-state region code, not a single state."
+"Bunyip Bushfires",2019,,54000000,519,"Victorian fire but ICA state field blank and event occurred March 2019 (2018-19 season), so it is not a 2019-20 Black Summer state loss."

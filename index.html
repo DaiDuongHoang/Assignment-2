@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/styles.css?v=20260531_hd_polish_v2" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260531_fig3d_ramp_v19" />
 
   <!-- Vega & Vega-Lite & Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -585,6 +585,72 @@
               class="chart-link-red">Insurance Council of Australia Historical Normalised Catastrophe Data</a></span>
         </div>
       </div>
+
+      <div class="chart-card burned-area-loss-card">
+        <div class="chart-card-header">
+          <div class="chart-card-tag label-tag accent-red">FIG. 3D · BURNED AREA VS ECONOMIC LOSS</div>
+          <div class="chart-card-title font-display">Does More Burned Area Mean Greater Economic Loss?</div>
+          <div class="chart-card-caption serif-note">Selected major bushfire events compared by burned area and
+            normalised insured loss.</div>
+          <p class="chart-card-note">Selected events only. Burned area and insured loss are matched at event level
+            where possible; burned area uses a log scale because event sizes span several orders of magnitude.</p>
+        </div>
+        <div class="chart-card-body">
+          <div id="burned-area-loss-control" class="custom-vega-bindings-container"></div>
+          <div id="vis-burned-area-loss"></div>
+
+          <div class="burned-area-loss-legend" aria-label="Burned area vs loss chart legend">
+            <div class="legend-group">
+              <span class="legend-group-title">Match confidence</span>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="swatch-icon" style="background: #B5202B;"></span>
+                  <span class="legend-label">High</span>
+                </div>
+                <div class="legend-item">
+                  <span class="swatch-icon" style="background: #E8A33D;"></span>
+                  <span class="legend-label">Medium</span>
+                </div>
+              </div>
+            </div>
+            <div class="legend-group">
+              <span class="legend-group-title">Claims</span>
+              <div class="legend-items">
+                <div class="legend-item">
+                  <span class="bubble-icon size-none"></span>
+                  <span class="legend-label">No claims data</span>
+                </div>
+                <div class="legend-item">
+                  <span class="bubble-icon size-30k"></span>
+                  <span class="legend-label">~30,000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="streamgraph-insight burned-area-loss-insight">
+            <div class="insight-marker" aria-hidden="true"></div>
+            <div>
+              <h3>What does this add?</h3>
+              <p>
+                This chart tests whether physical fire scale translates directly into economic loss. If large
+                burned-area events do not always sit highest on the loss axis, it shows that financial impact depends
+                not only on how much land burned, but also on where fires occurred and what assets were exposed.
+              </p>
+              <p class="burned-area-loss-caveat">
+                Burned area and insured loss are matched at event level where possible. Selected events only; this
+                chart should not be read as a complete model of economic damage.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card-footer">
+          <span class="source-label label-tag">Source</span>
+          <span>Burned-area event sources; <a href="https://insurancecouncil.com.au/" target="_blank"
+              rel="noopener noreferrer" class="chart-link-red">Insurance Council of Australia Historical Normalised
+              Catastrophe Data</a>.</span>
+        </div>
+      </div>
     </section>
 
     <!-- Section 4 - Wildlife & What We Learn (Beyond Property: Nature in the Firing Line) -->
@@ -748,7 +814,7 @@
 
   <!-- Main JS for Vega-embed -->
   <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-  <script src="js/main.js?v=20260531_hd_polish_v2"></script>
+  <script src="js/main.js?v=20260531_fig3d_bubble_v20"></script>
 </body>
 
 </html>

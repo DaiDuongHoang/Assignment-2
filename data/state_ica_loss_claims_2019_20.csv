@@ -1,0 +1,4 @@
+state_code,state_name,insured_loss_2019_20,total_claims_2019_20,ica_events_included,matching_confidence,matching_notes
+,,2405400000,38936,"2019/20 Bushfires (NSW,QLD,SA,VIC)",None,"Flagship Black Summer ICA catastrophe; loss and claims are reported as a single aggregate spanning NSW, QLD, SA and VIC. ICA state field is 'SEQ'. Cannot be split into individual state losses without fabrication."
+,,15900000,,"NSW/QLD September 2019 Bushfires",None,"Multi-state event spanning NSW and QLD (ICA state field 'SEQ'). No claims count recorded. Not attributable to one state."
+VIC,Victoria,54000000,519,"Bunyip Bushfires",Low,"Bunyip Complex is in Victoria, but ICA state field is blank and the fire occurred in March 2019 (2018-19 season), so it does not represent VIC's 2019-20 Black Summer insured loss."

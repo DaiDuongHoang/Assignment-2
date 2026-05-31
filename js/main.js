@@ -1,13 +1,14 @@
-const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260530_control_spacing_v2";
-const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260529_clean_tooltip_v22";
+const fireHotspotsSpec = "js/map_fire_hotspots.vg.json?v=20260531_savanna_label_v3";
+const stateBivariateBurnMapSpec = "js/state_bivariate_burn_map.vg.json?v=20260531_color_ramp_v23";
 const fireSeasonCalendarSpec = "js/fire_season_calendar.vg.json?v=20260531_calendar_v2";
 const fireRiskTrajectoriesSpec = "js/fire_risk_trajectories.vg.json?v=20260530_state_profiles_v14";
-const streamgraphSpec = "js/streamgraph.vg.json?v=20260530_v15";
-const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v16";
+const streamgraphSpec = "js/streamgraph.vg.json?v=20260531_label_v16";
+const annualBurnedAreaExtremesSpec = "js/annual_burned_area_extremes.vg.json?v=20260531_shift_v17";
 const bushfireTimelineSpec = "js/bushfire_event_timeline.vg.json?v=20260529_full_width_v21";
 
 const economicShockSpec = "js/economic_shock.vg.json?v=20260530_compact_v1";
 const domesticCommercialClaimsSpec = "js/domestic_commercial_claims.vg.json?v=20260529_legend_hover_v2";
+const burnedAreaLossSpec = "js/burned_area_vs_economic_loss.vg.json?v=20260531_fig3d_restore_v4";
 const threatenedAnimalsByClassSpec = "js/threatened_animals_by_class.vg.json?v=20260531_fig4b_editorial_v3";
 
 // Embed the Fire.csv hotspot map (Row 1)
@@ -242,6 +243,17 @@ vegaEmbed('#vis-economic-shock', economicShockSpec, { "actions": false }).then(f
 
 // Embed the domestic vs commercial claims diverging bar chart (Section 3)
 vegaEmbed('#vis-domestic-commercial-claims', domesticCommercialClaimsSpec, { "actions": false }).catch(console.error);
+
+// Embed the burned area vs economic loss scatter (Section 3, Fig 3D)
+vegaEmbed('#vis-burned-area-loss', burnedAreaLossSpec, { "actions": false })
+  .then(function(result) {
+    const target = document.querySelector('#burned-area-loss-control');
+    const bindings = document.querySelector('#vis-burned-area-loss .vega-bindings');
+    if (target && bindings) {
+      target.appendChild(bindings);
+    }
+  })
+  .catch(console.error);
 
 // Embed the threatened animal species chart (Section 4)
 vegaEmbed('#vis-threatened-animals-by-class', threatenedAnimalsByClassSpec, { "actions": false }).catch(console.error);

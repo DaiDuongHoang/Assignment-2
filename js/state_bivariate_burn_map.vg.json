@@ -59,8 +59,8 @@
           "field": "properties.unplanned_share",
           "type": "quantitative",
           "scale": {
-            "domain": [0, 1],
-            "range": ["#fff7bc", "#fec44f", "#f03b20", "#99000d"]
+            "domain": [0, 0.5, 0.7, 0.85, 0.95, 1],
+            "range": ["#fff7bc", "#fee391", "#fec44f", "#fb8d3c", "#f03b20", "#99000d"]
           },
           "legend": null
         },
