@@ -24,7 +24,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="./css/styles.css?v=20260531_keyword_color_v38" />
+  <link rel="stylesheet" href="./css/styles.css?v=20260531_metric_gold_v37" />
 
   <!-- Vega & Vega-Lite & Vega-Embed -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6"></script>
@@ -588,6 +588,8 @@
           <div class="chart-card-title font-display">Economic Shockwaves from Australian Bushfires</div>
           <div class="chart-card-caption serif-note">Insured losses normalised to 2022 Australian Dollars. Hover bubbles
             to view details. Click Severity below to filter.</div>
+          <p class="chart-card-note">Use the overview strip below the chart to brush a time range — the main chart
+            zooms to it; drag the band to pan across years. Double-click the overview to reset.</p>
         </div>
         <div class="chart-card-body">
           <div id="vis-economic-shock"></div>
@@ -851,6 +853,72 @@
       </div>
     </section>
 
+    <!-- Section 5 - Conclusion (Redefining the Narrative) -->
+    <section class="premium-section sec5" aria-labelledby="sec5-title">
+      <div class="section-header">
+        <div class="section-left">
+          <span class="section-name">
+            <span class="section-number font-display" style="color: var(--color-sec5);">05</span>
+            Conclusion - Redefining the Narrative
+          </span>
+          <h2 id="sec5-title" class="section-heading">A Shared Responsibility, a Multi-Layered Story</h2>
+        </div>
+        <div class="section-right">
+          <p class="section-description">
+            Looking back across decades of data, the key lesson is that bushfire impact cannot be reduced to a single number. Burned area, hotspot timing, unplanned fire, insured loss and species vulnerability each answer a different question. Effective policy and future resilience depend on reading these layers together: natural fire regimes, human exposure and ecological vulnerability.
+          </p>
+        </div>
+      </div>
+
+      <div class="chart-card conclusion-card">
+        <div class="chart-card-body conclusion-grid">
+          <div class="conclusion-text-column">
+            <h3 class="conclusion-h3">Key Takeaways & Lessons Learned</h3>
+            <p class="conclusion-lead">
+              The data reveals four crucial distinctions that must guide how Australia prepares for, manages, and talks about bushfires:
+            </p>
+            <ul class="conclusion-list">
+              <li>
+                <strong>Scale ≠ Severity:</strong> Large-scale savanna and rangeland burning dominates Australia’s annual burned-area totals, but physical scale is not the same as disaster severity. Smaller temperate forest fires can create sharper ecological and economic shocks when they intersect with communities, infrastructure and vulnerable ecosystems.
+              </li>
+              <li>
+                <strong>Planned vs Unplanned:</strong> Recurring or managed fire regimes are different from uncontrolled fire. Unplanned forest wildfires represent a higher-risk pattern because they are less predictable and more likely to threaten ecosystems and communities.
+              </li>
+              <li>
+                <strong>Exposure Drives Loss:</strong> Insured losses and claims are driven by what fire reaches, not just how much land burns. Building resilience means managing asset exposure in high-risk zones as well as tracking physical fire scale.
+              </li>
+              <li>
+                <strong>Vulnerability Over Volume:</strong> Animal-count estimates show the scale of ecological impact, but they do not tell the whole conservation story. EPBC-listed and already threatened species can face longer-term risks that are not visible from total animal numbers alone.
+              </li>
+            </ul>
+            <p class="conclusion-closing">
+              “By separating these layers, Australia can move beyond a single disaster headline and toward a clearer framework for understanding when fire is part of a recurring landscape cycle, and when it becomes a catastrophic social, economic and ecological event.”
+            </p>
+          </div>
+
+          <!-- Conclusion Metric Boxes -->
+          <div class="conclusion-metrics">
+            <div class="conclusion-metric-box">
+              <span class="conclusion-metric-value">Savanna ≠ Forest</span>
+              <span class="conclusion-metric-label">Seasonal savanna burning and temperate forest wildfire do not carry the same ecological or economic meaning.</span>
+            </div>
+            <div class="conclusion-metric-box">
+              <span class="conclusion-metric-value">Planned vs Unplanned</span>
+              <span class="conclusion-metric-label">Recurring or managed fire regimes carry different risks compared to uncontrolled, unplanned forest wildfires.</span>
+            </div>
+            <div class="conclusion-metric-box">
+              <span class="conclusion-metric-value">Exposure</span>
+              <span class="conclusion-metric-label">Financial shocks depend on what fire reaches — homes, businesses, infrastructure and insured assets.</span>
+            </div>
+            <div class="conclusion-metric-box">
+              <span class="conclusion-metric-value highlight">Vulnerability</span>
+              <span class="conclusion-metric-label">Already-threatened species can face lasting conservation risk beyond the headline animal counts.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Dashboard Footer with Complete Metadata & Sources -->
     <footer class="dashboard-footer" aria-labelledby="footer-title">
       <div class="footer-container">
@@ -928,7 +996,7 @@
 
   <!-- Main JS for Vega-embed -->
   <script src="js/wildlife_waffle.js?v=20260528_wildlife_v3"></script>
-  <script src="js/main.js?v=20260531_metric_gold_v36"></script>
+  <script src="js/main.js?v=20260531_overview_filter_v43"></script>
 </body>
 
 </html>

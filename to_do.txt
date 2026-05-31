@@ -1,6 +1,4 @@
 thêm annotations vào charts
 chỉnh data fig 3D
 thêm annotations fig 3D
-sửa legend fig 2D, fig 2C, 1B cho đẹp
-sửa màu chart đầu
 sửa lại hết insights/descriptions

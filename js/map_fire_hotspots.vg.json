@@ -83,10 +83,9 @@
       ],
       "mark": {
         "type": "circle",
-        "opacity": 0.4,
-        "stroke": "white",
-        "strokeWidth": 0.1,
-        "strokeOpacity": 0.6
+        "opacity": 0.5,
+        "blend": "multiply",
+        "stroke": null
       },
       "encoding": {
         "longitude": {
@@ -335,9 +334,9 @@
           "mark": {
             "type": "point",
             "shape": "circle",
-            "fill": "#ffffff",
+            "fill": "#e03e1b",
             "strokeWidth": 1.5,
-            "opacity": 0.7,
+            "opacity": 0.9,
             "cursor": "pointer"
           },
           "encoding": {
